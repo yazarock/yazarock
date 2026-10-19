@@ -95,3 +95,12 @@ f.addEventListener('submit',function(e){
 });
 if(/[?&]yr_g=tamam/.test(location.search)){try{sessionStorage.removeItem(K)}catch(e){}}
 })();
+
+/* v1.6.1: e-posta yazım hatası uyarısı (ör. gmaill.com → gmail.com) */
+(function(){
+var T={'gmaill.com':'gmail.com','gmial.com':'gmail.com','gamil.com':'gmail.com','gmai.com':'gmail.com','gmal.com':'gmail.com','gmail.co':'gmail.com','gmail.con':'gmail.com','gmail.cm':'gmail.com','gmail.om':'gmail.com','gmail.com.tr':'gmail.com','gnail.com':'gmail.com','gmeil.com':'gmail.com','hotmial.com':'hotmail.com','hotmal.com':'hotmail.com','hotmai.com':'hotmail.com','hotmail.con':'hotmail.com','hotmail.co':'hotmail.com','hotmil.com':'hotmail.com','hotmial.com.tr':'hotmail.com.tr','outlok.com':'outlook.com','outloo.com':'outlook.com','outlook.con':'outlook.com','yaho.com':'yahoo.com','yahooo.com':'yahoo.com','yahoo.con':'yahoo.com','icloud.con':'icloud.com','iclod.com':'icloud.com','yandex.con':'yandex.com'};
+function check(i){var h=i.parentNode.querySelector('.em-hint');if(h)h.remove();i.setCustomValidity('');var v=i.value.trim().toLowerCase(),p=v.split('@');if(p.length!==2||!T[p[1]])return;
+	var fix=p[0]+'@'+T[p[1]],s=document.createElement('span');s.className='em-hint';s.setAttribute('role','alert');s.appendChild(document.createTextNode('Bunu mu demek istedin: '));var b=document.createElement('button');b.type='button';b.textContent=fix;b.onclick=function(){i.value=fix;check(i);i.focus()};s.appendChild(b);s.appendChild(document.createTextNode(' ?'));i.insertAdjacentElement('afterend',s);
+	i.setCustomValidity('E-posta adresinde yazım hatası var: '+fix+' olabilir mi?')}
+document.querySelectorAll('form input[type=email]').forEach(function(i){i.addEventListener('blur',function(){check(i)});i.addEventListener('input',function(){if(i.parentNode.querySelector('.em-hint'))check(i)})});
+})();

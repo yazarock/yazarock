@@ -1,6 +1,27 @@
 <?php
 if(!defined('ABSPATH'))exit;
-define('YR_VER','1.6.0');
+define('YR_VER','1.6.1');
+
+/* E-posta adresi yazım ve alan adı kontrolü: hatalı adreslere giden mailler geri döner ve sitenin e-posta itibarını düşürür */
+function yr_eposta_oneri($m){
+	$m=strtolower(trim((string)$m));if(strpos($m,'@')===false)return '';list($u,$d)=explode('@',$m,2);
+	$T=['gmaill.com'=>'gmail.com','gmial.com'=>'gmail.com','gamil.com'=>'gmail.com','gmai.com'=>'gmail.com','gmal.com'=>'gmail.com','gmail.co'=>'gmail.com','gmail.con'=>'gmail.com','gmail.cm'=>'gmail.com','gmail.om'=>'gmail.com','gmail.com.tr'=>'gmail.com','gnail.com'=>'gmail.com','gmeil.com'=>'gmail.com','hotmial.com'=>'hotmail.com','hotmal.com'=>'hotmail.com','hotmai.com'=>'hotmail.com','hotmail.con'=>'hotmail.com','hotmail.co'=>'hotmail.com','hotmil.com'=>'hotmail.com','hotmial.com.tr'=>'hotmail.com.tr','outlok.com'=>'outlook.com','outloo.com'=>'outlook.com','outlook.con'=>'outlook.com','yaho.com'=>'yahoo.com','yahooo.com'=>'yahoo.com','yahoo.con'=>'yahoo.com','icloud.con'=>'icloud.com','iclod.com'=>'icloud.com','yandex.con'=>'yandex.com'];
+	return isset($T[$d])?$u.'@'.$T[$d]:'';
+}
+function yr_eposta_ok($m){
+	if(!is_email($m)||yr_eposta_oneri($m)!=='')return false;
+	$d=strtolower(substr(strrchr($m,'@'),1));
+	if(in_array($d,['gmail.com','hotmail.com','hotmail.com.tr','outlook.com','outlook.com.tr','live.com','msn.com','yahoo.com','icloud.com','me.com','yandex.com','yandex.com.tr','proton.me','protonmail.com'],true))return true;
+	if(!function_exists('checkdnsrr'))return true;
+	$k='yr_mx_'.md5($d);$c=get_transient($k);
+	if($c===false){
+		if(checkdnsrr($d,'MX')||checkdnsrr($d,'A'))$c='1';
+		elseif(!checkdnsrr('gmail.com','MX'))return true;/* sunucunun DNS'i yanıt vermiyorsa kimseyi engelleme */
+		else $c='0';
+		set_transient($k,$c,$c==='1'?DAY_IN_SECONDS:HOUR_IN_SECONDS);
+	}
+	return $c==='1';
+}
 
 add_action('after_setup_theme',function(){
 	add_theme_support('title-tag');
@@ -130,7 +151,7 @@ function yr_form(){
 	if(!yr_ts_ok())$go('guvenlik');
 	$k='yr_rl_'.md5(yr_ip());if(get_transient($k))$go('bekle');set_transient($k,1,20);
 	if($t==='abone'){
-		$m=sanitize_email(wp_unslash($_POST['email']??''));if(!is_email($m)||empty($_POST['onay']))$go('gecersiz');
+		$m=sanitize_email(wp_unslash($_POST['email']??''));if(!yr_eposta_ok($m)||empty($_POST['onay']))$go('gecersiz');
 		$ex=get_posts(['post_type'=>'abone','post_status'=>'any','meta_key'=>'_email','meta_value'=>$m,'numberposts'=>1]);
 		if($ex){$id=$ex[0]->ID;if(get_post_meta($id,'_onay',true)==='1')$go('tamam');}
 		else $id=wp_insert_post(['post_type'=>'abone','post_status'=>'publish','post_title'=>$m,'meta_input'=>['_email'=>$m,'_onay'=>'0','_kvkk'=>current_time('mysql')]]);
@@ -141,7 +162,7 @@ function yr_form(){
 	if($t==='basvuru'){
 		$ad=sanitize_text_field(wp_unslash($_POST['ad']??''));$m=sanitize_email(wp_unslash($_POST['email']??''));
 		$alan=sanitize_text_field(wp_unslash($_POST['alan']??''));$lk=esc_url_raw(wp_unslash($_POST['link']??''));$ms=mb_substr(sanitize_textarea_field(wp_unslash($_POST['msg']??'')),0,600);
-		if(mb_strlen($ad)<3||!is_email($m)||mb_strlen($ms)<40||empty($_POST['ok'])||empty($_POST['kvkk']))$go('gecersiz');
+		if(mb_strlen($ad)<3||!yr_eposta_ok($m)||mb_strlen($ms)<40||empty($_POST['ok'])||empty($_POST['kvkk']))$go('gecersiz');
 		wp_insert_post(['post_type'=>'basvuru','post_status'=>'publish','post_title'=>$ad,'post_content'=>$ms,'meta_input'=>['_email'=>$m,'_alan'=>$alan,'_link'=>$lk,'_durum'=>'yeni','_kvkk'=>current_time('mysql')]]);
 		wp_mail(get_option('admin_email'),'Yeni yazarlık başvurusu: '.$ad,"Ad: $ad\nE-posta: $m\nAlan: $alan\nÖrnek yazı: ".($lk?$lk:'-')."\n\n$ms\n\nYönetim: ".admin_url('edit.php?post_type=basvuru'),['Reply-To: '.$m]);
 		$go('tamam');

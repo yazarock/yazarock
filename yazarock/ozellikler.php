@@ -240,7 +240,7 @@ function yr_uye(){
 	if(!yr_ts_ok())$go('guvenlik');
 	$k='yr_rl_u_'.md5(yr_ip());if(get_transient($k))$go('bekle');set_transient($k,1,30);
 	$ad=sanitize_text_field(wp_unslash($_POST['ad']??''));$m=sanitize_email(wp_unslash($_POST['email']??''));
-	if(mb_strlen($ad)<2||mb_strlen($ad)>40||!is_email($m)||empty($_POST['kvkk']))$go('gecersiz');
+	if(mb_strlen($ad)<2||mb_strlen($ad)>40||!yr_eposta_ok($m)||empty($_POST['kvkk']))$go('gecersiz');
 	if(email_exists($m))$go('tamam');
 	$b=sanitize_user(strstr($m,'@',true),true);if(strlen($b)<3)$b='uye';$l=$b;$i=1;while(username_exists($l))$l=$b.(++$i);
 	$uid=wp_insert_user(['user_login'=>$l,'user_email'=>$m,'user_pass'=>wp_generate_password(24),'display_name'=>$ad,'nickname'=>$ad,'user_nicename'=>'uye-'.strtolower(wp_generate_password(10,false,false)),'role'=>'yazarock_uye']);
