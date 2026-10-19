@@ -1,16 +1,14 @@
-## Hi there 👋
+# Yazarock.com
 
-<!--
-**yazarock/yazarock** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+Türkiye'den ve dünyadan rock ve metal müzik haberleri, konser ve festival takvimi, grup biyografileri.
 
-Here are some ideas to get you started:
+🌐 **[yazarock.com](https://yazarock.com)**
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+## Bu depoda neler var
+
+| Klasör | İçerik |
+|---|---|
+| `yazarock/` | Sitenin WordPress teması. Buradaki sürüm numarası artınca site, WordPress panelinde normal bir tema güncellemesi olarak görür. |
+| `derlemeler/` | Her sabah hazırlanan haber derlemeleri. Site bunları saatte bir kontrol eder ve **taslak** olarak ekler; editör okuyup yayınlar. |
+
+Derleme dosyalarının biçimi `derlemeler/BICIM.md` içinde anlatılıyor.

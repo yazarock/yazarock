@@ -1,0 +1,4 @@
+<?php if(!defined('ABSPATH'))exit; if(post_password_required())return;?>
+<section class="box cmt" id="comments"><h2><?php echo get_comments_number()?'Yorumlar ('.(int)get_comments_number().')':'Yorumlar';?></h2>
+<?php if(have_comments()):?><div class="cl"><?php wp_list_comments(['style'=>'div','avatar_size'=>40,'short_ping'=>true]);?></div><?php the_comments_pagination();endif;
+comment_form(['title_reply'=>'Yorum Yap','label_submit'=>'Yorumu Gönder','comment_notes_before'=>'<p class="note">Yorumunla birlikte ad ve e-posta bilgin işlenir. Ayrıntı: <a href="'.esc_url(yr_page_url('kvkk-aydinlatma-metni')).'">KVKK Aydınlatma Metni</a>.</p>','comment_field'=>'<p class="comment-form-comment"><label for="comment">Yorumun</label><textarea id="comment" name="comment" rows="5" required></textarea></p>']);?></section>

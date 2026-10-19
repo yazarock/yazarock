@@ -1,0 +1,1 @@
+<?php if(!defined('ABSPATH'))exit; get_header();?><div class="ph"><h1>Sayfa bulunamadı</h1><p>Aradığın sayfa taşınmış ya da hiç var olmamış olabilir.</p></div><div class="box"><?php get_search_form();?><a class="btn" href="<?php echo esc_url(home_url('/'));?>">Ana Sayfa</a></div><?php get_footer();

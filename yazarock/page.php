@@ -1,0 +1,1 @@
+<?php if(!defined('ABSPATH'))exit; get_header();while(have_posts()):the_post();?><div class="ph"><h1><?php the_title();?></h1></div><div class="box entry"><div class="content"><?php the_content();?></div></div><?php endwhile;get_footer();
