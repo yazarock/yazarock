@@ -1,6 +1,6 @@
 <?php
 if(!defined('ABSPATH'))exit;
-define('YR_VER','1.5.0');
+define('YR_VER','1.6.0');
 
 add_action('after_setup_theme',function(){
 	add_theme_support('title-tag');
@@ -47,7 +47,7 @@ class YR_Walker extends Walker_Nav_Menu{
 	function end_el(&$output,$item,$depth=0,$args=null){}
 	function start_el(&$output,$item,$depth=0,$args=null,$id=0){
 		$c=(in_array('current-menu-item',$item->classes)||in_array('current-menu-ancestor',$item->classes))?' on':'';
-		if(in_array('login',$item->classes))$c.=' login';
+		if(in_array('login',$item->classes))$c.=' login';if(in_array('gt',$item->classes))$c.=' gt';
 		$output.='<a class="'.esc_attr(trim($c)).'" href="'.esc_url($item->url).'">'.esc_html($item->title).'</a>';
 	}
 }
@@ -409,3 +409,4 @@ add_action('admin_init',function(){
 require_once get_template_directory().'/ozellikler.php';
 require_once get_template_directory().'/github.php';
 require_once get_template_directory().'/panel.php';
+require_once get_template_directory().'/grup-basvuru.php';

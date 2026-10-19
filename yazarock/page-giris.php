@@ -55,7 +55,8 @@ $bio=trim((string)$u->description);
 	$q=new WP_Query(['post_type'=>'post','post_status'=>'draft','meta_key'=>'_yr_derleme_id','posts_per_page'=>1,'fields'=>'ids']);$der=(int)$q->found_posts;
 	$lst=(int)(wp_count_posts('liste')->pending??0);$cm=(int)wp_count_comments()->moderated;
 	$bq=new WP_Query(['post_type'=>'basvuru','post_status'=>'any','meta_key'=>'_durum','meta_value'=>'yeni','posts_per_page'=>1,'fields'=>'ids']);$bas=(int)$bq->found_posts;
-	$Y=[['Onay bekleyen yazılar',$pend,admin_url('edit.php?post_status=pending&post_type=post')],['Sabah derlemesi taslakları',$der,admin_url('edit.php?post_status=draft&yr_derleme=1')],['Onay bekleyen yorumlar',$cm,admin_url('edit-comments.php?comment_status=moderated')],['Onay bekleyen listeler',$lst,admin_url('edit.php?post_status=pending&post_type=liste')],['Yeni yazar başvuruları',$bas,admin_url('edit.php?post_type=basvuru')]];?>
+	$gq=new WP_Query(['post_type'=>'grup_basvuru','post_status'=>'any','meta_key'=>'_gb_durum','meta_value'=>'yeni','posts_per_page'=>1,'fields'=>'ids']);$gbn=(int)$gq->found_posts;
+	$Y=[['Yeni grup başvuruları',$gbn,admin_url('edit.php?post_type=grup_basvuru&gb_durum=yeni')],['Onay bekleyen yazılar',$pend,admin_url('edit.php?post_status=pending&post_type=post')],['Sabah derlemesi taslakları',$der,admin_url('edit.php?post_status=draft&yr_derleme=1')],['Onay bekleyen yorumlar',$cm,admin_url('edit-comments.php?comment_status=moderated')],['Onay bekleyen listeler',$lst,admin_url('edit.php?post_status=pending&post_type=liste')],['Yeni yazar başvuruları',$bas,admin_url('edit.php?post_type=basvuru')]];?>
 <div class="box ybox"><h2><?php echo yr_ikon('shield');?>Yönetim</h2><div class="yq"><?php foreach($Y as $x)echo '<a href="'.esc_url($x[2]).'"'.($x[1]?' class="has"':'').'><b>'.(int)$x[1].'</b><span>'.esc_html($x[0]).'</span></a>';?></div></div>
 <?php endif;?>
 
@@ -116,7 +117,7 @@ else echo '<p class="empty-s">Henüz listen yok. "Benim 10 favori albümüm" gib
 	yr_flash('yr_p',['tamam'=>['Profilin güncellendi.','ok'],'sifre_ok'=>['Şifren değiştirildi.','ok'],'ad'=>['Görünen ad 2-40 karakter olmalı.','err'],'foto'=>['Fotoğraf yüklenemedi. JPG, PNG veya WEBP, en fazla 2 MB olmalı.','err'],'eski'=>['Mevcut şifren hatalı.','err'],'yeni'=>['Yeni şifre en az 8 karakter olmalı, tekrarıyla aynı ve eskisinden farklı olmalı.','err'],'bekle'=>['Çok fazla deneme yaptın; 15 dakika sonra tekrar dene.','err'],'sil_hata'=>['Hesap silinemedi: onay kutusunu işaretleyip şifreni doğru girmelisin.','err'],'yetki'=>['Yazar ve yönetici hesapları buradan silinemez; info@yazarock.com adresine yaz.','err'],'guvenlik'=>['Güvenlik doğrulaması başarısız; sayfayı yenileyip tekrar dene.','err'],'hata'=>['Bir sorun oluştu, tekrar dene.','err']]);?>
 <div class="pgrid pf">
 <div class="box" id="profil"><h2>Profil Bilgileri</h2>
-<form class="fg" method="post" enctype="multipart/form-data" action="<?php echo esc_url(admin_url('admin-post.php'));?>"><input type="hidden" name="action" value="yr_profil"><?php wp_nonce_field('yr_profil','yr_n');?>
+<form class="fg pform" method="post" enctype="multipart/form-data" action="<?php echo esc_url(admin_url('admin-post.php'));?>"><input type="hidden" name="action" value="yr_profil"><?php wp_nonce_field('yr_profil','yr_n');?>
 <div class="avup"><?php echo get_avatar($uid,96,'','',['class'=>'pav','id'=>'avprev']);?><div><label>Profil fotoğrafı<input type="file" name="foto" id="avfile" accept="image/jpeg,image/png,image/webp"></label><small class="note">JPG, PNG veya WEBP · en fazla 2 MB · kare fotoğraf en iyi sonucu verir.</small>
 <?php if(get_user_meta($uid,'yr_foto',true))echo '<label class="chk"><input type="checkbox" name="foto_sil" value="1"> <span>Fotoğrafımı kaldır</span></label>';?></div></div>
 <label>Görünen ad<input name="ad" value="<?php echo esc_attr($u->display_name);?>" required minlength="2" maxlength="40" autocomplete="nickname"></label>
@@ -128,7 +129,7 @@ else echo '<p class="empty-s">Henüz listen yok. "Benim 10 favori albümüm" gib
 <button class="btn" type="submit">Kaydet</button></form></div>
 <div>
 <div class="box" id="sifre"><h2>Şifre Değiştir</h2>
-<form class="fg" method="post" action="<?php echo esc_url(admin_url('admin-post.php'));?>"><input type="hidden" name="action" value="yr_sifre"><?php wp_nonce_field('yr_sifre','yr_n');?>
+<form class="fg pform" method="post" action="<?php echo esc_url(admin_url('admin-post.php'));?>"><input type="hidden" name="action" value="yr_sifre"><?php wp_nonce_field('yr_sifre','yr_n');?>
 <input type="text" name="username" value="<?php echo esc_attr($u->user_login);?>" autocomplete="username" hidden>
 <label>Mevcut şifre<input type="password" name="eski" required autocomplete="current-password"></label>
 <label>Yeni şifre<input type="password" name="yeni" required minlength="8" autocomplete="new-password"></label>
@@ -136,7 +137,7 @@ else echo '<p class="empty-s">Henüz listen yok. "Benim 10 favori albümüm" gib
 <button class="btn" type="submit">Şifreyi Değiştir</button></form></div>
 <?php if(yr_is_member()&&count((array)$u->roles)===1):?>
 <div class="box danger" id="hesap"><h2>Hesabı Sil</h2><p class="note">Hesabın, listelerin ve profil fotoğrafın kalıcı olarak silinir. Bu işlem geri alınamaz.</p>
-<form class="fg" method="post" action="<?php echo esc_url(admin_url('admin-post.php'));?>" onsubmit="return confirm('Hesabın kalıcı olarak silinecek. Emin misin?')"><input type="hidden" name="action" value="yr_hesap_sil"><?php wp_nonce_field('yr_hesap_sil','yr_n');?>
+<form class="fg pform" method="post" action="<?php echo esc_url(admin_url('admin-post.php'));?>" onsubmit="return confirm('Hesabın kalıcı olarak silinecek. Emin misin?')"><input type="hidden" name="action" value="yr_hesap_sil"><?php wp_nonce_field('yr_hesap_sil','yr_n');?>
 <label>Şifren<input type="password" name="sifre" required autocomplete="current-password"></label>
 <label class="chk"><input type="checkbox" name="onay" value="1" required> <span>Hesabımın kalıcı olarak silineceğini anlıyorum.</span></label>
 <button class="btn" type="submit">Hesabımı Sil</button></form></div>

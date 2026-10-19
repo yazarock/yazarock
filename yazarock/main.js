@@ -75,3 +75,23 @@ var bio=document.getElementById('bio'),bc=document.getElementById('biocnt');if(b
 var af=document.getElementById('avfile'),ap=document.getElementById('avprev');
 if(af&&ap)af.addEventListener('change',function(){var f=af.files&&af.files[0];if(!f)return;if(f.size>2*1024*1024){alert('Fotoğraf en fazla 2 MB olmalı.');af.value='';return}var r=new FileReader();r.onload=function(){ap.src=r.result;ap.removeAttribute('srcset')};r.readAsDataURL(f)});
 })();
+
+/* v1.6: Grubunu Tanıt formu */
+(function(){
+var f=document.getElementById('gtform');if(!f)return;
+var K='yr_gt_form',hk=document.getElementById('gthk'),cnt=document.getElementById('gtcnt');
+function upd(){if(hk&&cnt)cnt.textContent=hk.value.length}
+/* hata sonrası geri dönüldüyse doldurulanları geri getir */
+try{var saved=JSON.parse(sessionStorage.getItem(K)||'null');if(saved&&/[?&]yr_g=(?!tamam)/.test(location.search)){Object.keys(saved).forEach(function(n){var els=f.querySelectorAll('[name="'+n.replace(/"/g,'')+'"]');els.forEach(function(el){if(el.type==='checkbox')el.checked=saved[n].indexOf(el.value)>-1;else if(el.type!=='file'&&el.type!=='hidden')el.value=saved[n][0]||''})})}}catch(e){}
+upd();if(hk)hk.addEventListener('input',upd);
+var ft=document.getElementById('gtfoto');if(ft)ft.addEventListener('change',function(){if(ft.files[0]&&ft.files[0].size>5*1024*1024){alert('Fotoğraf en fazla 5 MB olmalı.');ft.value=''}});
+f.addEventListener('submit',function(e){
+	var links=[].slice.call(f.querySelectorAll('input[name^="l_"]')).filter(function(i){return i.value.trim()});
+	var old=f.querySelector('.gt-err');if(old)old.remove();
+	if(!links.length){e.preventDefault();var d=document.createElement('div');d.className='gt-err';d.setAttribute('role','alert');d.textContent='Lütfen müziğinizi dinleyebileceğimiz en az bir bağlantı ekleyin (Bandcamp, Spotify, YouTube…).';var fs=f.querySelectorAll('fieldset')[1];fs.insertBefore(d,fs.querySelector('.g2'));d.scrollIntoView({behavior:'smooth',block:'center'});return}
+	var o={};[].slice.call(f.elements).forEach(function(el){if(!el.name||el.type==='file'||el.type==='hidden'||el.name==='website')return;if(el.type==='checkbox'){o[el.name]=o[el.name]||[];if(el.checked)o[el.name].push(el.value)}else o[el.name]=[el.value]});
+	try{sessionStorage.setItem(K,JSON.stringify(o))}catch(e){}
+	var b=f.querySelector('.gt-send');if(b){b.disabled=true;b.lastChild.textContent='Gönderiliyor…'}
+});
+if(/[?&]yr_g=tamam/.test(location.search)){try{sessionStorage.removeItem(K)}catch(e){}}
+})();
