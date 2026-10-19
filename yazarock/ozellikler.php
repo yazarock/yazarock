@@ -229,8 +229,8 @@ add_action('template_redirect',function(){
 /* ================= Üyelik ve okuyucu listeleri ================= */
 add_action('init',function(){if(!get_role('yazarock_uye'))add_role('yazarock_uye','Yazarock Üyesi',['read'=>true]);});
 add_filter('show_admin_bar',function($s){return yr_is_member()?false:$s;});
-add_action('admin_init',function(){if(yr_is_member()&&!wp_doing_ajax()&&!(defined('DOING_CRON')&&DOING_CRON)&&basename($_SERVER['PHP_SELF']??'')!=='admin-post.php'){wp_safe_redirect(yr_page_url('listelerim'));exit;}});
-add_filter('login_redirect',function($to,$req,$u){if($u&&!is_wp_error($u)&&in_array('yazarock_uye',(array)$u->roles,true))return yr_page_url('listelerim');return $to;},20,3);
+add_action('admin_init',function(){if(yr_is_member()&&!wp_doing_ajax()&&!(defined('DOING_CRON')&&DOING_CRON)&&basename($_SERVER['PHP_SELF']??'')!=='admin-post.php'){wp_safe_redirect(yr_panel_url());exit;}});
+add_filter('login_redirect',function($to,$req,$u){if($u&&!is_wp_error($u)&&in_array('yazarock_uye',(array)$u->roles,true))return yr_panel_url();return $to;},20,3);
 
 add_action('admin_post_nopriv_yr_uye','yr_uye');add_action('admin_post_yr_uye','yr_uye');
 function yr_uye(){

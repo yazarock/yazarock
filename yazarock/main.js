@@ -32,3 +32,46 @@ document.addEventListener('visibilitychange',function(){document.hidden?stop():s
 if(rm){paused=true;if(pp){pp.textContent='▶';pp.setAttribute('aria-label','Otomatik geçişi başlat')}}else start();
 })();
 })();
+
+/* v1.5: beğen / beğenme, okunma sayacı ve panel yardımcıları */
+(function(){
+var LS='yr_tp';
+function getMap(){try{return JSON.parse(localStorage.getItem(LS)||'{}')||{}}catch(e){return {}}}
+function setMap(m){try{var k=Object.keys(m);if(k.length>500)k.slice(0,k.length-500).forEach(function(x){delete m[x]});localStorage.setItem(LS,JSON.stringify(m))}catch(e){}}
+function fmt(n){n=+n||0;return n>=1e6?(Math.round(n/1e5)/10+' Mn').replace('.',','):n>=1e4?(Math.round(n/100)/10+' B').replace('.',','):n.toLocaleString('tr-TR')}
+var logged=!!window.YR_NONCE;
+document.querySelectorAll('.tepki').forEach(function(box){
+	var id=box.getAttribute('data-id'),api=box.getAttribute('data-api'),btns=box.querySelectorAll('.tp-b'),msg=box.querySelector('.tp-msg');
+	var cur=0;btns.forEach(function(b){if(b.getAttribute('aria-pressed')==='true')cur=+b.getAttribute('data-v')});
+	if(!logged){var m=getMap();if(m[id])cur=+m[id];}
+	function paint(st,counts){cur=st;btns.forEach(function(b){var v=+b.getAttribute('data-v');b.setAttribute('aria-pressed',v===st?'true':'false');if(counts){var n=b.querySelector('.tp-n');if(n)n.textContent=fmt(v===1?counts.l:counts.d)}})}
+	paint(cur);
+	btns.forEach(function(b){b.addEventListener('click',function(e){
+		if(!window.fetch)return;e.preventDefault();
+		var v=+b.getAttribute('data-v'),want=cur===v?0:v,prev=cur,cs={};
+		btns.forEach(function(x){var n=x.querySelector('.tp-n');cs[x.getAttribute('data-v')]=n?n.textContent:''});
+		/* anında göster */
+		var est={l:0,d:0};btns.forEach(function(x){var n=+(x.querySelector('.tp-n').textContent.replace(/\D/g,''))||0;if(x.getAttribute('data-v')==='1')est.l=n;else est.d=n});
+		if(prev===1)est.l--;else if(prev===-1)est.d--;if(want===1)est.l++;else if(want===-1)est.d++;
+		paint(want,{l:Math.max(0,est.l),d:Math.max(0,est.d)});if(want)b.classList.remove('pop'),void b.offsetWidth,b.classList.add('pop');
+		btns.forEach(function(x){x.disabled=true});if(msg)msg.textContent='';
+		var h={'Content-Type':'application/json'};if(logged)h['X-WP-Nonce']=window.YR_NONCE;
+		fetch(api,{method:'POST',credentials:'same-origin',headers:h,body:JSON.stringify({id:+id,v:want})}).then(function(r){return r.json().then(function(j){if(!r.ok)throw j;return j})}).then(function(j){
+			paint(+j.ben,{l:j.l,d:j.d});if(!logged){var m=getMap();if(+j.ben)m[id]=+j.ben;else delete m[id];setMap(m)}
+		}).catch(function(err){
+			paint(prev);btns.forEach(function(x){var n=x.querySelector('.tp-n');if(n)n.textContent=cs[x.getAttribute('data-v')]});
+			if(msg)msg.textContent=(err&&err.message)||'Oy kaydedilemedi, tekrar dene.';
+		}).then(function(){btns.forEach(function(x){x.disabled=false})});
+	})});
+});
+/* Okunma: sayfada birkaç saniye kalan okur bir kez sayılır */
+var art=document.querySelector('[data-okundu]');
+if(art&&window.fetch){var pid=art.getAttribute('data-okundu'),k='yr_ok_'+pid,seen=false;try{seen=!!sessionStorage.getItem(k)}catch(e){}
+	if(!seen)setTimeout(function(){if(document.hidden)return;try{sessionStorage.setItem(k,'1')}catch(e){}
+		var h={'Content-Type':'application/json'};if(logged)h['X-WP-Nonce']=window.YR_NONCE;
+		fetch(art.getAttribute('data-api'),{method:'POST',credentials:'same-origin',headers:h,body:JSON.stringify({id:+pid}),keepalive:true}).catch(function(){})},5000)}
+/* Panel: biyografi sayacı ve fotoğraf önizleme */
+var bio=document.getElementById('bio'),bc=document.getElementById('biocnt');if(bio&&bc)bio.addEventListener('input',function(){bc.textContent=bio.value.length});
+var af=document.getElementById('avfile'),ap=document.getElementById('avprev');
+if(af&&ap)af.addEventListener('change',function(){var f=af.files&&af.files[0];if(!f)return;if(f.size>2*1024*1024){alert('Fotoğraf en fazla 2 MB olmalı.');af.value='';return}var r=new FileReader();r.onload=function(){ap.src=r.result;ap.removeAttribute('srcset')};r.readAsDataURL(f)});
+})();

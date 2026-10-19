@@ -1,6 +1,6 @@
 <?php
 if(!defined('ABSPATH'))exit;
-define('YR_VER','1.4.0');
+define('YR_VER','1.5.0');
 
 add_action('after_setup_theme',function(){
 	add_theme_support('title-tag');
@@ -195,7 +195,7 @@ add_action('admin_post_yr_onayla',function(){
 function yr_login_back($r){return add_query_arg('login','failed',strtok($r,'?'));}
 add_action('wp_login_failed',function(){$r=wp_get_referer();if($r&&strpos($r,'wp-login')===false&&strpos($r,'wp-admin')===false){wp_safe_redirect(yr_login_back($r));exit;}});
 add_filter('authenticate',function($u,$n,$p){if(isset($_POST['log'])&&(empty($n)||empty($p))){$r=wp_get_referer();if($r&&strpos($r,'wp-login')===false){wp_safe_redirect(yr_login_back($r));exit;}}return $u;},1,3);
-add_filter('login_redirect',function($to,$req,$user){if($user&&!is_wp_error($user)&&in_array('yazarock_yazar',(array)$user->roles))return admin_url('edit.php');return $to;},10,3);
+add_filter('login_redirect',function($to,$req,$user){if($user&&!is_wp_error($user)&&in_array('yazarock_yazar',(array)$user->roles))return yr_panel_url();return $to;},10,3);
 add_action('login_enqueue_scripts',function(){echo '<style>@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Barlow:wght@400;500&display=swap");body.login{background:radial-gradient(ellipse at 50% -10%,#3a0f13,#0d0809 60%);font-family:Barlow,sans-serif}.login h1 a{background:none!important;text-indent:0!important;width:auto!important;height:auto!important;font:700 34px Oswald,Impact,sans-serif;color:#f3eded;text-transform:uppercase;overflow:visible}.login form{background:#170e10;border:1px solid #3a2024;color:#ece6e6}.login label{color:#a69a9b}.login input[type=text],.login input[type=password]{background:#0d0809;color:#ece6e6;border-color:#3a2024}.wp-core-ui .button-primary{background:#c0282d;border:0;text-shadow:none;box-shadow:none}.login #nav a,.login #backtoblog a{color:#a69a9b}</style>';});
 add_filter('login_headerurl',function(){return home_url('/');});
 add_filter('login_headertext',function(){return 'Yazarock.com';});
@@ -242,7 +242,7 @@ function yr_quotes_default(){return ['Riff, bir şarkının kapısını çalan i
 function yr_read(){return max(1,(int)ceil(str_word_count(wp_strip_all_tags(get_the_content()))/200));}
 function yr_card(){
 	$id=get_the_ID();$c=get_the_category();$cn=$c?$c[0]->name:'Yazı';
-	echo '<article class="card"><a class="thumb" href="'.esc_url(get_permalink()).'" tabindex="-1" aria-hidden="true">'.yr_post_cover($id).'<span>'.esc_html($cn).'</span></a><div class="b"><h3><a href="'.esc_url(get_permalink()).'">'.esc_html(get_the_title()).'</a></h3><p>'.esc_html(wp_trim_words(get_the_excerpt(),20)).'</p><p class="mt">'.yr_read().' dk okuma · '.esc_html(get_the_date('j F Y')).'</p></div></article>';
+	echo '<article class="card"><a class="thumb" href="'.esc_url(get_permalink()).'" tabindex="-1" aria-hidden="true">'.yr_post_cover($id).'<span>'.esc_html($cn).'</span></a><div class="b"><h3><a href="'.esc_url(get_permalink()).'">'.esc_html(get_the_title()).'</a></h3><p>'.esc_html(wp_trim_words(get_the_excerpt(),20)).'</p><p class="mt">'.yr_read().' dk okuma · '.esc_html(get_the_date('j F Y')).(function_exists('yr_kart_ist')?yr_kart_ist($id):'').'</p></div></article>';
 }
 function yr_band_card(){
 	$id=get_the_ID();$t=get_the_terms($id,'grup_tur');$tr=($t&&!is_wp_error($t))?$t[0]->slug:'';
@@ -408,3 +408,4 @@ add_action('admin_init',function(){
 });
 require_once get_template_directory().'/ozellikler.php';
 require_once get_template_directory().'/github.php';
+require_once get_template_directory().'/panel.php';
