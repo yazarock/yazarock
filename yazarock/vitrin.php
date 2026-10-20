@@ -30,14 +30,14 @@ function yr_grup_kart($id,$buyuk=false){
 	$p=get_post($id);if(!$p||$p->post_type!=='grup'||$p->post_status!=='publish')return;
 	$url=get_permalink($p);$alt=yr_join(yr_meta('stil',$id),yr_meta('kurulus',$id));
 	echo '<div class="gkart'.($buyuk?' buyuk':'').'"><a class="gk-img" href="'.esc_url($url).'" tabindex="-1" aria-hidden="true">'.yr_cover($id,$buyuk?'large':'yr-card').'</a><div class="gk-in">';
-	if($buyuk)echo '<span class="pill">Haftanın Keşfi</span>';else echo '<span class="gk-k">Röportaj yapılan grup</span>';
+	if($buyuk){if(yr_t('kesif_pill')!=='')echo '<span class="pill">'.esc_html(yr_t('kesif_pill')).'</span>';}else echo '<span class="gk-k">Röportaj yapılan grup</span>';
 	echo '<h3><a href="'.esc_url($url).'">'.esc_html(get_the_title($p)).'</a></h3>';
 	if($alt)echo '<p class="gk-alt">'.esc_html($alt).'</p>';
 	$ex=has_excerpt($p)?get_the_excerpt($p):wp_trim_words(wp_strip_all_tags($p->post_content),$buyuk?40:24);
 	if($ex)echo '<p>'.esc_html($ex).'</p>';
 	if($buyuk){ob_start();yr_embeds($id);$e=ob_get_clean();if($e)echo '<div class="gk-emb">'.$e.'</div>';}
-	echo '<div class="btnrow"><a class="btn'.($buyuk?'':' alt').'" href="'.esc_url($url).'">Grubu Tanı</a>';
-	$l=yr_meta('link',$id);if($l)echo '<a class="btn alt" href="'.esc_url($l).'" target="_blank" rel="noopener">Dinle</a>';
+	echo '<div class="btnrow"><a class="btn'.($buyuk?'':' alt').'" href="'.esc_url($url).'">'.esc_html(yr_t('grup_btn')).'</a>';
+	$l=yr_meta('link',$id);if($l)echo '<a class="btn alt" href="'.esc_url($l).'" target="_blank" rel="noopener">'.esc_html(yr_t('dinle_btn')).'</a>';
 	echo '</div></div></div>';
 }
 

@@ -87,9 +87,9 @@ function yr_week_pick(){
 add_action('save_post_grup',function(){delete_transient('yr_week_'.yr_week_key());});
 function yr_week_box(){
 	$w=yr_week_pick();if(!$w)return;$id=$w['id'];
-	echo '<div class="box wk"><h2>Haftanın Albümü</h2><div class="wkb"><a class="wkc" href="'.esc_url(get_permalink($id)).'">'.yr_cover($id).'</a><div><span class="pill">Haftanın Grubu</span><h3>'.esc_html(get_the_title($id)).'</h3>';
+	echo '<div class="box wk"><h2>'.esc_html(yr_t('hafta_b')).'</h2><div class="wkb"><a class="wkc" href="'.esc_url(get_permalink($id)).'">'.yr_cover($id).'</a><div>'.(yr_t('hafta_pill')!==''?'<span class="pill">'.esc_html(yr_t('hafta_pill')).'</span>':'').'<h3>'.esc_html(get_the_title($id)).'</h3>';
 	if($w['album'])echo '<p class="wka">'.esc_html($w['album'][0]).($w['album'][1]?' <span>('.esc_html($w['album'][1]).')</span>':'').'</p>';
-	echo '<p>'.esc_html(wp_trim_words(get_the_excerpt($id),26)).'</p><a class="btn" href="'.esc_url(get_permalink($id)).'">Grubu Keşfet</a></div></div></div>';
+	echo '<p>'.esc_html(wp_trim_words(get_the_excerpt($id),26)).'</p><a class="btn" href="'.esc_url(get_permalink($id)).'">'.esc_html(yr_t('hafta_btn')).'</a></div></div></div>';
 }
 
 /* ================= Anket ================= */
@@ -116,7 +116,7 @@ function yr_poll_box(){
 	$open=get_post_meta($id,'_yr_aktif',true)!=='0';$v=get_post_meta($id,'_yr_oylar',true);if(!is_array($v))$v=[];
 	$voted=isset($_COOKIE['yr_oy_'.$id])||in_array($_GET['yr_a']??'',['tamam','zaten'],true);
 	$show=$voted||!$open||isset($_GET['sonuc']);
-	echo '<div class="box" id="anket"><h2>Anket</h2>';
+	echo '<div class="box" id="anket"><h2>'.esc_html(yr_t('anket_b')).'</h2>';
 	yr_flash('yr_a',['tamam'=>['Oyun kaydedildi, teşekkürler.','ok'],'zaten'=>['Bu ankete zaten oy verdin.','err'],'guvenlik'=>['Güvenlik doğrulaması başarısız; sayfayı yenile.','err'],'kapali'=>['Bu anket kapalı.','err'],'gecersiz'=>['Lütfen bir seçenek seç.','err']]);
 	echo '<p class="kq" style="font-size:19px">'.esc_html(get_the_title($id)).'</p>';
 	if($show){

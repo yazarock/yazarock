@@ -145,3 +145,88 @@ add_action('admin_init',function(){
 	if(function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
 });
 add_action('save_post_post',function($id){if(!wp_is_post_revision($id)&&!wp_is_post_autosave($id))yr_slug_duzelt($id);},30);
+
+/* ================= v1.11: Ana sayfadaki bütün sabit yazılar → Özelleştir › Ana Sayfa Yazıları ================= */
+function yr_t_alanlar(){
+	return [
+		'Manşet'=>[
+			'hero_btn1'=>['Birinci düğme','Grubunu Tanıt'],
+			'hero_btn2'=>['İkinci düğme','Keşfet ↓'],
+		],
+		'Haftanın Keşfi'=>[
+			'kesif_pill'=>['Etiket','Haftanın Keşfi'],
+			'grup_btn'=>['Grup düğmesi','Grubu Tanı'],
+			'dinle_btn'=>['Dinle düğmesi','Dinle'],
+		],
+		'Röportajlar'=>[
+			'rop_b'=>['Başlık','Röportajlar'],
+			'rop_tum'=>['Alt bağlantı','Tüm röportajlar →'],
+			'rop_bos_b'=>['Henüz röportaj yokken: başlık','İlk röportajlar yolda'],
+			'rop_bos_m'=>['Henüz röportaj yokken: metin',"Türkiye'nin dört bir yanındaki bağımsız gruplarla konuşmaya başlıyoruz. Grubunun hikâyesini anlatmak ister misin?",'textarea'],
+			'rop_bos_btn'=>['Henüz röportaj yokken: düğme','Röportaj için başvur'],
+		],
+		'Sahneden'=>[
+			'sahne_b'=>['Başlık','Sahneden'],
+			'sahne_b2'=>['Başlık (Keşif/yeni çıkış yazısı yokken)','Son Yazılar'],
+			'sahne_tum'=>['Alt bağlantı','Tüm haberler ve yazılar →'],
+		],
+		'Etkinlikler'=>[
+			'etk_b'=>['Başlık','Sahnede Bu Ay'],
+			'etk_bos'=>['Konser yokken metin','Yaklaşan konser yok. Grubunun konserini duyurmak için'],
+			'etk_bos_l'=>['Konser yokken bağlantı','bize yaz'],
+			'etk_tum'=>['Alt bağlantı','Konser takvimi →'],
+		],
+		"Türkiye'den Gruplar"=>[
+			'tr_b'=>['Başlık',"Türkiye'den Gruplar"],
+			'tr_tum'=>['Alt bağlantı','Tüm gruplar →'],
+		],
+		'Haftanın Albümü'=>[
+			'hafta_b'=>['Başlık','Haftanın Albümü'],
+			'hafta_pill'=>['Etiket','Haftanın Grubu'],
+			'hafta_btn'=>['Düğme','Grubu Keşfet'],
+		],
+		'Yan sütun: Grubun mu var?'=>[
+			'cta_b'=>['Başlık','Grubun mu var?'],
+			'cta_m'=>['Metin',"Yazarock'ta yer almak ücretsiz. Müziğini dinleyelim, seni okurlarımızla tanıştıralım.",'textarea'],
+			'cta_btn'=>['Düğme','Grubunu Tanıt'],
+			'cta_l'=>['Alt bağlantı (Hakkımızda)','Biz kimiz? →'],
+		],
+		'Yan sütun: diğer kutular'=>[
+			'yazar_b'=>['Yazarlar başlığı','Yazarlar'],
+			'yorum_b'=>['Son yorumlar başlığı','Son Yorumlar'],
+			'anket_b'=>['Anket başlığı','Anket'],
+		],
+		'Günün Sözü'=>[
+			'soz_b'=>['Başlık','Günün Sözü'],
+			'soz_alt'=>['Sözün altındaki imza','Yazarock editörlüğünden'],
+			'soz_btn'=>['Düğme','Başka Bir Söz'],
+		],
+		'Haber Bülteni'=>[
+			'bulten_b'=>['Başlık','Haber Bülteni'],
+			'bulten_m'=>['Metin','Yeni haberler ve konser duyuruları e-postana gelsin.','textarea'],
+			'bulten_btn'=>['Düğme','Abone Ol'],
+		],
+	];
+}
+function yr_t($k){
+	static $D=null;
+	if($D===null){$D=[];foreach(yr_t_alanlar() as $g)foreach($g as $kk=>$a)$D[$kk]=$a[1];}
+	return trim((string)get_theme_mod('yr_t_'.$k,$D[$k]??''));
+}
+add_action('customize_register',function($c){
+	$c->add_section('yr_ana',['title'=>'Ana Sayfa Yazıları','priority'=>25,'description'=>'Ana sayfadaki bölüm başlıkları, düğmeler ve kutu yazıları. Bir kutuyu boş bırakırsan o düğme ya da bağlantı gizlenir. Büyük başlık, altındaki metin ve kırmızı etiket ise Ana Sayfa\'yı açıp "Sayfayı düzenle" ile değiştirilir. Bölümleri tamamen gizlemek için: Yazarock Ayarları.']);
+	$i=0;
+	foreach(yr_t_alanlar() as $grup=>$alanlar){
+		$ilk=true;
+		foreach($alanlar as $k=>$a){
+			$tip=$a[2]??'text';
+			$c->add_setting('yr_t_'.$k,['default'=>$a[1],'sanitize_callback'=>$tip==='textarea'?'sanitize_textarea_field':'sanitize_text_field']);
+			$c->add_control('yr_t_'.$k,['label'=>$grup.' · '.$a[0],'section'=>'yr_ana','type'=>$tip,'priority'=>++$i]);
+			$ilk=false;
+		}
+		if($grup==='Günün Sözü'){/* sözleri de buraya taşı, varsayılanları göster */
+			$s=$c->get_setting('yr_quotes');if($s)$s->default=implode("\n",yr_quotes_default());
+			$ct=$c->get_control('yr_quotes');if($ct){$ct->section='yr_ana';$ct->priority=++$i;$ct->label='Günün Sözü · Sözler (her satıra bir söz)';$ct->input_attrs=['rows'=>8];}
+		}
+	}
+},30);

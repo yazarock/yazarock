@@ -1,6 +1,6 @@
 <?php
 if(!defined('ABSPATH'))exit;
-define('YR_VER','1.10.0');
+define('YR_VER','1.11.0');
 
 /* E-posta adresi yazım ve alan adı kontrolü: hatalı adreslere giden mailler geri döner ve sitenin e-posta itibarını düşürür */
 function yr_eposta_oneri($m){
@@ -181,9 +181,9 @@ function yr_notice($t){
 }
 function yr_newsletter(){
 	if(!empty($_COOKIE['yr_ab']))return;/* abone olanlara gösterilmez */
-	echo '<section class="box nl-box" id="bulten" style="margin-top:22px"><h2>Haber Bülteni</h2><p style="margin:0;color:var(--mute)">Yeni haberler ve konser duyuruları e-postana gelsin.</p>';yr_notice('abone');
+	echo '<section class="box nl-box" id="bulten" style="margin-top:22px"><h2>'.esc_html(yr_t('bulten_b')).'</h2><p style="margin:0;color:var(--mute)">'.esc_html(yr_t('bulten_m')).'</p>';yr_notice('abone');
 	echo '<form class="news-l" method="post" action="'.esc_url(admin_url('admin-post.php')).'"><input type="hidden" name="action" value="yr_form"><input type="hidden" name="t" value="abone">';wp_nonce_field('yr_form','yr_n');
-	echo '<input class="hp" tabindex="-1" autocomplete="off" name="website"><input type="email" name="email" placeholder="E-posta adresin" aria-label="E-posta" required>';yr_ts_widget();echo '<button class="btn" type="submit">Abone Ol</button>';
+	echo '<input class="hp" tabindex="-1" autocomplete="off" name="website"><input type="email" name="email" placeholder="E-posta adresin" aria-label="E-posta" required>';yr_ts_widget();echo '<button class="btn" type="submit">'.esc_html(yr_t('bulten_btn')).'</button>';
 	echo '<label class="chk"><input type="checkbox" name="onay" value="1" required> <span>Ticari elektronik ileti almayı kabul ediyorum; <a href="'.esc_url(yr_page_url('kvkk-aydinlatma-metni')).'" target="_blank">KVKK Aydınlatma Metni</a>\'ni okudum. Dilediğim zaman abonelikten çıkabilirim.</span></label></form></section>';
 }
 /* Aboneleri CSV indir */
@@ -225,7 +225,7 @@ add_filter('login_headertext',function(){return 'Yazarock.com';});
 /* Özelleştir: Görünüm → Özelleştir → Yazarock Ayarları */
 add_action('customize_register',function($c){
 	$c->add_section('yr',['title'=>'Yazarock Ayarları','priority'=>30]);
-	$f=[['yr_hero_t','Ana sayfa manşet başlığı',"Anadolu'nun Sesi: Rock Kültürü ve İsyanın Tarihi",'text'],['yr_hero_d','Manşet açıklaması',"Türkiye'de rock müziğin derin köklerini keşfedin.",'textarea'],['yr_hero_b','Manşet düğme yazısı','Haberleri Oku','text'],['yr_hero_u','Manşet düğme adresi (boşsa Haberler sayfası)','','url'],['yr_mail','İletişim e-postası','info@yazarock.com','text'],['yr_social','Sosyal medya adresleri (her satıra bir adres)','','textarea'],['yr_quotes','Günün sözleri (her satıra bir söz)','','textarea']];
+	$f=[['yr_mail','İletişim e-postası','info@yazarock.com','text'],['yr_social','Sosyal medya adresleri (her satıra bir adres)','','textarea'],['yr_quotes','Günün sözleri (her satıra bir söz)','','textarea']];
 	foreach($f as $x){
 		$c->add_setting($x[0],['default'=>$x[2],'sanitize_callback'=>$x[3]==='url'?'esc_url_raw':($x[3]==='textarea'?'sanitize_textarea_field':'sanitize_text_field')]);
 		$c->add_control($x[0],['label'=>$x[1],'section'=>'yr','type'=>$x[3]]);
@@ -256,7 +256,7 @@ add_action('init',function(){
 });
 
 /* Günün sözü */
-function yr_quotes(){$q=array_values(array_filter(array_map('trim',explode("\n",(string)get_theme_mod('yr_quotes','')))));return $q?$q:yr_quotes_default();}
+function yr_quotes(){$q=array_values(array_filter(array_map('trim',explode("\n",(string)get_theme_mod('yr_quotes',implode("\n",yr_quotes_default()))))));return $q?$q:yr_quotes_default();}
 function yr_quotes_default(){return ['Riff, bir şarkının kapısını çalan ilk cümledir.','Sessizlik de bir enstrümandır; ne zaman susacağını bilen gitarist kazanır.','Sahne büyük olabilir ama hikâye hep ilk provada başlar.','Distorsiyon sesi bozmaz; duyguyu açığa çıkarır.','İyi bir albüm, baştan sona dinlenince anlam kazanan bir yolculuktur.','Her büyük grup bir garajda, küçük bir amfiyle başladı.'];}
 
 /* Şablon yardımcıları */
