@@ -15,6 +15,6 @@ if(is_user_logged_in()):?><p>Zaten giriş yaptın.</p><p><a class="btn" href="<?
 <p class="note" style="margin-top:12px">Kayıttan sonra hemen giriş yaparsın. E-posta adresine bir onay bağlantısı göndeririz; onaylanmayan hesaplar 7 gün sonra silinir.</p></form>
 <?php endif;?></div>
 <div class="box join"><h2>Zaten üye misin?</h2><p>Kullanıcı adın ya da e-postan ve şifrenle giriş yap.</p><p><a class="btn alt" href="<?php echo esc_url(yr_page_url('giris'));?>">Giriş Yap</a></p>
-<h2 style="margin-top:22px">Yazmak mı istiyorsun?</h2><p>Rock ve metal üzerine yazıyorsan yazarlık başvurusu yapabilirsin.</p><p><a class="btn alt" href="<?php echo esc_url(yr_page_url('yazar-ol'));?>">Yazar Ol</a></p></div>
+<h2 style="margin-top:22px">Yazmak mı istiyorsun?</h2><p>Rock ve metal üzerine yazıyorsan önce üye ol; ardından panelinden yazarlık başvurusu yapabilirsin.</p></div>
 </div>
 <?php get_footer();

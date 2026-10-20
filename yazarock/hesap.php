@@ -134,39 +134,22 @@ function yr_yazar_basvuru(){
 	if(!isset($_POST['yr_n'])||!wp_verify_nonce($_POST['yr_n'],'yr_yazar'))$go('guvenlik');
 	if(!empty($_POST['website']))$go('tamam');
 	if(!yr_ts_ok())$go('guvenlik');
+	if(!is_user_logged_in())$go('uye');
 	$rk='yr_rl_y_'.md5(yr_ip());if(get_transient($rk))$go('bekle');
 	$alan=sanitize_text_field(wp_unslash($_POST['alan']??''));$lk=esc_url_raw(wp_unslash($_POST['link']??''),['http','https']);$ms=mb_substr(sanitize_textarea_field(wp_unslash($_POST['msg']??'')),0,1000);
 	if(mb_strlen($ms)<40)$err('Kendini ve yazmak istediğin konuları en az 40 karakterle anlat.');
 	if(empty($_POST['ok'])||empty($_POST['kvkk']))$err('Devam etmek için iki onay kutusunu da işaretlemelisin.');
 	$meta=['_alan'=>$alan,'_link'=>$lk,'_durum'=>'yeni','_kvkk'=>current_time('mysql')];
-	if(is_user_logged_in()){
-		$u=wp_get_current_user();
-		if(yr_is_writer($u))$err('Zaten yazarsın; panelinden yeni yazı yazabilirsin.');
-		if(get_posts(['post_type'=>'basvuru','post_status'=>'any','numberposts'=>1,'fields'=>'ids','meta_query'=>[['key'=>'_uid','value'=>$u->ID],['key'=>'_durum','value'=>'yeni']]]))$err('Değerlendirmede olan bir başvurun zaten var.');
-		$ad=$u->display_name;$m=$u->user_email;$meta['_uid']=$u->ID;$meta['_email']=$m;$meta['_kadi']=$u->user_login;
-		if(yr_onayli($u->ID))$meta['_eposta_onay']=current_time('mysql');
-	}else{
-		$ad=trim(sanitize_text_field(wp_unslash($_POST['ad']??'')));$m=sanitize_email(wp_unslash($_POST['email']??''));
-		$kadi=yr_kadi_temizle(wp_unslash($_POST['kadi']??''));$sifre=(string)($_POST['sifre']??'');
-		if(mb_strlen($ad)<3||mb_strlen($ad)>60)$err('Ad soyad 3-60 karakter olmalı.');
-		if(!yr_eposta_ok($m))$err('E-posta adresi geçersiz görünüyor; yazımını kontrol et.');
-		if(email_exists($m))$err('Bu e-posta adresiyle zaten bir hesabın var. Önce giriş yap, sonra bu sayfadan başvur.');
-		if(get_posts(['post_type'=>'basvuru','post_status'=>'any','numberposts'=>1,'fields'=>'ids','meta_query'=>[['key'=>'_email','value'=>$m],['key'=>'_durum','value'=>'yeni']]]))$err('Bu e-posta adresiyle değerlendirmede olan bir başvuru zaten var.');
-		if($h=yr_kadi_hata($kadi))$err($h);
-		if($h=yr_sifre_hata(wp_unslash($sifre),$kadi,$m))$err($h);
-		if($sifre!==(string)($_POST['sifre2']??''))$err('Şifreler birbiriyle aynı değil.');
-		$t=yr_token();
-		$meta+=['_email'=>$m,'_kadi'=>$kadi,'_sifre_hash'=>wp_hash_password($sifre),'_onay_hash'=>wp_hash($t)];
-	}
+	$u=wp_get_current_user();
+	if(yr_is_writer($u))$err('Zaten yazarsın; panelinden yeni yazı yazabilirsin.');
+	if(get_posts(['post_type'=>'basvuru','post_status'=>'any','numberposts'=>1,'fields'=>'ids','meta_query'=>[['key'=>'_uid','value'=>$u->ID],['key'=>'_durum','value'=>'yeni']]]))$err('Değerlendirmede olan bir başvurun zaten var.');
+	$ad=$u->display_name;$m=$u->user_email;$meta['_uid']=$u->ID;$meta['_email']=$m;$meta['_kadi']=$u->user_login;
+	if(!yr_onayli($u->ID))$err('Başvurmadan önce e-posta adresini onaylamalısın. Onay bağlantısını panelinden tekrar isteyebilirsin.');
+	$meta['_eposta_onay']=current_time('mysql');
 	set_transient($rk,1,60);
 	$pid=wp_insert_post(['post_type'=>'basvuru','post_status'=>'publish','post_title'=>$ad,'post_content'=>$ms,'meta_input'=>$meta],true);
 	if(is_wp_error($pid))$err('Başvuru kaydedilemedi, tekrar dene.');
-	if(!empty($meta['_onay_hash'])){
-		$link=add_query_arg('yr_bdogrula',$pid.'.'.$t,home_url('/'));
-		wp_mail($m,'Yazarock: yazarlık başvurunu onayla',"Merhaba $ad,\n\nYazarock yazarlık başvurun bize ulaştı. Başvurunun değerlendirmeye alınması için aşağıdaki bağlantıya tıklayarak e-posta adresini onayla:\n\n$link\n\nSeçtiğin kullanıcı adı: {$meta['_kadi']}\nBaşvurun onaylandığında bu kullanıcı adı ve formda belirlediğin şifreyle giriş yapabileceksin.\n\nBu başvuruyu sen yapmadıysan bu e-postayı yok sayabilirsin; onaylanmayan başvurular 7 gün sonra silinir.\n\nYazarock\n".home_url('/'));
-		$go('onay');
-	}
-	if(!empty($meta['_eposta_onay']))yr_basvuru_bildir($pid);
+	yr_basvuru_bildir($pid);
 	$go('tamam');
 }
 function yr_basvuru_bildir($pid){
@@ -222,3 +205,10 @@ add_action('yr_hesap_temizlik',function(){
 	}
 	foreach(get_posts(['post_type'=>'basvuru','post_status'=>'any','numberposts'=>200,'date_query'=>[['before'=>'7 days ago']],'meta_key'=>'_onay_hash','meta_compare'=>'EXISTS']) as $p)wp_delete_post($p->ID,true);
 });
+
+/* Menüde "Yazar Ol" yalnızca yazar olmayan üyelere görünür */
+add_filter('wp_nav_menu_objects',function($items){
+	$goster=is_user_logged_in()&&!yr_is_writer();$yo=untrailingslashit(yr_page_url('yazar-ol'));
+	if($goster)return $items;
+	return array_filter($items,function($it)use($yo){return !(untrailingslashit((string)$it->url)===$yo||$it->title==='Yazar Ol');});
+},20);
