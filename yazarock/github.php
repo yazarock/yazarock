@@ -170,7 +170,7 @@ function yr_derleme_grup_ekle($g){
 	$icerik.=yr_derleme_kaynak_html($g['kaynaklar']??[]);
 	$yazar=(int)get_option('yr_derleme_yazar',0);
 	if(!$yazar||!get_userdata($yazar)){$a=get_users(['role'=>'administrator','number'=>1,'fields'=>'ID','orderby'=>'ID']);$yazar=$a?(int)$a[0]:0;}
-	$pid=wp_insert_post(wp_slash(['post_type'=>'grup','post_status'=>'draft','post_title'=>$ad,'post_name'=>sanitize_title($ad),'post_content'=>$icerik,'post_excerpt'=>sanitize_textarea_field((string)($g['ozet']??'')),'post_author'=>$yazar,'meta_input'=>[
+	$pid=wp_insert_post(wp_slash(['post_type'=>'grup','post_status'=>(($g['durum']??'')==='yayin'?'publish':'draft'),'post_title'=>$ad,'post_name'=>sanitize_title($ad),'post_content'=>$icerik,'post_excerpt'=>sanitize_textarea_field((string)($g['ozet']??'')),'post_author'=>$yazar,'meta_input'=>[
 		'_yr_derleme_id'=>$id,'_yr_bolge'=>$bolge,'_yr_stil'=>sanitize_text_field((string)($g['stil']??'')),'_yr_kurulus'=>sanitize_text_field((string)($g['kurulus']??'')),
 		'_yr_link'=>$url('link'),'_yr_spotify'=>$url('spotify'),'_yr_youtube'=>$url('youtube'),'_yr_diskografi'=>sanitize_textarea_field((string)$dis)]]),true);
 	if(is_wp_error($pid))return false;

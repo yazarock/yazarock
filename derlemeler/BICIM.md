@@ -70,4 +70,5 @@ Grup listeleri ayrı dosyalarda tutulur ve `index.json` içindeki `"grup_dosyala
  "ozet":"Tek cümlelik özet.","icerik":"<p>…</p>","diskografi":["Albüm (2016)"],"link":"","spotify":"","youtube":"",
  "kaynaklar":[{"ad":"Kaynak","url":"https://…"}]}]}
 ```
+- `durum`: `"yayin"` ise grup doğrudan yayımlanır; yoksa taslak olur.
 - `bolge`: `tr` ya da `world`. `tur`: `Rock`, `Metal`, `Alternatif` ya da `Progresif`.
