@@ -73,10 +73,6 @@ add_action('init',function(){
 
 /* ================= Özelleştir: yeni ana sayfa bölümleri ================= */
 add_action('customize_register',function($c){
-	$c->add_setting('yr_m_baslik',['default'=>'Bilinmeyen grupların sesi','sanitize_callback'=>'sanitize_text_field']);
-	$c->add_control('yr_m_baslik',['label'=>'Ana sayfa giriş başlığı','section'=>'yr','type'=>'text']);
-	$c->add_setting('yr_m_metin',['default'=>yr_m_metin_varsayilan(),'sanitize_callback'=>'sanitize_textarea_field']);
-	$c->add_control('yr_m_metin',['label'=>'Ana sayfa giriş metni','section'=>'yr','type'=>'textarea']);
 	foreach(['kesif'=>'Haftanın Keşfi','roportaj'=>'Röportajlar','sahne'=>'Sahneden (Keşif, yeni çıkış, konser duyurusu)','trgrup'=>"Türkiye'den Gruplar"] as $k=>$l){
 		$c->add_setting('yr_s_'.$k,['default'=>true,'sanitize_callback'=>'rest_sanitize_boolean']);
 		$c->add_control('yr_s_'.$k,['label'=>$l.' bölümünü göster','section'=>'yr','type'=>'checkbox']);
@@ -104,3 +100,34 @@ add_action('admin_init',function(){
 	}
 	if(!term_exists('Röportaj','category'))wp_insert_term('Röportaj','category',['slug'=>'roportaj']);
 });
+
+/* ================= Ana sayfa girişi = Ana Sayfa sayfasının ilk başlığı ve paragrafı ================= */
+/* "Sayfayı düzenle" ile açılan Ana Sayfa'daki ilk başlık girişin büyük başlığı, ilk paragraf metnidir; geri kalan bloklar girişin altında kutu olarak görünür. */
+function yr_giris_icerik(){
+	$out=['baslik'=>get_theme_mod('yr_m_baslik','Bilinmeyen grupların sesi'),'metin'=>get_theme_mod('yr_m_metin',yr_m_metin_varsayilan()),'kalan'=>''];
+	$fid=(int)get_option('page_on_front');$c=$fid?(string)get_post_field('post_content',$fid):'';if(trim($c)==='')return $out;
+	$bloklar=parse_blocks($c);$h=false;$p=false;$kalan=[];
+	foreach($bloklar as $b){
+		if(empty($b['blockName'])&&trim(wp_strip_all_tags((string)$b['innerHTML']))==='')continue;
+		if(!$h&&$b['blockName']==='core/heading'){$t=trim(wp_strip_all_tags(render_block($b)));if($t!==''){$out['baslik']=$t;$h=true;continue;}}
+		if($h&&!$p&&$b['blockName']==='core/paragraph'){$t=trim(wp_strip_all_tags(render_block($b)));if($t!==''){$out['metin']=$t;$p=true;continue;}}
+		$kalan[]=$b;
+	}
+	foreach($kalan as $b)$out['kalan'].=render_block($b);
+	return $out;
+}
+/* Ana Sayfa boşsa girişi içine yaz: düzenleyince yazıyı doğrudan görsün */
+add_action('admin_init',function(){
+	if(get_option('yr_mig_v8')||!current_user_can('manage_options'))return;
+	update_option('yr_mig_v8',1);
+	$fid=(int)get_option('page_on_front');if(!$fid)return;
+	if(trim((string)get_post_field('post_content',$fid))!=='')return;
+	$b=esc_html(get_theme_mod('yr_m_baslik','Bilinmeyen grupların sesi'));$m=esc_html(get_theme_mod('yr_m_metin',yr_m_metin_varsayilan()));
+	wp_update_post(['ID'=>$fid,'post_content'=>wp_slash('<!-- wp:heading {"level":1} --><h1 class="wp-block-heading">'.$b.'</h1><!-- /wp:heading --><!-- wp:paragraph --><p>'.$m.'</p><!-- /wp:paragraph -->')]);
+});
+/* İçerik kaydedilince sunucu önbelleğini temizle: değişiklik hemen görünsün */
+add_action('save_post',function($id,$p){
+	if(wp_is_post_revision($id)||wp_is_post_autosave($id)||!in_array($p->post_status,['publish','trash'],true))return;
+	if(!in_array($p->post_type,['post','page','grup','etkinlik','liste'],true))return;
+	if(function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
+},20,2);

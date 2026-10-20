@@ -1,13 +1,13 @@
 <?php if(!defined('ABSPATH'))exit; get_header();
 $gt=yr_page_url('grubunu-tanit');
 $tr_say=(int)(new WP_Query(['post_type'=>'grup','post_status'=>'publish','posts_per_page'=>1,'fields'=>'ids','meta_key'=>'_yr_bolge','meta_value'=>'tr']))->found_posts;
-$rk=yr_roportaj_kat();
+$rk=yr_roportaj_kat();$gi=yr_giris_icerik();
 ?>
 <section class="mhero">
 <div class="mh-in">
 <span class="pill">Türkiye · Rock &amp; Metal · Underground</span>
-<h1><?php echo esc_html(get_theme_mod('yr_m_baslik','Bilinmeyen grupların sesi'));?></h1>
-<p><?php echo esc_html(get_theme_mod('yr_m_metin',yr_m_metin_varsayilan()));?></p>
+<h1><?php echo esc_html($gi['baslik']);?></h1>
+<p><?php echo esc_html($gi['metin']);?></p>
 <div class="btnrow"><a class="btn" href="<?php echo esc_url($gt);?>">Grubunu Tanıt</a><a class="btn alt" href="#kesfet">Keşfet ↓</a></div>
 </div>
 <svg viewBox="0 0 400 430" preserveAspectRatio="xMaxYMid slice" aria-hidden="true"><g fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M390 20 L330 120 L360 125 L290 250 L330 255 L250 410" stroke="#8ec0ff" stroke-width="3"/><path d="M400 90 L350 170 L372 172" stroke="#8ec0ff" stroke-width="2" opacity=".7"/><path d="M200 30 L170 130 L195 134 L150 240" stroke="#e5393f" stroke-width="3"/><path d="M60 60 L90 150 L70 158 L110 260" stroke="#e5393f" stroke-width="2" opacity=".7"/></g></svg>
@@ -25,7 +25,7 @@ if($st):$h=new WP_Query(['posts_per_page'=>5,'ignore_sticky_posts'=>1,'no_found_
 </article><?php endif;endif;?>
 
 <?php if(is_active_sidebar('home-top'))dynamic_sidebar('home-top');?>
-<?php while(have_posts()){the_post();if(trim(get_the_content())){echo '<div class="box entry" style="margin-bottom:22px"><div class="content">';the_content();echo '</div></div>';}}?>
+<?php if(trim(wp_strip_all_tags($gi['kalan'],true))!==''||strpos($gi['kalan'],'<img')!==false)echo '<div class="box entry" style="margin-bottom:22px"><div class="content">'.$gi['kalan'].'</div></div>';?>
 
 <div class="grid" id="kesfet"><div>
 <?php if(yr_on('kesif')&&($kg=yr_kesif_grup())):?><div class="box kbox"><?php yr_grup_kart($kg->ID,true);?></div><?php endif;?>

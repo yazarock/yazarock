@@ -147,6 +147,9 @@ add_filter('views_edit-post',function($v){
 add_action('init',function(){
 	if(get_option('yr_son_ver')===YR_VER)return;
 	update_option('yr_son_ver',YR_VER);
+	yr_onbellek_temizle();
+},1);
+function yr_onbellek_temizle(){
 	if(!headers_sent())header('X-LiteSpeed-Purge: *');
 	do_action('litespeed_purge_all');
 	if(function_exists('rocket_clean_domain'))rocket_clean_domain();
@@ -154,4 +157,6 @@ add_action('init',function(){
 	if(function_exists('wp_cache_clear_cache'))wp_cache_clear_cache();
 	if(function_exists('sg_cachepress_purge_cache'))sg_cachepress_purge_cache();
 	wp_cache_flush();
-},1);
+}
+/* Özelleştir'de "Yayınla" denince de temizle: değişiklik hemen görünsün */
+add_action('customize_save_after','yr_onbellek_temizle');
