@@ -62,3 +62,12 @@ Kurallar:
 - Zorunlu: `id` (benzersiz), `baslik`, `tarih` (`YYYY-AA-GG`). İsteğe bağlı: `saat` (`SS:DD`), `sehir`, `mekan`, `tur` (`Konser`, `Festival`, `Kulüp Gecesi`; başka değer `Konser` sayılır), `bilet`, `ozet`, `aciklama` (HTML), `kaynaklar`.
 - Tarihi geçmiş etkinlikler, aynı `id` ile daha önce eklenenler ve aynı gün aynı başlıkla zaten var olan etkinlikler atlanır.
 - Başlık biçimi: `Grup – Mekân` (birden çok grup varsa `Grup 1, Grup 2 – Mekân`).
+
+## Gruplar (grup arşivi) — tema 1.12.0 ve sonrası
+Grup listeleri ayrı dosyalarda tutulur ve `index.json` içindeki `"grup_dosyalari"` listesine eklenir (ör. `"gruplar-2026-10-20.json"`). Site bunları **taslak** olarak Gruplar bölümüne ekler; sitede aynı adlı grup varsa (taslak dahil) atlar.
+```json
+{"gruplar":[{"id":"grup-ornek","ad":"Grup Adı","bolge":"tr","tur":"Metal","stil":"Death metal","kurulus":"Kadıköy, İstanbul · 2012",
+ "ozet":"Tek cümlelik özet.","icerik":"<p>…</p>","diskografi":["Albüm (2016)"],"link":"","spotify":"","youtube":"",
+ "kaynaklar":[{"ad":"Kaynak","url":"https://…"}]}]}
+```
+- `bolge`: `tr` ya da `world`. `tur`: `Rock`, `Metal`, `Alternatif` ya da `Progresif`.

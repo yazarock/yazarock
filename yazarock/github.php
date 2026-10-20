@@ -87,7 +87,7 @@ add_action('admin_notices',function(){
 function yr_derleme_cek($manual=false){
 	if(get_transient('yr_derleme_kilit'))return ['durum'=>'mesgul'];
 	set_transient('yr_derleme_kilit',1,5*MINUTE_IN_SECONDS);
-	$out=['eklenen'=>0,'etkinlik'=>0,'durum'=>'tamam'];
+	$out=['eklenen'=>0,'etkinlik'=>0,'grup'=>0,'durum'=>'tamam'];
 	$idx=json_decode((string)yr_gh_get('derlemeler/index.json',200000),true);
 	if(!is_array($idx)||!isset($idx['dosyalar'])||!is_array($idx['dosyalar'])){delete_transient('yr_derleme_kilit');update_option('yr_derleme_son',['zaman'=>time(),'eklenen'=>0,'hata'=>'Derleme listesi okunamadı'],false);return ['durum'=>'hata'];}
 	$alinan=(array)get_option('yr_derleme_alinan',[]);
@@ -98,10 +98,22 @@ function yr_derleme_cek($manual=false){
 		if(!is_array($d))continue;
 		if(isset($d['yazilar'])&&is_array($d['yazilar']))foreach(array_slice($d['yazilar'],0,30) as $y)if(is_array($y)&&yr_derleme_ekle($y))$out['eklenen']++;
 		if(isset($d['etkinlikler'])&&is_array($d['etkinlikler']))foreach(array_slice($d['etkinlikler'],0,60) as $e)if(is_array($e)&&yr_derleme_etkinlik_ekle($e))$out['etkinlik']++;
+		if(isset($d['gruplar'])&&is_array($d['gruplar']))foreach(array_slice($d['gruplar'],0,150) as $g)if(is_array($g)&&yr_derleme_grup_ekle($g))$out['grup']++;
 		$alinan[]=$f;
 	}
 	update_option('yr_derleme_alinan',array_slice($alinan,-60),false);
-	update_option('yr_derleme_son',['zaman'=>time(),'eklenen'=>$out['eklenen'],'etkinlik'=>$out['etkinlik'],'hata'=>''],false);
+	/* Grup listeleri ayrı tutulur (index.json → "grup_dosyalari"); eski tema sürümleri bunları görmez */
+	$galinan=(array)get_option('yr_grup_alinan',[]);
+	$gdos=isset($idx['grup_dosyalari'])&&is_array($idx['grup_dosyalari'])?array_slice(array_values(array_filter($idx['grup_dosyalari'],function($f){return is_string($f)&&preg_match('/^[A-Za-z0-9_-]+\.json$/',$f);})),-20):[];
+	foreach($gdos as $f){
+		if(in_array($f,$galinan,true))continue;
+		$d=json_decode((string)yr_gh_get('derlemeler/'.$f,3000000),true);
+		if(!is_array($d)||!isset($d['gruplar'])||!is_array($d['gruplar']))continue;
+		foreach(array_slice($d['gruplar'],0,150) as $g)if(is_array($g)&&yr_derleme_grup_ekle($g))$out['grup']++;
+		$galinan[]=$f;
+	}
+	update_option('yr_grup_alinan',array_slice($galinan,-60),false);
+	update_option('yr_derleme_son',['zaman'=>time(),'eklenen'=>$out['eklenen'],'etkinlik'=>$out['etkinlik'],'grup'=>$out['grup'],'hata'=>''],false);
 	delete_transient('yr_derleme_kilit');
 	return $out;
 }
@@ -143,6 +155,28 @@ function yr_derleme_etkinlik_ekle($e){
 		'_yr_derleme_id'=>$id,'_yr_tarih'=>$tarih,'_yr_saat'=>$saat,'_yr_sehir'=>sanitize_text_field((string)($e['sehir']??'')),'_yr_mekan'=>sanitize_text_field((string)($e['mekan']??'')),'_yr_tur'=>$tur,'_yr_bilet'=>$bilet]],true);
 	return !is_wp_error($pid);
 }
+/* Derlemedeki gruplar → Gruplar (taslak). Aynı adlı grup sitede varsa (taslak dahil) atlanır. */
+function yr_derleme_grup_ekle($g){
+	$id=sanitize_key($g['id']??'');$ad=sanitize_text_field((string)($g['ad']??''));$icerik=wp_kses_post((string)($g['icerik']??''));
+	if($id===''||mb_strlen($ad)<2||trim(wp_strip_all_tags($icerik))==='')return false;
+	if(get_posts(['post_type'=>'grup','post_status'=>'any','meta_key'=>'_yr_derleme_id','meta_value'=>$id,'numberposts'=>1,'fields'=>'ids']))return false;
+	$norm=function($t){return trim(preg_replace('/\s*\(.*?\)\s*/u',' ',mb_strtolower(wp_strip_all_tags(html_entity_decode($t,ENT_QUOTES,'UTF-8')))));};
+	$adn=$norm($ad);
+	global $wpdb;foreach($wpdb->get_col("SELECT post_title FROM {$wpdb->posts} WHERE post_type='grup' AND post_status NOT IN ('trash','auto-draft')") as $t)if($norm($t)===$adn)return false;
+	$bolge=(($g['bolge']??'')==='tr')?'tr':'world';
+	$tur=sanitize_text_field((string)($g['tur']??''));if(!in_array($tur,['Rock','Metal','Alternatif','Progresif'],true))$tur='';
+	$dis=$g['diskografi']??'';if(is_array($dis))$dis=implode("\n",array_map('strval',$dis));
+	$url=function($k)use($g){$u=esc_url_raw((string)($g[$k]??''));return ($u&&preg_match('#^https?://#',$u))?$u:'';};
+	$icerik.=yr_derleme_kaynak_html($g['kaynaklar']??[]);
+	$yazar=(int)get_option('yr_derleme_yazar',0);
+	if(!$yazar||!get_userdata($yazar)){$a=get_users(['role'=>'administrator','number'=>1,'fields'=>'ID','orderby'=>'ID']);$yazar=$a?(int)$a[0]:0;}
+	$pid=wp_insert_post(wp_slash(['post_type'=>'grup','post_status'=>'draft','post_title'=>$ad,'post_name'=>sanitize_title($ad),'post_content'=>$icerik,'post_excerpt'=>sanitize_textarea_field((string)($g['ozet']??'')),'post_author'=>$yazar,'meta_input'=>[
+		'_yr_derleme_id'=>$id,'_yr_bolge'=>$bolge,'_yr_stil'=>sanitize_text_field((string)($g['stil']??'')),'_yr_kurulus'=>sanitize_text_field((string)($g['kurulus']??'')),
+		'_yr_link'=>$url('link'),'_yr_spotify'=>$url('spotify'),'_yr_youtube'=>$url('youtube'),'_yr_diskografi'=>sanitize_textarea_field((string)$dis)]]),true);
+	if(is_wp_error($pid))return false;
+	if($tur){if(!term_exists($tur,'grup_tur'))wp_insert_term($tur,'grup_tur');wp_set_object_terms($pid,[$tur],'grup_tur');}
+	return true;
+}
 /* Saatlik kontrol (WordPress zamanlayıcısı) */
 add_action('init',function(){if(!wp_next_scheduled('yr_derleme_saatlik'))wp_schedule_event(time()+120,'hourly','yr_derleme_saatlik');});
 add_action('yr_derleme_saatlik','yr_derleme_cek');
@@ -160,27 +194,30 @@ add_action('yr_derleme_simdi','yr_derleme_cek');
 add_action('admin_post_yr_derleme_cek',function(){
 	check_admin_referer('yr_derleme_cek');if(!current_user_can('edit_others_posts'))wp_die('Yetkin yok.');
 	delete_transient('yr_derleme_kilit');$r=yr_derleme_cek(true);
-	wp_safe_redirect(add_query_arg(['yr_dc'=>$r['durum'],'yr_de'=>(int)($r['eklenen']??0),'yr_dk'=>(int)($r['etkinlik']??0)],admin_url('edit.php?post_status=draft&yr_derleme=1')));exit;
+	wp_safe_redirect(add_query_arg(['yr_dc'=>$r['durum'],'yr_de'=>(int)($r['eklenen']??0),'yr_dk'=>(int)($r['etkinlik']??0),'yr_dg'=>(int)($r['grup']??0)],admin_url('edit.php?post_status=draft&yr_derleme=1')));exit;
 });
 /* Taslak listesinde yalnızca derleme taslaklarını süz */
 add_action('pre_get_posts',function($q){
-	if(is_admin()&&$q->is_main_query()&&!empty($_GET['yr_derleme'])&&in_array($q->get('post_type'),['','post','etkinlik'],true))$q->set('meta_query',[['key'=>'_yr_derleme_id','compare'=>'EXISTS']]);
+	if(is_admin()&&$q->is_main_query()&&!empty($_GET['yr_derleme'])&&in_array($q->get('post_type'),['','post','etkinlik','grup'],true))$q->set('meta_query',[['key'=>'_yr_derleme_id','compare'=>'EXISTS']]);
 });
 /* Bildirim */
 add_action('admin_notices',function(){
 	if(!current_user_can('edit_others_posts'))return;
 	if(isset($_GET['yr_dc'])){
-		$d=sanitize_key($_GET['yr_dc']);$n=(int)($_GET['yr_de']??0);$ek=(int)($_GET['yr_dk']??0);
-		$m=$d==='tamam'?(($n||$ek)?trim(($n?$n.' yeni haber taslağı':'').($n&&$ek?', ':'').($ek?$ek.' yeni etkinlik taslağı':'')).' eklendi.':'Yeni derleme yok; her şey güncel.'):($d==='mesgul'?'Bir kontrol zaten sürüyor, birazdan tekrar dene.':'GitHub\'a ulaşılamadı. Biraz sonra tekrar dene.');
+		$d=sanitize_key($_GET['yr_dc']);$n=(int)($_GET['yr_de']??0);$ek=(int)($_GET['yr_dk']??0);$eg=(int)($_GET['yr_dg']??0);
+		$pp=array_filter([$n?$n.' yeni haber taslağı':'',$ek?$ek.' yeni etkinlik taslağı':'',$eg?$eg.' yeni grup taslağı':'']);
+		$m=$d==='tamam'?($pp?implode(', ',$pp).' eklendi.':'Yeni derleme yok; her şey güncel.'):($d==='mesgul'?'Bir kontrol zaten sürüyor, birazdan tekrar dene.':'GitHub\'a ulaşılamadı. Biraz sonra tekrar dene.');
 		echo '<div class="notice notice-'.($d==='tamam'?'success':'warning').' is-dismissible"><p>'.esc_html($m).'</p></div>';
 	}
 	$q=new WP_Query(['post_type'=>'post','post_status'=>'draft','meta_key'=>'_yr_derleme_id','posts_per_page'=>1,'fields'=>'ids']);
 	$n=(int)$q->found_posts;$scr=function_exists('get_current_screen')?get_current_screen():null;
 	$qe=new WP_Query(['post_type'=>'etkinlik','post_status'=>'draft','meta_key'=>'_yr_derleme_id','posts_per_page'=>1,'fields'=>'ids']);$ne=(int)$qe->found_posts;
-	if($scr&&in_array($scr->id,['edit-post','edit-etkinlik'],true)&&!empty($_GET['yr_derleme']))return;
-	if(!$n&&!$ne)return;
+	$qg=new WP_Query(['post_type'=>'grup','post_status'=>'draft','meta_key'=>'_yr_derleme_id','posts_per_page'=>1,'fields'=>'ids']);$ng=(int)$qg->found_posts;
+	if($scr&&in_array($scr->id,['edit-post','edit-etkinlik','edit-grup'],true)&&!empty($_GET['yr_derleme']))return;
+	if(!$n&&!$ne&&!$ng)return;
 	$p=[];if($n)$p[]=(int)$n.' haber taslağı <a class="button button-primary" style="margin-left:6px" href="'.esc_url(admin_url('edit.php?post_status=draft&yr_derleme=1')).'">Haberleri incele</a>';
 	if($ne)$p[]=(int)$ne.' konser/etkinlik taslağı <a class="button" style="margin-left:6px" href="'.esc_url(admin_url('edit.php?post_type=etkinlik&post_status=draft&yr_derleme=1')).'">Etkinlikleri incele</a>';
+	if($ng)$p[]=(int)$ng.' grup taslağı <a class="button" style="margin-left:6px" href="'.esc_url(admin_url('edit.php?post_type=grup&post_status=draft&yr_derleme=1')).'">Grupları incele</a>';
 	echo '<div class="notice notice-info"><p><b>Sabah derlemesi:</b> incelemeni bekleyen '.implode(' &nbsp;·&nbsp; ',$p).'</p></div>';
 });
 add_filter('views_edit-post',function($v){
@@ -191,6 +228,10 @@ add_filter('views_edit-post',function($v){
 
 add_filter('views_edit-etkinlik',function($v){
 	$v['yr_derleme']='<a href="'.esc_url(admin_url('edit.php?post_type=etkinlik&post_status=draft&yr_derleme=1')).'"'.(!empty($_GET['yr_derleme'])?' class="current"':'').'>Sabah derlemesinden gelenler</a> · <a href="'.esc_url(wp_nonce_url(admin_url('admin-post.php?action=yr_derleme_cek'),'yr_derleme_cek')).'">Şimdi çek</a>';
+	return $v;
+});
+add_filter('views_edit-grup',function($v){
+	$v['yr_derleme']='<a href="'.esc_url(admin_url('edit.php?post_type=grup&post_status=draft&yr_derleme=1')).'"'.(!empty($_GET['yr_derleme'])?' class="current"':'').'>GitHub\'dan gelen taslaklar</a> · <a href="'.esc_url(wp_nonce_url(admin_url('admin-post.php?action=yr_derleme_cek'),'yr_derleme_cek')).'">Şimdi çek</a>';
 	return $v;
 });
 
