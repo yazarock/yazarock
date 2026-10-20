@@ -130,3 +130,18 @@ add_action('admin_init',function(){
 	if($fid&&strpos(ltrim($fc),'<!-- wp:heading')===0)wp_update_post(['ID'=>$fid,'post_content'=>wp_slash(yr_b_p('Türkiye · Rock &amp; Metal · Underground').$fc)]);
 	if(function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
 });
+
+/* ================= v1.9.1: "hello-world" adresinde kalan yazıya başlığından adres ver ================= */
+function yr_slug_duzelt($id){
+	$p=get_post($id);if(!$p||$p->post_type!=='post'||$p->post_name!=='hello-world')return;
+	if(in_array(trim(wp_strip_all_tags($p->post_title)),['','Hello world!','Merhaba dünya!'],true))return;
+	$s=sanitize_title($p->post_title);if($s===''||$s==='hello-world')return;
+	wp_update_post(['ID'=>$p->ID,'post_name'=>wp_unique_post_slug($s,$p->ID,$p->post_status,'post',0)]);/* WordPress eski adresi yeni adrese yönlendirir */
+}
+add_action('admin_init',function(){
+	if(get_option('yr_mig_v10')||!current_user_can('manage_options'))return;
+	update_option('yr_mig_v10',1);
+	foreach(get_posts(['name'=>'hello-world','post_type'=>'post','post_status'=>'any','numberposts'=>5,'fields'=>'ids']) as $id)yr_slug_duzelt($id);
+	if(function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
+});
+add_action('save_post_post',function($id){if(!wp_is_post_revision($id)&&!wp_is_post_autosave($id))yr_slug_duzelt($id);},30);
