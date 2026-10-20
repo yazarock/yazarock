@@ -113,6 +113,7 @@ function yr_derleme_cek($manual=false){
 		$galinan[]=$f;
 	}
 	update_option('yr_grup_alinan',array_slice($galinan,-60),false);
+	$out['yayin']=yr_derleme_yayinla();
 	update_option('yr_derleme_son',['zaman'=>time(),'eklenen'=>$out['eklenen'],'etkinlik'=>$out['etkinlik'],'grup'=>$out['grup'],'hata'=>''],false);
 	delete_transient('yr_derleme_kilit');
 	return $out;
@@ -126,7 +127,7 @@ function yr_derleme_ekle($y){
 	$t=get_term_by('name',$kat,'category');if(!$t){$r=wp_insert_term($kat,'category');$tid=is_wp_error($r)?0:(int)$r['term_id'];}else $tid=(int)$t->term_id;
 	$yazar=(int)get_option('yr_derleme_yazar',0);
 	if(!$yazar||!get_userdata($yazar)){$a=get_users(['role'=>'administrator','number'=>1,'fields'=>'ID','orderby'=>'ID']);$yazar=$a?(int)$a[0]:0;}
-	$pid=wp_insert_post(['post_type'=>'post','post_status'=>'draft','post_title'=>$baslik,'post_content'=>$icerik,'post_excerpt'=>sanitize_textarea_field((string)($y['ozet']??'')),'post_author'=>$yazar,'post_category'=>$tid?[$tid]:[],'tags_input'=>array_slice(array_map('sanitize_text_field',(array)($y['etiketler']??[])),0,8),'meta_input'=>['_yr_derleme_id'=>$id]],true);
+	$pid=wp_insert_post(['post_type'=>'post','post_status'=>(($y['durum']??'')==='yayin'?'publish':'draft'),'post_title'=>$baslik,'post_content'=>$icerik,'post_excerpt'=>sanitize_textarea_field((string)($y['ozet']??'')),'post_author'=>$yazar,'post_category'=>$tid?[$tid]:[],'tags_input'=>array_slice(array_map('sanitize_text_field',(array)($y['etiketler']??[])),0,8),'meta_input'=>['_yr_derleme_id'=>$id]],true);
 	return !is_wp_error($pid);
 }
 function yr_derleme_kaynak_html($list){
@@ -151,7 +152,7 @@ function yr_derleme_etkinlik_ekle($e){
 	$icerik=wp_kses_post((string)($e['aciklama']??''));$icerik.=yr_derleme_kaynak_html($e['kaynaklar']??[]);
 	$yazar=(int)get_option('yr_derleme_yazar',0);
 	if(!$yazar||!get_userdata($yazar)){$a=get_users(['role'=>'administrator','number'=>1,'fields'=>'ID','orderby'=>'ID']);$yazar=$a?(int)$a[0]:0;}
-	$pid=wp_insert_post(['post_type'=>'etkinlik','post_status'=>'draft','post_title'=>$baslik,'post_content'=>$icerik,'post_excerpt'=>sanitize_textarea_field((string)($e['ozet']??'')),'post_author'=>$yazar,'meta_input'=>[
+	$pid=wp_insert_post(['post_type'=>'etkinlik','post_status'=>(($e['durum']??'')==='yayin'?'publish':'draft'),'post_title'=>$baslik,'post_content'=>$icerik,'post_excerpt'=>sanitize_textarea_field((string)($e['ozet']??'')),'post_author'=>$yazar,'meta_input'=>[
 		'_yr_derleme_id'=>$id,'_yr_tarih'=>$tarih,'_yr_saat'=>$saat,'_yr_sehir'=>sanitize_text_field((string)($e['sehir']??'')),'_yr_mekan'=>sanitize_text_field((string)($e['mekan']??'')),'_yr_tur'=>$tur,'_yr_bilet'=>$bilet]],true);
 	return !is_wp_error($pid);
 }
@@ -176,6 +177,23 @@ function yr_derleme_grup_ekle($g){
 	if(is_wp_error($pid))return false;
 	if($tur){if(!term_exists($tur,'grup_tur'))wp_insert_term($tur,'grup_tur');wp_set_object_terms($pid,[$tur],'grup_tur');}
 	return true;
+}
+/* derlemeler/yayinla.json → {"idler":["2026-10-20-ornek", ...]}: bu kimlikle GitHub'dan gelmiş TASLAKLAR yayımlanır.
+   Yalnızca derlemeden gelen içerik; her içerik bir kez (sonradan elle taslağa alınan tekrar yayımlanmaz). */
+function yr_derleme_yayinla(){
+	$d=json_decode((string)yr_gh_get('derlemeler/yayinla.json',200000),true);
+	if(!is_array($d)||empty($d['idler'])||!is_array($d['idler']))return 0;
+	$n=0;
+	foreach(array_slice($d['idler'],0,300) as $id){
+		$id=sanitize_key((string)$id);if($id==='')continue;
+		foreach(get_posts(['post_type'=>['post','grup','etkinlik'],'post_status'=>'draft','meta_key'=>'_yr_derleme_id','meta_value'=>$id,'numberposts'=>1]) as $p){
+			if(get_post_meta($p->ID,'_yr_yayinlandi',true))continue;
+			if($p->post_type==='etkinlik'&&(string)get_post_meta($p->ID,'_yr_tarih',true)<current_time('Y-m-d'))continue;
+			$r=wp_update_post(['ID'=>$p->ID,'post_status'=>'publish','post_name'=>$p->post_name?:sanitize_title($p->post_title)],true);
+			if(!is_wp_error($r)){update_post_meta($p->ID,'_yr_yayinlandi',time());$n++;}
+		}
+	}
+	return $n;
 }
 /* Saatlik kontrol (WordPress zamanlayıcısı) */
 add_action('init',function(){if(!wp_next_scheduled('yr_derleme_saatlik'))wp_schedule_event(time()+120,'hourly','yr_derleme_saatlik');});

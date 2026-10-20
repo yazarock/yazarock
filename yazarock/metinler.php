@@ -189,7 +189,7 @@ function yr_t_alanlar(){
 			'cta_b'=>['Başlık','Grubun mu var?'],
 			'cta_m'=>['Metin',"Yazarock'ta yer almak ücretsiz. Müziğini dinleyelim, seni okurlarımızla tanıştıralım.",'textarea'],
 			'cta_btn'=>['Düğme','Grubunu Tanıt'],
-			'cta_l'=>['Alt bağlantı (Hakkımızda)','Biz kimiz? →'],
+			'cta_l'=>['Alt bağlantı (Hakkımızda; boşsa gizli)',''],
 		],
 		'Yan sütun: diğer kutular'=>[
 			'yazar_b'=>['Yazarlar başlığı','Yazarlar'],
@@ -230,3 +230,6 @@ add_action('customize_register',function($c){
 		}
 	}
 },30);
+
+/* v1.13.1: "Biz kimiz?" bağlantısı ana sayfadan kaldırıldı (bir kez) */
+add_action('init',function(){if(get_option('yr_mig_v11'))return;update_option('yr_mig_v11',1);set_theme_mod('yr_t_cta_l','');});

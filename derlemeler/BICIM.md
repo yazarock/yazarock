@@ -72,3 +72,7 @@ Grup listeleri ayrı dosyalarda tutulur ve `index.json` içindeki `"grup_dosyala
 ```
 - `durum`: `"yayin"` ise grup doğrudan yayımlanır; yoksa taslak olur.
 - `bolge`: `tr` ya da `world`. `tur`: `Rock`, `Metal`, `Alternatif` ya da `Progresif`.
+
+## Yayımlama
+- Bir yazı, etkinlik ya da grupta `"durum": "yayin"` varsa doğrudan yayımlanır; yoksa taslak olur.
+- Daha önce taslak olarak gelmiş içerikleri yayımlamak için kimliklerini `derlemeler/yayinla.json` içindeki `"idler"` listesine ekle (tema 1.13.1+). Her içerik bir kez yayımlanır.
