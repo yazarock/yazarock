@@ -23,7 +23,7 @@ function yr_gh_remote_version($force=false){
 	if($v===false){
 		$css=yr_gh_get(YR_GH_THEME_DIR.'/style.css',20000);
 		$v=($css&&preg_match('/^[ \t\/*#@]*Version:\s*([0-9][0-9A-Za-z.\-]*)/mi',$css,$m))?$m[1]:'';
-		set_site_transient('yr_gh_ver',$v,$v?6*HOUR_IN_SECONDS:HOUR_IN_SECONDS);
+		set_site_transient('yr_gh_ver',$v,$v?HOUR_IN_SECONDS:15*MINUTE_IN_SECONDS);
 	}
 	return (string)$v;
 }
@@ -55,6 +55,24 @@ add_filter('upgrader_source_selection',function($source,$remote,$upgrader,$extra
 	return trailingslashit($dest);
 },10,4);
 add_action('upgrader_process_complete',function(){delete_site_transient('yr_gh_ver');});
+/* Güncellemeler, Temalar ya da Başlangıç sayfası açılınca GitHub'a hemen bak; yeni sürüm varsa beklemeden göster */
+function yr_gh_hemen_bak(){
+	if(!current_user_can('update_themes'))return;
+	if(get_transient('yr_gh_bakti'))return;set_transient('yr_gh_bakti',1,2*MINUTE_IN_SECONDS);
+	$new=yr_gh_remote_version(true);$slug=get_template();$cur=wp_get_theme($slug)->get('Version');
+	if(!$new||!version_compare($new,$cur,'>'))return;
+	$t=get_site_transient('update_themes');
+	if(is_object($t)&&isset($t->response[$slug]['new_version'])&&$t->response[$slug]['new_version']===$new)return;
+	delete_site_transient('update_themes');wp_update_themes();
+}
+foreach(['load-update-core.php','load-themes.php','load-index.php'] as $h)add_action($h,'yr_gh_hemen_bak');
+/* Panoda yeni sürüm uyarısı */
+add_action('admin_notices',function(){
+	if(!current_user_can('update_themes'))return;$scr=function_exists('get_current_screen')?get_current_screen():null;if($scr&&$scr->id==='update-core')return;
+	$t=get_site_transient('update_themes');$slug=get_template();
+	if(!is_object($t)||empty($t->response[$slug]['new_version']))return;
+	echo '<div class="notice notice-warning"><p><b>Yazarock teması:</b> yeni sürüm hazır ('.esc_html($t->response[$slug]['new_version']).'). <a class="button button-primary" style="margin-left:8px" href="'.esc_url(admin_url('update-core.php')).'">Güncellemeye git</a></p></div>';
+});
 
 /* ================= 2) Sabah derlemeleri → taslaklar ================= */
 /*
