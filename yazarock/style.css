@@ -3,7 +3,7 @@ Theme Name: Yazarock
 Theme URI: https://yazarock.com
 Author: Yazarock
 Description: Rock ve metal müzik haber teması. Gruplar, Etkinlikler, yazar giriş paneli, yazarlık başvurusu ve bülten içerir.
-Version: 1.6.1
+Version: 1.7.0
 Requires at least: 6.0
 Requires PHP: 7.4
 Text Domain: yazarock
@@ -450,3 +450,27 @@ nav a.gt:hover{background:var(--red)}
 @media(min-width:783px) and (max-width:1340px){header nav a{padding:9px 10px;font-size:13.5px}}
 .em-hint{display:block;margin-top:6px;font-size:13px;color:#f3b54a}
 .em-hint button{background:none;border:0;padding:0;color:var(--blue);text-decoration:underline;cursor:pointer;font:inherit}
+
+/* ===================== v1.7: kayıt formları ===================== */
+.hesapf .note{margin:6px 0 0;display:block}
+.kadi-m.ok{color:#5fbf6a}
+.kadi-m.no{color:var(--red2)}
+.sw{display:flex;margin-top:4px}
+.sw input{margin-top:0!important;flex:1;min-width:0}
+.goz{background:var(--panel2);color:var(--mute);border:1px solid var(--line);border-left:0;padding:0 14px;cursor:pointer;font:500 13px Barlow,sans-serif}
+.goz:hover{color:var(--text)}
+.sg{display:block;height:4px;background:#0d0809;margin-top:6px}
+.sg i{display:block;height:100%;width:0;transition:width .2s,background .2s}
+.sg i.z{background:var(--red2)}.sg i.o{background:#f3b54a}.sg i.g{background:#5fbf6a}
+.hesapf fieldset{border:0;border-top:1px solid var(--line);margin:0;padding:16px 0 4px}
+.hesapf fieldset:first-of-type{border-top:0;padding-top:0}
+.hesapf legend{display:flex;align-items:center;gap:10px;font:500 18px Oswald,sans-serif;text-transform:uppercase;padding:0;margin-bottom:12px}
+.hesapf legend span{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--red);font-size:15px}
+.hesapf input:invalid:not(:placeholder-shown):not(:focus){border-color:#7a2a2e}
+.notice.warn{border-color:#8a5a12}
+.onayb{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin:22px 0 0}
+.onayb .ic{width:26px;height:26px;color:#f3b54a;flex:none}
+.onayb>div{flex:1;min-width:220px}
+.onayb span{color:var(--mute);font-size:14px}
+.onayb .btn{padding:8px 16px}
+.phead+.onayb{margin-bottom:0}

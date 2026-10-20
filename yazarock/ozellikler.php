@@ -230,7 +230,7 @@ add_action('template_redirect',function(){
 add_action('init',function(){if(!get_role('yazarock_uye'))add_role('yazarock_uye','Yazarock Üyesi',['read'=>true]);});
 add_filter('show_admin_bar',function($s){return yr_is_member()?false:$s;});
 add_action('admin_init',function(){if(yr_is_member()&&!wp_doing_ajax()&&!(defined('DOING_CRON')&&DOING_CRON)&&basename($_SERVER['PHP_SELF']??'')!=='admin-post.php'){wp_safe_redirect(yr_panel_url());exit;}});
-add_filter('login_redirect',function($to,$req,$u){if($u&&!is_wp_error($u)&&in_array('yazarock_uye',(array)$u->roles,true))return yr_panel_url();return $to;},20,3);
+add_filter('login_redirect',function($to,$req,$u){if($u&&!is_wp_error($u)&&in_array('yazarock_uye',(array)$u->roles,true))return ($req&&strpos($req,admin_url())!==0&&untrailingslashit($req)!==untrailingslashit(home_url()))?$to:yr_panel_url();return $to;},20,3);
 
 add_action('admin_post_nopriv_yr_uye','yr_uye');add_action('admin_post_yr_uye','yr_uye');
 function yr_uye(){
@@ -255,6 +255,7 @@ function yr_liste(){
 	if(!isset($_POST['yr_n'])||!wp_verify_nonce($_POST['yr_n'],'yr_liste'))$go('guvenlik');
 	if(!yr_ts_ok())$go('guvenlik');
 	$u=get_current_user_id();
+	if(function_exists('yr_onayli')&&!yr_onayli($u))$go('onay');
 	if(count(get_posts(['post_type'=>'liste','post_status'=>['publish','pending'],'author'=>$u,'numberposts'=>11,'fields'=>'ids']))>=10)$go('limit');
 	$k='yr_rl_l_'.$u;if(get_transient($k))$go('bekle');set_transient($k,1,20);
 	$t=mb_substr(sanitize_text_field(wp_unslash($_POST['baslik']??'')),0,80);$it=[];

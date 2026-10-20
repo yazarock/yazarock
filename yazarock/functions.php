@@ -1,6 +1,6 @@
 <?php
 if(!defined('ABSPATH'))exit;
-define('YR_VER','1.6.1');
+define('YR_VER','1.7.0');
 
 /* E-posta adresi yazım ve alan adı kontrolü: hatalı adreslere giden mailler geri döner ve sitenin e-posta itibarını düşürür */
 function yr_eposta_oneri($m){
@@ -216,7 +216,7 @@ add_action('admin_post_yr_onayla',function(){
 function yr_login_back($r){return add_query_arg('login','failed',strtok($r,'?'));}
 add_action('wp_login_failed',function(){$r=wp_get_referer();if($r&&strpos($r,'wp-login')===false&&strpos($r,'wp-admin')===false){wp_safe_redirect(yr_login_back($r));exit;}});
 add_filter('authenticate',function($u,$n,$p){if(isset($_POST['log'])&&(empty($n)||empty($p))){$r=wp_get_referer();if($r&&strpos($r,'wp-login')===false){wp_safe_redirect(yr_login_back($r));exit;}}return $u;},1,3);
-add_filter('login_redirect',function($to,$req,$user){if($user&&!is_wp_error($user)&&in_array('yazarock_yazar',(array)$user->roles))return yr_panel_url();return $to;},10,3);
+add_filter('login_redirect',function($to,$req,$user){if($user&&!is_wp_error($user)&&in_array('yazarock_yazar',(array)$user->roles))return ($req&&strpos($req,admin_url())!==0&&untrailingslashit($req)!==untrailingslashit(home_url()))?$to:yr_panel_url();return $to;},10,3);
 add_action('login_enqueue_scripts',function(){echo '<style>@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Barlow:wght@400;500&display=swap");body.login{background:radial-gradient(ellipse at 50% -10%,#3a0f13,#0d0809 60%);font-family:Barlow,sans-serif}.login h1 a{background:none!important;text-indent:0!important;width:auto!important;height:auto!important;font:700 34px Oswald,Impact,sans-serif;color:#f3eded;text-transform:uppercase;overflow:visible}.login form{background:#170e10;border:1px solid #3a2024;color:#ece6e6}.login label{color:#a69a9b}.login input[type=text],.login input[type=password]{background:#0d0809;color:#ece6e6;border-color:#3a2024}.wp-core-ui .button-primary{background:#c0282d;border:0;text-shadow:none;box-shadow:none}.login #nav a,.login #backtoblog a{color:#a69a9b}</style>';});
 add_filter('login_headerurl',function(){return home_url('/');});
 add_filter('login_headertext',function(){return 'Yazarock.com';});
@@ -431,3 +431,4 @@ require_once get_template_directory().'/ozellikler.php';
 require_once get_template_directory().'/github.php';
 require_once get_template_directory().'/panel.php';
 require_once get_template_directory().'/grup-basvuru.php';
+require_once get_template_directory().'/hesap.php';

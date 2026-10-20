@@ -104,3 +104,36 @@ function check(i){var h=i.parentNode.querySelector('.em-hint');if(h)h.remove();i
 	i.setCustomValidity('E-posta adresinde yazım hatası var: '+fix+' olabilir mi?')}
 document.querySelectorAll('form input[type=email]').forEach(function(i){i.addEventListener('blur',function(){check(i)});i.addEventListener('input',function(){if(i.parentNode.querySelector('.em-hint'))check(i)})});
 })();
+
+/* v1.7: kayıt formları — kullanıcı adı kontrolü, şifre gücü, göster/gizle, hata sonrası geri doldurma */
+(function(){
+document.querySelectorAll('form[data-hatirla]').forEach(function(f){
+	var K=f.getAttribute('data-hatirla');
+	try{var s=JSON.parse(sessionStorage.getItem(K)||'null');if(s&&/[?&](yr_e|yr_u|yr_y)=(?!tamam|onay)/.test(location.search))Object.keys(s).forEach(function(n){f.querySelectorAll('[name="'+n.replace(/"/g,'')+'"]').forEach(function(el){if(el.type==='checkbox')el.checked=s[n].indexOf(el.value)>-1;else el.value=s[n][0]||''})})}catch(e){}
+	f.addEventListener('submit',function(){var o={};[].slice.call(f.elements).forEach(function(el){if(!el.name||el.type==='password'||el.type==='hidden'||el.type==='file'||el.name==='website')return;if(el.type==='checkbox'){o[el.name]=o[el.name]||[];if(el.checked)o[el.name].push(el.value)}else o[el.name]=[el.value]});try{sessionStorage.setItem(K,JSON.stringify(o))}catch(e){}
+		var b=f.querySelector('button[type=submit]');if(b){b.disabled=true;b.textContent='Gönderiliyor…'}});
+});
+var tr={'ç':'c','ğ':'g','ı':'i','İ':'i','ö':'o','ş':'s','ü':'u','â':'a','î':'i','û':'u'};
+function temiz(v){return v.replace(/[çğıİöşüâîû]/gi,function(c){return tr[c]||tr[c.toLowerCase()]||c}).toLowerCase().replace(/\s+/g,'').replace(/[^a-z0-9._-]/g,'')}
+document.querySelectorAll('input[data-kadi]').forEach(function(i){
+	var m=i.closest('label').querySelector('.kadi-m'),def=m?m.textContent:'',t=null,api=(window.YR_API||'/wp-json/')+'yazarock/v1/kadi?ad=';
+	var ad=i.form.querySelector('input[name=ad]');
+	if(ad)ad.addEventListener('blur',function(){if(!i.value&&ad.value){i.value=temiz(ad.value).slice(0,24);i.dataset.oto='1';chk();setTimeout(function(){if(document.activeElement===i)i.select()},0)}});
+	i.addEventListener('focus',function(){if(i.dataset.oto==='1')setTimeout(function(){i.select()},0)});i.addEventListener('keydown',function(){i.dataset.oto=''});
+	function set(ok,msg){if(!m)return;m.textContent=msg;m.className='kadi-m note '+(ok===null?'':ok?'ok':'no');i.setCustomValidity(ok===false?msg:'')}
+	function chk(){var v=temiz(i.value);if(v!==i.value)i.value=v;clearTimeout(t);if(v.length<3){set(null,def);i.setCustomValidity(v.length?'Kullanıcı adı en az 3 karakter olmalı.':'');return}
+		set(null,'Kontrol ediliyor…');t=setTimeout(function(){if(!window.fetch)return;fetch(api+encodeURIComponent(v),{credentials:'same-origin'}).then(function(r){return r.json()}).then(function(j){if(i.value!==v)return;if(typeof j.uygun==='boolean')set(j.uygun,(j.uygun?'✓ ':'')+j.mesaj);else set(null,def)}).catch(function(){set(null,def)})},400)}
+	i.addEventListener('input',chk);
+});
+document.querySelectorAll('input[data-sifre]').forEach(function(p){
+	var f=p.form,p2=f.querySelector('input[data-sifre2]'),bar=p.closest('label').querySelector('.sg i'),msg=p.closest('label').querySelector('.sg-m'),def=msg?msg.textContent:'',g=p.closest('label').querySelector('.goz');
+	function guc(v){var s=0;if(v.length>=8)s++;if(v.length>=12)s++;if(/[a-zçğıöşü]/.test(v)&&/[A-ZÇĞİÖŞÜ]/.test(v))s++;if(/\d/.test(v))s++;if(/[^A-Za-z0-9çğıöşüÇĞİÖŞÜ]/.test(v))s++;return s}
+	function upd(){var v=p.value,s=guc(v),ok=v.length>=8&&/[A-Za-zçğıöşüÇĞİÖŞÜ]/.test(v)&&/\d/.test(v);
+		if(bar){bar.style.width=(v?Math.max(12,s*20):0)+'%';bar.className=s<=2?'z':s===3?'o':'g'}
+		if(msg)msg.textContent=!v?def:!ok?'En az 8 karakter; en az bir harf ve bir rakam':s<=2?'Şifre gücü: zayıf':s===3?'Şifre gücü: orta':'Şifre gücü: güçlü';
+		p.setCustomValidity(v&&!ok?'Şifre en az 8 karakter olmalı; en az bir harf ve bir rakam içermeli.':'');m2()}
+	function m2(){if(p2)p2.setCustomValidity(p2.value&&p2.value!==p.value?'Şifreler birbiriyle aynı değil.':'')}
+	p.addEventListener('input',upd);if(p2)p2.addEventListener('input',m2);
+	if(g)g.addEventListener('click',function(){var s=p.type==='password';p.type=s?'text':'password';if(p2)p2.type=p.type;g.textContent=s?'Gizle':'Göster';g.setAttribute('aria-label',s?'Şifreyi gizle':'Şifreyi göster')});
+});
+})();

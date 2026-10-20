@@ -219,6 +219,7 @@ add_action('wp_head',function(){
 	echo '<script type="application/ld+json">'.wp_json_encode($j,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES).'</script>';
 },6);
 /* Panel ve yazı sayfalarında oturum açmış kullanıcıya REST anahtarı ver (önbelleğe alınmayan sayfalar) */
+add_action('wp_footer',function(){echo '<script>window.YR_API='.wp_json_encode(rest_url()).';</script>';},1);
 add_action('wp_footer',function(){
 	if(!is_user_logged_in())return;
 	echo '<script>window.YR_NONCE='.wp_json_encode(wp_create_nonce('wp_rest')).';</script>';

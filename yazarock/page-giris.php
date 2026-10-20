@@ -5,7 +5,7 @@ if(!is_user_logged_in()):?>
 <div class="ph"><h1>Giriş Yap</h1><p>Yazarlar, editörler ve üyeler için.</p></div>
 <div class="lgrid">
 <div class="box"><h2>Hesabına gir</h2><?php if(($_GET['login']??'')==='failed')echo '<div class="notice err" role="alert">Kullanıcı adı veya şifre hatalı.</div>';
-wp_login_form(['redirect'=>yr_panel_url(),'label_username'=>'Kullanıcı adı veya e-posta','label_password'=>'Şifre','label_remember'=>'Beni hatırla','label_log_in'=>'Giriş Yap']);?>
+wp_login_form(['redirect'=>wp_validate_redirect(esc_url_raw(wp_unslash($_GET['redirect_to']??'')),yr_panel_url()),'label_username'=>'Kullanıcı adı veya e-posta','label_password'=>'Şifre','label_remember'=>'Beni hatırla','label_log_in'=>'Giriş Yap']);?>
 <p class="note"><a href="<?php echo esc_url(wp_lostpassword_url(yr_panel_url()));?>">Şifremi unuttum</a></p></div>
 <div class="box join"><h2>Yazarock'a katıl</h2>
 <ul class="perk"><li><?php echo yr_ikon('heart');?><span><b>Beğendiklerin bir arada.</b> Beğendiğin yazılar panelinde birikir, istediğin zaman dönersin.</span></li>
@@ -40,6 +40,7 @@ $bio=trim((string)$u->description);
 </div></div>
 </section>
 
+<?php yr_onay_banner();yr_flash('yr_p',['hosgeldin'=>['Hoş geldin! Hesabın açıldı. E-posta adresine bir onay bağlantısı gönderdik.','ok'],'onaylandi'=>['E-posta adresin onaylandı, teşekkürler!','ok'],'onay_gitti'=>['Onay e-postasını tekrar gönderdik; gelen kutunu ve spam klasörünü kontrol et.','ok'],'onay_bekle'=>['Çok fazla onay e-postası istendi; bir saat sonra tekrar dene.','err']]);?>
 <nav class="ptabs" aria-label="Panel bölümleri"><?php foreach($B as $k=>$x)echo '<a href="'.esc_url(yr_panel_url($k==='genel'?'':$k)).'"'.($k===$b?' class="on" aria-current="page"':'').'>'.yr_ikon($x[1]).esc_html($x[0]).'</a>';?></nav>
 
 <?php if($b==='genel'):
