@@ -141,3 +141,17 @@ add_filter('views_edit-post',function($v){
 	$v['yr_derleme']='<a href="'.esc_url(admin_url('edit.php?post_status=draft&yr_derleme=1')).'"'.(!empty($_GET['yr_derleme'])?' class="current"':'').'>Sabah derlemeleri</a> · <a href="'.esc_url(wp_nonce_url(admin_url('admin-post.php?action=yr_derleme_cek'),'yr_derleme_cek')).'">Şimdi çek</a>'.(!empty($s['zaman'])?' <span style="color:#777">(son kontrol: '.esc_html(human_time_diff((int)$s['zaman'])).' önce)</span>':'');
 	return $v;
 });
+
+/* ================= Tema güncellenince önbellekleri bir kez temizle ================= */
+/* Sunucu (LiteSpeed) ve yaygın önbellek eklentileri eski sayfaları göstermeye devam etmesin */
+add_action('init',function(){
+	if(get_option('yr_son_ver')===YR_VER)return;
+	update_option('yr_son_ver',YR_VER);
+	if(!headers_sent())header('X-LiteSpeed-Purge: *');
+	do_action('litespeed_purge_all');
+	if(function_exists('rocket_clean_domain'))rocket_clean_domain();
+	if(function_exists('w3tc_flush_all'))w3tc_flush_all();
+	if(function_exists('wp_cache_clear_cache'))wp_cache_clear_cache();
+	if(function_exists('sg_cachepress_purge_cache'))sg_cachepress_purge_cache();
+	wp_cache_flush();
+},1);
