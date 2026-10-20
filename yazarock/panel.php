@@ -225,7 +225,10 @@ add_action('wp_footer',function(){
 	echo '<script>window.YR_NONCE='.wp_json_encode(wp_create_nonce('wp_rest')).';</script>';
 },1);
 /* Panel sayfası önbelleğe alınmasın */
-add_action('template_redirect',function(){if(is_page('giris')&&is_user_logged_in())nocache_headers();});
+/* Form içeren sayfalar önbelleğe alınmasın (güvenlik anahtarları bayatlamasın, güncel hâl görünsün) */
+add_action('template_redirect',function(){
+	if(is_page(['giris','uye-ol','yazar-ol','grubunu-tanit','listelerim'])){if(!defined('DONOTCACHEPAGE'))define('DONOTCACHEPAGE',true);nocache_headers();header('X-LiteSpeed-Cache-Control: no-cache');}
+},1);
 
 /* ================= v1.5 geçişi: Yazarlar sayfası, menü ve gizlilik notu ================= */
 add_action('admin_init',function(){

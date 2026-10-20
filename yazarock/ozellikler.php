@@ -315,8 +315,9 @@ add_action('template_redirect',function(){
 	}
 	if($p===$base.'/yr-sw.js'){
 		header('Content-Type: application/javascript; charset=utf-8');header('Service-Worker-Allowed: '.$base.'/');header('Cache-Control: no-cache');
+		ob_start();
 		echo <<<'JS'
-const V='yr-v1';
+const V='yr-__VER__';
 const OFF='<!doctype html><html lang="tr"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Çevrimdışı</title><body style="background:#0d0809;color:#ece6e6;font-family:sans-serif;text-align:center;padding:20vh 20px"><h1>Bağlantı yok</h1><p>İnternet bağlantını kontrol edip tekrar dene.</p><button onclick="location.reload()">Yenile</button>';
 self.addEventListener('install',function(){self.skipWaiting()});
 self.addEventListener('activate',function(e){e.waitUntil(caches.keys().then(function(k){return Promise.all(k.filter(function(x){return x!==V}).map(function(x){return caches.delete(x)}))}).then(function(){return self.clients.claim()}))});
@@ -324,9 +325,11 @@ self.addEventListener('fetch',function(e){
  var r=e.request;if(r.method!=='GET')return;var u=new URL(r.url);if(u.origin!==location.origin)return;
  if(/wp-admin|wp-login|wp-json|preview=/.test(u.pathname+u.search))return;
  if(r.mode==='navigate'){e.respondWith(fetch(r).catch(function(){return new Response(OFF,{headers:{'Content-Type':'text/html; charset=utf-8'}})}));return}
- if(/\.(css|js|png|jpg|jpeg|webp|svg|woff2?)$/.test(u.pathname)){e.respondWith(caches.open(V).then(function(c){return c.match(r).then(function(h){var n=fetch(r).then(function(x){if(x.ok)c.put(r,x.clone());return x}).catch(function(){return h});return h||n})}))}
+ if(/\.(css|js)$/.test(u.pathname)){e.respondWith(fetch(r).then(function(x){if(x.ok){var y=x.clone();caches.open(V).then(function(c){c.put(r,y)})}return x}).catch(function(){return caches.match(r)}));return}
+ if(/\.(png|jpg|jpeg|webp|svg|woff2?)$/.test(u.pathname)){e.respondWith(caches.open(V).then(function(c){return c.match(r).then(function(h){var n=fetch(r).then(function(x){if(x.ok)c.put(r,x.clone());return x}).catch(function(){return h});return h||n})}))}
 });
 JS;
+		echo str_replace('__VER__',YR_VER,ob_get_clean());
 		exit;
 	}
 },0);
