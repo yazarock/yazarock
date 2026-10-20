@@ -27,6 +27,23 @@ Site, listedeki son 14 dosyaya bakar ve daha önce almadığı yazıları **tasl
         {"ad": "Kaynak sitesi", "url": "https://..."}
       ]
     }
+  ],
+  "etkinlikler": [
+    {
+      "id": "2026-10-20-malt-blind-istanbul-2410",
+      "baslik": "Malt – Blind İstanbul",
+      "tarih": "2026-10-24",
+      "saat": "21:30",
+      "sehir": "İstanbul",
+      "mekan": "Blind İstanbul",
+      "tur": "Konser",
+      "bilet": "https://...",
+      "ozet": "İsteğe bağlı kısa not.",
+      "aciklama": "<p>Kısa tanıtım, kendi cümlelerimizle.</p>",
+      "kaynaklar": [
+        {"ad": "Mekân / bilet sayfası", "url": "https://..."}
+      ]
+    }
   ]
 }
 ```
@@ -38,3 +55,10 @@ Kurallar:
 - `kategori`: `Haber`, `Konser Duyurusu`, `Festival`, `Röportaj`, `Kültür & Sanat`, `Metal Rehberi` gibi. Yoksa site kategoriyi oluşturur.
 - `kaynaklar` yazının sonuna "Kaynaklar" başlığıyla bağlantı listesi olarak eklenir.
 - Metinler kaynaklardan kopyalanmaz; tamamen yeniden yazılır.
+
+## Etkinlikler (konser takvimi) — tema 1.10.0 ve sonrası
+
+- `etkinlikler` listesi isteğe bağlıdır. Her kayıt sitede **Etkinlikler** bölümüne **taslak** olarak eklenir; yayınlanınca konser takviminde görünür.
+- Zorunlu: `id` (benzersiz), `baslik`, `tarih` (`YYYY-AA-GG`). İsteğe bağlı: `saat` (`SS:DD`), `sehir`, `mekan`, `tur` (`Konser`, `Festival`, `Kulüp Gecesi`; başka değer `Konser` sayılır), `bilet`, `ozet`, `aciklama` (HTML), `kaynaklar`.
+- Tarihi geçmiş etkinlikler, aynı `id` ile daha önce eklenenler ve aynı gün aynı başlıkla zaten var olan etkinlikler atlanır.
+- Başlık biçimi: `Grup – Mekân` (birden çok grup varsa `Grup 1, Grup 2 – Mekân`).
