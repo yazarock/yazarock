@@ -2,15 +2,15 @@
 
 /* ================= Giriş yapılmamış ================= */
 if(!is_user_logged_in()):?>
-<div class="ph"><h1>Giriş Yap</h1><p>Yazarlar, editörler ve üyeler için.</p></div>
+<?php yr_ph('Giriş Yap','Yazarlar, editörler ve üyeler için.');?>
 <div class="lgrid">
 <div class="box"><h2>Hesabına gir</h2><?php if(($_GET['login']??'')==='failed')echo '<div class="notice err" role="alert">Kullanıcı adı veya şifre hatalı.</div>';
 wp_login_form(['redirect'=>wp_validate_redirect(esc_url_raw(wp_unslash($_GET['redirect_to']??'')),yr_panel_url()),'label_username'=>'Kullanıcı adı veya e-posta','label_password'=>'Şifre','label_remember'=>'Beni hatırla','label_log_in'=>'Giriş Yap']);?>
 <p class="note"><a href="<?php echo esc_url(wp_lostpassword_url(yr_panel_url()));?>">Şifremi unuttum</a></p></div>
-<div class="box join"><h2>Yazarock'a katıl</h2>
-<ul class="perk">
-<li><?php echo yr_ikon('list');?><span><b>Kendi listeni yap.</b> "En iyi 10 albümüm" gibi listeler oluştur, adınla yayımlansın.</span></li>
-<li><?php echo yr_ikon('pen');?><span><b>Yazar ol.</b> Üye olduktan sonra yazarlık başvurusu yapıp yazılarını okurlarla buluşturabilirsin.</span></li></ul>
+<div class="box join"><?php $jb=yr_parca()['bloklar'];$jh='';$jl=null;$jk=[];foreach($jb as $x){if($jh===''&&$x['blockName']==='core/heading'){$jh=trim(wp_strip_all_tags(render_block($x)));continue;}if(!$jl&&$x['blockName']==='core/list'){$jl=$x;continue;}$jk[]=$x;}
+if($jh!=='')echo '<h2>'.esc_html($jh).'</h2>';
+if($jl){$ik=['list','pen','heart','doc','eye','up'];echo '<ul class="perk">';foreach(yr_liste_maddeleri($jl) as $i=>$m)echo '<li>'.yr_ikon($ik[$i%count($ik)]).'<span>'.($m[0]!==''?'<b>'.esc_html($m[0]).'</b> ':'').wp_kses_post($m[1]).'</span></li>';echo '</ul>';}
+$x=yr_bloklar_html($jk);if(yr_dolu($x))echo '<div class="jm">'.$x.'</div>';?>
 <div class="btnrow"><a class="btn" href="<?php echo esc_url(yr_page_url('uye-ol'));?>">Ücretsiz Üye Ol</a></div></div>
 </div>
 <?php get_footer();return;endif;

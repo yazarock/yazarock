@@ -1,7 +1,7 @@
 <?php if(!defined('ABSPATH'))exit; get_header();
 $cal=(($_GET['gorunum']??'')==='takvim');$past=isset($_GET['gecmis'])&&!$cal;$base=get_post_type_archive_link('etkinlik');
 $cities=[];if(!$cal){foreach($wp_query->posts as $p){$c=get_post_meta($p->ID,'_yr_sehir',true);if($c)$cities[$c]=1;}ksort($cities);}?>
-<div class="ph"><h1><?php echo $cal?'Etkinlik Takvimi':($past?'Geçmiş Etkinlikler':'Etkinlikler');?></h1><p>Konser ve festival takvimi.</p></div>
+<div class="ph"><h1><?php $eb=get_theme_mod('yr_t_etk_b','Etkinlikler');echo esc_html($cal?$eb.' · Takvim':($past?'Geçmiş '.$eb:$eb));?></h1><p><?php echo esc_html(get_theme_mod('yr_t_etk_a','Konser ve festival takvimi.'));?></p></div>
 <div class="tabs vt"><a class="<?php echo $cal?'':'on';?>" href="<?php echo esc_url($base);?>">Liste</a><a class="<?php echo $cal?'on':'';?>" href="<?php echo esc_url(add_query_arg('gorunum','takvim',$base));?>">Takvim</a></div>
 <?php if($cal):?>
 <div class="box"><?php yr_cal(sanitize_text_field(wp_unslash($_GET['ay']??'')));?></div>

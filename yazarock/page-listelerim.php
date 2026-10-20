@@ -1,5 +1,5 @@
 <?php if(!defined('ABSPATH'))exit; get_header();?>
-<div class="ph"><h1>Listelerim</h1><p>"Benim 10 favori albümüm" gibi kendi listeni oluştur. Listeler editör onayından sonra yayımlanır.</p></div>
+<?php yr_ph('Listelerim','"Benim 10 favori albümüm" gibi kendi listeni oluştur. Listeler editör onayından sonra yayımlanır.');yr_sayfa_ek();?>
 <div class="box" id="liste"><?php if(!is_user_logged_in()):?>
 <p>Liste oluşturmak için giriş yapmalısın.</p><div class="btnrow"><a class="btn" href="<?php echo esc_url(yr_page_url('giris'));?>">Giriş Yap</a><a class="btn alt" href="<?php echo esc_url(yr_page_url('uye-ol'));?>">Üye Ol</a></div>
 <?php else:yr_flash('yr_l',['tamam'=>['Listen alındı; onaylandıktan sonra yayımlanacak.','ok'],'silindi'=>['Liste silindi.','ok'],'gecersiz'=>['Başlık en az 3 karakter, liste en az 3 madde olmalı.','err'],'limit'=>['En fazla 10 liste oluşturabilirsin.','err'],'bekle'=>['Biraz bekleyip tekrar dene.','err'],'guvenlik'=>['Güvenlik doğrulaması başarısız; sayfayı yenile.','err'],'onay'=>['Liste oluşturmak için önce e-posta adresini onaylamalısın. Onay bağlantısını panelinden tekrar isteyebilirsin.','err']]);?>

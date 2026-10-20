@@ -109,6 +109,7 @@ function yr_giris_icerik(){
 	$bloklar=parse_blocks($c);$h=false;$p=false;$kalan=[];
 	foreach($bloklar as $b){
 		if(empty($b['blockName'])&&trim(wp_strip_all_tags((string)$b['innerHTML']))==='')continue;
+		if(!$h&&$b['blockName']==='core/paragraph'&&!isset($out['ust'])){$out['ust']=trim(wp_strip_all_tags(render_block($b)));continue;}/* başlıktan önceki paragraf = küçük etiket */
 		if(!$h&&$b['blockName']==='core/heading'){$t=trim(wp_strip_all_tags(render_block($b)));if($t!==''){$out['baslik']=$t;$h=true;continue;}}
 		if($h&&!$p&&$b['blockName']==='core/paragraph'){$t=trim(wp_strip_all_tags(render_block($b)));if($t!==''){$out['metin']=$t;$p=true;continue;}}
 		$kalan[]=$b;

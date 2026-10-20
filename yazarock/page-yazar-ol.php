@@ -1,6 +1,5 @@
 <?php if(!defined('ABSPATH'))exit; /* Template Name: Yazar Ol */ get_header();$u=wp_get_current_user();$giris=$u->exists();?>
-<div class="ph"><h1>Yazar Ol</h1><p>Rock ve metal hakkında yazmak mı istiyorsun? Kendini tanıt, ilk yazı fikrini paylaş.</p></div>
-<?php while(have_posts()){the_post();if(trim(get_the_content())){echo '<div class="box entry" style="margin-bottom:22px"><div class="content">';the_content();echo '</div></div>';}}?>
+<?php yr_ph('Yazar Ol','Rock ve metal hakkında yazmak mı istiyorsun? Kendini tanıt, ilk yazı fikrini paylaş.');yr_sayfa_ek();?>
 <div class="box ybasvuru" id="basvuru-form"><h2>Yazarlık Başvurusu</h2><?php yr_hata_goster();
 yr_flash('yr_y',['tamam'=>['Başvurun alındı! Değerlendirip e-postayla dönüş yapacağız.','ok'],'onaylandi'=>['E-posta adresin onaylandı, başvurun değerlendirmeye alındı. Teşekkürler!','ok'],'bekle'=>['Biraz bekleyip tekrar dene.','err'],'guvenlik'=>['Güvenlik doğrulaması başarısız; sayfayı yenileyip tekrar dene.','err'],'uye'=>['Yazarlık başvurusu yapmak için önce üye olup giriş yapmalısın.','err']]);
 if(!$giris):?>

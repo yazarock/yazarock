@@ -5,7 +5,7 @@ $rk=yr_roportaj_kat();$gi=yr_giris_icerik();
 ?>
 <section class="mhero">
 <div class="mh-in">
-<span class="pill">Türkiye · Rock &amp; Metal · Underground</span>
+<?php $ust=$gi['ust']??'Türkiye · Rock & Metal · Underground';if($ust!=='')echo '<span class="pill">'.esc_html($ust).'</span>';?>
 <h1><?php echo esc_html($gi['baslik']);?></h1>
 <p><?php echo esc_html($gi['metin']);?></p>
 <div class="btnrow"><a class="btn" href="<?php echo esc_url($gt);?>">Grubunu Tanıt</a><a class="btn alt" href="#kesfet">Keşfet ↓</a></div>

@@ -1,16 +1,13 @@
-<?php if(!defined('ABSPATH'))exit; get_header();?>
+<?php if(!defined('ABSPATH'))exit; get_header();
+$P=yr_parca();$B=yr_bolumle($P['bloklar']);?>
 <section class="gt-hero">
 <div class="gt-in">
-<span class="pill">Ücretsiz · Türkiye'den bağımsız gruplar</span>
-<h1>Grubunu Tanıt</h1>
-<p class="gt-lead">Yazarock, Türkiye'de rock ve metal yapan bilinmeyen, tanınmayan grupların sesi olmak için var. Garajda, prova stüdyosunda, küçük sahnelerde müzik üretiyorsan seni dinlemek, seninle konuşmak ve okurlarımıza tanıtmak istiyoruz.</p>
-<ol class="gt-steps">
-<li><b>1</b><span><strong>Formu doldur</strong>Grubunu, müziğini ve hikâyeni anlat.</span></li>
-<li><b>2</b><span><strong>Dinliyoruz</strong>Gönderilen her başvuruyu dinliyoruz.</span></li>
-<li><b>3</b><span><strong>Sahne senin</strong>Röportaj, inceleme ya da tanıtım için sana yazıyoruz.</span></li>
-</ol>
+<?php if($P['ust']!=='')echo '<span class="pill">'.wp_kses_post($P['ust']).'</span>';?>
+<h1><?php echo esc_html($P['baslik']!==''?$P['baslik']:'Grubunu Tanıt');?></h1>
+<?php if($P['giris']!=='')echo '<p class="gt-lead">'.wp_kses_post($P['giris']).'</p>';
+if($B['liste']){echo '<ol class="gt-steps">';$i=0;foreach(yr_liste_maddeleri($B['liste']) as $m){$i++;echo '<li><b>'.$i.'</b><span>'.($m[0]!==''?'<strong>'.esc_html($m[0]).'</strong>':'').wp_kses_post($m[1]).'</span></li>';}echo '</ol>';}?>
 </div></section>
-<?php while(have_posts()){the_post();if(trim(get_the_content())){echo '<div class="box entry" style="margin:22px 0"><div class="content">';the_content();echo '</div></div>';}}?>
+<?php $ek=yr_bloklar_html(array_merge($B['once'],$B['sonra']));if(yr_dolu($ek))echo '<div class="box entry" style="margin:22px 0"><div class="content">'.$ek.'</div></div>';?>
 <div class="gt-grid">
 <div class="box" id="basvuru">
 <?php yr_flash('yr_g',['tamam'=>['Başvurun bize ulaştı, teşekkürler! E-posta adresine bir onay mesajı gönderdik. Uygun bulduğumuzda bu adresten sana yazacağız.','ok'],'gecersiz'=>['Lütfen zorunlu alanları kontrol et: grup adı, şehir, tür, en az 80 karakterlik hikâye, en az bir dinleme bağlantısı, ad, e-posta ve iki onay kutusu.','err'],'tekrar'=>['Bu grup için zaten değerlendirmede olan bir başvuru var. Yeni bir şey eklemek istersen info@yazarock.com adresine yazabilirsin.','err'],'bekle'=>['Biraz bekleyip tekrar dene.','err'],'limit'=>['Bugün bu bağlantıdan çok fazla başvuru yapıldı; yarın tekrar dene.','err'],'guvenlik'=>['Güvenlik doğrulaması başarısız; sayfayı yenileyip tekrar dene.','err'],'hata'=>['Bir sorun oluştu, tekrar dene.','err']]);
@@ -51,14 +48,8 @@ if(($_GET['yr_g']??'')==='tamam'):?>
 <?php endif;?>
 </div>
 <aside class="gt-side">
-<div class="box"><h2>Sık Sorulanlar</h2>
-<details open><summary>Ücretli mi?</summary><p>Hayır. Yazarock'ta yer almak tamamen ücretsizdir; gruplardan hiçbir ücret talep etmeyiz.</p></details>
-<details><summary>Kimler başvurabilir?</summary><p>Türkiye'de rock, metal ve alt türlerinde kendi bestelerini yapan bağımsız gruplar ve solo sanatçılar. Daha önce hiç yayın yapmamış olmanız sorun değil; bir demo kaydı yeterli.</p></details>
-<details><summary>Ne zaman dönüş yapılır?</summary><p>Her başvuruyu dinliyoruz. Röportaj, inceleme ya da tanıtım için uygun bulduğumuzda e-postayla sana yazıyoruz.</p></details>
-<details><summary>Neye dikkat ediyorsunuz?</summary><p>Özgün müzik, grubun hikâyesi ve sahnedeki emek. Kayıt kalitesinin mükemmel olması gerekmez.</p></details>
-<details><summary>Bilgilerimi nasıl sildiririm?</summary><p>info@yazarock.com adresine yazman yeterli; başvurun ve fotoğrafın silinir.</p></details>
-</div>
-<div class="box gt-q"><?php echo yr_ikon('cmt');?><p>"Bilinmeyen grupların sesi olmak" için yola çıktık. Sahne büyüdükçe herkes kazanır.</p></div>
+<?php if($B['sss']){echo '<div class="box">'.($B['ara']!==''?'<h2>'.esc_html($B['ara']).'</h2>':'');foreach($B['sss'] as $k=>$d)echo $k?$d:preg_replace('#<details#','<details open',$d,1);echo '</div>';}
+if($B['alinti']!=='')echo '<div class="box gt-q">'.yr_ikon('cmt').'<div>'.wp_kses_post($B['alinti']).'</div></div>';?>
 </aside>
 </div>
 <?php get_footer();

@@ -1,5 +1,5 @@
 <?php if(!defined('ABSPATH'))exit; get_header();?>
-<div class="ph"><h1>Üye Ol</h1><p>Ücretsiz üye ol; beğendiğin yazıları biriktir, kendi listelerini oluştur.</p></div>
+<?php yr_ph('Üye Ol','Ücretsiz üye ol; beğendiğin yazıları biriktir, kendi listelerini oluştur.');?>
 <div class="lgrid">
 <div class="box" id="uye"><h2>Hesap oluştur</h2><?php yr_flash('yr_u',['tamam'=>['İşlem alındı.','ok'],'bekle'=>['Biraz bekleyip tekrar dene.','err'],'guvenlik'=>['Güvenlik doğrulaması başarısız; sayfayı yenileyip tekrar dene.','err'],'gecersiz'=>['Lütfen alanları kontrol edip tekrar dene.','err']]);yr_hata_goster();
 if(is_user_logged_in()):?><p>Zaten giriş yaptın.</p><p><a class="btn" href="<?php echo esc_url(yr_panel_url());?>">Panelime git</a></p>
@@ -14,7 +14,6 @@ if(is_user_logged_in()):?><p>Zaten giriş yaptın.</p><p><a class="btn" href="<?
 <?php yr_ts_widget();?><button class="btn" type="submit">Üye Ol</button>
 <p class="note" style="margin-top:12px">Kayıttan sonra hemen giriş yaparsın. E-posta adresine bir onay bağlantısı göndeririz; onaylanmayan hesaplar 7 gün sonra silinir.</p></form>
 <?php endif;?></div>
-<div class="box join"><h2>Zaten üye misin?</h2><p>Kullanıcı adın ya da e-postan ve şifrenle giriş yap.</p><p><a class="btn alt" href="<?php echo esc_url(yr_page_url('giris'));?>">Giriş Yap</a></p>
-<h2 style="margin-top:22px">Yazmak mı istiyorsun?</h2><p>Rock ve metal üzerine yazıyorsan önce üye ol; ardından panelinden yazarlık başvurusu yapabilirsin.</p></div>
+<?php $x=yr_bloklar_html(yr_parca()['bloklar']);if(yr_dolu($x))echo '<div class="box join"><div class="jm">'.$x.'</div>';else echo '<div>';?></div>
 </div>
 <?php get_footer();

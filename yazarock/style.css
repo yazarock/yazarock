@@ -3,7 +3,7 @@ Theme Name: Yazarock
 Theme URI: https://yazarock.com
 Author: Yazarock
 Description: Rock ve metal müzik haber teması. Gruplar, Etkinlikler, yazar giriş paneli, yazarlık başvurusu ve bülten içerir.
-Version: 1.8.1
+Version: 1.9.0
 Requires at least: 6.0
 Requires PHP: 7.4
 Text Domain: yazarock
@@ -522,3 +522,10 @@ nav a.gt:hover{background:var(--red)}
 @media(max-width:720px){.gkart,.gkart:not(.buyuk){grid-template-columns:1fr}.gkart .gk-img{min-height:180px}.mh-in{padding:28px 18px}.mh-in p{font-size:16px}.bos-rop{flex-direction:column}}
 .mt .pill{color:#fff}
 @media(max-width:720px){.gkart .gk-img{aspect-ratio:16/10;min-height:0!important}.mhero svg{opacity:.3;width:80%}}
+/* v1.9 düzenlenebilir sayfa metinleri */
+.ph p a{color:var(--blue);text-decoration:underline}
+.jm>*:first-child{margin-top:0}.jm h2:not(:first-child){margin-top:22px}.jm p{color:#d6cdcd}.jm a:not(.wp-block-button__link){color:var(--blue);text-decoration:underline}
+.jm .wp-block-buttons{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}
+.jm .wp-block-button__link{display:inline-block;font:500 15px Oswald,Impact,sans-serif;text-transform:uppercase;letter-spacing:.02em;padding:11px 22px;background:var(--panel2);border:1px solid var(--red);color:#fff;text-decoration:none;border-radius:0}
+.gt-q>div,.gt-q>p{flex:1}.gt-q p+p{margin-top:8px}.gt-q cite{display:block;margin-top:8px;color:var(--mute);font-size:14px;font-style:normal}
+.gt-side summary{cursor:pointer}
