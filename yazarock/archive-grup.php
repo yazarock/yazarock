@@ -1,5 +1,5 @@
 <?php if(!defined('ABSPATH'))exit; get_header();$terms=get_terms(['taxonomy'=>'grup_tur','hide_empty'=>true]);?>
-<div class="ph"><h1>Gruplar</h1><p>Türkiye ve dünyadan rock ile metalin önemli isimleri.</p></div>
+<div class="ph"><h1>Gruplar</h1><p>Türkiye'nin bağımsız rock ve metal grupları ve türün ustaları. <a href="<?php echo esc_url(yr_page_url('grubunu-tanit'));?>" style="color:var(--blue);text-decoration:underline">Grubunu ekletmek ister misin?</a></p></div>
 <div class="box" data-filter>
 <div class="fb"><input type="search" data-search placeholder="Grup ara" aria-label="Grup ara"></div>
 <div class="tabs" data-k="r"><button data-v="all" aria-pressed="true">Tümü</button><button data-v="tr" aria-pressed="false">Türkiye</button><button data-v="world" aria-pressed="false">Dünya</button></div>

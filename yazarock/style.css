@@ -3,7 +3,7 @@ Theme Name: Yazarock
 Theme URI: https://yazarock.com
 Author: Yazarock
 Description: Rock ve metal müzik haber teması. Gruplar, Etkinlikler, yazar giriş paneli, yazarlık başvurusu ve bülten içerir.
-Version: 1.7.3
+Version: 1.8.0
 Requires at least: 6.0
 Requires PHP: 7.4
 Text Domain: yazarock
@@ -480,3 +480,45 @@ nav a.gt:hover{background:var(--red)}
 .pform .chk{display:flex;gap:10px;align-items:flex-start}
 .pform .chk input{flex:none;margin-top:4px}
 .ybasvuru form,.ybasvuru>p,.ybasvuru .btnrow{max-width:760px}
+
+/* ===================== v1.8: vitrin ve röportaj ===================== */
+.mhero{position:relative;margin:22px 0;min-height:380px;border:1px solid var(--line);overflow:hidden;display:flex;align-items:center;background:radial-gradient(circle at 72% 35%,rgba(106,168,255,.32),transparent 38%),radial-gradient(circle at 80% 62%,rgba(229,57,63,.55),transparent 45%),linear-gradient(120deg,#0b0607 30%,#2a0b0f);box-shadow:0 0 40px rgba(192,40,45,.25)}
+.mhero svg{position:absolute;right:0;top:0;height:100%;width:55%;opacity:.9}
+.mh-in{position:relative;z-index:2;padding:40px 36px;max-width:640px}
+.mh-in h1{font-size:clamp(40px,6.4vw,76px);line-height:.98;margin:14px 0 16px}
+.mh-in p{font-size:18px;color:#e2d8d8;margin:0;max-width:56ch}
+.mh-in .btnrow{margin-top:24px}
+.hero h2.h1{font-size:clamp(30px,4.4vw,50px);line-height:1.02;margin:0 0 14px;font-weight:700}
+.kbox{padding:0;overflow:hidden}
+.gkart{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:0;align-items:stretch}
+.gkart .gk-img{display:block;min-height:220px;background:var(--panel2);overflow:hidden}
+.gkart .gk-img>*{width:100%;height:100%;object-fit:cover;display:block}
+.gkart .gk-img svg{width:100%;height:100%}
+.gk-in{padding:20px 22px}
+.gk-in h3{font-size:clamp(26px,3.2vw,38px);margin:8px 0 4px;text-transform:uppercase;font-family:Oswald,Impact,sans-serif}
+.gk-in h3 a:hover{color:var(--red2)}
+.gk-alt{color:var(--red2);font:500 14px Oswald,sans-serif;text-transform:uppercase;letter-spacing:.04em;margin:0 0 10px}
+.gk-in>p{color:#d6cdcd;margin:0 0 6px}
+.gk-k{display:block;font:500 11px Oswald,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.gk-emb{margin-top:12px}
+.gk-emb h2{display:none}
+.gkart:not(.buyuk){grid-template-columns:200px minmax(0,1fr);border:1px solid var(--line);border-left:4px solid var(--red);background:var(--panel2);margin-top:18px}
+.gkart:not(.buyuk) .gk-img{min-height:160px}
+.gkart:not(.buyuk) .gk-in h3{font-size:24px}
+.bos-rop{display:flex;gap:18px;align-items:flex-start;padding:6px 0}
+.bos-rop>.ic{width:44px;height:44px;color:var(--red2);flex:none}
+.bos-rop h3{margin:0 0 6px;font-size:22px;text-transform:uppercase}
+.bos-rop p{color:#d6cdcd;margin:0 0 12px}
+.gt-cta{border-left:4px solid var(--red)}
+.gt-cta p{color:#d6cdcd;margin:0 0 12px}
+.gt-cta .note a{color:var(--blue)}
+/* röportaj soru-cevap */
+.content .rop-giris{font-size:1.12em;color:#efe6e6;border-left:4px solid var(--red);padding:2px 0 2px 16px}
+.content .soru{margin:1.6em 0 .4em;color:var(--red2);font-size:1.05em}
+.content .soru strong{font-weight:700}
+.content .soru::before{content:"Yazarock: ";font:700 .78em Oswald,sans-serif;text-transform:uppercase;letter-spacing:.06em;color:var(--mute)}
+.content .cevap{margin-top:0}
+.content .rop-kapanis{color:var(--mute);font-style:italic;border-top:1px solid var(--line);padding-top:12px;margin-top:2em}
+@media(max-width:720px){.gkart,.gkart:not(.buyuk){grid-template-columns:1fr}.gkart .gk-img{min-height:180px}.mh-in{padding:28px 18px}.mh-in p{font-size:16px}.bos-rop{flex-direction:column}}
+.mt .pill{color:#fff}
+@media(max-width:720px){.gkart .gk-img{aspect-ratio:16/10;min-height:0!important}.mhero svg{opacity:.3;width:80%}}
