@@ -36,4 +36,7 @@ add_action('init',function(){
 	if(wp_doing_ajax()||wp_doing_cron()||get_transient('yr_oto_bakti'))return;
 	set_transient('yr_oto_bakti',1,20*MINUTE_IN_SECONDS);
 	if(!wp_next_scheduled('yr_oto_guncelle_simdi'))wp_schedule_single_event(time()+5,'yr_oto_guncelle_simdi');
+	/* GitHub derlemelerini de ziyaretle 20 dakikada bir kontrol et (yalnızca saatlik zamanlayıcıyı beklemesin) */
+	$d=get_option('yr_derleme_son',[]);
+	if((empty($d['zaman'])||time()-(int)$d['zaman']>20*MINUTE_IN_SECONDS)&&!wp_next_scheduled('yr_derleme_simdi'))wp_schedule_single_event(time()+10,'yr_derleme_simdi');
 },99);
