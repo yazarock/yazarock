@@ -1,0 +1,58 @@
+{
+ "aciklama": "The Protomen grup sayfası",
+ "gruplar": [
+  {
+   "id": "grup-the-protomen",
+   "ad": "The Protomen",
+   "bolge": "world",
+   "tur": "Rock",
+   "durum": "yayin",
+   "stil": "Rock opera, synth-rock",
+   "kurulus": "ABD (Murfreesboro, Tennessee) · 2003",
+   "ozet": "Mega Man oyunlarından yola çıkıp karanlık bir distopya anlatan, sahneye kostümle ve takma adlarla çıkan Nashville'li rock opera grubu.",
+   "icerik": "<p>The Protomen, 2003'te Tennessee'nin Murfreesboro kasabasında, Middle Tennessee State University'nin ses kayıt programından mezun olan bir grup müzisyen tarafından kuruldu; bugün Nashville merkezli. Grup aslında bir okul ödevinin teslim tarihlerine yetişmek için bir araya geldi ve adını Mega Man serisindeki Proto Man karakterinden aldı.</p><p>Grubun bütün diskografisi tek bir hikâyeye hizmet ediyor: ilk altı NES Mega Man oyunundan esinlenen, ama oyunlardan çok daha karanlık bir bilimkurgu rock operası. Hikâye, deli bilim insanı Dr. Albert Wily'nin robot ordusuyla yönettiği bir şehirde geçiyor; Dr. Thomas Light ve onun robot oğulları Protoman ile Megaman bu zulme karşı duruyor. İsyan, tiranlık, kahraman tapıcılığı ve umut grubun temel temaları.</p><p>Üyeler sahnede yalnızca takma adlarını kullanıyor: Raul Panther III, Gambler Kirkdouglas, Commander B. Hawkins, Sir Dr. Robert Bakker, Murphy Weller, Shock Magnum, Reanimator Lovejoy ve konserleri açan gizemli karakter Kilroy bunlardan bazıları. Yıllar içinde gruptan 25'ten fazla müzisyen geçti.</p><p>Act I (2005) ve Act II: The Father of Death (2009) kült bir kitle yarattı; 80'ler şarkılarını hayali, yasaklanmış bir filmin müziği olarak yorumladıkları The Cover Up (2015) ise Phil Collins'in \"In the Air Tonight\" yorumuyla Netflix'in Cobra Kai dizisine kadar uzandı. Hikâyenin üçüncü perdesi Act III: This City Made Us, 16 yılı aşan bir bekleyişin ardından Ocak 2026'da yayımlandı ve Billboard'un albüm satışları listesine dokuzuncu sıradan girdi.</p>",
+   "diskografi": [
+    "The Protomen – Act I (2005)",
+    "Act II: The Father of Death (2009)",
+    "The Protomen Present: A Night of Queen – canlı (2012)",
+    "The Cover Up (2015)",
+    "Act III: This City Made Us (2026)"
+   ],
+   "link": "https://protomen.com/",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia: The Protomen",
+     "url": "https://en.wikipedia.org/wiki/The_Protomen"
+    },
+    {
+     "ad": "Wikipedia: The Protomen (Act I)",
+     "url": "https://en.wikipedia.org/wiki/The_Protomen_(album)"
+    },
+    {
+     "ad": "Wikipedia: Act II: The Father of Death",
+     "url": "https://en.wikipedia.org/wiki/Act_II:_The_Father_of_Death"
+    },
+    {
+     "ad": "Wikipedia: Act III: This City Made Us",
+     "url": "https://en.wikipedia.org/wiki/Act_III:_This_City_Made_Us"
+    },
+    {
+     "ad": "Wikipedia: The Cover Up",
+     "url": "https://en.wikipedia.org/wiki/The_Cover_Up:_Original_Soundtrack_from_the_Motion_Picture"
+    },
+    {
+     "ad": "Wikipedia: Light Up the Night (kısa film)",
+     "url": "https://en.wikipedia.org/wiki/Light_Up_the_Night_(Protomen_song)"
+    },
+    {
+     "ad": "Protomen.com: Act III duyurusu",
+     "url": "https://protomen.com/news/2025/10/03/act-iii-when/"
+    },
+    {
+     "ad": "PC Gamer: Act 3 sonunda geliyor",
+     "url": "https://www.pcgamer.com/gaming-industry/protomen-act-3-album-release-date/"
+    }
+   ]
+  }
+ ]
+}
