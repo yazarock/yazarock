@@ -262,9 +262,9 @@ add_action('init',function(){
 },22);
 /* Kopyanın eski adresleri asıl yazıya gitsin */
 add_action('template_redirect',function(){
-	if(!is_404())return;
+	$h=get_option('yr_kopya_hedef');if(!is_array($h)||empty($h['hedef']))return;
 	$y=trim((string)wp_parse_url($_SERVER['REQUEST_URI']??'',PHP_URL_PATH),'/');
-	if(!in_array($y,['hello-world','anadolu-rockun-dogusu-2'],true))return;
-	$h=get_option('yr_kopya_hedef');$u=is_array($h)&&!empty($h['hedef'])?get_permalink((int)$h['hedef']):'';
-	if($u){wp_safe_redirect($u,301);exit;}
-});
+	$p=(int)($_GET['p']??0);
+	/* WordPress'in eski adres yönlendirmesinden (priority 10) önce çalışır */
+	if(in_array($y,['hello-world','anadolu-rockun-dogusu-2'],true)||($p&&$p===(int)$h['kaynak']&&is_404())){$u=get_permalink((int)$h['hedef']);if($u){wp_safe_redirect($u,301);exit;}}
+},1);
