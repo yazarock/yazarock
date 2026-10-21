@@ -69,7 +69,7 @@ $bio=trim((string)$u->description);
 <div class="box"><h2>En Çok Okunan Yazıların</h2><?php if($top):?><ol class="tlist"><?php foreach($top as $p){$o=yr_okunma($p->ID);$c=yr_tepki_sayi($p->ID);
 	echo '<li><a href="'.esc_url(get_permalink($p)).'">'.esc_html(get_the_title($p)).'</a><span class="tbar"><i style="width:'.(int)round($o*100/$mx).'%"></i></span><small>'.yr_ikon('eye').esc_html(yr_sayi($o)).' '.yr_ikon('up').esc_html(yr_sayi($c['l'])).' '.yr_ikon('down').esc_html(yr_sayi($c['d'])).'</small></li>';}?></ol>
 <?php else:?><p class="empty-s">Henüz yayımlanmış yazın yok. İlk yazın onaylandığında istatistikleri burada göreceksin.</p><p><a class="btn" href="<?php echo esc_url(admin_url('post-new.php'));?>">İlk yazını yaz</a></p><?php endif;?></div>
-<div class="box"><h2>Yazılarına Gelen Yorumlar</h2><?php $cms=get_comments(['post_author'=>$uid,'post_type'=>'post','status'=>'approve','number'=>5]);
+<div class="box"><h2>Yazılarına Gelen Yorumlar</h2><?php $cms=get_comments(['post_author'=>$uid,'post_type'=>['post','grup','etkinlik'],'status'=>'approve','number'=>5]);
 	if($cms){echo '<ul class="clist">';foreach($cms as $cmt)echo '<li>'.get_avatar($cmt,36).'<div><b>'.esc_html($cmt->comment_author).'</b> <a href="'.esc_url(get_comment_link($cmt)).'">'.esc_html(get_the_title($cmt->comment_post_ID)).'</a> hakkında<p>'.esc_html(wp_trim_words(wp_strip_all_tags($cmt->comment_content),18)).'</p><small>'.esc_html(human_time_diff(strtotime($cmt->comment_date_gmt.' UTC'))).' önce</small></div></li>';echo '</ul>';}
 	else echo '<p class="empty-s">Yazılarına henüz yorum gelmedi.</p>';?></div>
 <?php else:?>

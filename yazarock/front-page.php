@@ -61,7 +61,7 @@ $baslik=yr_t('sahne_b');if(!$sq||!$sq->have_posts()){$sq=new WP_Query(['posts_pe
 <div class="box"><h2><?php echo esc_html(yr_t('yazar_b'));?></h2>
 <?php foreach($au as $u):?><a class="auth" href="<?php echo esc_url(get_author_posts_url($u->ID));?>"><?php echo get_avatar($u->ID,42,'','',['class'=>'av']);?><div><?php echo esc_html($u->display_name);?><small><?php echo (int)count_user_posts($u->ID);?> yazı</small></div></a><?php endforeach;?>
 </div><?php endif;?>
-<?php $cm=!yr_on('yorum')?[]:get_comments(['number'=>4,'status'=>'approve','post_type'=>'post']);if($cm):?>
+<?php $cm=!yr_on('yorum')?[]:get_comments(['number'=>4,'status'=>'approve','post_type'=>['post','grup','etkinlik']]);if($cm):?>
 <div class="box"><h2><?php echo esc_html(yr_t('yorum_b'));?></h2>
 <?php foreach($cm as $c):?><div class="cm"><b><?php echo esc_html($c->comment_author);?>:</b> <a href="<?php echo esc_url(get_comment_link($c));?>"><?php echo esc_html(wp_trim_words($c->comment_content,10));?></a></div><?php endforeach;?>
 </div><?php endif;?>

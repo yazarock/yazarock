@@ -271,3 +271,7 @@ function yr_onbellek_temizle(){
 }
 /* Özelleştir'de "Yayınla" denince de temizle: değişiklik hemen görünsün */
 add_action('customize_save_after','yr_onbellek_temizle');
+
+/* Onaylı yeni yorumda ve yorum onaylanınca önbelleği temizle: "Son Yorumlar" hemen güncellensin */
+add_action('comment_post',function($id,$ok){if($ok===1||$ok==='1')yr_onbellek_temizle();},10,2);
+add_action('transition_comment_status',function($new,$old){if($new==='approved'&&$old!=='approved')yr_onbellek_temizle();},10,2);

@@ -116,7 +116,7 @@ function yr_meta_toplam($uid,$key){
 function yr_yazar_ist($uid){
 	$k='yr_yist_'.(int)$uid;$s=get_transient($k);
 	if(!is_array($s)){
-		$s=['yazi'=>(int)count_user_posts($uid,'post',true),'okunma'=>yr_meta_toplam($uid,'_yr_okunma'),'begeni'=>yr_meta_toplam($uid,'_yr_like'),'begenmeme'=>yr_meta_toplam($uid,'_yr_dislike'),'yorum'=>(int)get_comments(['post_author'=>$uid,'post_type'=>'post','status'=>'approve','count'=>true])];
+		$s=['yazi'=>(int)count_user_posts($uid,'post',true),'okunma'=>yr_meta_toplam($uid,'_yr_okunma'),'begeni'=>yr_meta_toplam($uid,'_yr_like'),'begenmeme'=>yr_meta_toplam($uid,'_yr_dislike'),'yorum'=>(int)get_comments(['post_author'=>$uid,'post_type'=>['post','grup','etkinlik'],'status'=>'approve','count'=>true])];
 		set_transient($k,$s,10*MINUTE_IN_SECONDS);
 	}
 	return $s;
