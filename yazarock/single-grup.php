@@ -1,6 +1,6 @@
 <?php if(!defined('ABSPATH'))exit; get_header();while(have_posts()):the_post();$l=yr_meta('link');?>
 <article class="box entry"><span class="pill"><?php echo yr_meta('bolge')==='tr'?'Türkiye':'Dünya';?></span><h1><?php the_title();?></h1>
-<div class="meta"><?php echo esc_html(yr_join(yr_meta('stil'),yr_meta('kurulus')));?><?php echo get_the_term_list(get_the_ID(),'grup_tur',' · ',', ','');?></div>
+<div class="meta"><?php echo esc_html(yr_join(yr_meta('stil'),yr_meta('kurulus')));?><?php echo get_the_term_list(get_the_ID(),'grup_tur',' · ',', ','');echo get_the_term_list(get_the_ID(),'grup_sehir',' · <span class="sh-ic">📍</span>',', ','');?></div>
 <div class="gcov"><?php echo yr_cover(get_the_ID(),'large');?></div><?php yr_credit();?>
 <div class="content"><?php the_content();?></div>
 <?php yr_disco(get_the_ID());yr_embeds(get_the_ID());?>

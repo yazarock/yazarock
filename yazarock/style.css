@@ -3,7 +3,7 @@ Theme Name: Yazarock
 Theme URI: https://yazarock.com
 Author: Yazarock
 Description: Rock ve metal müzik haber teması. Gruplar, Etkinlikler, yazar giriş paneli, yazarlık başvurusu ve bülten içerir.
-Version: 1.14.5
+Version: 1.15.0
 Requires at least: 6.0
 Requires PHP: 7.4
 Text Domain: yazarock
@@ -541,3 +541,24 @@ nav a.gt:hover{background:var(--red)}
 .yer-son .pill{align-self:flex-start}.yer-son b{font:600 20px/1.2 Oswald,sans-serif;text-transform:uppercase;color:var(--text)}.yer-son small{color:var(--mute);font-size:14px}
 .yer-son:hover b{color:var(--red2)}
 .tags a{display:inline-block;padding:3px 10px;margin:0 6px 6px 0;border:1px solid var(--line);color:var(--mute);font-size:13px}.tags a:hover{color:var(--text);border-color:var(--red2)}
+
+/* Grup haritası */
+.harita{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,1fr);gap:18px;margin-bottom:22px;align-items:start}
+.harita .hr-bas{grid-column:1/-1}.harita .hr-bas h2{margin-bottom:8px}.harita .hr-bas p{margin:0;color:var(--mute)}
+.hr-map{position:relative;min-height:120px}
+.hr-map svg{display:block;width:100%;height:auto}
+.hr-map svg path{fill:#2a1a1d;stroke:var(--bg);stroke-width:.8;transition:fill .15s}
+.hr-map svg path:not([data-il]){fill:#1a1113}
+.hr-map svg path.var{cursor:pointer}
+.hr-map svg path.v1{fill:#6b1a1e}.hr-map svg path.v2{fill:#a32328}.hr-map svg path.v3{fill:var(--red2)}
+.hr-map svg path.var:hover,.hr-map svg path.var:focus{fill:#ff6a6e;outline:none}
+.hr-map svg path:not(.var):hover{fill:#3a2427}
+.hr-ipucu{position:absolute;transform:translate(-50%,-140%);background:#000;border:1px solid var(--red);color:#fff;font-size:13px;padding:5px 9px;white-space:nowrap;pointer-events:none;z-index:2}
+.hr-liste{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px;align-content:start;max-height:420px;overflow:auto}
+.hr-liste a{display:inline-flex;gap:6px;align-items:center;padding:6px 10px;border:1px solid var(--line);background:var(--panel2);color:var(--text);font-size:14px;text-decoration:none}
+.hr-liste a:hover{border-color:var(--red)}.hr-liste b{color:var(--red2);font-weight:600}
+.hr-kredi{grid-column:1/-1;margin:0;font-size:11px;color:var(--mute);opacity:.7}
+.sh-yol{margin:0 0 6px;font-size:13px;color:var(--mute)}.ph .sh-yol a{color:var(--mute);text-decoration:none}.ph .sh-yol a:hover{color:var(--text)}
+.sh-semt{margin-bottom:18px}.sh-semt a{display:inline-block;padding:8px 14px;border:1px solid var(--line);color:var(--text);text-decoration:none;font-size:14px}
+.sh-semt a.on{background:var(--red);border-color:var(--red)}.sh-semt small{color:var(--mute);margin-left:4px}.sh-semt a.on small{color:#fff}
+@media(max-width:760px){.harita{grid-template-columns:1fr}.hr-liste{max-height:none}}

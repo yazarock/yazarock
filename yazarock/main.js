@@ -158,3 +158,26 @@ f.addEventListener('submit',function(e){
 	var b=f.querySelector('.gt-send');if(b){b.disabled=true;b.lastChild.textContent='Gönderiliyor…'}
 });
 })();
+
+/* Grup haritası */
+(function(){
+var m=document.querySelector('.hr-map');if(!m)return;
+var d;try{d=JSON.parse(m.getAttribute('data-iller')||'{}')}catch(e){return}
+var mx=1;for(var k in d)mx=Math.max(mx,d[k].n);
+var ip=m.querySelector('.hr-ipucu');
+fetch(m.getAttribute('data-harita')).then(function(r){return r.text()}).then(function(t){
+	var w=document.createElement('div');w.innerHTML=t;var svg=w.querySelector('svg');if(!svg)return;
+	svg.removeAttribute('width');svg.removeAttribute('height');svg.setAttribute('role','img');svg.setAttribute('aria-label','Türkiye grup haritası');
+	m.insertBefore(svg,ip);
+	[].forEach.call(svg.querySelectorAll('path[data-il]'),function(p){
+		var s=p.getAttribute('data-il'),i=d[s],ad=p.getAttribute('data-ad')||s;
+		p.addEventListener('mousemove',function(e){var r=m.getBoundingClientRect();ip.textContent=ad+(i?' · '+i.n+' grup':' · henüz grup yok');ip.hidden=false;ip.style.left=(e.clientX-r.left)+'px';ip.style.top=(e.clientY-r.top)+'px'});
+		p.addEventListener('mouseleave',function(){ip.hidden=true});
+		if(!i)return;
+		var o=i.n/mx;p.classList.add('var',o>.5?'v3':o>.15?'v2':'v1');
+		p.setAttribute('tabindex','0');p.setAttribute('role','link');p.setAttribute('aria-label',ad+', '+i.n+' grup');
+		var git=function(){location.href=i.url};
+		p.addEventListener('click',git);p.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();git()}});
+	});
+}).catch(function(){});
+})();
