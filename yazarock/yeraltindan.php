@@ -9,10 +9,11 @@ add_action('init',function(){
 },21);
 add_action('customize_register',function($c){
 	$c->add_setting('yr_liste_url',['default'=>'','sanitize_callback'=>'esc_url_raw']);
-	$c->add_control('yr_liste_url',['label'=>'Yeraltından · çalma listesi adresi (YouTube ya da Spotify; boşsa yalnızca haftalık yazı görünür)','section'=>'yr_ana','type'=>'url','priority'=>0]);
+	$c->add_control('yr_liste_url',['label'=>'Yeraltından · çalma listesi adresi (YouTube Music, YouTube ya da Spotify; boşsa yalnızca haftalık yazı görünür)','section'=>'yr_ana','type'=>'url','priority'=>0]);
 	$c->add_setting('yr_s_yeraltindan',['default'=>true,'sanitize_callback'=>'rest_sanitize_boolean']);
 	$c->add_control('yr_s_yeraltindan',['label'=>'Yeraltından (haftalık liste) bölümünü göster','section'=>'yr','type'=>'checkbox']);
 },31);
+function yr_yer_platform($u){$h=(string)wp_parse_url($u,PHP_URL_HOST);if(strpos($h,'spotify')!==false)return 'Spotify';if(strpos($h,'music.youtube')!==false)return 'YouTube Music';return 'YouTube';}
 function yr_yeraltindan_kutu(){
 	if(!yr_on('yeraltindan'))return;
 	$k=yr_yer_kat();$p=$k?get_posts(['category'=>$k,'numberposts'=>1,'post_status'=>'publish']):[];
@@ -20,7 +21,7 @@ function yr_yeraltindan_kutu(){
 	if(!$p&&!$emb)return;
 	echo '<div class="box yer" style="margin-top:22px"><h2>'.esc_html(yr_t('yer_b')).'</h2><p class="yer-m">'.esc_html(yr_t('yer_m')).'</p>';
 	if($p){$p=$p[0];echo '<a class="yer-son" href="'.esc_url(get_permalink($p)).'"><span class="pill">Bu hafta</span><b>'.esc_html(get_the_title($p)).'</b><small>'.esc_html(wp_trim_words(get_the_excerpt($p),24)).'</small></a>';}
-	if($emb)echo '<div class="embs">'.$emb.'</div><p style="margin:10px 0 0"><a class="more" href="'.esc_url($u).'" target="_blank" rel="noopener">Listeyi '.(strpos((string)wp_parse_url($u,PHP_URL_HOST),'spotify')!==false?'Spotify':'YouTube').'\'da takip et →</a></p>';
+	if($emb)echo '<div class="embs">'.$emb.'</div><p style="margin:10px 0 0"><a class="more" href="'.esc_url($u).'" target="_blank" rel="noopener">Listeyi '.yr_yer_platform($u).'\'da takip et →</a></p>';
 	if($k&&$p)echo '<p style="margin:10px 0 0"><a class="more" href="'.esc_url(get_category_link($k)).'">Önceki haftalar →</a></p>';
 	echo '</div>';
 }
