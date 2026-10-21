@@ -227,7 +227,7 @@ add_action('wp_footer',function(){
 /* Panel sayfası önbelleğe alınmasın */
 /* Form içeren sayfalar önbelleğe alınmasın (güvenlik anahtarları bayatlamasın, güncel hâl görünsün) */
 add_action('template_redirect',function(){
-	if(is_page(['giris','uye-ol','yazar-ol','grubunu-tanit','listelerim'])){if(!defined('DONOTCACHEPAGE'))define('DONOTCACHEPAGE',true);nocache_headers();header('X-LiteSpeed-Cache-Control: no-cache');}
+	if(is_page(['giris','uye-ol','yazar-ol','grubunu-tanit','listelerim','garajdan-sahneye'])){if(!defined('DONOTCACHEPAGE'))define('DONOTCACHEPAGE',true);nocache_headers();header('X-LiteSpeed-Cache-Control: no-cache');}
 },1);
 
 /* ================= v1.5 geçişi: Yazarlar sayfası, menü ve gizlilik notu ================= */

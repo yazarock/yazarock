@@ -49,6 +49,7 @@ if(($_GET['yr_g']??'')==='tamam'):?>
 </div>
 <aside class="gt-side">
 <?php if($B['sss']){echo '<div class="box">'.($B['ara']!==''?'<h2>'.esc_html($B['ara']).'</h2>':'');foreach($B['sss'] as $k=>$d)echo $k?$d:preg_replace('#<details#','<details open',$d,1);echo '</div>';}
+echo '<div class="box"><h2>Röportaj ister misin?</h2><p style="margin:0 0 12px;color:#d6cdcd">Garajdan Sahneye serisinde 10 soruyu grup olarak yanıtla, röportajın Yazarock\'ta yayımlansın.</p><a class="btn" href="'.esc_url(yr_page_url('garajdan-sahneye')).'">Soruları yanıtla</a></div>';
 if($B['alinti']!=='')echo '<div class="box gt-q">'.yr_ikon('cmt').'<div>'.wp_kses_post($B['alinti']).'</div></div>';?>
 </aside>
 </div>

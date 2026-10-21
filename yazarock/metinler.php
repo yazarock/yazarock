@@ -114,6 +114,15 @@ function yr_sayfa_varsayilanlari(){
 		'yazarlar'=>yr_b_h('Yazarlar').yr_b_p("Yazarock'ta rock ve metal üzerine yazanlar."),
 		'listeler'=>yr_b_h('Okuyucu Listeleri').yr_b_p('Okuyucularımızın hazırladığı favori listeleri. <a href="'.esc_url(yr_page_url('listelerim')).'">Sen de liste oluştur</a>.'),
 		'listelerim'=>yr_b_h('Listelerim').yr_b_p('"Benim 10 favori albümüm" gibi kendi listeni oluştur. Listeler editör onayından sonra yayımlanır.'),
+		'garajdan-sahneye'=>yr_b_p('Röportaj serisi · Ücretsiz').yr_b_h('Garajdan Sahneye').yr_b_p("Türkiye'nin dört bir yanındaki bağımsız rock ve metal gruplarını kendi ağızlarından dinliyoruz. Aşağıdaki soruları grup olarak yanıtlayın; biz okuyup düzenleyelim, röportajınız Yazarock'ta yayımlansın.")
+			.yr_b_list(['<strong>Soruları yanıtla</strong> – En az 6 soruya istediğin uzunlukta cevap ver.','<strong>Okuyup hazırlıyoruz</strong> – Yazım ve uzunluk için küçük düzeltmeler yapıyoruz, anlamı değiştirmiyoruz.','<strong>Yayında</strong> – Röportaj yayına girince bağlantısını sana e-postayla gönderiyoruz.'],true)
+			.yr_b_h('Sık Sorulanlar',2)
+			.yr_b_details('Ücretli mi?',"Hayır. Garajdan Sahneye'de yer almak tamamen ücretsizdir.")
+			.yr_b_details('Kimler katılabilir?',"Türkiye'de rock, metal ve alt türlerinde kendi bestelerini yapan bağımsız gruplar ve solo sanatçılar. Yeni kurulmuş olmanız sorun değil.")
+			.yr_b_details('Ne zaman yayımlanır?','Gelen yanıtları sırayla okuyup hazırlıyoruz. Yayına girdiğinde e-postayla haber veriyoruz.')
+			.yr_b_details('Yanıtlarımı değiştirir misiniz?','Yalnızca yazım hatalarını düzeltir, çok uzun cevapları kısaltabiliriz. Söylediklerinizin anlamını değiştirmeyiz.')
+			.yr_b_details('Yüz yüze röportaj da yapıyor musunuz?','Zaman zaman evet. Yazılı röportaj ilk adım; ileride görüntülü ya da yüz yüze konuşmak için de size yazabiliriz.')
+			.yr_b_quote('"Her büyük grup bir garajda, küçük bir amfiyle başladı."'),
 		'haberler'=>yr_b_h('Haberler').yr_b_p('Türkiye ve dünyadan rock ve metal gündemi, incelemeler ve rehberler.'),
 	];
 }
@@ -164,6 +173,10 @@ function yr_t_alanlar(){
 			'rop_bos_b'=>['Henüz röportaj yokken: başlık','İlk röportajlar yolda'],
 			'rop_bos_m'=>['Henüz röportaj yokken: metin',"Türkiye'nin dört bir yanındaki bağımsız gruplarla konuşmaya başlıyoruz. Grubunun hikâyesini anlatmak ister misin?",'textarea'],
 			'rop_bos_btn'=>['Henüz röportaj yokken: düğme','Röportaj için başvur'],
+		],
+		'Yeraltından (haftalık liste)'=>[
+			'yer_b'=>['Başlık','Yeraltından'],
+			'yer_m'=>['Açıklama',"Her pazartesi Türkiye'nin yeraltından yeni çıkan şarkılar.",'textarea'],
 		],
 		'Sahneden'=>[
 			'sahne_b'=>['Başlık','Sahneden'],

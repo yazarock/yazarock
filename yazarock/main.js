@@ -137,3 +137,24 @@ document.querySelectorAll('input[data-sifre]').forEach(function(p){
 	if(g)g.addEventListener('click',function(){var s=p.type==='password';p.type=s?'text':'password';if(p2)p2.type=p.type;g.textContent=s?'Gizle':'Göster';g.setAttribute('aria-label',s?'Şifreyi gizle':'Şifreyi göster')});
 });
 })();
+
+/* v1.14: Garajdan Sahneye formu — yazılanlar tarayıcıda saklanır */
+(function(){
+var K='yr_rp_taslak';
+if(document.querySelector('[data-rp-tamam]')){try{localStorage.removeItem(K)}catch(e){}return}
+var f=document.getElementById('rpform');if(!f)return;
+function topla(){var o={};[].slice.call(f.elements).forEach(function(el){if(!el.name||el.type==='file'||el.type==='hidden'||el.name==='website'||el.type==='checkbox')return;o[el.name]=el.value});return o}
+try{var s=JSON.parse(localStorage.getItem(K)||'null');if(s)Object.keys(s).forEach(function(n){var el=f.querySelector('[name="'+n.replace(/"/g,'')+'"]');if(el&&!el.value)el.value=s[n]})}catch(e){}
+var t;f.addEventListener('input',function(){clearTimeout(t);t=setTimeout(function(){try{localStorage.setItem(K,JSON.stringify(topla()))}catch(e){}},400)});
+var ft=document.getElementById('rpfoto');if(ft)ft.addEventListener('change',function(){if(ft.files[0]&&ft.files[0].size>5*1024*1024){alert('Fotoğraf en fazla 5 MB olmalı.');ft.value=''}});
+f.addEventListener('submit',function(e){
+	var old=f.querySelector('.gt-err');if(old)old.remove();
+	var hata=function(m,yer){e.preventDefault();var d=document.createElement('div');d.className='gt-err';d.setAttribute('role','alert');d.textContent=m;yer.parentNode.insertBefore(d,yer);d.scrollIntoView({behavior:'smooth',block:'center'})};
+	var links=[].slice.call(f.querySelectorAll('input[name^="l_"]')).filter(function(i){return i.value.trim()});
+	if(!links.length)return hata('Lütfen müziğinizi dinleyebileceğimiz en az bir bağlantı ekleyin (Bandcamp, Spotify, YouTube…).',f.querySelector('input[name^="l_"]').closest('.g2'));
+	var dolu=[].slice.call(f.querySelectorAll('textarea[name^="s"]')).filter(function(t){return t.value.trim().length>=20}).length;
+	if(dolu<6)return hata('Lütfen en az 6 soruyu yanıtlayın (her biri en az 20 karakter). Şu an '+dolu+' soru yanıtlı.',f.querySelectorAll('fieldset')[1].querySelector('label'));
+	try{localStorage.setItem(K,JSON.stringify(topla()))}catch(e){}
+	var b=f.querySelector('.gt-send');if(b){b.disabled=true;b.lastChild.textContent='Gönderiliyor…'}
+});
+})();

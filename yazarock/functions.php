@@ -1,6 +1,6 @@
 <?php
 if(!defined('ABSPATH'))exit;
-define('YR_VER','1.13.2');
+define('YR_VER','1.14.0');
 
 /* E-posta adresi yazım ve alan adı kontrolü: hatalı adreslere giden mailler geri döner ve sitenin e-posta itibarını düşürür */
 function yr_eposta_oneri($m){
@@ -435,3 +435,5 @@ require_once get_template_directory().'/hesap.php';
 require_once get_template_directory().'/vitrin.php';
 require_once get_template_directory().'/metinler.php';
 require_once get_template_directory().'/logo.php';
+require_once get_template_directory().'/roportaj-form.php';
+require_once get_template_directory().'/yeraltindan.php';

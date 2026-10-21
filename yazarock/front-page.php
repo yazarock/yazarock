@@ -32,9 +32,11 @@ if($st):$h=new WP_Query(['posts_per_page'=>5,'ignore_sticky_posts'=>1,'no_found_
 
 <?php if(yr_on('roportaj')):$rq=$rk?new WP_Query(['post_type'=>'post','cat'=>$rk,'posts_per_page'=>3,'ignore_sticky_posts'=>1,'no_found_rows'=>true]):null;?>
 <div class="box" style="margin-top:22px"><h2><?php echo esc_html(yr_t('rop_b'));?></h2>
-<?php if($rq&&$rq->have_posts()):?><div class="news"><?php while($rq->have_posts()){$rq->the_post();yr_card();}wp_reset_postdata();?></div><a class="more" href="<?php echo esc_url(get_category_link($rk));?>"><?php echo esc_html(yr_t('rop_tum'));?></a>
-<?php else:?><div class="bos-rop"><?php echo yr_ikon('cmt');?><div><h3><?php echo esc_html(yr_t('rop_bos_b'));?></h3><p><?php echo esc_html(yr_t('rop_bos_m'));?></p><?php if(yr_t('rop_bos_btn')!=='')echo '<a class="btn" href="'.esc_url($gt).'">'.esc_html(yr_t('rop_bos_btn')).'</a>';?></div></div><?php endif;?>
+<?php if($rq&&$rq->have_posts()):?><div class="news"><?php while($rq->have_posts()){$rq->the_post();yr_card();}wp_reset_postdata();?></div><a class="more" href="<?php echo esc_url(get_category_link($rk));?>"><?php echo esc_html(yr_t('rop_tum'));?></a> <a class="more" style="margin-left:14px" href="<?php echo esc_url(yr_page_url('garajdan-sahneye'));?>">Grubunla sen de yanıtla →</a>
+<?php else:?><div class="bos-rop"><?php echo yr_ikon('cmt');?><div><h3><?php echo esc_html(yr_t('rop_bos_b'));?></h3><p><?php echo esc_html(yr_t('rop_bos_m'));?></p><?php if(yr_t('rop_bos_btn')!=='')echo '<a class="btn" href="'.esc_url(yr_page_url('garajdan-sahneye')).'">'.esc_html(yr_t('rop_bos_btn')).'</a>';?></div></div><?php endif;?>
 </div><?php endif;?>
+
+<?php yr_yeraltindan_kutu();?>
 
 <?php if(yr_on('sahne')):$cats=array_filter(array_map(function($s){$t=get_term_by('slug',$s,'category');return $t?(int)$t->term_id:0;},['kesif','yeni-cikis','konser-duyurusu']));
 $sq=$cats?new WP_Query(['post_type'=>'post','category__in'=>$cats,'posts_per_page'=>6,'ignore_sticky_posts'=>1,'no_found_rows'=>true]):null;
