@@ -246,3 +246,25 @@ add_action('customize_register',function($c){
 
 /* v1.13.1: "Biz kimiz?" bağlantısı ana sayfadan kaldırıldı (bir kez) */
 add_action('init',function(){if(get_option('yr_mig_v11'))return;update_option('yr_mig_v11',1);set_theme_mod('yr_t_cta_l','');});
+
+/* v1.14.4: Kopya "Anadolu Rock'un Doğuşu" yazısının yorumlarını asıl yazıya taşı, kopyayı çöpe al (bir kez) */
+add_action('init',function(){
+	if(get_option('yr_mig_v14'))return;
+	$asil=get_page_by_path('anadolu-rockun-dogusu',OBJECT,'post');
+	$kopya=get_page_by_path('anadolu-rockun-dogusu-2',OBJECT,'post');
+	if(!$asil||!$kopya||$asil->ID===$kopya->ID||stripos($kopya->post_title,'Anadolu Rock')!==0){update_option('yr_mig_v14','atlandi');return;}
+	foreach(get_comments(['post_id'=>$kopya->ID,'status'=>'all']) as $c)wp_update_comment(['comment_ID'=>(int)$c->comment_ID,'comment_post_ID'=>$asil->ID]);
+	wp_update_comment_count_now($asil->ID);wp_update_comment_count_now($kopya->ID);
+	update_option('yr_kopya_hedef',['kaynak'=>$kopya->ID,'hedef'=>$asil->ID],false);
+	wp_trash_post($kopya->ID);
+	update_option('yr_mig_v14',1);
+	if(function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
+},22);
+/* Kopyanın eski adresleri asıl yazıya gitsin */
+add_action('template_redirect',function(){
+	if(!is_404())return;
+	$y=trim((string)wp_parse_url($_SERVER['REQUEST_URI']??'',PHP_URL_PATH),'/');
+	if(!in_array($y,['hello-world','anadolu-rockun-dogusu-2'],true))return;
+	$h=get_option('yr_kopya_hedef');$u=is_array($h)&&!empty($h['hedef'])?get_permalink((int)$h['hedef']):'';
+	if($u){wp_safe_redirect($u,301);exit;}
+});
