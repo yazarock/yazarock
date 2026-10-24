@@ -216,7 +216,7 @@ function yr_t_alanlar(){
 		],
 		'Haber Bülteni'=>[
 			'bulten_b'=>['Başlık','Haber Bülteni'],
-			'bulten_m'=>['Metin','Yeni haberler ve konser duyuruları e-postana gelsin.','textarea'],
+			'bulten_m'=>['Metin','Haftanın yazıları, yeraltı grupları ve konser takvimi her cuma e-postana gelsin.','textarea'],
 			'bulten_btn'=>['Düğme','Abone Ol'],
 		],
 	];
