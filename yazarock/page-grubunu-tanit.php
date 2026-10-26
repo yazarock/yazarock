@@ -39,6 +39,7 @@ if(($_GET['yr_g']??'')==='tamam'):?>
 <div class="g2"><label>E-posta *<input name="email" type="email" required autocomplete="email"></label>
 <label>Telefon <small>(isteğe bağlı)</small><input name="tel" type="tel" maxlength="25" autocomplete="tel"></label></div>
 <p class="note">İletişim bilgilerin yayımlanmaz; yalnızca sana ulaşmak için kullanılır.</p>
+<label class="chk"><input type="checkbox" name="insan" value="1" required> <span>Müziğimizdeki vokal, enstrüman ve besteler insan emeğiyle yapılmıştır; yapay zekâ ile üretilmiş müzik içermez.</span></label>
 <label class="chk"><input type="checkbox" name="hak" value="1" required> <span>Paylaştığım müziğin ve fotoğrafın haklarına sahip olduğumu (ya da grubun iznini aldığımı) ve bunların Yazarock'ta grubun tanıtımı amacıyla kullanılabileceğini kabul ediyorum.</span></label>
 <label class="chk"><input type="checkbox" name="kvkk" value="1" required> <span><a href="<?php echo esc_url(yr_page_url('kvkk-aydinlatma-metni'));?>" target="_blank">KVKK Aydınlatma Metni</a>'ni okudum; bilgilerimin başvurunun değerlendirilmesi ve benimle iletişim kurulması için işlenmesini kabul ediyorum.</span></label>
 </fieldset>

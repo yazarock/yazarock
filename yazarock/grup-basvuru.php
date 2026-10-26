@@ -32,7 +32,7 @@ function yr_gb_kaydet(){
 	$L=[];foreach(yr_gb_linkler() as $k=>$l){$u=esc_url_raw(trim(wp_unslash($_POST['l_'.$k]??'')),['http','https']);$h=$u?(string)wp_parse_url($u,PHP_URL_HOST):'';if($h&&strpos($h,'.')!==false&&strlen($u)<=300)$L[$k]=$u;}
 	$I=array_values(array_intersect(array_keys(yr_gb_istekler()),array_map('sanitize_key',(array)($_POST['istek']??[]))));
 	if(!preg_match('/^(19[6-9]\d|20\d\d)$/',$d['yil']))$d['yil']='';
-	if(mb_strlen($d['grup'])<2||mb_strlen($d['sehir'])<2||mb_strlen($d['tur'])<2||mb_strlen($d['hikaye'])<80||mb_strlen($d['ad'])<2||!yr_eposta_ok($d['email'])||!$L||empty($_POST['kvkk'])||empty($_POST['hak']))$go('gecersiz');
+	if(mb_strlen($d['grup'])<2||mb_strlen($d['sehir'])<2||mb_strlen($d['tur'])<2||mb_strlen($d['hikaye'])<80||mb_strlen($d['ad'])<2||!yr_eposta_ok($d['email'])||!$L||empty($_POST['kvkk'])||empty($_POST['hak'])||empty($_POST['insan']))$go('gecersiz');
 	/* aynı grup için açık başvuru varsa tekrar alma */
 	$ac=get_posts(['post_type'=>'grup_basvuru','post_status'=>'any','numberposts'=>20,'date_query'=>[['after'=>'30 days ago']],'meta_query'=>[['key'=>'_gb_durum','value'=>['yeni','inceleniyor'],'compare'=>'IN']]]);
 	foreach($ac as $p)if(mb_strtolower($p->post_title)===mb_strtolower($d['grup']))$go('tekrar');

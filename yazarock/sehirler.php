@@ -74,3 +74,15 @@ function yr_ek($ad,$tur){
 	if($tur==='in'){$v=['a'=>'ı','â'=>'ı','ı'=>'ı','o'=>'u','u'=>'u','e'=>'i','i'=>'i','ö'=>'ü','ü'=>'ü'][$sesli]??'i';return "'".($unlu?'n':'').$v.'n';}
 	$e=($sert?'t':'d').($kalin?'a':'e');return "'".$e.($tur==='den'?'n':'');
 }
+
+/* Echoes of Tomorrow yazısına yapay zekâ notu (mig v16) */
+add_action('init',function(){
+	if(get_option('yr_mig_v16'))return;
+	$p=get_posts(['post_type'=>'post','post_status'=>'any','meta_key'=>'_yr_derleme_id','meta_value'=>'2026-10-26-kesif-echoes-of-tomorrow','numberposts'=>1]);
+	if(!$p)return;/* yazı henüz yoksa sonra tekrar dene */
+	update_option('yr_mig_v16',1);
+	if(strpos($p[0]->post_content,'yr-ai-not')!==false)return;
+	$not='<div class="yr-ai-not"><p><strong>Yazarock notu:</strong> Bu yazı yayımlandıktan sonra, Echoes of Tomorrow\'nun müziğinde ve görsellerinde yapay zekâ araçlarının kullanıldığını fark ettik. Yazarock, insan emeğiyle üretilen müziği öne çıkarmayı ilke ediniyor; bu yazıyı şeffaflık için bu notla birlikte yayında bırakıyoruz. Bundan sonra yapay zekâ ile üretilmiş müziğe sitemizde yer vermeyeceğiz.</p></div>';
+	wp_update_post(['ID'=>$p[0]->ID,'post_content'=>wp_slash($not.$p[0]->post_content)]);
+	if(function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
+},30);

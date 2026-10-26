@@ -43,7 +43,7 @@ function yr_rp_kaydet(){
 	$C=[];$dolu=0;
 	foreach(yr_rp_sorular() as $k=>$q){$v=mb_substr(sanitize_textarea_field(wp_unslash($_POST[$k]??'')),0,$q[1]);$C[$k]=$v;if(mb_strlen(trim($v))>=20)$dolu++;}
 	if(!preg_match('/^(19[6-9]\d|20\d\d)$/',$d['yil']))$d['yil']='';
-	if(mb_strlen($d['grup'])<2||mb_strlen($d['sehir'])<2||mb_strlen($d['tur'])<2||mb_strlen($d['ad'])<2||!yr_eposta_ok($d['email'])||!$L||$dolu<6||empty($_POST['kvkk'])||empty($_POST['hak'])||empty($_POST['duzen']))$go('gecersiz');
+	if(mb_strlen($d['grup'])<2||mb_strlen($d['sehir'])<2||mb_strlen($d['tur'])<2||mb_strlen($d['ad'])<2||!yr_eposta_ok($d['email'])||!$L||$dolu<6||empty($_POST['kvkk'])||empty($_POST['hak'])||empty($_POST['duzen'])||empty($_POST['insan']))$go('gecersiz');
 	$ac=get_posts(['post_type'=>'rop_basvuru','post_status'=>'any','numberposts'=>20,'date_query'=>[['after'=>'30 days ago']],'meta_query'=>[['key'=>'_rp_durum','value'=>['yeni','inceleniyor'],'compare'=>'IN']]]);
 	foreach($ac as $p)if(mb_strtolower($p->post_title)===mb_strtolower($d['grup']))$go('tekrar');
 	set_transient('yr_rp_rl_'.$ip,1,2*MINUTE_IN_SECONDS);set_transient('yr_rp_gun_'.$ip,$gun+1,DAY_IN_SECONDS);
