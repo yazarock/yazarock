@@ -3,7 +3,7 @@ Theme Name: Yazarock
 Theme URI: https://yazarock.com
 Author: Yazarock
 Description: Rock ve metal müzik haber teması. Gruplar, Etkinlikler, yazar giriş paneli, yazarlık başvurusu ve bülten içerir.
-Version: 1.16.2
+Version: 1.16.3
 Requires at least: 6.0
 Requires PHP: 7.4
 Text Domain: yazarock
@@ -134,7 +134,7 @@ a.band{display:block;color:inherit}a.ev{display:flex;color:inherit}
 .card .thumb{display:flex;height:150px;background-size:cover}.card h3 a:hover{color:var(--red2)}
 .entry{padding:26px}.entry h1{font-size:clamp(30px,4.2vw,46px);line-height:1.08;margin:6px 0 10px}
 .entry .meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap;color:var(--mute);font-size:14px;margin-bottom:18px}.meta img{border-radius:50%}
-.entry .wp-post-image{width:100%;height:auto;max-height:440px;object-fit:cover;object-position:center 22%;margin:0 0 18px}
+.entry .wp-post-image{display:block;width:auto;max-width:100%;height:auto;max-height:460px;margin:0 auto 18px}
 .content{font-size:18px;line-height:1.8;max-width:760px}.content a{color:var(--blue);text-decoration:underline}.content h2,.content h3{margin:1.6em 0 .5em;text-transform:none}.content img{max-width:100%;height:auto;max-height:420px;width:auto}
 .content blockquote{margin:1.4em 0;padding:4px 18px;border-left:4px solid var(--red);color:var(--mute)}
 .share,.btnrow{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
