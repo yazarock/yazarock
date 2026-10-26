@@ -86,3 +86,15 @@ add_action('init',function(){
 	wp_update_post(['ID'=>$p[0]->ID,'post_content'=>wp_slash($not.$p[0]->post_content)]);
 	if(function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
 },30);
+
+/* Echoes of Tomorrow notu: Jeremy Capo'nun açıklamasına göre güncellendi (mig v17) */
+add_action('init',function(){
+	if(get_option('yr_mig_v17'))return;
+	$p=get_posts(['post_type'=>'post','post_status'=>'any','meta_key'=>'_yr_derleme_id','meta_value'=>'2026-10-26-kesif-echoes-of-tomorrow','numberposts'=>1]);
+	if(!$p||strpos($p[0]->post_content,'yr-ai-not')===false)return;/* v16 notu henüz eklenmediyse bekle */
+	update_option('yr_mig_v17',1);
+	$not='<div class="yr-ai-not"><p><strong>Yazarock notu:</strong> Bu yazıyı yayımladıktan sonra Echoes of Tomorrow\'nun üretim sürecini Jeremy Capo\'ya sorduk. Capo\'nun açıklamasına göre "Le Dernier Matsuri"nin bestesi ve vokali kendisine ait; miks ve mastering ile bazı Japon enstrüman örneklerinde ise yapay zekâ araçları kullanıldı. Projenin animasyonlu videosu ve görsellerinde yapay zekâ kullanımı daha belirgin. Açık ve dürüst yanıtı için Capo\'ya teşekkür ediyoruz. Yazarock, insan emeğiyle üretilen müziği öne çıkarmayı ilke ediniyor; yapay zekâ kullanılan çalışmalarda bunu okurlarımıza açıkça belirteceğiz.</p></div>';
+	$c=preg_replace('#<div class="yr-ai-not">.*?</div>#s',$not,$p[0]->post_content,1);
+	wp_update_post(['ID'=>$p[0]->ID,'post_content'=>wp_slash($c)]);
+	if(function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
+},31);

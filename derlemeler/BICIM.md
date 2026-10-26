@@ -57,10 +57,11 @@ Kurallar:
 - Metinler kaynaklardan kopyalanmaz; tamamen yeniden yazılır.
 
 ## ÖNEMLİ: Yapay zekâ kuralı (Nevzat'ın kararı, 26 Ekim 2026)
-Yazarock yalnızca insan emeğiyle yapılmış müziğe yer verir. Müziği (vokal, enstrüman, beste) yapay zekâ ile üretilmiş grup ve projeleri **yazma, takvime ve grup arşivine ekleme, Yeraltından listesine koyma**.
-- Şüphe işaretleri: grubun görselleri yalnızca çizim/üretilmiş görsel ("promotional illustrations", "not photographs"), hiç gerçek konser ya da çekim fotoğrafı yok; tek kişilik proje ama kadro gibi sunulan maskeli/yüzsüz figürler; çok kısa sürede çok fazla şarkı; Suno, Udio gibi araçların anılması; sahnede hiç görülmemiş olmak.
-- Şüpheli bir projeyi yayına alma: yazıyı `durum` alanı olmadan (taslak) bırak ve Nevzat'a özette nedenini yaz.
-- Görseller için de aynısı geçerli: yapay zekâ ile üretilmiş görselleri öne çıkan görsel olarak kullanma.
+Yazarock insan emeğiyle yapılmış müziği öne çıkarır.
+- Bestesi, sözü ya da vokali yapay zekâ ile üretilmiş (Suno, Udio vb. ile baştan üretilmiş) şarkı ve projeleri **yazma, takvime ve grup arşivine ekleme, Yeraltından listesine koyma**.
+- Beste, söz ve vokal insanın olup miks/mastering, örnek (sample) ya da görsellerde yapay zekâ aracı kullanıldığı biliniyorsa yazı yazılabilir, ama bu yazıda **açıkça belirtilir**.
+- Şüphe işaretleri: grubun görselleri yalnızca çizim/üretilmiş görsel, hiç gerçek konser ya da çekim fotoğrafı yok; tek kişilik proje ama kadro gibi sunulan maskeli/yüzsüz figürler; çok kısa sürede çok fazla şarkı; Suno, Udio gibi araçların anılması; sahnede hiç görülmemiş olmak. Şüpheli bir projeyi yayına alma: `durum` alanı olmadan (taslak) bırak ve Nevzat'a özette nedenini yaz.
+- Yapay zekâ ile üretilmiş görselleri öne çıkan görsel olarak kullanma.
 
 ## Öne çıkan görsel (tema 1.16.1+)
 - Yazıya isteğe bağlı `"gorsel": "https://…/resim.jpg"` (jpg, png, webp, gif) ve `"gorsel_aciklama"` eklenebilir. Site resmi indirip yazının öne çıkan görseli yapar. Yalnızca basın kiti, resmi site gibi kullanım izni olan görselleri kullan ve kaynağı yazının sonunda belirt.
