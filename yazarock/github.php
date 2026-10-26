@@ -128,7 +128,17 @@ function yr_derleme_ekle($y){
 	$yazar=(int)get_option('yr_derleme_yazar',0);
 	if(!$yazar||!get_userdata($yazar)){$a=get_users(['role'=>'administrator','number'=>1,'fields'=>'ID','orderby'=>'ID']);$yazar=$a?(int)$a[0]:0;}
 	$pid=wp_insert_post(['post_type'=>'post','post_status'=>(($y['durum']??'')==='yayin'?'publish':'draft'),'post_title'=>$baslik,'post_content'=>$icerik,'post_excerpt'=>sanitize_textarea_field((string)($y['ozet']??'')),'post_author'=>$yazar,'post_category'=>$tid?[$tid]:[],'tags_input'=>array_slice(array_map('sanitize_text_field',(array)($y['etiketler']??[])),0,8),'meta_input'=>['_yr_derleme_id'=>$id]],true);
+	if(!is_wp_error($pid)&&$pid&&!empty($y['gorsel']))yr_derleme_gorsel($pid,(string)$y['gorsel'],(string)($y['gorsel_aciklama']??''));
 	return !is_wp_error($pid);
+}
+/* "gorsel": https://… bağlantısındaki resmi indirip yazının öne çıkan görseli yapar (tema 1.16.1+) */
+function yr_derleme_gorsel($pid,$url,$alt=''){
+	$url=esc_url_raw($url);if(!$url||!preg_match('#^https://[^\s]+\.(jpe?g|png|webp|gif)(\?.*)?$#i',$url))return false;
+	require_once ABSPATH.'wp-admin/includes/media.php';require_once ABSPATH.'wp-admin/includes/file.php';require_once ABSPATH.'wp-admin/includes/image.php';
+	$aid=media_sideload_image($url,$pid,sanitize_text_field($alt),'id');
+	if(is_wp_error($aid))return false;
+	if($alt!=='')update_post_meta($aid,'_wp_attachment_image_alt',sanitize_text_field($alt));
+	return set_post_thumbnail($pid,$aid);
 }
 function yr_derleme_kaynak_html($list){
 	$k=[];

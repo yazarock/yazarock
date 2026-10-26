@@ -56,6 +56,9 @@ Kurallar:
 - `kaynaklar` yazının sonuna "Kaynaklar" başlığıyla bağlantı listesi olarak eklenir.
 - Metinler kaynaklardan kopyalanmaz; tamamen yeniden yazılır.
 
+## Öne çıkan görsel (tema 1.16.1+)
+- Yazıya isteğe bağlı `"gorsel": "https://…/resim.jpg"` (jpg, png, webp, gif) ve `"gorsel_aciklama"` eklenebilir. Site resmi indirip yazının öne çıkan görseli yapar. Yalnızca basın kiti, resmi site gibi kullanım izni olan görselleri kullan ve kaynağı yazının sonunda belirt.
+
 ## Etkinlikler (konser takvimi) — tema 1.10.0 ve sonrası
 
 - `etkinlikler` listesi isteğe bağlıdır. Her kayıt sitede **Etkinlikler** bölümüne **taslak** olarak eklenir; yayınlanınca konser takviminde görünür.
