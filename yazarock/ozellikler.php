@@ -63,7 +63,7 @@ function yr_cover($id=0,$size='yr-card'){
 	$t=get_the_terms($id,'grup_tur');$sl=($t&&!is_wp_error($t))?$t[0]->slug:'';
 	return yr_cover_svg(get_the_title($id),$sl);
 }
-function yr_credit(){if(has_post_thumbnail()&&yr_meta('gorsel_kredi'))echo '<p class="credit">Görsel: '.esc_html(yr_meta('gorsel_kredi')).'</p>';}
+function yr_credit(){if(!has_post_thumbnail()||!yr_meta('gorsel_kredi'))return;$k=esc_html(yr_meta('gorsel_kredi'));$u=yr_meta('gorsel_kaynak');echo '<p class="credit">Görsel: '.($u?'<a href="'.esc_url($u).'" rel="noopener nofollow" target="_blank">'.$k.'</a>':$k).'</p>';}
 
 /* ================= Diskografi ================= */
 function yr_disco($id){

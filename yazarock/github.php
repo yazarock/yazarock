@@ -113,6 +113,8 @@ function yr_derleme_cek($manual=false){
 		$galinan[]=$f;
 	}
 	update_option('yr_grup_alinan',array_slice($galinan,-60),false);
+	/* Grup görselleri (index.json → "gorsel_dosyalari"): mevcut gruplara öne çıkan görsel ekler (tema 1.18.0+) */
+	$out['gorsel']=yr_derleme_grup_gorselleri($idx);
 	$out['yayin']=yr_derleme_yayinla();
 	update_option('yr_derleme_son',['zaman'=>time(),'eklenen'=>$out['eklenen'],'etkinlik'=>$out['etkinlik'],'grup'=>$out['grup'],'hata'=>''],false);
 	delete_transient('yr_derleme_kilit');
@@ -139,6 +141,31 @@ function yr_derleme_gorsel($pid,$url,$alt=''){
 	if(is_wp_error($aid))return false;
 	if($alt!=='')update_post_meta($aid,'_wp_attachment_image_alt',sanitize_text_field($alt));
 	return set_post_thumbnail($pid,$aid);
+}
+function yr_derleme_grup_gorselleri($idx){
+	$dos=isset($idx['gorsel_dosyalari'])&&is_array($idx['gorsel_dosyalari'])?array_slice($idx['gorsel_dosyalari'],-10):[];
+	$bitti=(array)get_option('yr_gorsel_alinan',[]);$n=0;$hak=12;/* bir çalışmada en fazla 12 indirme */
+	foreach($dos as $f){
+		if(!is_string($f)||!preg_match('/^[A-Za-z0-9_-]+\.json$/',$f)||in_array($f,$bitti,true))continue;
+		$d=json_decode((string)yr_gh_get('derlemeler/'.$f,1000000),true);if(!is_array($d)||empty($d['gorseller']))continue;
+		$kalan=0;
+		foreach(array_slice((array)$d['gorseller'],0,300) as $g){
+			if(!is_array($g)||empty($g['ad'])||empty($g['gorsel']))continue;
+			$p=get_posts(['post_type'=>'grup','post_status'=>'any','title'=>sanitize_text_field($g['ad']),'numberposts'=>1]);
+			if(!$p||has_post_thumbnail($p[0]->ID)||get_post_meta($p[0]->ID,'_yr_gorsel_denendi',true))continue;
+			if($hak<=0){$kalan++;continue;}$hak--;
+			update_post_meta($p[0]->ID,'_yr_gorsel_denendi',1);
+			if(yr_derleme_gorsel($p[0]->ID,(string)$g['gorsel'],(string)$g['ad'])){
+				$n++;update_post_meta($p[0]->ID,'_yr_gorsel_kredi',sanitize_text_field((string)($g['kredi']??'')));
+				if(!empty($g['kaynak']))update_post_meta($p[0]->ID,'_yr_gorsel_kaynak',esc_url_raw((string)$g['kaynak']));
+			}
+		}
+		if($kalan){if(!wp_next_scheduled('yr_derleme_simdi'))wp_schedule_single_event(time()+120,'yr_derleme_simdi');}
+		else $bitti[]=$f;
+	}
+	update_option('yr_gorsel_alinan',array_slice($bitti,-30),false);
+	if($n&&function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
+	return $n;
 }
 function yr_derleme_kaynak_html($list){
 	$k=[];
