@@ -1,0 +1,32 @@
+{
+  "tarih": "2026-10-27",
+  "yazilar": [
+    {
+      "id": "2026-10-27-bruce-dickinson-psychogod-istanbul",
+      "baslik": "Bruce Dickinson, PsychoGod Tour kapsamında 29 Haziran 2027'de İstanbul'da",
+      "ozet": "Iron Maiden vokalisti Bruce Dickinson, 2027'ye yayılan solo turnesini açıkladı; Avrupa programında 29 Haziran'da Bonus Parkorman'da bir İstanbul durağı var.",
+      "icerik": "<p>Iron Maiden'ın sesi Bruce Dickinson, solo kariyerinin yeni turnesi <em>PsychoGod Tour 2027</em>'nin tarihlerini duyurdu. Yaz ve sonbahar olmak üzere iki ayağa bölünen turnenin yaz bölümünde Türkiye de var: Dickinson ve grubu 29 Haziran 2027'de İstanbul'da, Bonus Parkorman'da sahneye çıkacak.</p><p>Yaz ayağı 14 Haziran'da Belfast'ta başlıyor; İstanbul'dan önce Dublin, Milano, Zürih, Zagreb, Belgrad ve Sofya geliyor. Temmuzda Rock Imperium, Rockharz ve Masters Of Rock gibi festivaller programda. Kasım ve aralıkta ise Varşova'dan Paris'e uzanan, İsveçli Evergrey'in ön grup olacağı geniş bir kulüp ve salon turu planlanmış.</p><p>Sahnede Dickinson'a gitarlarda Chris Declercq ve Philip Näslund, basta Tanya O'Callaghan, davulda Dave Moreno, klavyede Mistheria eşlik edecek. Duyuruya göre repertuvarda yeni şarkılar ile solo diskografinin sevilen parçaları ve az çalınan şarkıları bir arada olacak. Biletler 30 Ekim'de turnenin resmi sayfasında satışa çıkıyor; İstanbul için yerel satış kanalı henüz açıklanmadı.</p>",
+      "kategori": "Konser Duyurusu",
+      "etiketler": ["Bruce Dickinson", "Iron Maiden", "Heavy Metal", "İstanbul", "Konser"],
+      "kaynaklar": [
+        {"ad": "Iron Maiden resmi sitesi", "url": "https://ironmaiden.com/bruce-announces-psychogod-tour-2027"}
+      ],
+      "durum": "yayin"
+    }
+  ],
+  "etkinlikler": [
+    {
+      "id": "2026-10-27-bruce-dickinson-parkorman-290627",
+      "baslik": "Bruce Dickinson – Bonus Parkorman",
+      "tarih": "2027-06-29",
+      "sehir": "İstanbul",
+      "mekan": "Bonus Parkorman",
+      "tur": "Konser",
+      "ozet": "PsychoGod Tour 2027 İstanbul durağı.",
+      "aciklama": "<p>Iron Maiden vokalisti Bruce Dickinson, solo grubuyla PsychoGod Tour 2027 kapsamında İstanbul'da.</p>",
+      "kaynaklar": [
+        {"ad": "Iron Maiden resmi sitesi", "url": "https://ironmaiden.com/bruce-announces-psychogod-tour-2027"}
+      ]
+    }
+  ]
+}
