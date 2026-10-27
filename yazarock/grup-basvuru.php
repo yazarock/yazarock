@@ -30,6 +30,8 @@ function yr_gb_kaydet(){
 	$d['hikaye']=mb_substr(sanitize_textarea_field(wp_unslash($_POST['hikaye']??'')),0,2000);
 	$d['email']=sanitize_email(wp_unslash($_POST['email']??''));
 	$L=[];foreach(yr_gb_linkler() as $k=>$l){$u=esc_url_raw(trim(wp_unslash($_POST['l_'.$k]??'')),['http','https']);$h=$u?(string)wp_parse_url($u,PHP_URL_HOST):'';if($h&&strpos($h,'.')!==false&&strlen($u)<=300)$L[$k]=$u;}
+	/* "Son çıkış" alanına bağlantı yazılmışsa bağlantılara taşı */
+	if(preg_match('#^https?://\S+$#i',$d['son'])){$u=esc_url_raw($d['son']);$k=strpos($u,'spotify.')!==false?'spotify':(preg_match('#youtu\.?be#',$u)?'youtube':(strpos($u,'bandcamp.')!==false?'bandcamp':'web'));if(empty($L[$k]))$L[$k]=$u;$d['son']='';}
 	$I=array_values(array_intersect(array_keys(yr_gb_istekler()),array_map('sanitize_key',(array)($_POST['istek']??[]))));
 	if(!preg_match('/^(19[6-9]\d|20\d\d)$/',$d['yil']))$d['yil']='';
 	if(mb_strlen($d['grup'])<2||mb_strlen($d['sehir'])<2||mb_strlen($d['tur'])<2||mb_strlen($d['hikaye'])<80||mb_strlen($d['ad'])<2||!yr_eposta_ok($d['email'])||!$L||empty($_POST['kvkk'])||empty($_POST['hak'])||empty($_POST['insan']))$go('gecersiz');

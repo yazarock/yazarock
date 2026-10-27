@@ -98,3 +98,15 @@ add_action('init',function(){
 	wp_update_post(['ID'=>$p[0]->ID,'post_content'=>wp_slash($c)]);
 	if(function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
 },31);
+
+/* Grup diskografisine yazılmış tek bağlantıyı dinleme bağlantısına taşı (mig v18) */
+add_action('init',function(){
+	if(get_option('yr_mig_v18'))return;update_option('yr_mig_v18',1);
+	foreach(get_posts(['post_type'=>'grup','post_status'=>'any','numberposts'=>-1,'fields'=>'ids','meta_query'=>[['key'=>'_yr_diskografi','value'=>'http','compare'=>'LIKE']]]) as $id){
+		$d=trim((string)get_post_meta($id,'_yr_diskografi',true));if(!preg_match('#^https?://\S+$#i',$d))continue;
+		$k=strpos($d,'spotify.')!==false?'_yr_spotify':(preg_match('#youtu\.?be#',$d)?'_yr_youtube':'_yr_link');
+		if(!get_post_meta($id,$k,true))update_post_meta($id,$k,esc_url_raw($d));
+		update_post_meta($id,'_yr_diskografi','');
+	}
+	if(function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
+},32);
