@@ -137,7 +137,7 @@ add_action('admin_post_yr_gb_grup',function(){
 	$ana=$L['bandcamp']??($L['web']??($L['spotify']??($L['youtube']??($L['instagram']??''))));
 	$h=(string)yr_gb($id,'hikaye');
 	$gid=wp_insert_post(wp_slash(['post_type'=>'grup','post_status'=>'draft','post_title'=>$p->post_title,'post_content'=>wpautop(htmlspecialchars($h,ENT_NOQUOTES,'UTF-8')),'post_excerpt'=>wp_trim_words($h,28),
-		'meta_input'=>['_yr_bolge'=>'tr','_yr_stil'=>$tur,'_yr_kurulus'=>yr_join(yr_gb($id,'sehir'),yr_gb($id,'yil')),'_yr_link'=>$ana,'_yr_spotify'=>$L['spotify']??'','_yr_youtube'=>$L['youtube']??'','_yr_diskografi'=>(string)yr_gb($id,'son'),'_yr_gorsel_kredi'=>yr_gb($id,'foto')?'Grubun izniyle':'','_yr_gb_kaynak'=>$id]]),true);
+		'meta_input'=>['_yr_bolge'=>'tr','_yr_stil'=>$tur,'_yr_kurulus'=>yr_join(yr_gb($id,'sehir'),yr_gb($id,'yil')),'_yr_link'=>$ana,'_yr_spotify'=>$L['spotify']??'','_yr_youtube'=>$L['youtube']??'','_yr_diskografi'=>(string)yr_gb($id,'son'),'_yr_uyeler'=>(string)yr_gb($id,'uyeler'),'_yr_gorsel_kredi'=>yr_gb($id,'foto')?'Grubun izniyle':'','_yr_gb_kaynak'=>$id]]),true);
 	if(is_wp_error($gid))wp_die(esc_html($gid->get_error_message()));
 	$tl=mb_strtolower($tur);$terms=[];foreach(['metal'=>'Metal','rock'=>'Rock','alternatif'=>'Alternatif','alternative'=>'Alternatif','progresif'=>'Progresif','progressive'=>'Progresif'] as $k=>$v)if(strpos($tl,$k)!==false)$terms[]=$v;
 	if($terms)wp_set_object_terms($gid,array_unique($terms),'grup_tur');

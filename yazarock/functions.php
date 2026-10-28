@@ -1,6 +1,6 @@
 <?php
 if(!defined('ABSPATH'))exit;
-define('YR_VER','1.19.3');
+define('YR_VER','1.19.4');
 
 /* E-posta adresi yazım ve alan adı kontrolü: hatalı adreslere giden mailler geri döner ve sitenin e-posta itibarını düşürür */
 function yr_eposta_oneri($m){
@@ -109,7 +109,7 @@ add_action('pre_get_posts',function($q){
 
 /* Grup ve Etkinlik alanları */
 function yr_fields(){return [
-	'grup'=>[['bolge','Bölge','select',['tr'=>'Türkiye','world'=>'Dünya']],['stil','Müzik stili (ör. Thrash Metal)','text'],['kurulus','Ülke · kuruluş yılı (ör. İngiltere · 1968)','text'],['link','Resmî site veya müzik bağlantısı','url'],['spotify','Spotify bağlantısı (sanatçı, albüm veya çalma listesi)','url'],['youtube','YouTube video veya çalma listesi bağlantısı','url'],['diskografi','Diskografi (her satıra bir albüm; yılı parantezle yaz: Albüm Adı (1999))','textarea'],['gorsel_kredi','Öne çıkan görselin kaynağı / telif sahibi','text'],['sabit','Bu grubu Haftanın Grubu olarak sabitle','checkbox']],
+	'grup'=>[['bolge','Bölge','select',['tr'=>'Türkiye','world'=>'Dünya']],['stil','Müzik stili (ör. Thrash Metal)','text'],['kurulus','Ülke · kuruluş yılı (ör. İngiltere · 1968)','text'],['link','Resmî site veya müzik bağlantısı','url'],['spotify','Spotify bağlantısı (sanatçı, albüm veya çalma listesi)','url'],['youtube','YouTube video veya çalma listesi bağlantısı','url'],['uyeler','Kadro (her satıra bir kişi: Ad – enstrüman)','textarea'],['diskografi','Diskografi (her satıra bir albüm; yılı parantezle yaz: Albüm Adı (1999))','textarea'],['gorsel_kredi','Öne çıkan görselin kaynağı / telif sahibi','text'],['sabit','Bu grubu Haftanın Grubu olarak sabitle','checkbox']],
 	'etkinlik'=>[['tarih','Tarih','date'],['saat','Saat','time'],['sehir','Şehir','text'],['mekan','Mekân','text'],['tur','Tür','select',['Konser'=>'Konser','Festival'=>'Festival','Kulüp Gecesi'=>'Kulüp Gecesi']],['bilet','Bilet bağlantısı','url'],['harita','Harita arama metni (boşsa mekân ve şehir kullanılır)','text']],'post'=>[['youtube','YouTube video bağlantısı (isteğe bağlı)','url']]
 ];}
 function yr_join(...$a){return implode(' · ',array_filter($a));}

@@ -3,7 +3,7 @@ Theme Name: Yazarock
 Theme URI: https://yazarock.com
 Author: Yazarock
 Description: Rock ve metal müzik haber teması. Gruplar, Etkinlikler, yazar giriş paneli, yazarlık başvurusu ve bülten içerir.
-Version: 1.19.3
+Version: 1.19.4
 Requires at least: 6.0
 Requires PHP: 7.4
 Text Domain: yazarock
@@ -583,3 +583,7 @@ nav a.gt:hover{background:var(--red)}
 .ft-ig{display:inline-flex;align-items:center;gap:5px}.ft-ig svg{width:16px;height:16px}
 .ig-kutu{display:flex;align-items:center;gap:14px;margin:22px 0 0;padding:16px 18px;border:1px solid var(--line);background:linear-gradient(90deg,rgba(192,40,45,.18),transparent);color:var(--text);text-decoration:none;font-size:15px;line-height:1.5}
 .ig-kutu:hover{border-color:var(--red)}.ig-kutu svg{width:34px;height:34px;flex:none;color:var(--red2)}.ig-kutu b{display:block;font-size:16px}.ig-kutu u{color:var(--red2);text-decoration:none}
+
+.kadro{list-style:none;margin:0 0 22px;padding:0;display:grid;gap:8px}
+.kadro li{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline;padding:10px 14px;background:var(--panel2);border-left:3px solid var(--red)}
+.kadro b{font-weight:600}.kadro span{color:var(--mute);font-size:15px}

@@ -110,3 +110,13 @@ add_action('init',function(){
 	}
 	if(function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
 },32);
+
+/* Başvurudan eklenen gruplara kadro bilgisini taşı (mig v19) */
+add_action('init',function(){
+	if(get_option('yr_mig_v19'))return;update_option('yr_mig_v19',1);
+	foreach(get_posts(['post_type'=>'grup','post_status'=>'any','numberposts'=>-1,'fields'=>'ids','meta_key'=>'_yr_gb_kaynak']) as $id){
+		if(get_post_meta($id,'_yr_uyeler',true))continue;$gb=(int)get_post_meta($id,'_yr_gb_kaynak',true);
+		$u=$gb?(string)get_post_meta($gb,'_gb_uyeler',true):'';if($u!=='')update_post_meta($id,'_yr_uyeler',$u);
+	}
+	if(function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
+},33);

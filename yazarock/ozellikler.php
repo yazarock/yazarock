@@ -72,6 +72,12 @@ function yr_cover($id=0,$size='medium_large',$fit=false){/* $fit: yalnızca grup
 function yr_credit(){if(!has_post_thumbnail()||!yr_meta('gorsel_kredi'))return;$k=esc_html(yr_meta('gorsel_kredi'));$u=yr_meta('gorsel_kaynak');echo '<p class="credit">Görsel: '.($u?'<a href="'.esc_url($u).'" rel="noopener nofollow" target="_blank">'.$k.'</a>':$k).'</p>';}
 
 /* ================= Diskografi ================= */
+function yr_kadro($id){
+	$u=array_filter(array_map('trim',preg_split('/\r?\n/',(string)yr_meta('uyeler',$id))));if(!$u)return;
+	echo '<h2>Kadro</h2><ul class="kadro">';
+	foreach($u as $s){$p=preg_split('/\s*[–—:-]\s+|\s+-\s*/u',$s,2);echo '<li><b>'.esc_html($p[0]).'</b>'.(isset($p[1])&&$p[1]!==''?'<span>'.esc_html($p[1]).'</span>':'').'</li>';}
+	echo '</ul>';
+}
 function yr_disco($id){
 	$d=yr_parse_disco(yr_meta('diskografi',$id));if(!$d)return;
 	echo '<h2>Diskografi</h2><ul class="disco">';
