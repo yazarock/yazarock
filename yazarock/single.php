@@ -3,7 +3,7 @@
 <article class="box entry<?php echo yr_roportaj_mi($pid)?' rop':'';?>" data-okundu="<?php echo (int)$pid;?>" data-api="<?php echo esc_url(rest_url('yazarock/v1/okundu'));?>"><div class="mt"><?php if(yr_roportaj_mi($pid))echo '<span class="pill">Röportaj</span> ';if($c&&!(yr_roportaj_mi($pid)&&(int)$c[0]->term_id===yr_roportaj_kat()))echo '<a href="'.esc_url(get_category_link($c[0])).'">'.esc_html($c[0]->name).'</a>';?></div>
 <h1><?php the_title();?></h1>
 <div class="meta"><?php echo get_avatar($aid,32);?><a href="<?php echo esc_url(get_author_posts_url($aid));?>"><?php the_author();?></a> · <?php echo esc_html(get_the_date('j F Y'));?> · <?php echo (int)yr_read();?> dk okuma<?php if($ok)echo ' · '.esc_html(yr_sayi($ok)).' okunma';?></div>
-<?php if(has_post_thumbnail())the_post_thumbnail('large');?>
+<?php if(has_post_thumbnail()){the_post_thumbnail('large');yr_credit();}?>
 <div class="content"><?php the_content();?></div>
 <?php yr_embeds($pid);$rg=(int)get_post_meta($pid,'_yr_roportaj_grup',true);if($rg)yr_grup_kart($rg);?>
 <?php the_tags('<p class="tags">',' ',' </p>');?>
