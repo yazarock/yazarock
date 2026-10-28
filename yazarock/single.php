@@ -19,4 +19,4 @@ $ay=new WP_Query(['post_type'=>'post','author'=>$aid,'posts_per_page'=>3,'post__
 if($ay->have_posts()):?><div class="box" style="margin-top:22px"><h2>Yazarın Diğer Yazıları</h2><div class="news"><?php while($ay->have_posts()){$ay->the_post();$ex[]=get_the_ID();yr_card();}?></div><p style="margin:14px 0 0"><a class="more" href="<?php echo esc_url(get_author_posts_url($aid));?>">Tüm yazıları →</a></p></div><?php endif;wp_reset_postdata();
 $r=new WP_Query(['posts_per_page'=>3,'post__not_in'=>$ex,'category__in'=>wp_get_post_categories($pid),'ignore_sticky_posts'=>1,'no_found_rows'=>true]);
 if($r->have_posts()):?><div class="box" style="margin-top:22px"><h2>İlgili Yazılar</h2><div class="news"><?php while($r->have_posts()){$r->the_post();yr_card();}?></div></div><?php endif;wp_reset_postdata();
-yr_newsletter();endwhile;get_footer();
+yr_instagram_kutu();yr_newsletter();endwhile;get_footer();

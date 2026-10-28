@@ -397,3 +397,8 @@ add_action('admin_init',function(){
 	$cp=get_page_by_path('cerez-politikasi',OBJECT,'page');
 	if($cp&&strpos($cp->post_content,'yr_ab')===false)wp_update_post(['ID'=>$cp->ID,'post_content'=>wp_slash($cp->post_content.'<h2>Bülten Abonelik Çerezi</h2><p>Bültene abone olduğunda tarayıcında <code>yr_ab</code> adlı işlevsel bir çerez saklanır (1 yıl). Bu çerez yalnızca abone olduğun için bülten kutusunu tekrar göstermemek amacıyla kullanılır; kimliğini belirleyen bir bilgi içermez.</p>')]);
 });
+
+/* Yazarock Instagram hesabı (Özelleştir → Site Ayarları → Sosyal medya ile değiştirilebilir) */
+function yr_instagram(){foreach(array_filter(array_map('trim',explode("\n",(string)get_theme_mod('yr_social',''))))as $s)if(strpos($s,'instagram.com')!==false)return $s;return 'https://www.instagram.com/yazarockk/';}
+function yr_instagram_kutu(){$u=yr_instagram();$h='@'.trim((string)wp_parse_url($u,PHP_URL_PATH),'/');
+	echo '<a class="ig-kutu" href="'.esc_url($u).'" rel="noopener" target="_blank">'.yr_ikon('ig').'<span><b>Yazarock Instagram\'da</b> Yeni röportajlar, keşifler ve konserler: <u>'.esc_html($h).'</u></span></a>';}
