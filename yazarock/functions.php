@@ -1,6 +1,6 @@
 <?php
 if(!defined('ABSPATH'))exit;
-define('YR_VER','1.19.0');
+define('YR_VER','1.19.1');
 
 /* E-posta adresi yazım ve alan adı kontrolü: hatalı adreslere giden mailler geri döner ve sitenin e-posta itibarını düşürür */
 function yr_eposta_oneri($m){
@@ -267,7 +267,7 @@ function yr_card(){
 }
 function yr_band_card(){
 	$id=get_the_ID();$t=get_the_terms($id,'grup_tur');$tr=($t&&!is_wp_error($t))?$t[0]->slug:'';
-	echo '<a class="band fi" href="'.esc_url(get_permalink()).'" data-r="'.esc_attr(yr_meta('bolge')).'" data-g="'.esc_attr($tr).'"><div class="bcov">'.yr_cover($id).'</div><div class="bb"><h3>'.esc_html(get_the_title()).'</h3><em>'.esc_html(yr_join(yr_meta('stil'),yr_meta('kurulus'))).'</em><p>'.esc_html(wp_trim_words(get_the_excerpt(),18)).'</p></div></a>';
+	echo '<a class="band fi" href="'.esc_url(get_permalink()).'" data-r="'.esc_attr(yr_meta('bolge')).'" data-g="'.esc_attr($tr).'"><div class="bcov">'.yr_cover($id,'medium_large',true).'</div><div class="bb"><h3>'.esc_html(get_the_title()).'</h3><em>'.esc_html(yr_join(yr_meta('stil'),yr_meta('kurulus'))).'</em><p>'.esc_html(wp_trim_words(get_the_excerpt(),18)).'</p></div></a>';
 }
 function yr_event_card(){
 	$M=['Oca','Şub','Mar','Nis','May','Haz','Tem','Ağu','Eyl','Eki','Kas','Ara'];$d=yr_meta('tarih');$ts=$d?strtotime($d.' 12:00'):0;

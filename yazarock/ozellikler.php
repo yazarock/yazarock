@@ -59,13 +59,13 @@ function yr_fit_img($id,$size,$alt=''){
 }
 function yr_post_cover($id=0,$size='medium_large'){
 	$id=$id?$id:get_the_ID();
-	if(has_post_thumbnail($id))return yr_fit_img($id,$size,'');
+	if(has_post_thumbnail($id))return get_the_post_thumbnail($id,$size,['class'=>'cover','loading'=>'lazy','alt'=>'']);
 	$cs=get_the_category($id);$cn=$cs?$cs[0]->name:'';
 	return yr_cover_svg(get_the_title($id).' '.$cn,'',false,yr_motif_key(get_the_title($id).' '.$cn));
 }
-function yr_cover($id=0,$size='medium_large'){/* kırpılmamış boyut: yüzler kesilmesin */
+function yr_cover($id=0,$size='medium_large',$fit=false){/* $fit: yalnızca grup kartı ve grup sayfası, görsel kırpılmaz */
 	$id=$id?$id:get_the_ID();
-	if(has_post_thumbnail($id))return yr_fit_img($id,$size,get_the_title($id));
+	if(has_post_thumbnail($id))return $fit?yr_fit_img($id,$size,get_the_title($id)):get_the_post_thumbnail($id,$size,['class'=>'cover','loading'=>'lazy','alt'=>get_the_title($id)]);
 	$t=get_the_terms($id,'grup_tur');$sl=($t&&!is_wp_error($t))?$t[0]->slug:'';
 	return yr_cover_svg(get_the_title($id),$sl);
 }
