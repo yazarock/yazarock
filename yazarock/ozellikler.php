@@ -57,7 +57,7 @@ function yr_post_cover($id=0,$size='yr-card'){
 	$cs=get_the_category($id);$cn=$cs?$cs[0]->name:'';
 	return yr_cover_svg(get_the_title($id).' '.$cn,'',false,yr_motif_key(get_the_title($id).' '.$cn));
 }
-function yr_cover($id=0,$size='yr-card'){
+function yr_cover($id=0,$size='medium_large'){/* kırpılmamış boyut: yüzler kesilmesin */
 	$id=$id?$id:get_the_ID();
 	if(has_post_thumbnail($id))return get_the_post_thumbnail($id,$size,['class'=>'cover','loading'=>'lazy','alt'=>get_the_title($id)]);
 	$t=get_the_terms($id,'grup_tur');$sl=($t&&!is_wp_error($t))?$t[0]->slug:'';
