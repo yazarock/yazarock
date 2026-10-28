@@ -3,7 +3,7 @@ Theme Name: Yazarock
 Theme URI: https://yazarock.com
 Author: Yazarock
 Description: Rock ve metal müzik haber teması. Gruplar, Etkinlikler, yazar giriş paneli, yazarlık başvurusu ve bülten içerir.
-Version: 1.18.1
+Version: 1.18.2
 Requires at least: 6.0
 Requires PHP: 7.4
 Text Domain: yazarock
@@ -202,7 +202,7 @@ nav a.login{margin-left:14px}
 .thumb .cover,.thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .card .thumb{height:150px}
 .thumb span{position:absolute;left:8px;bottom:8px;z-index:1}
-.hbg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.55}.hbg:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(13,8,9,.92) 25%,rgba(13,8,9,.35))}
+.hbg{position:absolute;inset:0;background-size:cover;background-position:center 25%;opacity:.55}.hbg:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(13,8,9,.92) 25%,rgba(13,8,9,.35))}
 .hbg.art{opacity:.8}.hbg.art .cover{width:100%;height:100%;object-fit:cover;display:block}
 .hero svg{z-index:1}.hero .in{z-index:2}
 
@@ -564,3 +564,6 @@ nav a.gt:hover{background:var(--red)}
 @media(max-width:760px){.harita{grid-template-columns:1fr}.hr-liste{max-height:none}}
 
 .yr-ai-not{border-left:4px solid var(--red);background:var(--panel2);padding:12px 16px;margin:0 0 20px;font-size:16px}.yr-ai-not p{margin:0}
+
+/* Görseller kırpılırken yüzler üstte kalsın */
+.thumb .cover,.thumb img,.gk-img>img{object-position:50% 25%}

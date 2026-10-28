@@ -29,7 +29,7 @@ add_action('manage_grup_posts_custom_column',function($c,$id){if($c==='yr_kesif'
 function yr_grup_kart($id,$buyuk=false){
 	$p=get_post($id);if(!$p||$p->post_type!=='grup'||$p->post_status!=='publish')return;
 	$url=get_permalink($p);$alt=yr_join(yr_meta('stil',$id),yr_meta('kurulus',$id));
-	echo '<div class="gkart'.($buyuk?' buyuk':'').'"><a class="gk-img" href="'.esc_url($url).'" tabindex="-1" aria-hidden="true">'.yr_cover($id,$buyuk?'large':'yr-card').'</a><div class="gk-in">';
+	echo '<div class="gkart'.($buyuk?' buyuk':'').'"><a class="gk-img" href="'.esc_url($url).'" tabindex="-1" aria-hidden="true">'.yr_cover($id,$buyuk?'large':'medium_large').'</a><div class="gk-in">';
 	if($buyuk){if(yr_t('kesif_pill')!=='')echo '<span class="pill">'.esc_html(yr_t('kesif_pill')).'</span>';}else echo '<span class="gk-k">Röportaj yapılan grup</span>';
 	echo '<h3><a href="'.esc_url($url).'">'.esc_html(get_the_title($p)).'</a></h3>';
 	if($alt)echo '<p class="gk-alt">'.esc_html($alt).'</p>';

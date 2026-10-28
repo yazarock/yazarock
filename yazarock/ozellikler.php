@@ -51,7 +51,7 @@ function yr_cover_svg($title,$slug='',$text=true,$key=''){
 	return '<svg class="cover" viewBox="0 0 640 360" preserveAspectRatio="xMidYMid slice" role="img" aria-label="'.esc_attr($name).'"><defs><linearGradient id="yrg'.$n.'" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="'.$c[0].'"/><stop offset="1" stop-color="#0d0809"/></linearGradient><linearGradient id="yrs'.$n.'" x1="0" y1="0" x2="0" y2="1"><stop offset=".45" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".7"/></linearGradient></defs><rect width="640" height="360" fill="url(#yrg'.$n.')"/>'.yr_motif($key,$c[1]).$bars.'<rect width="640" height="360" fill="url(#yrs'.$n.')"/>'.$tx.'</svg>';
 }
 /* Yazılar için kapak: öne çıkan görsel yoksa konuya uygun otomatik görsel */
-function yr_post_cover($id=0,$size='yr-card'){
+function yr_post_cover($id=0,$size='medium_large'){
 	$id=$id?$id:get_the_ID();
 	if(has_post_thumbnail($id))return get_the_post_thumbnail($id,$size,['class'=>'cover','loading'=>'lazy','alt'=>'']);
 	$cs=get_the_category($id);$cn=$cs?$cs[0]->name:'';
