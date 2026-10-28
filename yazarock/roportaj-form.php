@@ -121,7 +121,7 @@ function yr_rp_yazi_olustur($id){
 	$e=function($s){return nl2br(esc_html(trim((string)$s)));};
 	$grup=$p->post_title;$sehir=(string)yr_rp($id,'sehir');$tur=(string)yr_rp($id,'tur');$yil=(string)yr_rp($id,'yil');
 	$C=(array)yr_rp($id,'cevaplar');$L=(array)yr_rp($id,'linkler');$LN=yr_gb_linkler();
-	$giris=esc_html($sehir).' merkezli '.esc_html($grup).', '.esc_html(mb_strtolower($tur)).' çizgisinde müzik yapan bir grup'.($yil?' ('.esc_html($yil).'\'den beri)':'').'. Garajdan Sahneye serisinde grubu kendi ağzından dinliyoruz: nasıl bir araya geldiler, neyi anlatıyorlar ve sırada ne var?';
+	$giris=esc_html($sehir).' merkezli '.esc_html($grup).', '.esc_html(mb_strtolower($tur)).' çizgisinde müzik yapan bir grup'.($yil?' ('.esc_html($yil).yr_yil_ek($yil).' beri)':'').'. Garajdan Sahneye serisinde grubu kendi ağzından dinliyoruz: nasıl bir araya geldiler, neyi anlatıyorlar ve sırada ne var?';
 	$h='<!-- wp:paragraph {"className":"rop-giris"} --><p class="rop-giris">'.$giris.'</p><!-- /wp:paragraph -->';
 	foreach(yr_rp_sorular() as $k=>$q){$v=trim((string)($C[$k]??''));if($v==='')continue;
 		$h.='<!-- wp:paragraph {"className":"soru"} --><p class="soru"><strong>'.esc_html($q[0]).'</strong></p><!-- /wp:paragraph -->';
@@ -172,3 +172,10 @@ add_action('init',function(){
 	if($k&&strpos($k->post_content,'Röportaj Yanıtları')===false)wp_update_post(['ID'=>$k->ID,'post_content'=>wp_slash($k->post_content.'<h2>Röportaj Yanıtları</h2><p>"Garajdan Sahneye" formunu doldurduğunuzda grup bilgileri, yanıtlarınız, bağlantılar ve isteğe bağlı grup fotoğrafı ile iletişim kişisinin adı ve e-posta adresi işlenir. Yanıtlar ve grup bilgileri düzenlenerek röportaj olarak yayımlanabilir; iletişim bilgileri yayımlanmaz. Kayıtlar en fazla iki yıl saklanır; silinmesini istediğinizde info@yazarock.com adresine yazmanız yeterlidir.</p>')]);
 	flush_rewrite_rules(false);
 },20);
+
+/* Yıl ekleri: 1983'ten, 2000'den, 2026'dan */
+function yr_yil_ek($y){
+	$y=(int)$y;$d=[1=>'den',2=>'den',3=>'ten',4=>'ten',5=>'ten',6=>'dan',7=>'den',8=>'den',9=>'dan'];$o=[1=>'dan',2=>'den',3=>'dan',4=>'tan',5=>'den',6=>'tan',7=>'ten',8=>'den',9=>'dan'];
+	if($y%10)$e=$d[$y%10];elseif($y%100)$e=$o[intdiv($y%100,10)];else $e='den';
+	return "'".$e;
+}

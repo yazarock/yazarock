@@ -120,3 +120,15 @@ add_action('init',function(){
 	}
 	if(function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
 },33);
+
+/* Ayberk Saka röportajı: kuruluş yılı 1983 değil, ilk sahne 2000 (mig v20) */
+add_action('init',function(){
+	if(get_option('yr_mig_v20'))return;
+	$p=get_posts(['post_type'=>'post','post_status'=>'any','name'=>'garajdan-sahneye-ayberk-saka','numberposts'=>1]);if(!$p)return;
+	update_option('yr_mig_v20',1);
+	$c=preg_replace("/\\(1983(?:'|’|&#8217;)[dt]en beri\\)/u","(2000'den beri)",$p[0]->post_content);
+	if($c!==$p[0]->post_content)wp_update_post(['ID'=>$p[0]->ID,'post_content'=>wp_slash($c)]);
+	$g=get_posts(['post_type'=>'grup','post_status'=>'any','title'=>'Ayberk Saka','numberposts'=>1]);
+	if($g){$k=(string)get_post_meta($g[0]->ID,'_yr_kurulus',true);if(strpos($k,'1983')!==false)update_post_meta($g[0]->ID,'_yr_kurulus',str_replace('1983','2000',$k));}
+	if(function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
+},34);
