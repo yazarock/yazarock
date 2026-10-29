@@ -92,8 +92,8 @@ function yr_week_pick(){
 	$ids=get_posts(['post_type'=>'grup','post_status'=>'publish','numberposts'=>-1,'fields'=>'ids','orderby'=>'title','order'=>'ASC','meta_query'=>[['key'=>'_yr_diskografi','value'=>'','compare'=>'!=']]]);
 	if(!$ids){set_transient('yr_week_'.$k,0,HOUR_IN_SECONDS);return null;}
 	$id=0;foreach($ids as $i)if(get_post_meta($i,'_yr_sabit',true)==='1'){$id=$i;break;}
-	if(!$id)$id=$ids[$k%count($ids)];
-	$d=yr_parse_disco(get_post_meta($id,'_yr_diskografi',true));$r=['id'=>$id,'album'=>$d?$d[$k%count($d)]:null];
+	$sabit=(bool)$id;if(!$id)$id=$ids[$k%count($ids)];
+	$d=yr_parse_disco(get_post_meta($id,'_yr_diskografi',true));$r=['id'=>$id,'album'=>$d?($sabit?end($d):$d[$k%count($d)]):null];/* sabitlenen grupta en yeni albüm */
 	set_transient('yr_week_'.$k,$r,WEEK_IN_SECONDS);return $r;
 }
 add_action('save_post_grup',function(){delete_transient('yr_week_'.yr_week_key());});

@@ -132,3 +132,15 @@ add_action('init',function(){
 	if($g){$k=(string)get_post_meta($g[0]->ID,'_yr_kurulus',true);if(strpos($k,'1983')!==false)update_post_meta($g[0]->ID,'_yr_kurulus',str_replace('1983','2000',$k));}
 	if(function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
 },34);
+
+/* Haftanın Keşfi: Tahrip (mig v21) */
+add_action('init',function(){
+	if(get_option('yr_mig_v21'))return;
+	$t=get_posts(['post_type'=>'grup','post_status'=>'publish','title'=>'Tahrip','numberposts'=>1]);if(!$t)return;
+	update_option('yr_mig_v21',1);
+	foreach(get_posts(['post_type'=>'grup','post_status'=>'any','numberposts'=>-1,'fields'=>'ids','meta_key'=>'_yr_sabit','meta_value'=>'1']) as $i)delete_post_meta($i,'_yr_sabit');
+	update_post_meta($t[0]->ID,'_yr_sabit','1');
+	if(!get_post_meta($t[0]->ID,'_yr_diskografi',true))update_post_meta($t[0]->ID,'_yr_diskografi',"Araf (2011)\nEsaret (EP)\nLabirent (2026)");
+	delete_transient('yr_week_'.yr_week_key());
+	if(function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
+},35);
