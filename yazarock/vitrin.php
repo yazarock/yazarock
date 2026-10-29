@@ -29,14 +29,18 @@ add_action('manage_grup_posts_custom_column',function($c,$id){if($c==='yr_kesif'
 function yr_grup_kart($id,$buyuk=false){
 	$p=get_post($id);if(!$p||$p->post_type!=='grup'||$p->post_status!=='publish')return;
 	$url=get_permalink($p);$alt=yr_join(yr_meta('stil',$id),yr_meta('kurulus',$id));
-	echo '<div class="gkart'.($buyuk?' buyuk':'').'"><a class="gk-img" href="'.esc_url($url).'" tabindex="-1" aria-hidden="true">'.yr_cover($id,$buyuk?'large':'medium_large').'</a><div class="gk-in">';
+	$yz=$buyuk?(int)get_post_meta($id,'_yr_kesif_yazi',true):0;if($yz&&get_post_status($yz)!=='publish')$yz=0;/* Keşif kutusunda öne çıkan inceleme yazısı */
+	$img=(!has_post_thumbnail($id)&&$yz&&has_post_thumbnail($yz))?yr_cover($yz,'large'):yr_cover($id,$buyuk?'large':'medium_large');
+	echo '<div class="gkart'.($buyuk?' buyuk':'').'"><a class="gk-img" href="'.esc_url($yz?get_permalink($yz):$url).'" tabindex="-1" aria-hidden="true">'.$img.'</a><div class="gk-in">';
 	if($buyuk){if(yr_t('kesif_pill')!=='')echo '<span class="pill">'.esc_html(yr_t('kesif_pill')).'</span>';}else echo '<span class="gk-k">Röportaj yapılan grup</span>';
 	echo '<h3><a href="'.esc_url($url).'">'.esc_html(get_the_title($p)).'</a></h3>';
 	if($alt)echo '<p class="gk-alt">'.esc_html($alt).'</p>';
-	$ex=has_excerpt($p)?get_the_excerpt($p):wp_trim_words(wp_strip_all_tags($p->post_content),$buyuk?40:24);
+	if($yz){echo '<p class="gk-alt"><a href="'.esc_url(get_permalink($yz)).'">'.esc_html(get_the_title($yz)).'</a></p>';$ex=has_excerpt($yz)?get_the_excerpt($yz):wp_trim_words(wp_strip_all_tags(get_post_field('post_content',$yz)),40);}
+	else $ex=has_excerpt($p)?get_the_excerpt($p):wp_trim_words(wp_strip_all_tags($p->post_content),$buyuk?40:24);
 	if($ex)echo '<p>'.esc_html($ex).'</p>';
 	if($buyuk){ob_start();yr_embeds($id);$e=ob_get_clean();if($e)echo '<div class="gk-emb">'.$e.'</div>';}
-	echo '<div class="btnrow"><a class="btn'.($buyuk?'':' alt').'" href="'.esc_url($url).'">'.esc_html(yr_t('grup_btn')).'</a>';
+	echo '<div class="btnrow">';if($yz)echo '<a class="btn" href="'.esc_url(get_permalink($yz)).'">İncelemeyi oku</a>';
+	echo '<a class="btn'.($buyuk&&!$yz?'':' alt').'" href="'.esc_url($url).'">'.esc_html(yr_t('grup_btn')).'</a>';
 	$l=yr_meta('link',$id);if($l)echo '<a class="btn alt" href="'.esc_url($l).'" target="_blank" rel="noopener">'.esc_html(yr_t('dinle_btn')).'</a>';
 	echo '</div></div></div>';
 }

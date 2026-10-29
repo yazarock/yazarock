@@ -156,3 +156,21 @@ add_action('init',function(){
 	if($t&&!get_post_meta($t[0]->ID,'_yr_youtube',true))update_post_meta($t[0]->ID,'_yr_youtube',$yt);
 	if(function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
 },36);
+
+/* Ana sayfa Haftanın Keşfi: Tahrip + Labirent incelemesi (mig v23) */
+add_action('init',function(){
+	if(get_option('yr_mig_v23'))return;
+	$t=get_posts(['post_type'=>'grup','post_status'=>'publish','title'=>'Tahrip','numberposts'=>1]);if(!$t)return;
+	update_option('yr_mig_v23',1);
+	foreach(get_posts(['post_type'=>'grup','post_status'=>'any','numberposts'=>-1,'fields'=>'ids','meta_key'=>'_yr_kesif']) as $i)delete_post_meta($i,'_yr_kesif');
+	update_post_meta($t[0]->ID,'_yr_kesif',time());
+	if(function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
+},37);
+add_action('init',function(){/* yazı sonradan çekilirse de bağlansın */
+	if(get_option('yr_mig_v24'))return;
+	$p=get_posts(['post_type'=>'post','post_status'=>'publish','meta_key'=>'_yr_derleme_id','meta_value'=>'2026-10-29-haftanin-sarkisi-tahrip-labirent','numberposts'=>1]);if(!$p)return;
+	$t=get_posts(['post_type'=>'grup','post_status'=>'publish','title'=>'Tahrip','numberposts'=>1]);if(!$t)return;
+	update_option('yr_mig_v24',1);
+	update_post_meta($t[0]->ID,'_yr_kesif_yazi',$p[0]->ID);
+	if(function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
+},38);
