@@ -144,3 +144,15 @@ add_action('init',function(){
 	delete_transient('yr_week_'.yr_week_key());
 	if(function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
 },35);
+
+/* Tahrip "Labirent" yazısına YouTube bağlantısı (mig v22) */
+add_action('init',function(){
+	if(get_option('yr_mig_v22'))return;
+	$p=get_posts(['post_type'=>'post','post_status'=>'any','meta_key'=>'_yr_derleme_id','meta_value'=>'2026-10-29-haftanin-sarkisi-tahrip-labirent','numberposts'=>1]);if(!$p)return;
+	update_option('yr_mig_v22',1);
+	$yt='https://www.youtube.com/watch?v=Ps8xFQWgNmc';
+	update_post_meta($p[0]->ID,'_yr_youtube',$yt);/* yazının altındaki Dinle & İzle bölümünde görünür */
+	$t=get_posts(['post_type'=>'grup','post_status'=>'any','title'=>'Tahrip','numberposts'=>1]);
+	if($t&&!get_post_meta($t[0]->ID,'_yr_youtube',true))update_post_meta($t[0]->ID,'_yr_youtube',$yt);
+	if(function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
+},36);
