@@ -13,7 +13,7 @@ add_filter('post_row_actions',function($a,$p){
 add_action('admin_notices',function(){
 	if(!current_user_can('edit_posts')||(int)current_time('N')!==1)return;
 	$s=get_current_screen();if(!$s||$s->id!=='dashboard')return;
-	echo '<div class="notice notice-info"><p><strong>Pazartesi:</strong> bu haftanın konser görseli hazır. <a href="'.esc_url(admin_url('admin.php?page=yr-instagram')).'">Instagram görselini aç →</a></p></div>';
+	echo '<div class="notice notice-info"><p><strong>Pazartesi:</strong> bu haftanın yeraltı konserlerini seçip Instagram görselini hazırlayabilirsin. <a href="'.esc_url(admin_url('admin.php?page=yr-instagram')).'">Instagram görselini aç →</a></p></div>';
 });
 
 function yr_ig_logo(){
@@ -45,7 +45,7 @@ function yr_ig_sayfa(){
 	$u=admin_url('admin.php?page=yr-instagram');
 	?>
 	<div class="wrap yr-ig"><h1>Instagram Görselleri</h1>
-	<h2 class="nav-tab-wrapper"><a class="nav-tab<?php echo $sekme==='hafta'?' nav-tab-active':'';?>" href="<?php echo esc_url($u);?>">Bu Hafta Sahnede</a><a class="nav-tab<?php echo $sekme==='yazi'?' nav-tab-active':'';?>" href="<?php echo esc_url($u.'&sekme=yazi');?>">Yazı görseli</a></h2>
+	<h2 class="nav-tab-wrapper"><a class="nav-tab<?php echo $sekme==='hafta'?' nav-tab-active':'';?>" href="<?php echo esc_url($u);?>">Yeraltında Bu Hafta</a><a class="nav-tab<?php echo $sekme==='yazi'?' nav-tab-active':'';?>" href="<?php echo esc_url($u.'&sekme=yazi');?>">Yazı görseli</a></h2>
 	<form method="get" class="yr-ig-form"><input type="hidden" name="page" value="yr-instagram">
 	<?php if($sekme==='hafta'):?>
 		<label>Başlangıç günü <input type="date" name="bas" value="<?php echo esc_attr($bas);?>"></label> <button class="button">Göster</button>
@@ -53,11 +53,12 @@ function yr_ig_sayfa(){
 	<?php else:?>
 		<input type="hidden" name="sekme" value="yazi"><label>Yazı <select name="yazi" onchange="this.form.submit()"><?php foreach($son as $p)echo '<option value="'.$p->ID.'"'.selected($p->ID,$yid,false).'>'.esc_html(wp_trim_words(get_the_title($p),12)).'</option>';?></select></label>
 	<?php endif;?></form>
+	<?php if($sekme==='hafta'&&!empty($veri['e'])):?><fieldset class="yr-ig-sec"><legend><strong>Görsele girecek konserler</strong> — yalnızca öne çıkarmak istediklerini işaretle</legend><?php foreach($veri['e'] as $i=>$e)echo '<label><input type="checkbox" class="yr-ig-k" value="'.$i.'"> '.esc_html(date_i18n('j M',strtotime($e['t'])).' · '.$e['ad'].($e['sehir']?' ('.$e['sehir'].')':'')).'</label>';?><p><button type="button" class="button-link" id="yr-ig-hepsi">Tümünü seç / kaldır</button></p></fieldset><?php endif;?>
 	<div class="yr-ig-in"><div id="yr-ig-gorseller"><p>Görsel hazırlanıyor…</p></div>
 	<div class="yr-ig-yan"><h3>Açıklama</h3><textarea id="yr-ig-metin" rows="16"></textarea>
 	<p><button type="button" class="button button-primary" id="yr-ig-kopya">Açıklamayı kopyala</button></p>
 	<ol class="description"><li>Görsel(ler)i indir (birden fazlaysa sırayla, kaydırmalı gönderi olarak paylaş).</li><li>Açıklamayı kopyala, Instagram'da yapıştır.</li><li>Gruplar Instagram'daysa gönderide onları etiketle.</li><li>İstersen Meta Business Suite'ten ileri bir saate planla.</li></ol></div></div></div>
-	<style>.yr-ig-form{margin:14px 0}.yr-ig-in{display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start}#yr-ig-gorseller{display:flex;gap:16px;flex-wrap:wrap}#yr-ig-gorseller figure{margin:0}#yr-ig-gorseller canvas{width:360px;max-width:100%;height:auto;display:block;box-shadow:0 2px 12px rgba(0,0,0,.25)}#yr-ig-gorseller figcaption{margin-top:8px}.yr-ig-yan{flex:1;min-width:280px;max-width:520px}.yr-ig-yan textarea{width:100%;font:13px/1.5 monospace}</style>
+	<style>.yr-ig-form{margin:14px 0}.yr-ig-in{display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start}#yr-ig-gorseller{display:flex;gap:16px;flex-wrap:wrap}#yr-ig-gorseller figure{margin:0}#yr-ig-gorseller canvas{width:360px;max-width:100%;height:auto;display:block;box-shadow:0 2px 12px rgba(0,0,0,.25)}#yr-ig-gorseller figcaption{margin-top:8px}.yr-ig-sec{border:1px solid #c3c4c7;background:#fff;padding:10px 14px;margin:0 0 18px;max-width:900px}.yr-ig-sec label{display:block;margin:4px 0}.yr-ig-yan{flex:1;min-width:280px;max-width:520px}.yr-ig-yan textarea{width:100%;font:13px/1.5 monospace}</style>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Barlow:wght@400;600&display=swap">
 	<script>
 	window.YR_IG={sekme:<?php echo wp_json_encode($sekme);?>,veri:<?php echo wp_json_encode($veri);?>,logo:<?php echo wp_json_encode(yr_ig_logo());?>,site:<?php echo wp_json_encode(preg_replace('~^https?://~','',untrailingslashit(home_url())));?>};
@@ -81,15 +82,15 @@ function alt(c){c.fillStyle=RED;c.fillRect(0,H-96,W,96);c.fillStyle='#fff';c.fon
 function tuval(){const c=document.createElement('canvas');c.width=W;c.height=H;return c}
 
 async function hafta(){
-	const v=D.veri,e=v.e,on=[];const per=6,sayfa=Math.max(1,Math.ceil(e.length/per));
+	const v=D.veri,sec=[...document.querySelectorAll('.yr-ig-k:checked')].map(x=>+x.value),e=v.e.filter((x,i)=>sec.includes(i)),on=[];const per=6,sayfa=Math.max(1,Math.ceil(e.length/per));
 	const b=tarih(v.bas),s=tarih(v.bit);
 	const aralik=b.getMonth()===s.getMonth()?b.getDate()+'–'+s.getDate()+' '+AYU[s.getMonth()]:b.getDate()+' '+AYU[b.getMonth()]+' – '+s.getDate()+' '+AYU[s.getMonth()];
 	for(let p=0;p<sayfa;p++){
 		const cv=tuval(),c=cv.getContext('2d');zemin(c);await logo(c,70,64,340);
 		c.fillStyle=RED2;c.font='700 30px Oswald, Impact, sans-serif';c.fillText(up(aralik)+(sayfa>1?'  ·  '+(p+1)+'/'+sayfa:''),70,200);
-		c.fillStyle=TXT;c.font='700 112px Oswald, Impact, sans-serif';c.fillText('BU HAFTA',66,318);c.fillText('SAHNEDE',66,428);
+		c.fillStyle=TXT;c.font='700 112px Oswald, Impact, sans-serif';c.fillText('YERALTINDA',66,318);c.fillText('BU HAFTA',66,428);
 		const parca=e.slice(p*per,p*per+per);let y=492;
-		if(!parca.length){c.fillStyle=MUTE;c.font='400 40px Barlow, Arial, sans-serif';c.fillText('Bu hafta takvimde konser yok.',70,y+80)}
+		if(!parca.length){c.fillStyle=MUTE;c.font='400 40px Barlow, Arial, sans-serif';c.fillText('Görsele girecek konserleri yukarıdan işaretle.',70,y+80)}
 		for(const x of parca){
 			const d=tarih(x.t),h=110;
 			c.fillStyle=PAN;c.fillRect(70,y,W-140,h);c.fillStyle=RED;c.fillRect(70,y,132,h);
@@ -101,10 +102,10 @@ async function hafta(){
 		}
 		alt(c);on.push(cv);
 	}
-	let m='🤘 BU HAFTA SAHNEDE · '+aralik+'\n\n';
+	let m='🤘 YERALTINDA BU HAFTA · '+aralik+'\n\n';
 	for(const x of e){const d=tarih(x.t);m+='▪️ '+d.getDate()+' '+AYU[d.getMonth()]+' '+GUN[d.getDay()].charAt(0)+GUN[d.getDay()].slice(1).toLocaleLowerCase('tr-TR')+(x.s?' '+x.s:'')+' · '+x.ad+(x.sehir?' ('+x.sehir+')':'')+'\n'}
-	if(!e.length)m+='Bu hafta takvimde konser yok.\n';
-	m+='\nBiletler ve tüm konser takvimi: link profilde 👆\nGrubunun konserini takvime eklemek için bize yaz.\n\n#yazarock #konser #canlımüzik #rock #metal #underground #türkrock'+[...new Set(e.map(x=>x.sehir).filter(Boolean))].map(s=>' #'+s.toLocaleLowerCase('tr-TR').replace(/\s+/g,'')).join('');
+	if(!e.length)m+='(Henüz konser seçilmedi.)\n';
+	m+='\nBağımsız grupları sahnede yalnız bırakmayın! Biletler ve tüm takvim: link profilde 👆\nGrubunun konserini eklemek için bize yaz.\n\n#yazarock #yeraltı #underground #konser #canlımüzik #rock #metal'+[...new Set(e.map(x=>x.sehir).filter(Boolean))].map(s=>' #'+s.toLocaleLowerCase('tr-TR').replace(/\s+/g,'')).join('');
 	return [on,m];
 }
 async function yazi(){
@@ -137,5 +138,7 @@ async function calis(){
 	document.getElementById('yr-ig-kopya').onclick=()=>{t.select();(navigator.clipboard?navigator.clipboard.writeText(t.value):Promise.reject()).catch(()=>document.execCommand('copy'));};
 }
 calis();
+document.querySelectorAll('.yr-ig-k').forEach(x=>x.addEventListener('change',calis));
+const hb=document.getElementById('yr-ig-hepsi');if(hb)hb.onclick=()=>{const k=[...document.querySelectorAll('.yr-ig-k')],h=k.some(x=>!x.checked);k.forEach(x=>x.checked=h);calis()};
 })();
 JS;}
