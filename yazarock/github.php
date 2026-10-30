@@ -92,6 +92,9 @@ function yr_derleme_cek($manual=false){
 	if(!is_array($idx)||!isset($idx['dosyalar'])||!is_array($idx['dosyalar'])){delete_transient('yr_derleme_kilit');update_option('yr_derleme_son',['zaman'=>time(),'eklenen'=>0,'hata'=>'Derleme listesi okunamadı'],false);return ['durum'=>'hata'];}
 	$alinan=(array)get_option('yr_derleme_alinan',[]);
 	$dosyalar=array_slice(array_values(array_filter($idx['dosyalar'],function($f){return is_string($f)&&preg_match('/^\d{4}-\d{2}-\d{2}[A-Za-z0-9_-]*\.json$/',$f);})),-14);
+	/* index.json'a eklenmeyi unutulmuş, elle yüklenmiş bugünkü/dünkü dosyaları da dene */
+	$tz=new DateTimeZone('Europe/Istanbul');
+	foreach([0,1] as $g){$gun=(new DateTime('now',$tz))->modify("-$g day")->format('Y-m-d');foreach(['','-aksam','-yeraltindan'] as $ek){$ad=$gun.$ek.'.json';if(!in_array($ad,$dosyalar,true))$dosyalar[]=$ad;}}
 	foreach($dosyalar as $f){
 		if(in_array($f,$alinan,true))continue;
 		$d=json_decode((string)yr_gh_get('derlemeler/'.$f,2000000),true);
