@@ -13,9 +13,13 @@ if($B['liste']){echo '<ol class="gt-steps">';$i=0;foreach(yr_liste_maddeleri($B[
 <?php yr_flash('yr_r',['tamam'=>['Yanıtların bize ulaştı, teşekkürler! E-posta adresine bir onay gönderdik. Röportaj yayına girince bağlantısını da bu adrese yollayacağız.','ok'],'gecersiz'=>['Lütfen zorunlu alanları kontrol et: grup adı, şehir, tür, en az bir dinleme bağlantısı, en az 6 soruya yanıt (her biri en az 20 karakter), ad, e-posta ve dört onay kutusu.','err'],'tekrar'=>['Bu grubun yanıtları zaten bize ulaştı ve değerlendiriliyor. Eklemek istediğin bir şey varsa info@yazarock.com adresine yazabilirsin.','err'],'bekle'=>['Biraz bekleyip tekrar dene.','err'],'limit'=>['Bugün bu bağlantıdan çok fazla gönderim yapıldı; yarın tekrar dene.','err'],'guvenlik'=>['Güvenlik doğrulaması başarısız; sayfayı yenileyip tekrar dene. Yanıtların bu tarayıcıda saklı, kaybolmadı.','err'],'hata'=>['Bir sorun oluştu, tekrar dene. Yanıtların bu tarayıcıda saklı, kaybolmadı.','err']]);
 if(($_GET['yr_r']??'')==='tamam'):?>
 <div class="gt-ok" data-rp-tamam><?php echo yr_ikon('cmt');?><h2>Sahnede görüşmek üzere!</h2><p>Yanıtlarını okuyup röportajı hazırlayacağız. Bu arada daha önce konuştuğumuz gruplara göz atabilirsin.</p><div class="btnrow" style="justify-content:center"><?php $rk=yr_roportaj_kat();if($rk)echo '<a class="btn" href="'.esc_url(get_category_link($rk)).'">Röportajlar</a>';?><a class="btn alt" href="<?php echo esc_url(get_post_type_archive_link('grup'));?>">Gruplar</a></div></div>
-<?php else:?>
-<form class="fg pform gtf" id="rpform" method="post" enctype="multipart/form-data" action="<?php echo esc_url(admin_url('admin-post.php'));?>"><input type="hidden" name="action" value="yr_rop_basvuru"><?php wp_nonce_field('yr_rp','yr_n');?><input class="hp" tabindex="-1" autocomplete="off" name="website">
-<p class="note" style="margin-top:0">Yazdıkların bu tarayıcıda kendiliğinden saklanır; sayfayı kapatıp sonra devam edebilirsin.</p>
+<?php else:$tk=sanitize_text_field(wp_unslash($_GET['taslak']??''));$td=$tk?yr_rp_taslak_al($tk):null;if(!$td)$tk='';
+if($td){unset($td['_mail']);echo '<script>window.YR_RP_TASLAK='.wp_json_encode($td).';</script><div class="gt-ok-mini" role="status">Kayıtlı yanıtların yüklendi, kaldığın yerden devam edebilirsin.</div>';}
+elseif(!empty($_GET['taslak']))echo '<div class="gt-err" role="alert">Bu devam bağlantısının süresi dolmuş ya da bağlantı hatalı. Formu yeniden doldurman gerekiyor, kusura bakma.</div>';?>
+<form class="fg pform gtf" id="rpform" data-ajax="<?php echo esc_url(admin_url('admin-ajax.php'));?>" method="post" enctype="multipart/form-data" action="<?php echo esc_url(admin_url('admin-post.php'));?>"><input type="hidden" name="action" value="yr_rop_basvuru"><?php wp_nonce_field('yr_rp','yr_n');?><input class="hp" tabindex="-1" autocomplete="off" name="website"><input type="hidden" name="tk" id="rp-tk" value="<?php echo esc_attr($tk);?>">
+<div class="rp-ig" id="rp-ig" hidden><strong>Instagram içinden açtın.</strong> Uygulama kapanınca yazdıkların kaybolabilir. Sağ üstteki <b>⋯</b> menüsünden <b>"Tarayıcıda aç"</b>ı seç ya da aşağıdaki düğmeyle yanıtlarını kaydet. <a class="btn alt" id="rp-chrome" hidden href="#">Chrome'da aç</a></div>
+<div class="rp-kayit"><p class="note" style="margin:0 0 8px">Yazdıkların bu cihazda kendiliğinden saklanır. Sonra ya da başka bir cihazdan devam etmek istersen yanıtlarını kaydedip devam bağlantısını e-postana gönderebilirsin.</p>
+<button type="button" class="btn alt rp-kaydet">Kaydet, devam bağlantısını e-postama gönder</button><div class="rp-sonuc" role="status" hidden></div></div>
 <fieldset><legend><span>1</span>Grup</legend>
 <div class="g2"><label>Grup adı *<input name="grup" required minlength="2" maxlength="80"></label>
 <label>Şehir *<input name="sehir" list="rp-sehir" required minlength="2" maxlength="40" placeholder="ör. İzmir"></label></div>
@@ -43,6 +47,7 @@ if(($_GET['yr_r']??'')==='tamam'):?>
 <label class="chk"><input type="checkbox" name="kvkk" value="1" required> <span><a href="<?php echo esc_url(yr_page_url('kvkk-aydinlatma-metni'));?>" target="_blank">KVKK Aydınlatma Metni</a>'ni okudum; bilgilerimin röportajın hazırlanması ve benimle iletişim kurulması için işlenmesini kabul ediyorum.</span></label>
 </fieldset>
 <?php yr_ts_widget();?>
+<p class="note" style="margin:6px 0 10px">Hepsini şimdi bitiremedin mi? <button type="button" class="button-link rp-kaydet">Kaydet, devam bağlantısını e-postama gönder</button><span class="rp-sonuc" role="status" hidden></span></p>
 <button class="btn gt-send" type="submit"><?php echo yr_ikon('plus');?>Yanıtları Gönder</button>
 </form>
 <?php endif;?>

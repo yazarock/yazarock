@@ -141,11 +141,36 @@ document.querySelectorAll('input[data-sifre]').forEach(function(p){
 /* v1.14: Garajdan Sahneye formu — yazılanlar tarayıcıda saklanır */
 (function(){
 var K='yr_rp_taslak';
-if(document.querySelector('[data-rp-tamam]')){try{localStorage.removeItem(K)}catch(e){}return}
+if(document.querySelector('[data-rp-tamam]')){try{localStorage.removeItem(K);localStorage.removeItem('yr_rp_tk')}catch(e){}return}
 var f=document.getElementById('rpform');if(!f)return;
 function topla(){var o={};[].slice.call(f.elements).forEach(function(el){if(!el.name||el.type==='file'||el.type==='hidden'||el.name==='website'||el.type==='checkbox')return;o[el.name]=el.value});return o}
 try{var s=JSON.parse(localStorage.getItem(K)||'null');if(s)Object.keys(s).forEach(function(n){var el=f.querySelector('[name="'+n.replace(/"/g,'')+'"]');if(el&&!el.value)el.value=s[n]})}catch(e){}
 var t;f.addEventListener('input',function(){clearTimeout(t);t=setTimeout(function(){try{localStorage.setItem(K,JSON.stringify(topla()))}catch(e){}},400)});
+/* 1.22.0: sunucuda taslak + Instagram içi tarayıcı uyarısı */
+var tkEl=document.getElementById('rp-tk'),ajax=f.getAttribute('data-ajax');
+if(window.YR_RP_TASLAK){var T=window.YR_RP_TASLAK;Object.keys(T).forEach(function(n){var el=f.querySelector('[name="'+n.replace(/"/g,'')+'"]');if(el&&T[n]&&el.type!=='file'&&el.type!=='checkbox'&&el.type!=='hidden')el.value=T[n]});try{localStorage.setItem(K,JSON.stringify(topla()))}catch(e){}}
+var KT='yr_rp_tk';if(tkEl&&!tkEl.value){try{tkEl.value=localStorage.getItem(KT)||''}catch(e){}}
+var ua=navigator.userAgent||'';
+if(/Instagram|FBAN|FBAV|FB_IAB/i.test(ua)){var ig=document.getElementById('rp-ig');if(ig){ig.hidden=false;if(/Android/i.test(ua)){var ch=document.getElementById('rp-chrome');ch.hidden=false;ch.href='intent://'+location.href.replace(/^https?:\/\//,'')+'#Intent;scheme=https;package=com.android.chrome;end'}}}
+var sonuc=[].slice.call(f.querySelectorAll('.rp-sonuc'));
+function yaz(m,iyi){sonuc.forEach(function(x){x.hidden=false;x.className='rp-sonuc'+(iyi?' iyi':' kotu');x.textContent='';if(typeof m==='string')x.textContent=m;else x.appendChild(m.cloneNode(true))})}
+function kaydet(mail,sessiz){
+	if(!window.fetch||!ajax)return;
+	var em=f.querySelector('[name="email"]');
+	if(!em||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em.value.trim())){if(!sessiz){yaz('Devam bağlantısını gönderebilmemiz için önce E-posta alanını doldur (formun en altında).',false);em&&em.focus();em&&em.scrollIntoView({behavior:'smooth',block:'center'})}return}
+	var fd=new FormData();fd.append('action','yr_rp_taslak');fd.append('tk',tkEl?tkEl.value:'');if(mail)fd.append('mail','1');
+	var o=topla();Object.keys(o).forEach(function(k){fd.append(k,o[k])});
+	if(!sessiz)yaz('Kaydediliyor…',true);
+	fetch(ajax,{method:'POST',body:fd,credentials:'same-origin'}).then(function(r){return r.json()}).then(function(j){
+		if(!j||!j.success){if(!sessiz)yaz((j&&j.data)||'Kaydedilemedi, biraz sonra tekrar dene.',false);return}
+		if(tkEl)tkEl.value=j.data.tk;try{localStorage.setItem(KT,j.data.tk)}catch(e){}
+		try{var u=new URL(location.href);u.searchParams.set('taslak',j.data.tk);history.replaceState(null,'',u.toString())}catch(e){}
+		if(!sessiz){var d=document.createElement('span');d.appendChild(document.createTextNode((j.data.mail?'Kaydedildi! Devam bağlantısını e-postana gönderdik (gelmezse spam klasörüne bak). ':'Kaydedildi! ')+'Bağlantın: '));var a=document.createElement('a');a.href=j.data.link;a.textContent=j.data.link;d.appendChild(a);yaz(d,true)}
+	}).catch(function(){if(!sessiz)yaz('Bağlantı sorunu; kaydedilemedi. Biraz sonra tekrar dene.',false)});
+}
+[].forEach.call(f.querySelectorAll('.rp-kaydet'),function(b){b.addEventListener('click',function(){kaydet(true,false)})});
+var st;f.addEventListener('input',function(){if(!tkEl||!tkEl.value)return;clearTimeout(st);st=setTimeout(function(){kaydet(false,true)},4000)});
+if(document.querySelector('[data-rp-tamam]')){try{localStorage.removeItem(KT)}catch(e){}}
 var ft=document.getElementById('rpfoto');if(ft)ft.addEventListener('change',function(){if(ft.files[0]&&ft.files[0].size>5*1024*1024){alert('Fotoğraf en fazla 5 MB olmalı.');ft.value=''}});
 f.addEventListener('submit',function(e){
 	var old=f.querySelector('.gt-err');if(old)old.remove();

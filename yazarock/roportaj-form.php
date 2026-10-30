@@ -179,3 +179,54 @@ function yr_yil_ek($y){
 	if($y%10)$e=$d[$y%10];elseif($y%100)$e=$o[intdiv($y%100,10)];else $e='den';
 	return "'".$e;
 }
+
+/* ================= Sunucuda taslak (1.22.0): "devam bağlantısını e-postama gönder" =================
+   Instagram içi tarayıcı gibi yerlerde tarayıcı kaydı kaybolabildiği için yanıtlar 30 gün sunucuda tutulur. */
+function yr_rp_taslak_alanlar(){
+	$a=['grup'=>80,'sehir'=>40,'yil'=>4,'tur'=>80,'uyeler'=>600,'sarki'=>300,'ad'=>60,'rol'=>40,'email'=>120];
+	foreach(yr_gb_linkler() as $k=>$l)$a['l_'.$k]=300;
+	foreach(yr_rp_sorular() as $k=>$q)$a[$k]=(int)$q[1];
+	return $a;
+}
+function yr_rp_taslak_al($tk){
+	if(!is_string($tk)||!preg_match('/^[A-Za-z0-9]{32}$/',$tk))return null;
+	$d=get_transient('yr_rpt_'.$tk);return is_array($d)?$d:null;
+}
+add_action('wp_ajax_nopriv_yr_rp_taslak','yr_rp_taslak_ajax');add_action('wp_ajax_yr_rp_taslak','yr_rp_taslak_ajax');
+function yr_rp_taslak_ajax(){
+	if(!empty($_POST['website']))wp_send_json_error('x');
+	$ip=md5(yr_ip());
+	$say=(int)get_transient('yr_rpt_say_'.$ip);if($say>=60)wp_send_json_error('Çok fazla kayıt denemesi; biraz sonra tekrar dene.');
+	set_transient('yr_rpt_say_'.$ip,$say+1,HOUR_IN_SECONDS);
+	$d=[];foreach(yr_rp_taslak_alanlar() as $k=>$max)$d[$k]=mb_substr(sanitize_textarea_field(wp_unslash($_POST[$k]??'')),0,$max);
+	$d['email']=sanitize_email($d['email']);
+	if(!yr_eposta_ok($d['email']))wp_send_json_error('Devam bağlantısını gönderebilmemiz için önce aşağıdaki E-posta alanını doldur.');
+	$tk=(string)($_POST['tk']??'');$eski=yr_rp_taslak_al($tk);
+	if(!$eski||strcasecmp($eski['email'],$d['email'])!==0){
+		$yeni=(int)get_transient('yr_rpt_yeni_'.$ip);if($yeni>=5)wp_send_json_error('Bugün bu bağlantıdan çok fazla yeni taslak açıldı; yarın tekrar dene.');
+		set_transient('yr_rpt_yeni_'.$ip,$yeni+1,DAY_IN_SECONDS);
+		$tk=wp_generate_password(32,false,false);$eski=null;
+	}
+	$d['_mail']=$eski['_mail']??0;
+	$link=add_query_arg('taslak',$tk,yr_page_url('garajdan-sahneye')).'#form';
+	$mail=false;
+	if(!empty($_POST['mail'])&&(time()-(int)$d['_mail'])>600){
+		$ad=$d['ad']!==''?' '.$d['ad']:'';$g=$d['grup']!==''?' ('.$d['grup'].')':'';
+		$mail=wp_mail($d['email'],'Yazarock: Garajdan Sahneye yanıtların kaydedildi',"Merhaba{$ad},\n\nGarajdan Sahneye röportaj yanıtların{$g} kaydedildi. Kaldığın yerden devam etmek için bu bağlantıyı aç (30 gün geçerli):\n\n{$link}\n\nİpucu: Bağlantıyı Safari ya da Chrome'da açarsan yazdıkların daha güvende olur. Bu bağlantıyı kimseyle paylaşma; içinde yanıtların var.\n\nSahnede görüşmek üzere,\nYazarock\n".home_url('/'));
+		if($mail)$d['_mail']=time();
+	}
+	set_transient('yr_rpt_'.$tk,$d,30*DAY_IN_SECONDS);
+	wp_send_json_success(['tk'=>$tk,'link'=>$link,'mail'=>$mail]);
+}
+/* Taslak bağlantısıyla açılan sayfa önbelleğe alınmasın */
+add_action('template_redirect',function(){
+	if(empty($_GET['taslak']))return;
+	if(!defined('DONOTCACHEPAGE'))define('DONOTCACHEPAGE',true);
+	do_action('litespeed_control_set_nocache','yazarock taslak');nocache_headers();
+},1);
+/* Gönderim başarılı olunca sunucudaki taslağı sil */
+add_action('admin_post_nopriv_yr_rop_basvuru','yr_rp_taslak_sil',1);add_action('admin_post_yr_rop_basvuru','yr_rp_taslak_sil',1);
+function yr_rp_taslak_sil(){
+	$tk=(string)($_POST['tk']??'');if(!yr_rp_taslak_al($tk))return;
+	add_filter('wp_redirect',function($u)use($tk){if(strpos($u,'yr_r=tamam')!==false)delete_transient('yr_rpt_'.$tk);return $u;});
+}
