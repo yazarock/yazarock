@@ -174,3 +174,14 @@ add_action('init',function(){/* yazı sonradan çekilirse de bağlansın */
 	update_post_meta($t[0]->ID,'_yr_kesif_yazi',$p[0]->ID);
 	if(function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
 },38);
+
+/* Anoreksi yazısına 7 Kasım konseri (mig v25) */
+add_action('init',function(){
+	if(get_option('yr_mig_v25'))return;
+	$p=get_posts(['post_type'=>'post','post_status'=>'any','meta_key'=>'_yr_derleme_id','meta_value'=>'2026-10-30-anoreksi-insignificance','numberposts'=>1]);if(!$p)return;
+	update_option('yr_mig_v25',1);
+	$c=$p[0]->post_content;if(strpos($c,'The Wall Saloon')!==false)return;
+	$c.="\n<h3>7 Kasım'da sahnede</h3><p>Anoreksi, <em>Insignificance</em>'ı ilk kez <strong>7 Kasım Cumartesi</strong> günü Kadıköy'deki <strong>The Wall Saloon</strong>'da canlı çalacak. Grubun 9 yıl aradan sonraki ilk konseri olan bu gecede sahneyi Damocles ile paylaşacaklar. Kapılar 20:00'de açılıyor, 18 yaş sınırı var. <a href=\"https://biletino.com/tr/e-1d5u/anoreksi-damocles-the-wall-saloon-kadikoy/\" target=\"_blank\" rel=\"noopener\">Biletler Biletino'da</a>.</p>";
+	wp_update_post(['ID'=>$p[0]->ID,'post_content'=>$c]);
+	if(function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
+},39);
