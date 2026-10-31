@@ -33,7 +33,8 @@ function yr_ig_grup_aday($id){
 	$bas=mb_strtolower(get_the_title($p));$tags=array_map('mb_strtolower',(array)wp_get_post_tags($id,['fields'=>'names']));$o=[];
 	foreach(get_posts(['post_type'=>'grup','post_status'=>'publish','numberposts'=>-1,'meta_key'=>'_thumbnail_id','orderby'=>'title','order'=>'ASC']) as $g){
 		$ad=mb_strtolower($g->post_title);if(mb_strlen($ad)<3)continue;
-		if(in_array($ad,$tags,true)||preg_match('/(^|[^\p{L}\p{N}])'.preg_quote($ad,'/').'($|[^\p{L}\p{N}])/u',$bas))$o[]=$g->ID;
+		/* Yalnızca etiketle tam eşleşme: başlıkta geçen sözcükler ("death metal" → Death grubu) yanlış eşleşmesin */
+		if(in_array($ad,$tags,true))$o[]=$g->ID;
 	}
 	return $o;
 }
