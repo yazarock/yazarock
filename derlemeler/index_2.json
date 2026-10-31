@@ -1,0 +1,43 @@
+{
+  "dosyalar": [
+    "2026-10-20.json",
+    "2026-10-21-protomen.json",
+    "2026-10-21.json",
+    "2026-10-22.json",
+    "2026-10-22-aksam.json",
+    "2026-10-23.json",
+    "2026-10-24-nev.json",
+    "2026-10-24.json",
+    "2026-10-24-nev-vefat.json",
+    "2026-10-24-nev-cenaze.json",
+    "2026-10-25.json",
+    "2026-10-26.json",
+    "2026-10-26-echoes-of-tomorrow.json",
+    "2026-10-26-yeraltindan.json",
+    "2026-10-26-aksam.json",
+    "2026-10-27.json",
+    "2026-10-27-aksam.json",
+    "2026-10-28.json",
+    "2026-10-29-tahrip-labirent.json",
+    "2026-10-29.json",
+    "2026-10-30.json",
+    "2026-10-30-anoreksi-konser.json",
+    "2026-10-30-aksam.json",
+    "2026-10-31.json"
+  ],
+  "grup_dosyalari": [
+    "gruplar-2026-10-20.json",
+    "gruplar-2026-10-21-protomen.json",
+    "gruplar-2026-10-24.json",
+    "gruplar-2026-10-30-karton.json",
+    "gruplar-2026-10-31-anoreksi.json"
+  ],
+  "gorsel_dosyalari": [
+    "grup-gorselleri-2026-10-27.json",
+    "grup-gorselleri-2026-10-27-2.json",
+    "gorseller-2026-10-29-ayberk.json",
+    "gorseller-2026-10-30-karton.json",
+    "gorseller-2026-10-31-anoreksi.json",
+    "gorseller-2026-10-31-anoreksi-grup.json"
+  ]
+}
