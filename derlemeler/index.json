@@ -28,13 +28,15 @@
     "gruplar-2026-10-20.json",
     "gruplar-2026-10-21-protomen.json",
     "gruplar-2026-10-24.json",
-    "gruplar-2026-10-30-karton.json"
+    "gruplar-2026-10-30-karton.json",
+    "gruplar-2026-10-31-anoreksi.json"
   ],
   "gorsel_dosyalari": [
     "grup-gorselleri-2026-10-27.json",
     "grup-gorselleri-2026-10-27-2.json",
     "gorseller-2026-10-29-ayberk.json",
     "gorseller-2026-10-30-karton.json",
-    "gorseller-2026-10-31-anoreksi.json"
+    "gorseller-2026-10-31-anoreksi.json",
+    "gorseller-2026-10-31-anoreksi-grup.json"
   ]
 }

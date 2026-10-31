@@ -197,3 +197,15 @@ add_action('init',function(){
 	}
 	if(function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
 },40);
+
+/* Haftanın Keşfi: Anoreksi + Insignificance yazısı (mig v27) */
+add_action('init',function(){
+	if(get_option('yr_mig_v27'))return;
+	$g=get_posts(['post_type'=>'grup','post_status'=>'publish','title'=>'Anoreksi','numberposts'=>1]);if(!$g)return;
+	$p=get_posts(['post_type'=>'post','post_status'=>'publish','meta_key'=>'_yr_derleme_id','meta_value'=>'2026-10-30-anoreksi-insignificance','numberposts'=>1]);if(!$p)return;
+	update_option('yr_mig_v27',1);
+	foreach(get_posts(['post_type'=>'grup','post_status'=>'any','numberposts'=>-1,'fields'=>'ids','meta_key'=>'_yr_kesif']) as $i)delete_post_meta($i,'_yr_kesif');
+	update_post_meta($g[0]->ID,'_yr_kesif',time());
+	update_post_meta($g[0]->ID,'_yr_kesif_yazi',$p[0]->ID);
+	if(function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
+},41);
