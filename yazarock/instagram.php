@@ -32,7 +32,10 @@ function yr_ig_yazi($id){
 	$c=get_the_category($id);$tags=wp_get_post_tags($id,['fields'=>'names']);
 	$img=get_post_thumbnail_id($id)?wp_get_attachment_image_url(get_post_thumbnail_id($id),'large'):'';
 	$ex=has_excerpt($p)?get_the_excerpt($p):wp_trim_words(wp_strip_all_tags(preg_replace('~</(p|h\d|li|div)>|<br\s*/?>~i',' ',$p->post_content)),35);
-	return ['baslik'=>html_entity_decode(get_the_title($p),ENT_QUOTES,'UTF-8'),'ozet'=>html_entity_decode($ex,ENT_QUOTES,'UTF-8'),'kat'=>$c?$c[0]->name:'','etiket'=>$tags,'img'=>$img,'url'=>get_permalink($p)];
+	$bs=html_entity_decode(get_the_title($p),ENT_QUOTES,'UTF-8');$kat=$c?$c[0]->name:'';
+	/* Başlık kategori adıyla başlıyorsa (ör. "Keşif: …") görselde tekrar etmesin; kategori zaten kırmızı etikette */
+	foreach(array_filter([$kat,'Keşif','Haber','Röportaj','Yeni Çıkış','Haftanın Şarkısı']) as $on){if(mb_stripos($bs,$on)===0&&preg_match('/^.{'.mb_strlen($on).'}\s*[:–—-]\s*(.+)$/us',$bs,$m)){$bs=$m[1];break;}}
+	return ['baslik'=>$bs,'ozet'=>html_entity_decode($ex,ENT_QUOTES,'UTF-8'),'kat'=>$c?$c[0]->name:'','etiket'=>$tags,'img'=>$img,'url'=>get_permalink($p)];
 }
 
 function yr_ig_sayfa(){
@@ -112,7 +115,11 @@ async function yazi(){
 	const v=D.veri;if(!v)return [[], ''];
 	const cv=tuval(),c=cv.getContext('2d');zemin(c);const ih=700;
 	const i=await img(v.img);
-	if(i){const r=Math.max(W/i.width,ih/i.height),w=i.width*r,h=i.height*r;c.drawImage(i,(W-w)/2,Math.min(0,(ih-h)*0.3),w,h);const g=c.createLinearGradient(0,ih-260,0,ih);g.addColorStop(0,'rgba(13,8,9,0)');g.addColorStop(1,BG);c.fillStyle=g;c.fillRect(0,ih-260,W,260)}
+	if(i){const r=Math.max(W/i.width,ih/i.height),w=i.width*r,h=i.height*r;
+		if(i.width/i.height>W/ih*1.08){/* geniş grup fotoğrafı: kenardaki üyeler kesilmesin, arkası bulanık doldurulur */
+			c.save();c.filter='blur(28px) brightness(.55)';c.drawImage(i,(W-w)/2-40,(ih-h)/2-40,w+80,h+80);c.restore();
+			const h2=i.height*W/i.width;c.drawImage(i,0,(ih-h2)/2,W,h2);
+		}else c.drawImage(i,(W-w)/2,Math.min(0,(ih-h)*0.3),w,h);const g=c.createLinearGradient(0,ih-260,0,ih);g.addColorStop(0,'rgba(13,8,9,0)');g.addColorStop(1,BG);c.fillStyle=g;c.fillRect(0,ih-260,W,260)}
 	else{c.fillStyle='#2a1015';c.fillRect(0,0,W,ih);await logo(c,140,ih/2-200,W-280)}
 	let y=ih-10;
 	if(v.kat){c.font='700 30px Oswald, Impact, sans-serif';const t=up(v.kat),w=c.measureText(t).width+40;c.fillStyle=RED;c.fillRect(70,y-48,w,54);c.fillStyle='#fff';c.fillText(t,90,y-10);y+=36}

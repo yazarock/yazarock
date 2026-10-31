@@ -153,8 +153,9 @@ function yr_derleme_grup_gorselleri($idx){
 		$d=json_decode((string)yr_gh_get('derlemeler/'.$f,1000000),true);if(!is_array($d)||empty($d['gorseller']))continue;
 		$kalan=0;
 		foreach(array_slice((array)$d['gorseller'],0,300) as $g){
-			if(!is_array($g)||empty($g['gorsel'])||(empty($g['ad'])&&empty($g['yazi'])))continue;
-			/* "yazi": yazı adresi (slug) verilirse o yazıya, yoksa "ad" ile gruba eklenir */
+			if(!is_array($g)||empty($g['gorsel'])||(empty($g['ad'])&&empty($g['yazi'])&&empty($g['derleme'])))continue;
+			if(!empty($g['derleme'])){$p=get_posts(['post_type'=>'post','post_status'=>'any','meta_key'=>'_yr_derleme_id','meta_value'=>sanitize_text_field($g['derleme']),'numberposts'=>1]);}else
+			/* "derleme": derleme kimliği, "yazi": yazı adresi (slug) verilirse o yazıya, yoksa "ad" ile gruba eklenir */
 			$p=!empty($g['yazi'])?get_posts(['post_type'=>'post','post_status'=>'any','name'=>sanitize_title($g['yazi']),'numberposts'=>1]):get_posts(['post_type'=>'grup','post_status'=>'any','title'=>sanitize_text_field($g['ad']),'numberposts'=>1]);
 			if(!$p||has_post_thumbnail($p[0]->ID)||get_post_meta($p[0]->ID,'_yr_gorsel_denendi',true))continue;
 			if($hak<=0){$kalan++;continue;}$hak--;
