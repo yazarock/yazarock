@@ -1,6 +1,6 @@
 <?php
 if(!defined('ABSPATH'))exit;
-define('YR_VER','1.22.8');
+define('YR_VER','1.22.9');
 
 /* E-posta adresi yazım ve alan adı kontrolü: hatalı adreslere giden mailler geri döner ve sitenin e-posta itibarını düşürür */
 function yr_eposta_oneri($m){
@@ -214,6 +214,18 @@ add_action('admin_post_yr_onayla',function(){
 
 /* Giriş akışı: hatalı girişte özel sayfaya dön, yazarı panele yönlendir */
 function yr_login_back($r){return add_query_arg('login','failed',strtok($r,'?'));}
+/* İki aşamalı doğrulama (Wordfence Login Security) kodu isteyen hesaplar: şifre doğru, kod gerekiyor. Sitenin kendi giriş formunda kod alanı olmadığı için
+   WordPress'in giriş sayfasına yönlendir; Wordfence kodu orada sorar. Bu, hatalı deneme sayılmaz. */
+function yr_2fa_hatasi($e){
+	if(!is_wp_error($e)||in_array('yr_kilit',$e->get_error_codes(),true))return false;
+	foreach($e->get_error_codes() as $c)if(strpos((string)$c,'wfls_')===0)return true;
+	/* Hata kodu farklı olsa da şifre doğruysa sorun şifrede değil, ek doğrulamadadır */
+	$n=isset($_POST['log'])?sanitize_user(wp_unslash($_POST['log'])):'';$p=isset($_POST['pwd'])?(string)wp_unslash($_POST['pwd']):'';
+	if($n===''||$p==='')return false;$u=is_email($n)?get_user_by('email',$n):get_user_by('login',$n);
+	return $u&&wp_check_password($p,$u->user_pass,$u->ID);
+}
+add_action('wp_login_failed',function($n,$e=null){if(!yr_2fa_hatasi($e))return;$r=wp_get_referer();if($r&&strpos($r,'wp-login')===false){wp_safe_redirect(add_query_arg('yr_2fa','1',wp_login_url(isset($_POST['redirect_to'])?esc_url_raw(wp_unslash($_POST['redirect_to'])):admin_url())));exit;}},1,2);
+add_filter('login_message',function($m){if(!empty($_GET['yr_2fa']))$m.='<p class="message">Hesabında iki aşamalı doğrulama açık. Kullanıcı adı ve şifreni burada tekrar gir; ardından telefonundaki kod sorulacak.</p>';return $m;});
 add_action('wp_login_failed',function(){$r=wp_get_referer();if($r&&strpos($r,'wp-login')===false&&strpos($r,'wp-admin')===false){wp_safe_redirect(yr_login_back($r));exit;}});
 add_filter('authenticate',function($u,$n,$p){if(isset($_POST['log'])&&(empty($n)||empty($p))){$r=wp_get_referer();if($r&&strpos($r,'wp-login')===false){wp_safe_redirect(yr_login_back($r));exit;}}return $u;},1,3);
 add_filter('login_redirect',function($to,$req,$user){if($user&&!is_wp_error($user)&&in_array('yazarock_yazar',(array)$user->roles))return ($req&&strpos($req,admin_url())!==0&&untrailingslashit($req)!==untrailingslashit(home_url()))?$to:yr_panel_url();return $to;},10,3);
@@ -354,7 +366,7 @@ add_filter('wp_robots',function($r){if(is_search()||is_404())$r['noindex']=true;
 /* Giriş denemesi sınırı: 5 hatalı denemede 15 dakika kilit */
 function yr_lk($n){return 'yr_ll_'.md5(yr_ip().strtolower((string)$n));}
 add_filter('authenticate',function($u,$n,$p){if(empty($n))return $u;if((int)get_transient(yr_lk($n))>=5)return new WP_Error('yr_kilit','Çok fazla hatalı deneme. 15 dakika sonra tekrar dene.');return $u;},30,3);
-add_action('wp_login_failed',function($n){set_transient(yr_lk($n),(int)get_transient(yr_lk($n))+1,900);},5);
+add_action('wp_login_failed',function($n,$e=null){if(function_exists('yr_2fa_hatasi')&&yr_2fa_hatasi($e))return;set_transient(yr_lk($n),(int)get_transient(yr_lk($n))+1,900);},0,2);
 add_action('wp_login',function($n){delete_transient(yr_lk($n));});
 
 /* WordPress "Kişisel veri dışa aktar / sil" araçlarına başvuru ve abone kayıtlarını bağla */
