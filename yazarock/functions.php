@@ -1,6 +1,6 @@
 <?php
 if(!defined('ABSPATH'))exit;
-define('YR_VER','1.22.7');
+define('YR_VER','1.22.8');
 
 /* E-posta adresi yazım ve alan adı kontrolü: hatalı adreslere giden mailler geri döner ve sitenin e-posta itibarını düşürür */
 function yr_eposta_oneri($m){
@@ -341,7 +341,7 @@ add_action('template_redirect',function(){
 
 /* Güvenlik */
 if(!defined('DISALLOW_FILE_EDIT'))define('DISALLOW_FILE_EDIT',true);
-remove_action('wp_head','wp_generator');
+remove_action('wp_head','wp_generator');add_filter('the_generator','__return_empty_string');/* WordPress sürümü RSS ve diğer yerlerde de görünmesin */
 add_filter('xmlrpc_enabled','__return_false');
 add_filter('login_errors',function($e){return strpos($e,'Çok fazla')!==false?$e:'Kullanıcı adı veya şifre hatalı.';});
 add_action('send_headers',function(){
