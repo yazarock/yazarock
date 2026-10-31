@@ -27,24 +27,37 @@ function yr_ig_hafta($bas){
 	$o=[];foreach($q as $e){$o[]=['t'=>(string)get_post_meta($e->ID,'_yr_tarih',true),'s'=>(string)get_post_meta($e->ID,'_yr_saat',true),'ad'=>html_entity_decode(get_the_title($e),ENT_QUOTES,'UTF-8'),'sehir'=>(string)get_post_meta($e->ID,'_yr_sehir',true),'mekan'=>(string)get_post_meta($e->ID,'_yr_mekan',true)];}
 	return ['bas'=>$bas,'bit'=>$bit,'e'=>$o];
 }
-function yr_ig_yazi($id){
+/* Yazıyla ilgili gruplar: etiketleri ya da başlığı grup adıyla eşleşen, fotoğrafı olan gruplar */
+function yr_ig_grup_aday($id){
+	$p=get_post($id);if(!$p)return [];
+	$bas=mb_strtolower(get_the_title($p));$tags=array_map('mb_strtolower',(array)wp_get_post_tags($id,['fields'=>'names']));$o=[];
+	foreach(get_posts(['post_type'=>'grup','post_status'=>'publish','numberposts'=>-1,'meta_key'=>'_thumbnail_id','orderby'=>'title','order'=>'ASC']) as $g){
+		$ad=mb_strtolower($g->post_title);if(mb_strlen($ad)<3)continue;
+		if(in_array($ad,$tags,true)||preg_match('/(^|[^\p{L}\p{N}])'.preg_quote($ad,'/').'($|[^\p{L}\p{N}])/u',$bas))$o[]=$g->ID;
+	}
+	return $o;
+}
+function yr_ig_yazi($id,$grup=0){
 	$p=get_post($id);if(!$p||$p->post_type!=='post')return null;
 	$c=get_the_category($id);$tags=wp_get_post_tags($id,['fields'=>'names']);
 	$img=get_post_thumbnail_id($id)?wp_get_attachment_image_url(get_post_thumbnail_id($id),'large'):'';
+	if($grup===-1&&!$img){$a=yr_ig_grup_aday($id);if($a)$grup=$a[0];}/* yazının görseli yoksa ilgili grubun fotoğrafı */
+	if($grup>0&&get_post_type($grup)==='grup'&&get_post_thumbnail_id($grup))$img=wp_get_attachment_image_url(get_post_thumbnail_id($grup),'large');
 	$ex=has_excerpt($p)?get_the_excerpt($p):wp_trim_words(wp_strip_all_tags(preg_replace('~</(p|h\d|li|div)>|<br\s*/?>~i',' ',$p->post_content)),35);
 	$bs=html_entity_decode(get_the_title($p),ENT_QUOTES,'UTF-8');$kat=$c?$c[0]->name:'';
 	/* Başlık kategori adıyla başlıyorsa (ör. "Keşif: …") görselde tekrar etmesin; kategori zaten kırmızı etikette */
-	foreach(array_filter([$kat,'Keşif','Haber','Röportaj','Yeni Çıkış','Haftanın Şarkısı']) as $on){if(mb_stripos($bs,$on)===0&&preg_match('/^.{'.mb_strlen($on).'}\s*[:–—-]\s*(.+)$/us',$bs,$m)){$bs=$m[1];break;}}
+	foreach(array_filter([$kat,'Keşif','Haber','Röportaj','Yeni Çıkış']) as $on){if(mb_stripos($bs,$on)===0&&preg_match('/^.{'.mb_strlen($on).'}\s*[:–—-]\s*(.+)$/us',$bs,$m)){$bs=$m[1];break;}}
 	return ['baslik'=>$bs,'ozet'=>html_entity_decode($ex,ENT_QUOTES,'UTF-8'),'kat'=>$c?$c[0]->name:'','etiket'=>$tags,'img'=>$img,'url'=>get_permalink($p)];
 }
 
 function yr_ig_sayfa(){
 	$sekme=($_GET['sekme']??'')==='yazi'?'yazi':'hafta';
 	$bas=isset($_GET['bas'])&&preg_match('/^\d{4}-\d{2}-\d{2}$/',$_GET['bas'])?$_GET['bas']:current_time('Y-m-d');
-	$yid=(int)($_GET['yazi']??0);
+	$yid=(int)($_GET['yazi']??0);$gsec=isset($_GET['gimg'])?(int)$_GET['gimg']:-1;/* -1: otomatik, 0: yazının görseli, >0: seçilen grup */
 	$son=get_posts(['post_type'=>'post','post_status'=>'publish','numberposts'=>30]);
 	if(!$yid&&$son)$yid=$son[0]->ID;
-	$veri=$sekme==='hafta'?yr_ig_hafta($bas):yr_ig_yazi($yid);
+	if($yid&&!in_array($yid,wp_list_pluck($son,'ID'),true)&&get_post($yid))array_unshift($son,get_post($yid));
+	$veri=$sekme==='hafta'?yr_ig_hafta($bas):yr_ig_yazi($yid,$gsec);
 	$u=admin_url('admin.php?page=yr-instagram');
 	?>
 	<div class="wrap yr-ig"><h1>Instagram Görselleri</h1>
@@ -54,7 +67,14 @@ function yr_ig_sayfa(){
 		<label>Başlangıç günü <input type="date" name="bas" value="<?php echo esc_attr($bas);?>"></label> <button class="button">Göster</button>
 		<span class="description">Seçilen günden itibaren 7 günün yayındaki konserleri.</span>
 	<?php else:?>
-		<input type="hidden" name="sekme" value="yazi"><label>Yazı <select name="yazi" onchange="this.form.submit()"><?php foreach($son as $p)echo '<option value="'.$p->ID.'"'.selected($p->ID,$yid,false).'>'.esc_html(wp_trim_words(get_the_title($p),12)).'</option>';?></select></label>
+		<input type="hidden" name="sekme" value="yazi"><label>Yazı <select name="yazi" onchange="this.form.gimg.value='-1';this.form.submit()"><?php foreach($son as $p)echo '<option value="'.$p->ID.'"'.selected($p->ID,$yid,false).'>'.esc_html(wp_trim_words(get_the_title($p),12)).'</option>';?></select></label>
+		<?php $aday=yr_ig_grup_aday($yid);$tum=get_posts(['post_type'=>'grup','post_status'=>'publish','numberposts'=>-1,'meta_key'=>'_thumbnail_id','orderby'=>'title','order'=>'ASC']);?>
+		<label style="margin-left:12px">Görsel <select name="gimg" onchange="this.form.submit()">
+			<option value="-1"<?php selected($gsec,-1);?>>Otomatik (yazının görseli, yoksa ilgili grup)</option>
+			<option value="0"<?php selected($gsec,0);?>>Yalnızca yazının kendi görseli</option>
+			<?php if($aday){echo '<optgroup label="Bu yazıdaki gruplar">';foreach($aday as $g)echo '<option value="'.$g.'"'.selected($gsec,$g,false).'>'.esc_html(get_the_title($g)).'</option>';echo '</optgroup>';}
+			echo '<optgroup label="Tüm gruplar (fotoğrafı olanlar)">';foreach($tum as $g)echo '<option value="'.$g->ID.'"'.selected($gsec,$g->ID,false).'>'.esc_html($g->post_title).'</option>';echo '</optgroup>';?>
+		</select></label>
 	<?php endif;?></form>
 	<?php if($sekme==='hafta'&&!empty($veri['e'])):?><fieldset class="yr-ig-sec"><legend><strong>Görsele girecek konserler</strong> — yalnızca öne çıkarmak istediklerini işaretle</legend><?php foreach($veri['e'] as $i=>$e)echo '<label><input type="checkbox" class="yr-ig-k" value="'.$i.'"> '.esc_html(date_i18n('j M',strtotime($e['t'])).' · '.$e['ad'].($e['sehir']?' ('.$e['sehir'].')':'')).'</label>';?><p><button type="button" class="button-link" id="yr-ig-hepsi">Tümünü seç / kaldır</button></p></fieldset><?php endif;?>
 	<div class="yr-ig-in"><div id="yr-ig-gorseller"><p>Görsel hazırlanıyor…</p></div>
