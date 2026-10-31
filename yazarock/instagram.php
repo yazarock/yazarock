@@ -59,6 +59,7 @@ function yr_ig_yazi($id,$grup=0){
 	return ['baslik'=>$bs,'ozet'=>html_entity_decode($ex,ENT_QUOTES,'UTF-8'),'kat'=>$c?$c[0]->name:'','etiket'=>array_values((array)$tags),'img'=>$img,'url'=>get_permalink($p)];
 }
 
+add_action('admin_enqueue_scripts',function($h){if(strpos((string)$h,'yr-instagram')!==false)wp_enqueue_media();});
 function yr_ig_sayfa(){
 	$sekme=($_GET['sekme']??'')==='yazi'?'yazi':'hafta';
 	$bas=isset($_GET['bas'])&&preg_match('/^\d{4}-\d{2}-\d{2}$/',$_GET['bas'])?$_GET['bas']:current_time('Y-m-d');
@@ -89,12 +90,18 @@ function yr_ig_sayfa(){
 			echo '<optgroup label="Tüm gruplar (fotoğrafı olanlar)">';foreach($tum as $g)echo '<option value="'.$g->ID.'"'.selected($gsec,$g->ID,false).'>'.esc_html($g->post_title).'</option>';echo '</optgroup>';?>
 		</select></label><?php endif;?>
 	<?php endif;?></form>
+	<?php if($sekme==='yazi'):?><fieldset class="yr-ig-sec yr-ig-foto"><legend><strong>Kendi fotoğrafın</strong> — görseldeki fotoğrafı değiştir (siteye yüklenmez, sadece bu görselde kullanılır)</legend>
+		<label class="button" for="yr-ig-dosya">Bilgisayardan / telefondan seç</label><input type="file" id="yr-ig-dosya" accept="image/*" hidden>
+		<button type="button" class="button" id="yr-ig-ortam">Ortam kütüphanesinden seç</button>
+		<button type="button" class="button-link" id="yr-ig-sifirla" hidden>Fotoğrafı geri al</button>
+		<label class="yr-ig-kaydir">Fotoğrafın yeri (yukarı ↔ aşağı) <input type="range" id="yr-ig-konum" min="0" max="100" value="30"></label>
+	</fieldset><?php endif;?>
 	<?php if($sekme==='hafta'&&!empty($veri['e'])):?><fieldset class="yr-ig-sec"><legend><strong>Görsele girecek konserler</strong> — yalnızca öne çıkarmak istediklerini işaretle</legend><?php foreach($veri['e'] as $i=>$e)echo '<label><input type="checkbox" class="yr-ig-k" value="'.$i.'"> '.esc_html(date_i18n('j M',strtotime($e['t'])).' · '.$e['ad'].($e['sehir']?' ('.$e['sehir'].')':'')).'</label>';?><p><button type="button" class="button-link" id="yr-ig-hepsi">Tümünü seç / kaldır</button></p></fieldset><?php endif;?>
 	<div class="yr-ig-in"><div id="yr-ig-gorseller"><p>Görsel hazırlanıyor…</p></div>
 	<div class="yr-ig-yan"><h3>Açıklama</h3><textarea id="yr-ig-metin" rows="16"></textarea>
 	<p><button type="button" class="button button-primary" id="yr-ig-kopya">Açıklamayı kopyala</button></p>
 	<ol class="description"><li>Görsel(ler)i indir (birden fazlaysa sırayla, kaydırmalı gönderi olarak paylaş).</li><li>Açıklamayı kopyala, Instagram'da yapıştır.</li><li>Gruplar Instagram'daysa gönderide onları etiketle.</li><li>İstersen Meta Business Suite'ten ileri bir saate planla.</li></ol></div></div></div>
-	<style>.yr-ig-form{margin:14px 0}.yr-ig-in{display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start}#yr-ig-gorseller{display:flex;gap:16px;flex-wrap:wrap}#yr-ig-gorseller figure{margin:0}#yr-ig-gorseller canvas{width:360px;max-width:100%;height:auto;display:block;box-shadow:0 2px 12px rgba(0,0,0,.25)}#yr-ig-gorseller figcaption{margin-top:8px}.yr-ig-sec{border:1px solid #c3c4c7;background:#fff;padding:10px 14px;margin:0 0 18px;max-width:900px}.yr-ig-sec label{display:block;margin:4px 0}.yr-ig-yan{flex:1;min-width:280px;max-width:520px}.yr-ig-yan textarea{width:100%;font:13px/1.5 monospace}</style>
+	<style>.yr-ig-form{margin:14px 0}.yr-ig-in{display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start}#yr-ig-gorseller{display:flex;gap:16px;flex-wrap:wrap}#yr-ig-gorseller figure{margin:0}#yr-ig-gorseller canvas{width:360px;max-width:100%;height:auto;display:block;box-shadow:0 2px 12px rgba(0,0,0,.25)}#yr-ig-gorseller figcaption{margin-top:8px}.yr-ig-sec{border:1px solid #c3c4c7;background:#fff;padding:10px 14px;margin:0 0 18px;max-width:900px}.yr-ig-sec label{display:block;margin:4px 0}.yr-ig-foto{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}.yr-ig-foto label.button{display:inline-block;margin:0}.yr-ig-kaydir{display:flex!important;gap:8px;align-items:center;margin:0!important}.yr-ig-yan{flex:1;min-width:280px;max-width:520px}.yr-ig-yan textarea{width:100%;font:13px/1.5 monospace}</style>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Barlow:wght@400;600&display=swap">
 	<script>
 	window.YR_IG={sekme:<?php echo wp_json_encode($sekme);?>,veri:<?php echo wp_json_encode($veri);?>,logo:<?php echo wp_json_encode(yr_ig_logo());?>,site:<?php echo wp_json_encode(preg_replace('~^https?://~','',untrailingslashit(home_url())));?>};
@@ -147,12 +154,12 @@ async function hafta(){
 async function yazi(){
 	const v=D.veri;if(!v)return [[], ''];
 	const cv=tuval(),c=cv.getContext('2d');zemin(c);const ih=700;
-	const i=await img(v.img);
-	if(i){const r=Math.max(W/i.width,ih/i.height),w=i.width*r,h=i.height*r;
+	const i=window.YR_OZEL||await img(v.img);const pos=(+((document.getElementById('yr-ig-konum')||{}).value||30))/100;
+	if(i){const r=Math.max(W/i.width,ih/i.height),w=i.width*r,h=i.height*r;c.save();c.beginPath();c.rect(0,0,W,ih);c.clip();/* fotoğraf yalnızca üst alana çizilir */
 		if(i.width/i.height>W/ih*1.08){/* geniş grup fotoğrafı: kenardaki üyeler kesilmesin, arkası bulanık doldurulur */
 			c.save();c.filter='blur(28px) brightness(.55)';c.drawImage(i,(W-w)/2-40,(ih-h)/2-40,w+80,h+80);c.restore();
 			const h2=i.height*W/i.width;c.drawImage(i,0,(ih-h2)/2,W,h2);
-		}else c.drawImage(i,(W-w)/2,Math.min(0,(ih-h)*0.3),w,h);const g=c.createLinearGradient(0,ih-260,0,ih);g.addColorStop(0,'rgba(13,8,9,0)');g.addColorStop(1,BG);c.fillStyle=g;c.fillRect(0,ih-260,W,260)}
+		}else c.drawImage(i,(W-w)*0.5,(ih-h)*pos,w,h);c.restore();const g=c.createLinearGradient(0,ih-260,0,ih);g.addColorStop(0,'rgba(13,8,9,0)');g.addColorStop(1,BG);c.fillStyle=g;c.fillRect(0,ih-260,W,260)}
 	else{c.fillStyle='#2a1015';c.fillRect(0,0,W,ih);await logo(c,140,ih/2-200,W-280)}
 	let y=ih-10;
 	if(v.kat){c.font='700 30px Oswald, Impact, sans-serif';const t=up(v.kat),w=c.measureText(t).width+40;c.fillStyle=RED;c.fillRect(70,y-48,w,54);c.fillStyle='#fff';c.fillText(t,90,y-10);y+=36}
@@ -178,6 +185,17 @@ async function calis(){
 	document.getElementById('yr-ig-kopya').onclick=()=>{t.select();(navigator.clipboard?navigator.clipboard.writeText(t.value):Promise.reject()).catch(()=>document.execCommand('copy'));};
 }
 calis();
+(function(){
+	const d=document.getElementById('yr-ig-dosya');if(!d)return;
+	const sif=document.getElementById('yr-ig-sifirla');
+	const kullan=src=>{const i=new Image();i.onload=()=>{window.YR_OZEL=i;sif.hidden=false;calis()};i.onerror=()=>alertsiz('Fotoğraf açılamadı.');i.src=src};
+	const alertsiz=m=>{const k=document.getElementById('yr-ig-gorseller');const p=document.createElement('p');p.textContent=m;p.style.color='#b32d2e';k.prepend(p)};
+	d.addEventListener('change',()=>{const f=d.files&&d.files[0];if(!f)return;if(f.size>25*1024*1024)return alertsiz('Fotoğraf 25 MB\'tan küçük olmalı.');kullan(URL.createObjectURL(f));d.value=''});
+	sif.onclick=()=>{window.YR_OZEL=null;sif.hidden=true;calis()};
+	let t;document.getElementById('yr-ig-konum').addEventListener('input',()=>{clearTimeout(t);t=setTimeout(calis,120)});
+	const om=document.getElementById('yr-ig-ortam');
+	let fr;om.onclick=()=>{if(!(window.wp&&wp.media))return alertsiz('Ortam kütüphanesi yüklenemedi; sayfayı yenileyip tekrar dene.');if(!fr){fr=wp.media({title:'Instagram görseli için fotoğraf seç',button:{text:'Bu fotoğrafı kullan'},library:{type:'image'},multiple:false});fr.on('select',()=>{const a=fr.state().get('selection').first().toJSON();const u=(a.sizes&&(a.sizes.large||a.sizes.full)||a).url;kullan(u)})}fr.open()};
+})();
 document.querySelectorAll('.yr-ig-k').forEach(x=>x.addEventListener('change',calis));
 const hb=document.getElementById('yr-ig-hepsi');if(hb)hb.onclick=()=>{const k=[...document.querySelectorAll('.yr-ig-k')],h=k.some(x=>!x.checked);k.forEach(x=>x.checked=h);calis()};
 })();
