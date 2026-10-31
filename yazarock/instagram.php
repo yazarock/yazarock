@@ -45,7 +45,7 @@ function yr_ig_yazi($id,$grup=0){
 		$t=get_the_terms($id,'grup_sehir');$sehir=($t&&!is_wp_error($t))?$t[0]->name:'';
 		$stil=function_exists('yr_meta')?(string)yr_meta('stil',$id):'';
 		$ex=has_excerpt($p)?get_the_excerpt($p):wp_trim_words(wp_strip_all_tags(preg_replace('~</(p|h\d|li|div)>|<br\s*/?>~i',' ',$p->post_content)),30);
-		$et=array_filter(array_merge([$p->post_title,$sehir],array_map('trim',preg_split('/[,\/]/',$stil))));
+		$et=array_values(array_filter(array_merge([$p->post_title,$sehir],array_map('trim',preg_split('/[,\/]/',$stil)))));/* sıralı dizi: JSON'da nesneye dönüşmesin */
 		return ['baslik'=>html_entity_decode(get_the_title($p),ENT_QUOTES,'UTF-8'),'ozet'=>html_entity_decode(($stil?$stil.'. ':'').$ex,ENT_QUOTES,'UTF-8'),'kat'=>'Grup'.($sehir?' · '.$sehir:''),'etiket'=>$et,'img'=>$img,'url'=>get_permalink($p)];
 	}
 	$c=get_the_category($id);$tags=wp_get_post_tags($id,['fields'=>'names']);
@@ -56,7 +56,7 @@ function yr_ig_yazi($id,$grup=0){
 	$bs=html_entity_decode(get_the_title($p),ENT_QUOTES,'UTF-8');$kat=$c?$c[0]->name:'';
 	/* Başlık kategori adıyla başlıyorsa (ör. "Keşif: …") görselde tekrar etmesin; kategori zaten kırmızı etikette */
 	foreach(array_filter([$kat,'Keşif','Haber','Röportaj','Yeni Çıkış']) as $on){if(mb_stripos($bs,$on)===0&&preg_match('/^.{'.mb_strlen($on).'}\s*[:–—-]\s*(.+)$/us',$bs,$m)){$bs=$m[1];break;}}
-	return ['baslik'=>$bs,'ozet'=>html_entity_decode($ex,ENT_QUOTES,'UTF-8'),'kat'=>$c?$c[0]->name:'','etiket'=>$tags,'img'=>$img,'url'=>get_permalink($p)];
+	return ['baslik'=>$bs,'ozet'=>html_entity_decode($ex,ENT_QUOTES,'UTF-8'),'kat'=>$c?$c[0]->name:'','etiket'=>array_values((array)$tags),'img'=>$img,'url'=>get_permalink($p)];
 }
 
 function yr_ig_sayfa(){
@@ -163,7 +163,7 @@ async function yazi(){
 	for(let k=0;k<Math.min(kalan,oz.length);k++){let l=oz[k];if(k===kalan-1&&oz.length>kalan)l=kisalt(c,l+' …',W-140);y+=44;c.fillText(l,70,y)}
 	await logo(c,W-70-230,H-96-30-45,230);
 	alt(c);
-	const m=v.baslik+'\n\n'+v.ozet+'\n\n'+(/^Grup/.test(v.kat||'')?'Grubu tanı, dinle: yazarock.com\'da (link profilde) 👆':'Yazının tamamı yazarock.com\'da: link profilde 👆')+'\n\n#yazarock #rock #metal #underground'+(v.etiket||[]).slice(0,6).map(t=>' #'+t.toLocaleLowerCase('tr-TR').replace(/[^0-9a-zçğıöşü]/g,'')).filter(t=>t.length>2).join('');
+	const m=v.baslik+'\n\n'+v.ozet+'\n\n'+(/^Grup/.test(v.kat||'')?'Grubu tanı, dinle: yazarock.com\'da (link profilde) 👆':'Yazının tamamı yazarock.com\'da: link profilde 👆')+'\n\n#yazarock #rock #metal #underground'+[].concat(Object.values(v.etiket||{})).slice(0,6).map(t=>' #'+t.toLocaleLowerCase('tr-TR').replace(/[^0-9a-zçğıöşü]/g,'')).filter((t,i,a)=>t.length>2&&a.indexOf(t)===i&&![' #rock',' #metal',' #underground',' #yazarock'].includes(t)).join('');
 	return [[cv],m];
 }
 async function calis(){
