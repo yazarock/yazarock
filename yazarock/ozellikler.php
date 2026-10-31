@@ -408,3 +408,19 @@ add_action('admin_init',function(){
 function yr_instagram(){foreach(array_filter(array_map('trim',explode("\n",(string)get_theme_mod('yr_social',''))))as $s)if(strpos($s,'instagram.com')!==false)return $s;return 'https://www.instagram.com/yazarockk/';}
 function yr_instagram_kutu(){$u=yr_instagram();$h='@'.trim((string)wp_parse_url($u,PHP_URL_PATH),'/');
 	echo '<a class="ig-kutu" href="'.esc_url($u).'" rel="noopener" target="_blank">'.yr_ikon('ig').'<span><b>Yazarock Instagram\'da</b> Yeni röportajlar, keşifler ve konserler: <u>'.esc_html($h).'</u></span></a>';}
+
+/* Öne çıkan görselin kaynağı (1.23.1): yazı düzenleme ekranında (gruplarda 'Ayrıntılar' kutusunda zaten var); görselin altında "Görsel: …" olarak çıkar */
+add_action('add_meta_boxes',function(){
+	foreach(['post'] as $pt)add_meta_box('yr_gorsel_kaynak','Görselin kaynağı',function($p){
+		wp_nonce_field('yr_gk','yr_gk_n');
+		echo '<p><label for="yr_gk_kredi">Kime ait / nereden</label><input type="text" class="widefat" id="yr_gk_kredi" name="yr_gk_kredi" value="'.esc_attr(get_post_meta($p->ID,'_yr_gorsel_kredi',true)).'" placeholder="ör. Grubun Instagram hesabı, Fotoğraf: Ad Soyad"></p>';
+		echo '<p><label for="yr_gk_kaynak">Bağlantı (isteğe bağlı)</label><input type="url" class="widefat" id="yr_gk_kaynak" name="yr_gk_kaynak" value="'.esc_attr(get_post_meta($p->ID,'_yr_gorsel_kaynak',true)).'" placeholder="https://"></p>';
+		echo '<p class="description">Yalnızca grubun kendi paylaştığı ya da kullanım izni olan fotoğrafları kullan.</p>';
+	},$pt,'side','low');
+});
+add_action('save_post',function($id){
+	if(!isset($_POST['yr_gk_n'])||!wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['yr_gk_n'])),'yr_gk')||(defined('DOING_AUTOSAVE')&&DOING_AUTOSAVE)||!current_user_can('edit_post',$id))return;
+	$k=sanitize_text_field(wp_unslash($_POST['yr_gk_kredi']??''));$u=esc_url_raw(wp_unslash($_POST['yr_gk_kaynak']??''),['http','https']);
+	if(get_post_type($id)!=='post')return;if($k!=='')update_post_meta($id,'_yr_gorsel_kredi',mb_substr($k,0,120));else delete_post_meta($id,'_yr_gorsel_kredi');
+	if($u!=='')update_post_meta($id,'_yr_gorsel_kaynak',$u);else delete_post_meta($id,'_yr_gorsel_kaynak');
+});
