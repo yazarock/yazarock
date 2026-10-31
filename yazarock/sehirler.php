@@ -185,3 +185,15 @@ add_action('init',function(){
 	wp_update_post(['ID'=>$p[0]->ID,'post_content'=>$c]);
 	if(function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
 },39);
+
+/* Mevcut yazılarda başlıktaki kategori tekrarını sil (mig v26): "Keşif: X" → "X". Adres (slug) değişmez. */
+add_action('init',function(){
+	if(get_option('yr_mig_v26')||!function_exists('yr_baslik_kat_sil'))return;
+	update_option('yr_mig_v26',1);
+	foreach(get_posts(['post_type'=>'post','post_status'=>'any','numberposts'=>-1]) as $p){
+		$c=get_the_category($p->ID);if(!$c)continue;
+		$yeni=yr_baslik_kat_sil($p->post_title,$c[0]->name);
+		if($yeni!==$p->post_title){global $wpdb;$wpdb->update($wpdb->posts,['post_title'=>$yeni],['ID'=>$p->ID]);clean_post_cache($p->ID);}/* içerik filtrelerden geçmesin diye doğrudan */
+	}
+	if(function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
+},40);

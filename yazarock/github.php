@@ -123,12 +123,18 @@ function yr_derleme_cek($manual=false){
 	delete_transient('yr_derleme_kilit');
 	return $out;
 }
+/* Başlık kendi kategorisinin adıyla başlıyorsa ("Keşif: …") o kısmı sil; kategori sitede zaten etiket olarak görünüyor */
+function yr_baslik_kat_sil($b,$kat){
+	if($kat===''||mb_stripos($b,$kat)!==0)return $b;
+	return preg_match('/^.{'.mb_strlen($kat).'}\s*[:–—-]\s*(.{5,})$/us',$b,$m)?$m[1]:$b;
+}
 function yr_derleme_ekle($y){
 	$id=sanitize_key($y['id']??'');$baslik=sanitize_text_field((string)($y['baslik']??''));$icerik=wp_kses_post((string)($y['icerik']??''));
 	if($id===''||mb_strlen($baslik)<5||trim(wp_strip_all_tags($icerik))==='')return false;
 	if(get_posts(['post_type'=>'post','post_status'=>'any','meta_key'=>'_yr_derleme_id','meta_value'=>$id,'numberposts'=>1,'fields'=>'ids']))return false;
 	$icerik.=yr_derleme_kaynak_html($y['kaynaklar']??[]);
 	$kat=sanitize_text_field((string)($y['kategori']??'Haber'));if($kat==='')$kat='Haber';
+	$baslik=yr_baslik_kat_sil($baslik,$kat);
 	$t=get_term_by('name',$kat,'category');if(!$t){$r=wp_insert_term($kat,'category');$tid=is_wp_error($r)?0:(int)$r['term_id'];}else $tid=(int)$t->term_id;
 	$yazar=(int)get_option('yr_derleme_yazar',0);
 	if(!$yazar||!get_userdata($yazar)){$a=get_users(['role'=>'administrator','number'=>1,'fields'=>'ID','orderby'=>'ID']);$yazar=$a?(int)$a[0]:0;}
