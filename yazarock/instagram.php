@@ -6,7 +6,7 @@ add_action('admin_menu',function(){
 	add_menu_page('Instagram Görselleri','Instagram','edit_posts','yr-instagram','yr_ig_sayfa','dashicons-instagram',4);
 });
 add_filter('post_row_actions',function($a,$p){
-	if($p->post_type==='post'&&$p->post_status==='publish'&&current_user_can('edit_posts'))$a['yr_ig']='<a href="'.esc_url(admin_url('admin.php?page=yr-instagram&sekme=yazi&yazi='.$p->ID)).'">Instagram görseli</a>';
+	if(in_array($p->post_type,['post','grup'],true)&&$p->post_status==='publish'&&current_user_can('edit_posts'))$a['yr_ig']='<a href="'.esc_url(admin_url('admin.php?page=yr-instagram&sekme=yazi&yazi='.$p->ID)).'">Instagram görseli</a>';
 	return $a;
 },10,2);
 /* Pazartesi hatırlatması */
@@ -39,7 +39,15 @@ function yr_ig_grup_aday($id){
 	return $o;
 }
 function yr_ig_yazi($id,$grup=0){
-	$p=get_post($id);if(!$p||$p->post_type!=='post')return null;
+	$p=get_post($id);if(!$p||!in_array($p->post_type,['post','grup'],true))return null;
+	if($p->post_type==='grup'){/* grup sayfası: grubun fotoğrafı, adı, şehri ve tanıtımı */
+		$img=get_post_thumbnail_id($id)?wp_get_attachment_image_url(get_post_thumbnail_id($id),'large'):'';
+		$t=get_the_terms($id,'grup_sehir');$sehir=($t&&!is_wp_error($t))?$t[0]->name:'';
+		$stil=function_exists('yr_meta')?(string)yr_meta('stil',$id):'';
+		$ex=has_excerpt($p)?get_the_excerpt($p):wp_trim_words(wp_strip_all_tags(preg_replace('~</(p|h\d|li|div)>|<br\s*/?>~i',' ',$p->post_content)),30);
+		$et=array_filter(array_merge([$p->post_title,$sehir],array_map('trim',preg_split('/[,\/]/',$stil))));
+		return ['baslik'=>html_entity_decode(get_the_title($p),ENT_QUOTES,'UTF-8'),'ozet'=>html_entity_decode(($stil?$stil.'. ':'').$ex,ENT_QUOTES,'UTF-8'),'kat'=>'Grup'.($sehir?' · '.$sehir:''),'etiket'=>$et,'img'=>$img,'url'=>get_permalink($p)];
+	}
 	$c=get_the_category($id);$tags=wp_get_post_tags($id,['fields'=>'names']);
 	$img=get_post_thumbnail_id($id)?wp_get_attachment_image_url(get_post_thumbnail_id($id),'large'):'';
 	if($grup===-1&&!$img){$a=yr_ig_grup_aday($id);if($a)$grup=$a[0];}/* yazının görseli yoksa ilgili grubun fotoğrafı */
@@ -55,9 +63,11 @@ function yr_ig_sayfa(){
 	$sekme=($_GET['sekme']??'')==='yazi'?'yazi':'hafta';
 	$bas=isset($_GET['bas'])&&preg_match('/^\d{4}-\d{2}-\d{2}$/',$_GET['bas'])?$_GET['bas']:current_time('Y-m-d');
 	$yid=(int)($_GET['yazi']??0);$gsec=isset($_GET['gimg'])?(int)$_GET['gimg']:-1;/* -1: otomatik, 0: yazının görseli, >0: seçilen grup */
-	$son=get_posts(['post_type'=>'post','post_status'=>'publish','numberposts'=>30]);
+	$son=get_posts(['post_type'=>'post','post_status'=>'publish','numberposts'=>500]);
+	$gruplar=get_posts(['post_type'=>'grup','post_status'=>'publish','numberposts'=>-1,'orderby'=>'title','order'=>'ASC']);
 	if(!$yid&&$son)$yid=$son[0]->ID;
-	if($yid&&!in_array($yid,wp_list_pluck($son,'ID'),true)&&get_post($yid))array_unshift($son,get_post($yid));
+	if($yid&&get_post_type($yid)==='post'&&!in_array($yid,wp_list_pluck($son,'ID'),true))array_unshift($son,get_post($yid));
+	$grupmu=$yid&&get_post_type($yid)==='grup';
 	$veri=$sekme==='hafta'?yr_ig_hafta($bas):yr_ig_yazi($yid,$gsec);
 	$u=admin_url('admin.php?page=yr-instagram');
 	?>
@@ -68,14 +78,16 @@ function yr_ig_sayfa(){
 		<label>Başlangıç günü <input type="date" name="bas" value="<?php echo esc_attr($bas);?>"></label> <button class="button">Göster</button>
 		<span class="description">Seçilen günden itibaren 7 günün yayındaki konserleri.</span>
 	<?php else:?>
-		<input type="hidden" name="sekme" value="yazi"><label>Yazı <select name="yazi" onchange="this.form.gimg.value='-1';this.form.submit()"><?php foreach($son as $p)echo '<option value="'.$p->ID.'"'.selected($p->ID,$yid,false).'>'.esc_html(wp_trim_words(get_the_title($p),12)).'</option>';?></select></label>
-		<?php $aday=yr_ig_grup_aday($yid);$tum=get_posts(['post_type'=>'grup','post_status'=>'publish','numberposts'=>-1,'meta_key'=>'_thumbnail_id','orderby'=>'title','order'=>'ASC']);?>
+		<input type="hidden" name="sekme" value="yazi"><label>Yazı ya da grup <select name="yazi" style="max-width:420px" onchange="if(this.form.gimg)this.form.gimg.value='-1';this.form.submit()"><?php
+		echo '<optgroup label="Yazılar (en yeniden eskiye)">';foreach($son as $p)echo '<option value="'.$p->ID.'"'.selected($p->ID,$yid,false).'>'.esc_html(get_the_date('j M',$p).' · '.wp_trim_words(get_the_title($p),12)).'</option>';echo '</optgroup>';
+		echo '<optgroup label="Gruplar (A–Z)">';foreach($gruplar as $p)echo '<option value="'.$p->ID.'"'.selected($p->ID,$yid,false).'>'.esc_html($p->post_title).(has_post_thumbnail($p)?'':' (fotoğrafsız)').'</option>';echo '</optgroup>';?></select></label>
+		<?php if(!$grupmu):$aday=yr_ig_grup_aday($yid);$tum=get_posts(['post_type'=>'grup','post_status'=>'publish','numberposts'=>-1,'meta_key'=>'_thumbnail_id','orderby'=>'title','order'=>'ASC']);?>
 		<label style="margin-left:12px">Görsel <select name="gimg" onchange="this.form.submit()">
 			<option value="-1"<?php selected($gsec,-1);?>>Otomatik (yazının görseli, yoksa ilgili grup)</option>
 			<option value="0"<?php selected($gsec,0);?>>Yalnızca yazının kendi görseli</option>
 			<?php if($aday){echo '<optgroup label="Bu yazıdaki gruplar">';foreach($aday as $g)echo '<option value="'.$g.'"'.selected($gsec,$g,false).'>'.esc_html(get_the_title($g)).'</option>';echo '</optgroup>';}
 			echo '<optgroup label="Tüm gruplar (fotoğrafı olanlar)">';foreach($tum as $g)echo '<option value="'.$g->ID.'"'.selected($gsec,$g->ID,false).'>'.esc_html($g->post_title).'</option>';echo '</optgroup>';?>
-		</select></label>
+		</select></label><?php endif;?>
 	<?php endif;?></form>
 	<?php if($sekme==='hafta'&&!empty($veri['e'])):?><fieldset class="yr-ig-sec"><legend><strong>Görsele girecek konserler</strong> — yalnızca öne çıkarmak istediklerini işaretle</legend><?php foreach($veri['e'] as $i=>$e)echo '<label><input type="checkbox" class="yr-ig-k" value="'.$i.'"> '.esc_html(date_i18n('j M',strtotime($e['t'])).' · '.$e['ad'].($e['sehir']?' ('.$e['sehir'].')':'')).'</label>';?><p><button type="button" class="button-link" id="yr-ig-hepsi">Tümünü seç / kaldır</button></p></fieldset><?php endif;?>
 	<div class="yr-ig-in"><div id="yr-ig-gorseller"><p>Görsel hazırlanıyor…</p></div>
@@ -151,7 +163,7 @@ async function yazi(){
 	for(let k=0;k<Math.min(kalan,oz.length);k++){let l=oz[k];if(k===kalan-1&&oz.length>kalan)l=kisalt(c,l+' …',W-140);y+=44;c.fillText(l,70,y)}
 	await logo(c,W-70-230,H-96-30-45,230);
 	alt(c);
-	const m=v.baslik+'\n\n'+v.ozet+'\n\nYazının tamamı yazarock.com\'da: link profilde 👆\n\n#yazarock #rock #metal #underground'+(v.etiket||[]).slice(0,6).map(t=>' #'+t.toLocaleLowerCase('tr-TR').replace(/[^0-9a-zçğıöşü]/g,'')).filter(t=>t.length>2).join('');
+	const m=v.baslik+'\n\n'+v.ozet+'\n\n'+(/^Grup/.test(v.kat||'')?'Grubu tanı, dinle: yazarock.com\'da (link profilde) 👆':'Yazının tamamı yazarock.com\'da: link profilde 👆')+'\n\n#yazarock #rock #metal #underground'+(v.etiket||[]).slice(0,6).map(t=>' #'+t.toLocaleLowerCase('tr-TR').replace(/[^0-9a-zçğıöşü]/g,'')).filter(t=>t.length>2).join('');
 	return [[cv],m];
 }
 async function calis(){
