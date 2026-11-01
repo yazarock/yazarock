@@ -231,3 +231,26 @@ add_action('init',function(){
 		if(function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
 	}
 },43);
+
+/* Draconian: İstanbul (28 Kasım) ve Ankara (29 Kasım) konserleri iptal — taslak yazı güncellenip yayımlanır, takvimdeki iki etkinliğe "İptal" eklenir (mig v29) */
+add_action('init',function(){
+	if(get_option('yr_mig_v29'))return;
+	$p=get_posts(['post_type'=>'post','post_status'=>'any','meta_key'=>'_yr_derleme_id','meta_value'=>'2026-11-01-draconian-istanbul-belirsizlik','numberposts'=>1]);if(!$p)return;
+	update_option('yr_mig_v29',1);
+	$c='<p>İsveçli gotik doom metal grubu <strong>Draconian</strong>\'ın Türkiye\'de vereceği iki konser de iptal edildi. Grup 28 Kasım\'da İstanbul\'da IF Performance Hall Beşiktaş\'ta, 29 Kasım\'da ise Ankara\'da Jolly Joker Ankara\'da sahneye çıkacaktı. Bilet satış platformunda iki gece de artık "iptal edildi" olarak görünüyor.</p>'
+	.'<p>Draconian\'ın sosyal medya hesabından yaptığı açıklamaya göre karar grubun kendisine ait değil. Organizatör firma, Türkiye\'deki mevcut ekonomik koşulları gerekçe göstererek organizasyondan çekildi. Grup, iptalin düşük bilet satışlarından, lojistik sorunlardan ya da resmî bir yasaktan kaynaklanmadığının da altını çizdi.</p>'
+	.'<p>Bilet satın alanlar, ücret iadesi için biletlerini aldıkları platformun iade sürecini takip etmeli. Draconian\'ın Ankara gecesinde açılışı Bulgaristan\'dan The A.X.E. Project yapacaktı.</p>'
+	.'<p>Kasım ayında Türkiye\'de iptal ya da ertelenen tek konser bu değil; son haftalarda başka konserlerde de iptal, erteleme ve organizatör değişiklikleri yaşandı. Konser takvimimizi güncel tutmaya devam ediyoruz.</p>';
+	if(function_exists('yr_derleme_kaynak_html'))$c.=yr_derleme_kaynak_html([
+		['ad'=>'Milliyet Sanat – Kasım konserlerinde iptal, erteleme ve organizatör değişiklikleri','url'=>'https://www.milliyetsanat.com/haberler/diger/kasim-konserlerinde-iptal-erteleme-ve-organizator-degisiklikleri/83738'],
+		['ad'=>'Draconian – resmî açıklama (Instagram)','url'=>'https://www.instagram.com/p/DegnMh1ikLE/'],
+		['ad'=>'Kapak Magazin – Draconian İstanbul','url'=>'https://kapakmagazin.com/etkinlik-takvimi/draconian-istanbul/'],
+	]);
+	wp_update_post(['ID'=>$p[0]->ID,'post_title'=>'Draconian\'ın İstanbul ve Ankara konserleri iptal edildi','post_excerpt'=>'Draconian\'ın 28 Kasım İstanbul ve 29 Kasım Ankara konserleri, organizatörün ekonomik koşullar gerekçesiyle çekilmesi üzerine iptal edildi.','post_content'=>$c,'post_status'=>'publish']);
+	foreach(['2026-10-29-draconian-if-besiktas-2811','2026-10-23-draconian-jolly-joker-ankara-2911'] as $eid){
+		$e=get_posts(['post_type'=>'etkinlik','post_status'=>'any','meta_key'=>'_yr_derleme_id','meta_value'=>$eid,'numberposts'=>1]);if(!$e)continue;$e=$e[0];
+		if(strpos($e->post_title,'İptal')===0)continue;
+		wp_update_post(['ID'=>$e->ID,'post_title'=>'İptal edildi: '.$e->post_title,'post_content'=>'<p><strong>Bu konser iptal edildi.</strong> Organizatör ekonomik koşulları gerekçe göstererek organizasyondan çekildi. Bilet iadesi için biletin alındığı platformun iade sürecini takip edin. <a href="'.esc_url(get_permalink($p[0]->ID)).'">Haberin ayrıntıları</a></p>'.$e->post_content]);
+	}
+	if(function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
+},44);
