@@ -254,3 +254,16 @@ add_action('init',function(){
 	}
 	if(function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
 },44);
+
+/* Haftanın Keşfi: ZeroSpan + EPK yazısı; grubun kadrosu (mig v30) */
+add_action('init',function(){
+	if(get_option('yr_mig_v30'))return;
+	$g=get_posts(['post_type'=>'grup','post_status'=>'publish','title'=>'ZeroSpan','numberposts'=>1]);if(!$g)return;
+	$p=get_page_by_path('groove-ile-progresif-death-metal-arasinda-ilk-album-zerospan',OBJECT,'post');if(!$p||$p->post_status!=='publish')return;
+	update_option('yr_mig_v30',1);
+	foreach(get_posts(['post_type'=>'grup','post_status'=>'any','numberposts'=>-1,'fields'=>'ids','meta_key'=>'_yr_kesif']) as $i)delete_post_meta($i,'_yr_kesif');
+	update_post_meta($g[0]->ID,'_yr_kesif',time());
+	update_post_meta($g[0]->ID,'_yr_kesif_yazi',$p->ID);
+	if(!get_post_meta($g[0]->ID,'_yr_uyeler',true))update_post_meta($g[0]->ID,'_yr_uyeler',"Can Kurtulay – vokal\nYiğit Hiçyılmaz – gitar\nAtaberk Denge – gitar\nAtakan Germiyanoğlu – bas gitar\nMert Gürkan Demir – davul");
+	if(function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
+},45);
