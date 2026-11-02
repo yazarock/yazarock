@@ -30,6 +30,10 @@ if($st):$h=new WP_Query(['posts_per_page'=>5,'ignore_sticky_posts'=>1,'no_found_
 <div class="grid" id="kesfet"><div>
 <?php if(yr_on('kesif')&&($kg=yr_kesif_grup())):?><div class="box kbox"><?php yr_grup_kart($kg->ID,true);?></div><?php endif;?>
 
+<?php if(yr_on('trgrup')&&$tr_say):?><div class="box" style="margin-top:22px"><h2><?php echo esc_html(yr_t('tr_b'));?></h2><div class="bands">
+<?php $g=new WP_Query(['post_type'=>'grup','posts_per_page'=>4,'meta_key'=>'_yr_bolge','meta_value'=>'tr','orderby'=>'date','order'=>'DESC','no_found_rows'=>true]);while($g->have_posts()){$g->the_post();yr_band_card();}wp_reset_postdata();?>
+</div><a class="more" href="<?php echo esc_url(get_post_type_archive_link('grup'));?>"><?php echo esc_html(yr_t('tr_tum'));?></a></div><?php endif;?>
+
 <?php if(yr_on('roportaj')):$rq=$rk?new WP_Query(['post_type'=>'post','cat'=>$rk,'posts_per_page'=>3,'ignore_sticky_posts'=>1,'no_found_rows'=>true]):null;?>
 <div class="box" style="margin-top:22px"><h2><?php echo esc_html(yr_t('rop_b'));?></h2>
 <?php if($rq&&$rq->have_posts()):?><div class="news"><?php while($rq->have_posts()){$rq->the_post();yr_card();}wp_reset_postdata();?></div><a class="more" href="<?php echo esc_url(get_category_link($rk));?>"><?php echo esc_html(yr_t('rop_tum'));?></a> <a class="more" style="margin-left:14px" href="<?php echo esc_url(yr_page_url('garajdan-sahneye'));?>">Grubunla sen de yanıtla →</a>
@@ -48,10 +52,6 @@ $baslik=yr_t('sahne_b');if(!$sq||!$sq->have_posts()){$sq=new WP_Query(['posts_pe
 <?php if(yr_on('etkinlik')):?><div class="box" style="margin-top:22px"><h2><?php echo esc_html(yr_t('etk_b'));?></h2><div class="events">
 <?php $e=yr_events(4);if($e->have_posts()){while($e->have_posts()){$e->the_post();yr_event_card();}}else{echo '<p class="empty-s">'.esc_html(yr_t('etk_bos')).(yr_t('etk_bos_l')!==''?' <a href="'.esc_url($gt).'" style="color:var(--blue);text-decoration:underline">'.esc_html(yr_t('etk_bos_l')).'</a>':'').'</p>';}wp_reset_postdata();?>
 </div><a class="more" href="<?php echo esc_url(get_post_type_archive_link('etkinlik'));?>"><?php echo esc_html(yr_t('etk_tum'));?></a></div><?php endif;?>
-
-<?php if(yr_on('trgrup')&&$tr_say):?><div class="box" style="margin-top:22px"><h2><?php echo esc_html(yr_t('tr_b'));?></h2><div class="bands">
-<?php $g=new WP_Query(['post_type'=>'grup','posts_per_page'=>4,'meta_key'=>'_yr_bolge','meta_value'=>'tr','orderby'=>'date','order'=>'DESC','no_found_rows'=>true]);while($g->have_posts()){$g->the_post();yr_band_card();}wp_reset_postdata();?>
-</div><a class="more" href="<?php echo esc_url(get_post_type_archive_link('grup'));?>"><?php echo esc_html(yr_t('tr_tum'));?></a></div><?php endif;?>
 
 <?php if(yr_on('hafta'))yr_week_box();?>
 </div>
