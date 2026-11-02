@@ -71,6 +71,7 @@ function yr_ek($ad,$tur){
 	$s=mb_strtolower(trim((string)$ad));$son=mb_substr($s,-1);$sesli='';
 	for($i=mb_strlen($s)-1;$i>=0;$i--){$c=mb_substr($s,$i,1);if(mb_strpos('aeıioöuüâ',$c)!==false){$sesli=$c;break;}}
 	$kalin=mb_strpos('aıouâ',$sesli)!==false;$sert=mb_strpos('fstkçşhp',$son)!==false;$unlu=mb_strpos('aeıioöuüâ',$son)!==false;
+	if($tur==='i'){$v=['a'=>'ı','â'=>'ı','ı'=>'ı','o'=>'u','u'=>'u','e'=>'i','i'=>'i','ö'=>'ü','ü'=>'ü'][$sesli]??'i';return "'".($unlu?'y':'').$v;}/* belirtme: Metin'i, Saka'yı, Kara Mesai'yi */
 	if($tur==='in'){$v=['a'=>'ı','â'=>'ı','ı'=>'ı','o'=>'u','u'=>'u','e'=>'i','i'=>'i','ö'=>'ü','ü'=>'ü'][$sesli]??'i';return "'".($unlu?'n':'').$v.'n';}
 	$e=($sert?'t':'d').($kalin?'a':'e');return "'".$e.($tur==='den'?'n':'');
 }
@@ -267,3 +268,19 @@ add_action('init',function(){
 	if(!get_post_meta($g[0]->ID,'_yr_uyeler',true))update_post_meta($g[0]->ID,'_yr_uyeler',"Can Kurtulay – vokal\nYiğit Hiçyılmaz – gitar\nAtaberk Denge – gitar\nAtakan Germiyanoğlu – bas gitar\nMert Gürkan Demir – davul");
 	if(function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
 },45);
+
+/* Röportajlardaki ek hatalarını düzelt: "Kara Mesai'ı" → "Kara Mesai'yi", "Muğla'den" → "Muğla'dan", "türkçe rock" → "Türkçe rock" (mig v32) */
+add_action('init',function(){
+	if(get_option('yr_mig_v32'))return;update_option('yr_mig_v32',1);
+	global $wpdb;
+	foreach(get_posts(['post_type'=>'post','post_status'=>'any','numberposts'=>-1,'s'=>'Garajdan Sahneye']) as $p){
+		if(strpos($p->post_title,'Garajdan Sahneye: ')!==0)continue;
+		$g=html_entity_decode(trim(substr($p->post_title,strlen('Garajdan Sahneye: '))),ENT_QUOTES,'UTF-8');if($g==='')continue;
+		$c=$p->post_content;$x=$p->post_excerpt;
+		$c=preg_replace('/'.preg_quote($g,'/').'[\'’]ı dinlemek ve takip etmek/u',$g.yr_ek($g,'i').' dinlemek ve takip etmek',$c);
+		$c=preg_replace('/(\s)türk(çe)? (rock|metal|punk)/u','$1Türk$2 $3',$c);
+		if(preg_match('/^(.+?)[\'’]den (.+)$/us',$x,$m))$x=$m[1].yr_ek($m[1],'den').' '.$m[2];
+		if($c!==$p->post_content||$x!==$p->post_excerpt){$wpdb->update($wpdb->posts,['post_content'=>$c,'post_excerpt'=>$x],['ID'=>$p->ID]);clean_post_cache($p->ID);}
+	}
+	if(function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
+},47);

@@ -121,7 +121,7 @@ function yr_rp_yazi_olustur($id){
 	$e=function($s){return nl2br(esc_html(trim((string)$s)));};
 	$grup=$p->post_title;$sehir=(string)yr_rp($id,'sehir');$tur=(string)yr_rp($id,'tur');$yil=(string)yr_rp($id,'yil');
 	$C=(array)yr_rp($id,'cevaplar');$L=(array)yr_rp($id,'linkler');$LN=yr_gb_linkler();
-	$giris=esc_html($sehir).' merkezli '.esc_html($grup).', '.esc_html(mb_strtolower($tur)).' çizgisinde müzik yapan bir grup'.($yil?' ('.esc_html($yil).yr_yil_ek($yil).' beri)':'').'. Garajdan Sahneye serisinde grubu kendi ağzından dinliyoruz: nasıl bir araya geldiler, neyi anlatıyorlar ve sırada ne var?';
+	$giris=esc_html($sehir).' merkezli '.esc_html($grup).', '.esc_html(preg_replace_callback('/\\btürk(çe)?\\b/u',function($m){return 'T'.mb_substr($m[0],1);},mb_strtolower($tur))).' çizgisinde müzik yapan bir grup'.($yil?' ('.esc_html($yil).yr_yil_ek($yil).' beri)':'').'. Garajdan Sahneye serisinde grubu kendi ağzından dinliyoruz: nasıl bir araya geldiler, neyi anlatıyorlar ve sırada ne var?';
 	$h='<!-- wp:paragraph {"className":"rop-giris"} --><p class="rop-giris">'.$giris.'</p><!-- /wp:paragraph -->';
 	foreach(yr_rp_sorular() as $k=>$q){$v=trim((string)($C[$k]??''));if($v==='')continue;
 		$h.='<!-- wp:paragraph {"className":"soru"} --><p class="soru"><strong>'.esc_html($q[0]).'</strong></p><!-- /wp:paragraph -->';
@@ -129,10 +129,10 @@ function yr_rp_yazi_olustur($id){
 	$sm=[];if($s=(string)yr_rp($id,'sarki')){$hs=(string)wp_parse_url($s,PHP_URL_HOST);if(strpos($hs,'spotify')!==false)$sm['_yr_spotify']=$s;elseif(strpos($hs,'youtu')!==false)$sm['_yr_youtube']=$s;else $L['sarki']=$s;}/* şarkı yazının altındaki "Dinle & İzle" kutusunda çıkar */
 	$LN['sarki']='Önerilen şarkı';
 	$lk=[];foreach($L as $k=>$u)$lk[]='<a href="'.esc_url($u).'" target="_blank" rel="noopener">'.esc_html($LN[$k]??$k).'</a>';
-	$h.='<!-- wp:paragraph {"className":"rop-kapanis"} --><p class="rop-kapanis">'.esc_html($grup).'\'ı dinlemek ve takip etmek için: '.implode(' · ',$lk).'. Siz de grubunuzla Garajdan Sahneye\'de yer almak isterseniz <a href="'.esc_url(yr_page_url('garajdan-sahneye')).'">soruları yanıtlayın</a>.</p><!-- /wp:paragraph -->';
+	$h.='<!-- wp:paragraph {"className":"rop-kapanis"} --><p class="rop-kapanis">'.esc_html($grup).yr_ek($grup,'i').' dinlemek ve takip etmek için: '.implode(' · ',$lk).'. Siz de grubunuzla Garajdan Sahneye\'de yer almak isterseniz <a href="'.esc_url(yr_page_url('garajdan-sahneye')).'">soruları yanıtlayın</a>.</p><!-- /wp:paragraph -->';
 	$kat=yr_roportaj_kat();if(!$kat){$t=wp_insert_term('Röportaj','category',['slug'=>'roportaj']);$kat=is_wp_error($t)?0:(int)$t['term_id'];}
 	$gid=0;global $wpdb;$gid=(int)$wpdb->get_var($wpdb->prepare("SELECT ID FROM {$wpdb->posts} WHERE post_type='grup' AND post_status IN ('publish','draft') AND post_title=%s LIMIT 1",$grup));
-	$pid=wp_insert_post(wp_slash(['post_type'=>'post','post_status'=>'draft','post_title'=>'Garajdan Sahneye: '.$grup,'post_name'=>sanitize_title('garajdan-sahneye-'.$grup),'post_content'=>$h,'post_excerpt'=>$sehir.'\'den '.$grup.', müziklerini, sahnelerini ve planlarını Yazarock\'a anlattı.','post_category'=>$kat?[$kat]:[],'tags_input'=>array_filter([$grup,$sehir,'Garajdan Sahneye']),'meta_input'=>['_yr_rp_kaynak'=>$id]+$sm+($gid?['_yr_roportaj_grup'=>$gid]:[])]),true);
+	$pid=wp_insert_post(wp_slash(['post_type'=>'post','post_status'=>'draft','post_title'=>'Garajdan Sahneye: '.$grup,'post_name'=>sanitize_title('garajdan-sahneye-'.$grup),'post_content'=>$h,'post_excerpt'=>$sehir.yr_ek($sehir,'den').' '.$grup.', müziklerini, sahnelerini ve planlarını Yazarock\'a anlattı.','post_category'=>$kat?[$kat]:[],'tags_input'=>array_filter([$grup,$sehir,'Garajdan Sahneye']),'meta_input'=>['_yr_rp_kaynak'=>$id]+$sm+($gid?['_yr_roportaj_grup'=>$gid]:[])]),true);
 	if(is_wp_error($pid))return 0;
 	if($f=(int)yr_rp($id,'foto'))set_post_thumbnail($pid,$f);
 	update_post_meta($id,'_rp_yazi_id',$pid);update_post_meta($id,'_rp_durum','taslak');
