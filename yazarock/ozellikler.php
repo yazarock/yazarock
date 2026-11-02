@@ -424,3 +424,20 @@ add_action('save_post',function($id){
 	if(get_post_type($id)!=='post')return;if($k!=='')update_post_meta($id,'_yr_gorsel_kredi',mb_substr($k,0,120));else delete_post_meta($id,'_yr_gorsel_kredi');
 	if($u!=='')update_post_meta($id,'_yr_gorsel_kaynak',$u);else delete_post_meta($id,'_yr_gorsel_kaynak');
 });
+
+/* Öne çıkan görseli olmayan yazıda, yazının içine eklenmiş ilk resim kartlarda ve listelerde kullanılsın (1.23.5) */
+function yr_icerikten_one($id){
+	$p=get_post($id);if(!$p||$p->post_type!=='post'||has_post_thumbnail($id))return;
+	if(!preg_match('/wp-image-(\d+)/',$p->post_content,$m))return;
+	$a=(int)$m[1];if(get_post_type($a)!=='attachment'||!wp_attachment_is_image($a))return;
+	set_post_thumbnail($id,$a);update_post_meta($id,'_yr_one_icerikten',1);
+}
+add_action('save_post_post',function($id){if(wp_is_post_revision($id)||(defined('DOING_AUTOSAVE')&&DOING_AUTOSAVE))return;yr_icerikten_one($id);},20);
+/* Sonradan elle öne çıkan görsel seçilirse işaret kalksın, görsel üstte de gösterilsin */
+add_action('updated_post_meta',function($mid,$id,$key){if($key==='_thumbnail_id'&&get_post_meta($id,'_yr_one_icerikten',true)){$t=(int)get_post_thumbnail_id($id);$c=(string)get_post_field('post_content',$id);if(strpos($c,'wp-image-'.$t)===false)delete_post_meta($id,'_yr_one_icerikten');}},10,3);
+/* Mevcut yazılara bir kez uygula (mig v31) */
+add_action('init',function(){
+	if(get_option('yr_mig_v31'))return;update_option('yr_mig_v31',1);
+	foreach(get_posts(['post_type'=>'post','post_status'=>'publish','numberposts'=>300,'fields'=>'ids','meta_query'=>[['key'=>'_thumbnail_id','compare'=>'NOT EXISTS']]]) as $id)yr_icerikten_one($id);
+	if(function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
+},46);
