@@ -1,0 +1,31 @@
+{
+  "tarih": "2026-11-03",
+  "yazilar": [
+    {
+      "id": "2026-11-03-deep-purple-avrupa-turnesi-ertelendi",
+      "baslik": "Deep Purple, Ian Gillan'ın sağlığı nedeniyle Avrupa turnesinin kalanını erteledi",
+      "ozet": "Leipzig'de acil tıbbi müdahale gerektiren bir sorun yaşayan Ian Gillan, doktorlarının tavsiyesiyle sonbahar Avrupa ve İngiltere konserlerini bıraktı. Yeni tarih henüz yok.",
+      "icerik": "<p>Deep Purple, sonbahar Avrupa turnesinin geri kalanını ileri bir tarihe erteledi. Karar, solist Ian Gillan'ın Almanya'nın Leipzig kentinde hastaneye kaldırılmasının ardından geldi. Grup, 31 Ekim'deki Leipzig QI Arena ve 1 Kasım'daki Hamburg Sporthalle konserlerini zaten iptal etmişti.</p><p>Gillan, 2 Kasım'da yayımladığı açıklamada hayranlarına destekleri için teşekkür etti. Leipzig'de acil hastane tedavisi gerektiren bir sağlık sorunu yaşadığını, turneyi tamamlamayı umsa da devam etmenin ciddi riskler taşıdığını anlattı. Sağlık ekibinin ve menajmanın önerisiyle Avrupa ve İngiltere ayağının kalan tarihlerinin şimdilik ertelendiğini duyurdu ve yaşanan aksaklık için özür diledi.</p><p>Erteleme, grubun <em>Splat!</em> adını taşıyan turnesinin Avrupa bölümünü kapsıyor. Bu ayakta Mammoth'un da yer aldığı İngiltere konserleri bulunuyordu. Biletler ve yeni tarihler konusunda henüz bir açıklama yapılmadı; bilet sahiplerinin satın aldıkları noktaların duyurularını takip etmesi gerekecek.</p>",
+      "kategori": "Haber",
+      "etiketler": ["Deep Purple", "Ian Gillan", "Hard Rock", "Turne"],
+      "kaynaklar": [
+        {"ad": "Blabbermouth", "url": "https://blabbermouth.net/news/deep-purple-cancels-remainder-of-fall-2026-european-tour-on-advice-of-ian-gillans-medical-team"},
+        {"ad": "Blabbermouth (Almanya konserlerinin iptali)", "url": "https://blabbermouth.net/news/deep-purple-cancels-german-shows-due-to-medical-emergency-involving-ian-gillan"}
+      ],
+      "durum": "yayin"
+    },
+    {
+      "id": "2026-11-03-scorpions-2027-avrupa-turnesi",
+      "baslik": "Scorpions 2027'de yeniden Avrupa yollarında: Love, Peace & Rock 'N' Roll Tour",
+      "ozet": "Alman efsane, nisan sonunda Barcelona'da başlayıp temmuzda Milano'da bitecek 24 tarihli bir Avrupa turnesi duyurdu. Listede Türkiye yok.",
+      "icerik": "<p>Scorpions, 2027 ilkbahar ve yazına yayılan yeni bir Avrupa turnesi açıkladı. <em>Love, Peace &amp; Rock 'N' Roll Tour</em> adını taşıyan turne 29 Nisan'da Barcelona'daki Palau Sant Jordi'de başlayacak, 18 Temmuz'da Milano'daki Unipol Arena'da sona erecek.</p><p>Grup bu süre içinde İspanya, Almanya, Polonya, Litvanya, Çekya, Hırvatistan, Avusturya, İsviçre, Hollanda, İsveç, Norveç, İrlanda, İngiltere, Fransa ve İtalya'da sahneye çıkacak. Oslo'da Tons of Rock festivaline, İsveç'te Dalhalla'nın taş ocağı sahnesine ve Fransa'da Nîmes'in Roma arenasına uğrayacak. Avrupa'nın ardından ağustos sonu ve eylül başında Meksika'da iki konser daha var. Açıklanan listede Türkiye tarihi bulunmuyor.</p><p>Biletler 4 Kasım'da ön satışa, 6 Kasım'da genel satışa çıkacak. Grup bu yılın kalan konserlerini, Las Vegas'taki sekiz gecelik programı da dahil olmak üzere ertelemişti; bu program Eylül 2027'ye taşındı. Grubun kuruluşundan bu yana kesintisiz yer alan tek üyesi Rudolf Schenker.</p>",
+      "kategori": "Haber",
+      "etiketler": ["Scorpions", "Hard Rock", "Turne", "2027"],
+      "kaynaklar": [
+        {"ad": "Blabbermouth", "url": "https://blabbermouth.net/news/scorpions-announce-spring-summer-2027-european-tour"}
+      ],
+      "durum": "yayin"
+    }
+  ],
+  "etkinlikler": []
+}
