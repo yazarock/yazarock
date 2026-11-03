@@ -427,7 +427,7 @@ add_action('save_post',function($id){
 
 /* Öne çıkan görseli olmayan yazıda, yazının içine eklenmiş ilk resim kartlarda ve listelerde kullanılsın (1.23.5) */
 function yr_icerikten_one($id){
-	$p=get_post($id);if(!$p||$p->post_type!=='post'||has_post_thumbnail($id))return;
+	$p=get_post($id);if(!$p||!in_array($p->post_type,['post','grup'],true)||has_post_thumbnail($id))return;
 	if(!preg_match('/wp-image-(\d+)/',$p->post_content,$m))return;
 	$a=(int)$m[1];if(get_post_type($a)!=='attachment'||!wp_attachment_is_image($a))return;
 	set_post_thumbnail($id,$a);update_post_meta($id,'_yr_one_icerikten',1);
@@ -441,3 +441,11 @@ add_action('init',function(){
 	foreach(get_posts(['post_type'=>'post','post_status'=>'publish','numberposts'=>300,'fields'=>'ids','meta_query'=>[['key'=>'_thumbnail_id','compare'=>'NOT EXISTS']]]) as $id)yr_icerikten_one($id);
 	if(function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
 },46);
+
+/* Gruplar için de (1.24.1): grup sayfasının içine eklenen ilk resim kart ve kapak görseli olur (mig v33) */
+add_action('save_post_grup',function($id){if(wp_is_post_revision($id)||(defined('DOING_AUTOSAVE')&&DOING_AUTOSAVE))return;yr_icerikten_one($id);},20);
+add_action('init',function(){
+	if(get_option('yr_mig_v33'))return;update_option('yr_mig_v33',1);
+	foreach(get_posts(['post_type'=>'grup','post_status'=>'publish','numberposts'=>-1,'fields'=>'ids','meta_query'=>[['key'=>'_thumbnail_id','compare'=>'NOT EXISTS']]]) as $id)yr_icerikten_one($id);
+	if(function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
+},48);
