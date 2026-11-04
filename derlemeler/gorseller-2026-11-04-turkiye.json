@@ -1,0 +1,334 @@
+{
+ "gorseller": [
+  {
+   "ad": "Saint Howl",
+   "gorsel": "https://f4.bcbits.com/img/0047372486_10.jpg",
+   "kredi": "Saint Howl (Bandcamp)",
+   "kaynak": "https://sainthowl.bandcamp.com"
+  },
+  {
+   "ad": "Righteous Goat",
+   "gorsel": "https://f4.bcbits.com/img/0048285652_10.jpg",
+   "kredi": "Righteous Goat (Bandcamp)",
+   "kaynak": "https://righteousgoat.bandcamp.com"
+  },
+  {
+   "ad": "Dog in the Burning House",
+   "gorsel": "https://f4.bcbits.com/img/0046470662_10.jpg",
+   "kredi": "Dog in the Burning House (Bandcamp)",
+   "kaynak": "https://dogintheburninghouse.bandcamp.com"
+  },
+  {
+   "ad": "ARCHÆIC",
+   "gorsel": "https://f4.bcbits.com/img/0037547329_10.jpg",
+   "kredi": "ARCHÆIC (Bandcamp)",
+   "kaynak": "https://archaeic.bandcamp.com"
+  },
+  {
+   "ad": "Dert Motifi",
+   "gorsel": "https://f4.bcbits.com/img/0042533254_10.jpg",
+   "kredi": "Dert Motifi (Bandcamp)",
+   "kaynak": "https://dertmotifi.bandcamp.com"
+  },
+  {
+   "ad": "Ars Longa",
+   "gorsel": "https://f4.bcbits.com/img/0042131603_10.jpg",
+   "kredi": "Ars Longa (Bandcamp)",
+   "kaynak": "https://arslonga.bandcamp.com"
+  },
+  {
+   "ad": "Nemrud",
+   "gorsel": "https://f4.bcbits.com/img/0047511340_10.jpg",
+   "kredi": "Nemrud (Bandcamp)",
+   "kaynak": "https://nemrud.bandcamp.com"
+  },
+  {
+   "ad": "DEATHROLL",
+   "gorsel": "https://f4.bcbits.com/img/0038243844_10.jpg",
+   "kredi": "DEATHROLL (Bandcamp)",
+   "kaynak": "https://deathrollofficial.bandcamp.com"
+  },
+  {
+   "ad": "Hang Their Bodies",
+   "gorsel": "https://f4.bcbits.com/img/0047351299_10.jpg",
+   "kredi": "Hang Their Bodies (Bandcamp)",
+   "kaynak": "https://hangtheirbodies.bandcamp.com"
+  },
+  {
+   "ad": "Cannibalism",
+   "gorsel": "https://f4.bcbits.com/img/0039958183_10.jpg",
+   "kredi": "Cannibalism (Bandcamp)",
+   "kaynak": "https://cannibalismslam.bandcamp.com"
+  },
+  {
+   "ad": "I Deny",
+   "gorsel": "https://f4.bcbits.com/img/0046615944_10.jpg",
+   "kredi": "I Deny (Bandcamp)",
+   "kaynak": "https://idenyhc.bandcamp.com"
+  },
+  {
+   "ad": "Denosys",
+   "gorsel": "https://f4.bcbits.com/img/0046290923_10.jpg",
+   "kredi": "Denosys (Bandcamp)",
+   "kaynak": "https://denosys.bandcamp.com"
+  },
+  {
+   "ad": "Jornada Del Muerto",
+   "gorsel": "https://f4.bcbits.com/img/0033832028_10.jpg",
+   "kredi": "Jornada Del Muerto (Bandcamp)",
+   "kaynak": "https://jornadadelmuerto.bandcamp.com"
+  },
+  {
+   "ad": "Fuzziliers",
+   "gorsel": "https://f4.bcbits.com/img/0039461817_10.jpg",
+   "kredi": "Fuzziliers (Bandcamp)",
+   "kaynak": "https://fuzziliers.bandcamp.com"
+  },
+  {
+   "ad": "The Gardener",
+   "gorsel": "https://f4.bcbits.com/img/0044703932_10.jpg",
+   "kredi": "The Gardener (Bandcamp)",
+   "kaynak": "https://thegardener2.bandcamp.com"
+  },
+  {
+   "ad": "SÜLFÜR Ensemble",
+   "gorsel": "https://f4.bcbits.com/img/0044741149_10.jpg",
+   "kredi": "SÜLFÜR Ensemble (Bandcamp)",
+   "kaynak": "https://sulfurensemble.bandcamp.com"
+  },
+  {
+   "ad": "Varn",
+   "gorsel": "https://f4.bcbits.com/img/0040353615_10.jpg",
+   "kredi": "Varn (Bandcamp)",
+   "kaynak": "https://varnband666.bandcamp.com"
+  },
+  {
+   "ad": "BABA SAD",
+   "gorsel": "https://f4.bcbits.com/img/0040744204_10.jpg",
+   "kredi": "BABA SAD (Bandcamp)",
+   "kaynak": "https://babasad.bandcamp.com"
+  },
+  {
+   "ad": "Neurodeath",
+   "gorsel": "https://f4.bcbits.com/img/0045000682_10.jpg",
+   "kredi": "Neurodeath (Bandcamp)",
+   "kaynak": "https://neurodeath.bandcamp.com"
+  },
+  {
+   "ad": "Banner of Resistance",
+   "gorsel": "https://f4.bcbits.com/img/0037832865_10.jpg",
+   "kredi": "Banner of Resistance (Bandcamp)",
+   "kaynak": "https://bannerofresistance.bandcamp.com"
+  },
+  {
+   "ad": "Asafated",
+   "gorsel": "https://f4.bcbits.com/img/0041128810_10.jpg",
+   "kredi": "Asafated (Bandcamp)",
+   "kaynak": "https://asafated.bandcamp.com"
+  },
+  {
+   "ad": "Primitive Call",
+   "gorsel": "https://f4.bcbits.com/img/0044594562_10.jpg",
+   "kredi": "Primitive Call (Bandcamp)",
+   "kaynak": "https://primitivecall.bandcamp.com"
+  },
+  {
+   "ad": "Tümör",
+   "gorsel": "https://f4.bcbits.com/img/0042055944_10.jpg",
+   "kredi": "Tümör (Bandcamp)",
+   "kaynak": "https://tumormetal.bandcamp.com"
+  },
+  {
+   "ad": "Amras Numenesse",
+   "gorsel": "https://f4.bcbits.com/img/0047203935_10.jpg",
+   "kredi": "Amras Numenesse (Bandcamp)",
+   "kaynak": "https://amrasnumenesse.bandcamp.com"
+  },
+  {
+   "ad": "HARMAN",
+   "gorsel": "https://f4.bcbits.com/img/0041275412_10.jpg",
+   "kredi": "HARMAN (Bandcamp)",
+   "kaynak": "https://harmanband.bandcamp.com"
+  },
+  {
+   "ad": "Marblesun",
+   "gorsel": "https://f4.bcbits.com/img/0036647539_10.jpg",
+   "kredi": "Marblesun (Bandcamp)",
+   "kaynak": "https://ozmarblesun.bandcamp.com"
+  },
+  {
+   "ad": "Kapital",
+   "gorsel": "https://f4.bcbits.com/img/0041544967_10.jpg",
+   "kredi": "Kapital (Bandcamp)",
+   "kaynak": "https://kapitalankara.bandcamp.com"
+  },
+  {
+   "ad": "Omitten",
+   "gorsel": "https://f4.bcbits.com/img/0042026245_10.jpg",
+   "kredi": "Omitten (Bandcamp)",
+   "kaynak": "https://omitten.bandcamp.com"
+  },
+  {
+   "ad": "SECURSE",
+   "gorsel": "https://f4.bcbits.com/img/0038894537_10.jpg",
+   "kredi": "SECURSE (Bandcamp)",
+   "kaynak": "https://securse.bandcamp.com"
+  },
+  {
+   "ad": "Khepra",
+   "gorsel": "https://f4.bcbits.com/img/0038053741_10.jpg",
+   "kredi": "Khepra (Bandcamp)",
+   "kaynak": "https://khepraofficial.bandcamp.com"
+  },
+  {
+   "ad": "Kâhin",
+   "gorsel": "https://f4.bcbits.com/img/0044554951_10.jpg",
+   "kredi": "Kâhin (Bandcamp)",
+   "kaynak": "https://kahin666.bandcamp.com"
+  },
+  {
+   "ad": "Cheap Genes",
+   "gorsel": "https://f4.bcbits.com/img/0045406349_10.jpg",
+   "kredi": "Cheap Genes (Bandcamp)",
+   "kaynak": "https://cheapgenes.bandcamp.com"
+  },
+  {
+   "ad": "Inhonoratus",
+   "gorsel": "https://f4.bcbits.com/img/0039485651_10.jpg",
+   "kredi": "Inhonoratus (Bandcamp)",
+   "kaynak": "https://lnhonoratus.bandcamp.com"
+  },
+  {
+   "ad": "Booze Serpent",
+   "gorsel": "https://f4.bcbits.com/img/0041242187_10.jpg",
+   "kredi": "Booze Serpent (Bandcamp)",
+   "kaynak": "https://boozeserpent.bandcamp.com"
+  },
+  {
+   "ad": "Pan Klan",
+   "gorsel": "https://f4.bcbits.com/img/0038919178_10.jpg",
+   "kredi": "Pan Klan (Bandcamp)",
+   "kaynak": "https://panklan.bandcamp.com"
+  },
+  {
+   "ad": "Noumenon",
+   "gorsel": "https://f4.bcbits.com/img/0043444261_10.jpg",
+   "kredi": "Noumenon (Bandcamp)",
+   "kaynak": "https://thebandnoumenon.bandcamp.com"
+  },
+  {
+   "ad": "Fraquien",
+   "gorsel": "https://f4.bcbits.com/img/0042250158_10.jpg",
+   "kredi": "Fraquien (Bandcamp)",
+   "kaynak": "https://fraquien.bandcamp.com"
+  },
+  {
+   "ad": "DarkPhase",
+   "gorsel": "https://f4.bcbits.com/img/0035308726_10.jpg",
+   "kredi": "DarkPhase (Bandcamp)",
+   "kaynak": "https://darkphase.bandcamp.com"
+  },
+  {
+   "ad": "Extravasation",
+   "gorsel": "https://f4.bcbits.com/img/0042980613_10.jpg",
+   "kredi": "Extravasation (Bandcamp)",
+   "kaynak": "https://extravasation.bandcamp.com"
+  },
+  {
+   "ad": "Bloodcoven",
+   "gorsel": "https://f4.bcbits.com/img/0043832332_10.jpg",
+   "kredi": "Bloodcoven (Bandcamp)",
+   "kaynak": "https://bloodcovendoom.bandcamp.com"
+  },
+  {
+   "ad": "DOVOLOR",
+   "gorsel": "https://f4.bcbits.com/img/0046598884_10.jpg",
+   "kredi": "DOVOLOR (Bandcamp)",
+   "kaynak": "https://dovolor.bandcamp.com"
+  },
+  {
+   "ad": "neon//ashes",
+   "gorsel": "https://f4.bcbits.com/img/0044925333_10.jpg",
+   "kredi": "neon//ashes (Bandcamp)",
+   "kaynak": "https://neonashes.bandcamp.com"
+  },
+  {
+   "ad": "Taurwen",
+   "gorsel": "https://f4.bcbits.com/img/0048062282_10.jpg",
+   "kredi": "Taurwen (Bandcamp)",
+   "kaynak": "https://taurwenofficial.bandcamp.com"
+  },
+  {
+   "ad": "Slalom Zizek",
+   "gorsel": "https://f4.bcbits.com/img/0041165764_10.jpg",
+   "kredi": "Slalom Zizek (Bandcamp)",
+   "kaynak": "https://slalomzizek.bandcamp.com"
+  },
+  {
+   "ad": "Cursed in Eternity",
+   "gorsel": "https://f4.bcbits.com/img/0041721681_10.jpg",
+   "kredi": "Cursed in Eternity (Bandcamp)",
+   "kaynak": "https://cursedineternity.bandcamp.com"
+  },
+  {
+   "ad": "7shock",
+   "gorsel": "https://f4.bcbits.com/img/0040608915_10.jpg",
+   "kredi": "7shock (Bandcamp)",
+   "kaynak": "https://7shock.bandcamp.com"
+  },
+  {
+   "ad": "Aka",
+   "gorsel": "https://f4.bcbits.com/img/0042232905_10.jpg",
+   "kredi": "Aka (Bandcamp)",
+   "kaynak": "https://akapnk3.bandcamp.com"
+  },
+  {
+   "ad": "Knell",
+   "gorsel": "https://f4.bcbits.com/img/0039196009_10.jpg",
+   "kredi": "Knell (Bandcamp)",
+   "kaynak": "https://weareknell.bandcamp.com"
+  },
+  {
+   "ad": "Nascent",
+   "gorsel": "https://f4.bcbits.com/img/0038781077_10.jpg",
+   "kredi": "Nascent (Bandcamp)",
+   "kaynak": "https://wearenascent.bandcamp.com"
+  },
+  {
+   "ad": "Tomb",
+   "gorsel": "https://f4.bcbits.com/img/0040719496_10.jpg",
+   "kredi": "Tomb (Bandcamp)",
+   "kaynak": "https://tombtr.bandcamp.com"
+  },
+  {
+   "ad": "Direfall",
+   "gorsel": "https://f4.bcbits.com/img/0041983430_10.jpg",
+   "kredi": "Direfall (Bandcamp)",
+   "kaynak": "https://direfall.bandcamp.com"
+  },
+  {
+   "ad": "Wrackpact",
+   "gorsel": "https://f4.bcbits.com/img/0044935562_10.jpg",
+   "kredi": "Wrackpact (Bandcamp)",
+   "kaynak": "https://wrackpact.bandcamp.com"
+  },
+  {
+   "ad": "Hormone Replacements",
+   "gorsel": "https://f4.bcbits.com/img/0045526578_10.jpg",
+   "kredi": "Hormone Replacements (Bandcamp)",
+   "kaynak": "https://hormonereplacements.bandcamp.com"
+  },
+  {
+   "ad": "Brek",
+   "gorsel": "https://f4.bcbits.com/img/0046616963_10.jpg",
+   "kredi": "Brek (Bandcamp)",
+   "kaynak": "https://benbrek.bandcamp.com"
+  },
+  {
+   "ad": "Sren",
+   "gorsel": "https://f4.bcbits.com/img/0039346668_10.jpg",
+   "kredi": "Sren (Bandcamp)",
+   "kaynak": "https://srenscape.bandcamp.com"
+  }
+ ]
+}

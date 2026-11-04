@@ -1,0 +1,1420 @@
+{
+ "gruplar": [
+  {
+   "id": "grup-guns-n-roses",
+   "ad": "Guns N' Roses",
+   "bolge": "world",
+   "tur": "Rock",
+   "stil": "Hard rock",
+   "kurulus": "ABD (Los Angeles) · 1985",
+   "ozet": "Appetite for Destruction ile tarihin en çok satan çıkış albümlerinden birini yapan Los Angeles grubu.",
+   "icerik": "<p>Guns N' Roses, 1985'te Los Angeles'ta kuruldu. Axl Rose, Slash, Izzy Stradlin, Duff McKagan ve Steven Adler'den oluşan klasik kadro, 80'lerin sonunda hard rock'ı yeniden sokağın sesine dönüştürdü.</p><p>1987'de çıkan <em>Appetite for Destruction</em>, \"Welcome to the Jungle\", \"Sweet Child o' Mine\" ve \"Paradise City\" ile tarihin en çok satan çıkış albümlerinden biri oldu. Grup, <em>Use Your Illusion</em> ikilisinin ardından uzun bir aradan sonra 2008'de <em>Chinese Democracy</em>'yi yayımladı; 2016'dan beri Slash ve McKagan'la yeniden sahnede.</p>",
+   "diskografi": [
+    "Appetite for Destruction (1987)",
+    "G N' R Lies (1988)",
+    "Use Your Illusion I & II (1991)",
+    "Chinese Democracy (2008)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Guns_N'_Roses"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-aerosmith",
+   "ad": "Aerosmith",
+   "bolge": "world",
+   "tur": "Rock",
+   "stil": "Hard rock, blues rock",
+   "kurulus": "ABD (Boston) · 1970",
+   "ozet": "Steven Tyler ve Joe Perry'nin \"Amerika'nın en büyük rock grubu\" diye anılan Boston grubu.",
+   "icerik": "<p>Aerosmith, 1970'te Boston'da kuruldu. Steven Tyler, Joe Perry, Tom Hamilton, Joey Kramer ve Brad Whitford'dan oluşan grup, blues temelli hard rock'ıyla Amerika'nın en çok satan rock gruplarından biri oldu.</p><p><em>Toys in the Attic</em> (1975) ve <em>Rocks</em> (1976) klasikleşti; 80'lerin sonunda <em>Permanent Vacation</em> ve <em>Pump</em> ile büyük bir dönüş yaptılar. Grup 2024'te Steven Tyler'ın ses tellerindeki sakatlık nedeniyle turneleri bıraktığını açıkladı.</p>",
+   "diskografi": [
+    "Aerosmith (1973)",
+    "Toys in the Attic (1975)",
+    "Rocks (1976)",
+    "Pump (1989)",
+    "Get a Grip (1993)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Aerosmith"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-kiss",
+   "ad": "Kiss",
+   "bolge": "world",
+   "tur": "Rock",
+   "stil": "Hard rock",
+   "kurulus": "ABD (New York) · 1973",
+   "ozet": "Yüz boyaları ve şov dolu konserleriyle rock tarihine geçen New York grubu.",
+   "icerik": "<p>Kiss, 1973'te New York'ta Paul Stanley, Gene Simmons, Ace Frehley ve Peter Criss tarafından kuruldu. Her üyenin bir karaktere büründüğü yüz boyaları, ateş püskürtmeli ve havai fişekli konserleri grubu efsaneleştirdi.</p><p><em>Alive!</em> (1975) ve <em>Destroyer</em> (1976) grubun zirve yılları oldu; \"Rock and Roll All Nite\" ve \"Detroit Rock City\" marşa dönüştü. Kiss, 2023'te New York'ta veda konserini verdi.</p>",
+   "diskografi": [
+    "Kiss (1974)",
+    "Alive! (1975)",
+    "Destroyer (1976)",
+    "Love Gun (1977)",
+    "Creatures of the Night (1982)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Kiss_(band)"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-scorpions",
+   "ad": "Scorpions",
+   "bolge": "world",
+   "tur": "Rock",
+   "stil": "Hard rock, heavy metal",
+   "kurulus": "Almanya (Hannover) · 1965",
+   "ozet": "\"Wind of Change\" ve \"Still Loving You\"nun sahibi, Almanya'nın en büyük rock grubu.",
+   "icerik": "<p>Scorpions, 1965'te Hannover'de gitarist Rudolf Schenker tarafından kuruldu. Klaus Meine'nin sesi ve Matthias Jabs'ın gitarıyla grup, Almanya'dan dünyaya açılan en başarılı rock grubu oldu.</p><p><em>Lovedrive</em>, <em>Blackout</em> ve <em>Love at First Sting</em> ile 80'lerde zirveye çıkan grubun \"Still Loving You\" ve \"Rock You Like a Hurricane\" şarkıları klasikleşti. 1990'daki \"Wind of Change\", Soğuk Savaş'ın sonunun marşı olarak hatırlanıyor.</p>",
+   "diskografi": [
+    "Lovedrive (1979)",
+    "Blackout (1982)",
+    "Love at First Sting (1984)",
+    "Crazy World (1990)",
+    "Rock Believer (2022)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Scorpions_(band)"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-accept",
+   "ad": "Accept",
+   "bolge": "world",
+   "tur": "Metal",
+   "stil": "Heavy metal",
+   "kurulus": "Almanya (Solingen) · 1976",
+   "ozet": "\"Balls to the Wall\" ve \"Fast as a Shark\" ile speed metale yol açan Alman heavy metal grubu.",
+   "icerik": "<p>Accept, 1976'da Solingen'de kuruldu. Udo Dirkschneider'ın keskin vokali ve Wolf Hoffmann'ın klasik müzikten beslenen gitarıyla Alman heavy metalinin kurucularından oldu.</p><p><em>Restless and Wild</em> (1982) albümünün açılış şarkısı \"Fast as a Shark\" speed metalin ilk örneklerinden sayılıyor; <em>Balls to the Wall</em> (1983) ise grubu dünyaya tanıttı. Grup bugün Hoffmann ve vokalist Mark Tornillo'yla yoluna devam ediyor.</p>",
+   "diskografi": [
+    "Restless and Wild (1982)",
+    "Balls to the Wall (1983)",
+    "Metal Heart (1985)",
+    "Blood of the Nations (2010)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Accept_(band)"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-dio",
+   "ad": "Dio",
+   "bolge": "world",
+   "tur": "Metal",
+   "stil": "Heavy metal",
+   "kurulus": "ABD · 1982",
+   "ozet": "Ronnie James Dio'nun Black Sabbath'tan sonra kurduğu efsanevi heavy metal grubu.",
+   "icerik": "<p>Dio, Ronnie James Dio'nun Black Sabbath'tan ayrıldıktan sonra 1982'de davulcu Vinny Appice'le birlikte kurduğu grup. Rainbow ve Sabbath'la heavy metalin en güçlü seslerinden biri olarak tanınan Dio, bu grupla da türün klasiklerini yaptı.</p><p>İlk albüm <em>Holy Diver</em> (1983), \"Rainbow in the Dark\" ve aynı adlı şarkıyla heavy metalin temel taşlarından biri oldu. Grup, Ronnie James Dio'nun 2010'daki ölümüne kadar on albüm yayımladı.</p>",
+   "diskografi": [
+    "Holy Diver (1983)",
+    "The Last in Line (1984)",
+    "Sacred Heart (1985)",
+    "Dream Evil (1987)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Dio_(band)"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-rainbow",
+   "ad": "Rainbow",
+   "bolge": "world",
+   "tur": "Rock",
+   "stil": "Hard rock",
+   "kurulus": "İngiltere · 1975",
+   "ozet": "Ritchie Blackmore'un Deep Purple'dan sonra kurduğu hard rock grubu.",
+   "icerik": "<p>Rainbow, Ritchie Blackmore'un Deep Purple'dan ayrılmasının ardından 1975'te kuruldu. İlk kadroda Ronnie James Dio vardı; grup daha sonra Graham Bonnet ve Joe Lynn Turner'la çalıştı.</p><p><em>Rising</em> (1976) ve içindeki \"Stargazer\", hard rock ile neoklasik metal arasında bir köprü kurdu. Blackmore, 2016'dan beri Rainbow'u zaman zaman yeni bir kadroyla yeniden sahneye çıkarıyor.</p>",
+   "diskografi": [
+    "Ritchie Blackmore's Rainbow (1975)",
+    "Rising (1976)",
+    "Long Live Rock 'n' Roll (1978)",
+    "Down to Earth (1979)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Rainbow_(rock_band)"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-whitesnake",
+   "ad": "Whitesnake",
+   "bolge": "world",
+   "tur": "Rock",
+   "stil": "Hard rock, blues rock",
+   "kurulus": "İngiltere (Londra) · 1978",
+   "ozet": "David Coverdale'in Deep Purple sonrası kurduğu, \"Here I Go Again\"in grubu.",
+   "icerik": "<p>Whitesnake, David Coverdale'in Deep Purple'dan ayrıldıktan sonra 1978'de Londra'da kurduğu grup. Blues kökenli hard rock'la başlayan grup, 80'lerde parlak bir arena rock sound'una geçti.</p><p>1987'deki <em>Whitesnake</em> albümü, \"Here I Go Again\" ve \"Is This Love\" ile dünya çapında büyük bir başarı yakaladı. Coverdale, grubun kırk yıl boyunca değişmeyen tek üyesi oldu.</p>",
+   "diskografi": [
+    "Trouble (1978)",
+    "Slide It In (1984)",
+    "Whitesnake (1987)",
+    "Slip of the Tongue (1989)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Whitesnake"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-alice-cooper",
+   "ad": "Alice Cooper",
+   "bolge": "world",
+   "tur": "Rock",
+   "stil": "Shock rock, hard rock",
+   "kurulus": "ABD (Detroit) · 1964",
+   "ozet": "Sahne şovlarıyla \"şok rock'ın babası\" sayılan Alice Cooper.",
+   "icerik": "<p>Alice Cooper (Vincent Furnier), hem bir grubun hem de solo kariyerinin adı. Giyotinli, yılanlı ve kanlı sahne şovlarıyla \"şok rock'ın babası\" olarak anılıyor; altmış yılı aşan kariyeri hard rock ve metal sahnesini derinden etkiledi.</p><p>\"School's Out\" ve \"I'm Eighteen\" 70'lerin marşlarındandı; <em>Billion Dollar Babies</em> (1973) ve <em>Welcome to My Nightmare</em> (1975) klasikleşti. 1989'daki <em>Trash</em> ve \"Poison\" ile ikinci bir zirve yaşadı.</p>",
+   "diskografi": [
+    "Love It to Death (1971)",
+    "School's Out (1972)",
+    "Billion Dollar Babies (1973)",
+    "Welcome to My Nightmare (1975)",
+    "Trash (1989)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Alice_Cooper"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-van-halen",
+   "ad": "Van Halen",
+   "bolge": "world",
+   "tur": "Rock",
+   "stil": "Hard rock",
+   "kurulus": "ABD (Pasadena) · 1972",
+   "ozet": "Eddie Van Halen'ın gitarıyla rock çalmayı değiştiren Kaliforniya grubu.",
+   "icerik": "<p>Van Halen, 1972'de Pasadena'da kuruldu. Eddie Van Halen'ın tapping tekniği ve yenilikçi gitar sound'u, bütün bir rock gitaristleri kuşağını etkiledi; David Lee Roth'un sahne enerjisi grubu arenalara taşıdı.</p><p>1978'deki ilk albüm ve \"Eruption\" gitar tarihinin dönüm noktalarından biri oldu. <em>1984</em> albümündeki \"Jump\" grubun en büyük hiti; Sammy Hagar dönemi de birçok bir numaralı albüm getirdi. Grup, Eddie Van Halen'ın 2020'deki ölümüyle sona erdi.</p>",
+   "diskografi": [
+    "Van Halen (1978)",
+    "Women and Children First (1980)",
+    "1984 (1984)",
+    "5150 (1986)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Van_Halen"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-queens-of-the-stone-age",
+   "ad": "Queens of the Stone Age",
+   "bolge": "world",
+   "tur": "Rock",
+   "stil": "Stoner rock, alternatif rock",
+   "kurulus": "ABD (Palm Desert) · 1996",
+   "ozet": "Josh Homme'un Kyuss sonrası kurduğu çöl rock'ının en büyük grubu.",
+   "icerik": "<p>Queens of the Stone Age, Kyuss'ın dağılmasının ardından Josh Homme tarafından 1996'da kuruldu. Grubun tek sabit üyesi Homme; Nick Oliveri, Mark Lanegan ve Dave Grohl gibi isimler farklı dönemlerde gruptan geçti.</p><p><em>Rated R</em> (2000) ve <em>Songs for the Deaf</em> (2002) çöl rock'ını dünyaya taşıdı; \"No One Knows\" grubun en bilinen şarkısı oldu. <em>...Like Clockwork</em> (2013) Billboard'da bir numaraya yerleşti.</p>",
+   "diskografi": [
+    "Queens of the Stone Age (1998)",
+    "Rated R (2000)",
+    "Songs for the Deaf (2002)",
+    "...Like Clockwork (2013)",
+    "In Times New Roman... (2023)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Queens_of_the_Stone_Age"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-foo-fighters",
+   "ad": "Foo Fighters",
+   "bolge": "world",
+   "tur": "Rock",
+   "stil": "Alternatif rock, post-grunge",
+   "kurulus": "ABD (Seattle) · 1994",
+   "ozet": "Nirvana'nın davulcusu Dave Grohl'un tek kişilik projeden stadyum grubuna dönüşen grubu.",
+   "icerik": "<p>Foo Fighters, Nirvana'nın dağılmasının ardından Dave Grohl'un 1994'te tek başına kaydettiği bir proje olarak başladı ve kısa sürede tam bir gruba dönüştü.</p><p>\"Everlong\", \"My Hero\", \"Learn to Fly\" ve \"Best of You\" ile 90'ların ve 2000'lerin en büyük rock gruplarından biri oldu. Davulcu Taylor Hawkins'in 2022'deki ölümünün ardından grup, <em>But Here We Are</em> (2023) ile döndü.</p>",
+   "diskografi": [
+    "Foo Fighters (1995)",
+    "The Colour and the Shape (1997)",
+    "There Is Nothing Left to Lose (1999)",
+    "Wasting Light (2011)",
+    "But Here We Are (2023)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Foo_Fighters"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-red-hot-chili-peppers",
+   "ad": "Red Hot Chili Peppers",
+   "bolge": "world",
+   "tur": "Rock",
+   "stil": "Funk rock, alternatif rock",
+   "kurulus": "ABD (Los Angeles) · 1982",
+   "ozet": "Funk, punk ve rock'ı birleştiren Los Angeles grubu.",
+   "icerik": "<p>Red Hot Chili Peppers, 1982'de Los Angeles'ta kuruldu. Flea'nın funk bası, Anthony Kiedis'in vokali, Chad Smith'in davulu ve John Frusciante'nin gitarı grubun en bilinen kadrosu.</p><p><em>Blood Sugar Sex Magik</em> (1991), \"Under the Bridge\" ve \"Give It Away\" ile grubu dünyaya tanıttı; <em>Californication</em> (1999) ve <em>By the Way</em> (2002) en çok satan albümleri arasında.</p>",
+   "diskografi": [
+    "Blood Sugar Sex Magik (1991)",
+    "Californication (1999)",
+    "By the Way (2002)",
+    "Stadium Arcadium (2006)",
+    "Unlimited Love (2022)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Red_Hot_Chili_Peppers"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-linkin-park",
+   "ad": "Linkin Park",
+   "bolge": "world",
+   "tur": "Rock",
+   "stil": "Nu metal, alternatif rock",
+   "kurulus": "ABD (Agoura Hills) · 1996",
+   "ozet": "Hybrid Theory ile nu metal'in en çok satan albümünü yapan, 2024'te Emily Armstrong'la dönen grup.",
+   "icerik": "<p>Linkin Park, 1996'da Kaliforniya'da kuruldu. Mike Shinoda'nın rap'leri ile Chester Bennington'ın güçlü vokalini rock, elektronik ve hip-hop'la birleştiren grup, 2000'lerin en çok dinlenen gruplarından biri oldu.</p><p>2000'deki <em>Hybrid Theory</em> ve <em>Meteora</em> (2003) nu metal'in zirvesi oldu. Bennington'ın 2017'deki ölümünün ardından ara veren grup, 2024'te vokalist Emily Armstrong'la <em>From Zero</em> albümüyle döndü.</p>",
+   "diskografi": [
+    "Hybrid Theory (2000)",
+    "Meteora (2003)",
+    "Minutes to Midnight (2007)",
+    "From Zero (2024)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Linkin_Park"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-deftones",
+   "ad": "Deftones",
+   "bolge": "world",
+   "tur": "Metal",
+   "stil": "Alternatif metal",
+   "kurulus": "ABD (Sacramento) · 1988",
+   "ozet": "Ağırlığı rüya gibi atmosferlerle birleştiren Sacramento grubu.",
+   "icerik": "<p>Deftones, 1988'de Sacramento'da Chino Moreno, Stephen Carpenter ve Abe Cunningham tarafından kuruldu. Nu metal dalgasıyla anılsa da grup, ağır riff'leri shoegaze ve dream pop'tan gelen atmosferlerle birleştiren kendine has bir sound geliştirdi.</p><p><em>Around the Fur</em> (1997) ve <em>White Pony</em> (2000) grubun mihenk taşları; \"Change (In the House of Flies)\" en bilinen şarkıları arasında. Grup 2025'te <em>Private Music</em>'i yayımladı.</p>",
+   "diskografi": [
+    "Adrenaline (1995)",
+    "Around the Fur (1997)",
+    "White Pony (2000)",
+    "Diamond Eyes (2010)",
+    "Private Music (2025)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Deftones"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-faith-no-more",
+   "ad": "Faith No More",
+   "bolge": "world",
+   "tur": "Rock",
+   "stil": "Alternatif metal, deneysel rock",
+   "kurulus": "ABD (San Francisco) · 1979",
+   "ozet": "Mike Patton'la funk, metal ve rap'i karıştıran San Francisco grubu.",
+   "icerik": "<p>Faith No More, 1979'da San Francisco'da kuruldu. 1988'de vokale Mike Patton'ın gelmesiyle grup, funk, metal, rap ve progresif rock'ı karıştıran deneysel sound'uyla alternatif metalin öncülerinden oldu.</p><p><em>The Real Thing</em> (1989) ve \"Epic\" grubu dünyaya tanıttı; <em>Angel Dust</em> (1992) ise en etkili albümlerinden biri sayılıyor. Grup 2015'te <em>Sol Invictus</em>'la döndü.</p>",
+   "diskografi": [
+    "The Real Thing (1989)",
+    "Angel Dust (1992)",
+    "King for a Day... Fool for a Lifetime (1995)",
+    "Sol Invictus (2015)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Faith_No_More"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-ramones",
+   "ad": "Ramones",
+   "bolge": "world",
+   "tur": "Rock",
+   "stil": "Punk rock",
+   "kurulus": "ABD (New York) · 1974",
+   "ozet": "Kısa, hızlı ve basit şarkılarıyla punk'ı başlatan Queens grubu.",
+   "icerik": "<p>Ramones, 1974'te New York'un Queens semtinde kuruldu. Hepsi \"Ramone\" soyadını kullanan dört üye, iki dakikalık hızlı ve yalın şarkılarıyla punk rock'ın ilk gruplarından biri oldu.</p><p>1976'daki ilk albüm ve \"Blitzkrieg Bop\" punk'ın başlangıç noktalarından sayılıyor. Ticari olarak büyük hit yapmasalar da sayısız grubu etkilediler; 1996'da veda ettiler.</p>",
+   "diskografi": [
+    "Ramones (1976)",
+    "Leave Home (1977)",
+    "Rocket to Russia (1977)",
+    "Road to Ruin (1978)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Ramones"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-the-clash",
+   "ad": "The Clash",
+   "bolge": "world",
+   "tur": "Rock",
+   "stil": "Punk rock, post-punk",
+   "kurulus": "İngiltere (Londra) · 1976",
+   "ozet": "\"Önemli olan tek grup\" diye anılan, punk'ı reggae ve ska'yla birleştiren Londra grubu.",
+   "icerik": "<p>The Clash, 1976'da Londra'da kuruldu. Joe Strummer ve Mick Jones'un liderliğindeki grup, İngiliz punk'ının ilk dalgasının en etkili gruplarından biri oldu; politik sözlerini reggae, dub, ska ve rockabilly'yle harmanladı.</p><p>1979'daki <em>London Calling</em> tüm zamanların en iyi rock albümleri listelerinde üst sıralarda yer alıyor. \"Should I Stay or Should I Go\" ve \"Rock the Casbah\" grubun en bilinen şarkıları.</p>",
+   "diskografi": [
+    "The Clash (1977)",
+    "London Calling (1979)",
+    "Sandinista! (1980)",
+    "Combat Rock (1982)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/The_Clash"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-misfits",
+   "ad": "Misfits",
+   "bolge": "world",
+   "tur": "Rock",
+   "stil": "Horror punk",
+   "kurulus": "ABD (Lodi, New Jersey) · 1977",
+   "ozet": "Korku filmlerini punk'la buluşturan, horror punk'ın öncüsü.",
+   "icerik": "<p>Misfits, 1977'de New Jersey'de Glenn Danzig tarafından kuruldu. Punk'ı korku filmi temaları ve görselliğiyle birleştiren grup, horror punk türünün öncüsü sayılıyor; kurukafa logosu metal ve punk tişörtlerinin değişmezlerinden biri oldu.</p><p><em>Walk Among Us</em> (1982) ve \"Last Caress\", \"Skulls\" gibi şarkılar Metallica'dan sayısız gruba ilham verdi. Danzig ve Jerry Only, 2016'dan beri klasik kadroyla zaman zaman sahneye çıkıyor.</p>",
+   "diskografi": [
+    "Walk Among Us (1982)",
+    "Earth A.D./Wolfs Blood (1983)",
+    "Static Age (1997)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Misfits_(band)"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-bad-religion",
+   "ad": "Bad Religion",
+   "bolge": "world",
+   "tur": "Rock",
+   "stil": "Melodik punk",
+   "kurulus": "ABD (Los Angeles) · 1980",
+   "ozet": "Akıllı sözleri ve üçlü vokal armonileriyle melodik punk'ın kurucusu.",
+   "icerik": "<p>Bad Religion, 1980'de Los Angeles'ta kuruldu. Din, siyaset, toplum ve bilim üzerine yazdığı sözleri ve üçlü vokal armonileriyle melodik punk'ın en etkili gruplarından biri.</p><p><em>Suffer</em> (1988) ve <em>No Control</em> (1989) 90'ların punk patlamasının zeminini hazırladı. Gitarist Brett Gurewitz'in kurduğu Epitaph Records ise sayısız punk grubuna ev sahipliği yaptı.</p>",
+   "diskografi": [
+    "Suffer (1988)",
+    "No Control (1989)",
+    "Against the Grain (1990)",
+    "Stranger than Fiction (1994)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Bad_Religion"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-converge",
+   "ad": "Converge",
+   "bolge": "world",
+   "tur": "Metal",
+   "stil": "Metalcore, hardcore",
+   "kurulus": "ABD (Salem) · 1990",
+   "ozet": "Jane Doe ile metalcore'un en önemli albümlerinden birini yapan Massachusetts grubu.",
+   "icerik": "<p>Converge, 1990'da Jacob Bannon ve Kurt Ballou tarafından Massachusetts'te kuruldu. Hardcore punk'ı metalin karmaşıklığı ve kaotik yapılarla birleştiren grup, metalcore ve mathcore'un en etkili isimlerinden.</p><p>2001'deki <em>Jane Doe</em> türün en önemli albümlerinden biri kabul ediliyor. Kurt Ballou, aynı zamanda sahnenin en çok aranan prodüktörlerinden biri.</p>",
+   "diskografi": [
+    "Jane Doe (2001)",
+    "You Fail Me (2004)",
+    "Axe to Fall (2009)",
+    "The Dusk in Us (2017)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Converge_(band)"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-neurosis",
+   "ad": "Neurosis",
+   "bolge": "world",
+   "tur": "Metal",
+   "stil": "Post-metal, sludge",
+   "kurulus": "ABD (Oakland) · 1985",
+   "ozet": "Crust punk'tan doğup post-metal'i yaratan Oakland grubu.",
+   "icerik": "<p>Neurosis, 1985'te Oakland'da bir crust punk grubu olarak kuruldu. Zamanla sludge metal, post-rock ve deneysel müziği birleştiren devasa, ağır bir sound'a ulaştı ve \"post-metal\" türünün kurucularından oldu.</p><p><em>Souls at Zero</em> (1992), <em>Through Silver in Blood</em> (1996) ve <em>Times of Grace</em> (1999) sayısız grubu etkiledi.</p>",
+   "diskografi": [
+    "Souls at Zero (1992)",
+    "Through Silver in Blood (1996)",
+    "Times of Grace (1999)",
+    "Fires Within Fires (2016)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Neurosis_(band)"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-electric-wizard",
+   "ad": "Electric Wizard",
+   "bolge": "world",
+   "tur": "Metal",
+   "stil": "Doom / stoner metal",
+   "kurulus": "İngiltere (Dorset) · 1993",
+   "ozet": "Dopethrone ile doom metalin en ağır albümlerinden birini yapan Dorset grubu.",
+   "icerik": "<p>Electric Wizard, İngiltere'nin Dorset bölgesinden bir doom / stoner metal grubu. Jus Oborn liderliğindeki grup, korku filmlerinden ve okültizmden beslenen, son derece ağır ve fuzz dolu bir sound'la tanınıyor.</p><p><em>Come My Fanatics...</em> (1997) ve <em>Dopethrone</em> (2000) türün kilometre taşları olarak kabul ediliyor.</p>",
+   "diskografi": [
+    "Come My Fanatics... (1997)",
+    "Dopethrone (2000)",
+    "Witchcult Today (2007)",
+    "Wizard Bloody Wizard (2017)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Electric_Wizard"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-celtic-frost",
+   "ad": "Celtic Frost",
+   "bolge": "world",
+   "tur": "Metal",
+   "stil": "Ekstrem metal",
+   "kurulus": "İsviçre (Zürih) · 1984",
+   "ozet": "Black, death ve doom metali derinden etkileyen avangart İsviçre grubu.",
+   "icerik": "<p>Celtic Frost, 1984'te Zürih'te Tom G. Warrior (Thomas Gabriel Fischer) ve Martin Eric Ain tarafından kuruldu. Grubun erken dönem işleri black, death ve doom metalin oluşumunda belirleyici oldu; avangart yaklaşımıyla da dikkat çekti.</p><p><em>Morbid Tales</em> (1984) ve <em>To Mega Therion</em> (1985) ekstrem metalin temel albümleri arasında. Grup 2006'da <em>Monotheist</em> ile son albümünü yayımladı.</p>",
+   "diskografi": [
+    "Morbid Tales (1984)",
+    "To Mega Therion (1985)",
+    "Into the Pandemonium (1987)",
+    "Monotheist (2006)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Celtic_Frost"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-darkthrone",
+   "ad": "Darkthrone",
+   "bolge": "world",
+   "tur": "Metal",
+   "stil": "Black metal",
+   "kurulus": "Norveç (Kolbotn) · 1986",
+   "ozet": "Norveç black metalinin öncülerinden, Fenriz ve Nocturno Culto ikilisi.",
+   "icerik": "<p>Darkthrone, 1986'da Norveç'te bir death metal grubu olarak kuruldu ve 90'ların başında black metale geçerek Norveç sahnesinin öncülerinden oldu. Grup uzun zamandır Fenriz ve Nocturno Culto'dan oluşan bir ikili.</p><p><em>A Blaze in the Northern Sky</em> (1992), <em>Under a Funeral Moon</em> (1993) ve <em>Transilvanian Hunger</em> (1994) black metalin \"klasik üçlemesi\" sayılıyor. Grup son yıllarda heavy metal ve crust punk'tan da beslenen albümler yapıyor.</p>",
+   "diskografi": [
+    "A Blaze in the Northern Sky (1992)",
+    "Under a Funeral Moon (1993)",
+    "Transilvanian Hunger (1994)",
+    "It Beckons Us All (2024)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Darkthrone"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-immortal",
+   "ad": "Immortal",
+   "bolge": "world",
+   "tur": "Metal",
+   "stil": "Black metal",
+   "kurulus": "Norveç (Bergen) · 1991",
+   "ozet": "Abbath ve Demonaz'ın kurduğu, \"Blashyrkh\" efsanesini yaratan Bergen grubu.",
+   "icerik": "<p>Immortal, 1991'de Bergen'de Abbath ve Demonaz tarafından kuruldu. Hayali kuzey diyarı \"Blashyrkh\"ı anlatan şarkıları, yüz boyaları ve buzlu imgeleriyle Norveç black metalinin en tanınan gruplarından biri oldu.</p><p><em>At the Heart of Winter</em> (1999) ve <em>Sons of Northern Darkness</em> (2002) grubun en beğenilen albümleri arasında.</p>",
+   "diskografi": [
+    "Pure Holocaust (1993)",
+    "At the Heart of Winter (1999)",
+    "Sons of Northern Darkness (2002)",
+    "War Against All (2023)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Immortal_(band)"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-carcass",
+   "ad": "Carcass",
+   "bolge": "world",
+   "tur": "Metal",
+   "stil": "Grindcore, melodik death metal",
+   "kurulus": "İngiltere (Liverpool) · 1985",
+   "ozet": "Grindcore'dan melodik death metale uzanan Liverpool grubu.",
+   "icerik": "<p>Carcass, 1985'te Liverpool'da kuruldu. Grindcore'un öncülerinden olan grup, zamanla melodik death metale geçti. Gitarist Bill Steer ve basçı-vokalist Jeff Walker grubun değişmeyen üyeleri.</p><p><em>Heartwork</em> (1993) melodik death metalin en etkili albümlerinden biri. 1996'da dağılan grup 2007'de yeniden bir araya geldi ve <em>Torn Arteries</em>'i (2021) yayımladı.</p>",
+   "diskografi": [
+    "Reek of Putrefaction (1988)",
+    "Necroticism (1991)",
+    "Heartwork (1993)",
+    "Torn Arteries (2021)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Carcass_(band)"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-morbid-angel",
+   "ad": "Morbid Angel",
+   "bolge": "world",
+   "tur": "Metal",
+   "stil": "Death metal",
+   "kurulus": "ABD (Tampa) · 1983",
+   "ozet": "Tampa'dan, death metalin kurucusu sayılan gruplardan biri.",
+   "icerik": "<p>Morbid Angel, 1983'te Tampa'da gitarist Trey Azagthoth tarafından kuruldu. Hırıltılı vokaller, blast beat'ler ve karmaşık tempo değişimleriyle death metalin şekillenmesinde belirleyici oldu.</p><p><em>Altars of Madness</em> (1989) türün en önemli çıkış albümlerinden biri; <em>Blessed Are the Sick</em> ve <em>Covenant</em> ile Florida death metalinin zirvesine oturdu.</p>",
+   "diskografi": [
+    "Altars of Madness (1989)",
+    "Blessed Are the Sick (1991)",
+    "Covenant (1993)",
+    "Kingdoms Disdained (2017)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Morbid_Angel"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-obituary",
+   "ad": "Obituary",
+   "bolge": "world",
+   "tur": "Metal",
+   "stil": "Death metal",
+   "kurulus": "ABD (Tampa) · 1984",
+   "ozet": "Ağır ve yavaş riffleriyle Florida death metalinin en başarılı gruplarından.",
+   "icerik": "<p>Obituary, 1984'te Tampa'da kuruldu. Ağır, yavaş ve boğuk riffleri ile John Tardy'nin kendine has vokali, death metalin oluşumunda belirleyici oldu; grup türün en başarılı isimlerinden biri.</p><p><em>Slowly We Rot</em> (1989) ve <em>Cause of Death</em> (1990) klasikleşti; grup bugün de düzenli albüm yapıp turneye çıkıyor.</p>",
+   "diskografi": [
+    "Slowly We Rot (1989)",
+    "Cause of Death (1990)",
+    "The End Complete (1992)",
+    "Dying of Everything (2023)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Obituary_(band)"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-testament",
+   "ad": "Testament",
+   "bolge": "world",
+   "tur": "Metal",
+   "stil": "Thrash metal",
+   "kurulus": "ABD (Berkeley) · 1983",
+   "ozet": "Körfez Bölgesi thrash metalinin büyüklerinden Testament.",
+   "icerik": "<p>Testament, 1983'te Berkeley'de Legacy adıyla kuruldu. Chuck Billy'nin vokali ve Eric Peterson ile Alex Skolnick'in gitarlarıyla Körfez Bölgesi thrash metalinin en önemli gruplarından biri oldu.</p><p><em>The Legacy</em> (1987) ve <em>The New Order</em> (1988) türün klasikleri arasında; <em>The Gathering</em> (1999) ise grubun en ağır albümlerinden biri.</p>",
+   "diskografi": [
+    "The Legacy (1987)",
+    "The New Order (1988)",
+    "Practice What You Preach (1989)",
+    "The Gathering (1999)",
+    "Para Bellum (2025)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Testament_(band)"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-exodus",
+   "ad": "Exodus",
+   "bolge": "world",
+   "tur": "Metal",
+   "stil": "Thrash metal",
+   "kurulus": "ABD (Richmond) · 1979",
+   "ozet": "Bonded by Blood ile thrash metalin temel taşlarından birini koyan Körfez grubu.",
+   "icerik": "<p>Exodus, 1979'da Kaliforniya'da kuruldu ve Körfez Bölgesi thrash sahnesinin ilk gruplarından biri oldu. Kirk Hammett Metallica'ya geçmeden önce bu grupta çalıyordu; gitarist Gary Holt grubun lokomotifi.</p><p>1985'teki <em>Bonded by Blood</em> thrash metalin en etkili çıkış albümlerinden biri kabul ediliyor.</p>",
+   "diskografi": [
+    "Bonded by Blood (1985)",
+    "Pleasures of the Flesh (1987)",
+    "Fabulous Disaster (1989)",
+    "Persona Non Grata (2021)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Exodus_(band)"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-sodom",
+   "ad": "Sodom",
+   "bolge": "world",
+   "tur": "Metal",
+   "stil": "Thrash metal",
+   "kurulus": "Almanya (Gelsenkirchen) · 1982",
+   "ozet": "Tom Angelripper'ın Alman thrash metalinin \"büyük üçlüsü\"nden grubu.",
+   "icerik": "<p>Sodom, 1982'de Gelsenkirchen'de kuruldu. Kreator ve Destruction'la birlikte Alman thrash metalinin \"büyük üçlüsü\" arasında sayılıyor. Basçı-vokalist Tom Angelripper grubun değişmeyen tek üyesi.</p><p><em>Persecution Mania</em> (1987) ve <em>Agent Orange</em> (1989) grubun en bilinen albümleri.</p>",
+   "diskografi": [
+    "Persecution Mania (1987)",
+    "Agent Orange (1989)",
+    "Tapping the Vein (1992)",
+    "The Arsonist (2025)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Sodom_(band)"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-katatonia",
+   "ad": "Katatonia",
+   "bolge": "world",
+   "tur": "Metal",
+   "stil": "Progresif metal, gotik doom",
+   "kurulus": "İsveç (Stockholm) · 1991",
+   "ozet": "Death-doom'dan melankolik progresif metale uzanan Stockholm grubu.",
+   "icerik": "<p>Katatonia, 1991'de Stockholm'de Jonas Renkse ve Anders Nyström tarafından kuruldu. Death-doom ile başlayan grup, zamanla melankolik, atmosferik ve progresif bir rock/metal sound'una evrildi.</p><p><em>Brave Murder Day</em> (1996), <em>The Great Cold Distance</em> (2006) ve <em>Night Is the New Day</em> (2009) en beğenilen albümleri arasında.</p>",
+   "diskografi": [
+    "Brave Murder Day (1996)",
+    "Last Fair Deal Gone Down (2001)",
+    "The Great Cold Distance (2006)",
+    "Nightmares as Extensions of the Waking State (2025)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Katatonia"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-anathema",
+   "ad": "Anathema",
+   "bolge": "world",
+   "tur": "Rock",
+   "stil": "Atmosferik rock, doom metal",
+   "kurulus": "İngiltere (Liverpool) · 1990",
+   "ozet": "Doom metalden atmosferik rock'a uzanan Cavanagh kardeşlerin grubu.",
+   "icerik": "<p>Anathema, 1990'da Liverpool'da Cavanagh kardeşler tarafından kuruldu. My Dying Bride ve Paradise Lost'la birlikte İngiliz death-doom'unun öncülerindendi; zamanla atmosferik ve duygusal bir rock'a yöneldi.</p><p><em>Alternative 4</em> (1998), <em>Judgement</em> (1999) ve <em>We're Here Because We're Here</em> (2010) grubun dönüm noktaları.</p>",
+   "diskografi": [
+    "The Silent Enigma (1995)",
+    "Alternative 4 (1998)",
+    "Judgement (1999)",
+    "Weather Systems (2012)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Anathema_(band)"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-my-dying-bride",
+   "ad": "My Dying Bride",
+   "bolge": "world",
+   "tur": "Metal",
+   "stil": "Death-doom, gotik metal",
+   "kurulus": "İngiltere (Bradford) · 1990",
+   "ozet": "Keman ve melankoliyle death-doom'un öncülerinden Bradford grubu.",
+   "icerik": "<p>My Dying Bride, 1990'da Bradford'da kuruldu. Anathema ve Paradise Lost'la birlikte death-doom türünün öncülerinden; kemanı ve şiirsel, kederli sözleriyle tanınıyor.</p><p><em>Turn Loose the Swans</em> (1993) ve <em>The Angel and the Dark River</em> (1995) türün klasikleri arasında.</p>",
+   "diskografi": [
+    "As the Flower Withers (1992)",
+    "Turn Loose the Swans (1993)",
+    "The Angel and the Dark River (1995)",
+    "A Mortal Binding (2024)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/My_Dying_Bride"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-within-temptation",
+   "ad": "Within Temptation",
+   "bolge": "world",
+   "tur": "Metal",
+   "stil": "Senfonik metal",
+   "kurulus": "Hollanda · 1996",
+   "ozet": "Sharon den Adel'in sesiyle senfonik metalin en büyük gruplarından.",
+   "icerik": "<p>Within Temptation, 1996'da vokalist Sharon den Adel ve gitarist Robert Westerholt tarafından Hollanda'da kuruldu. Senfonik metalin en çok satan gruplarından biri.</p><p><em>Mother Earth</em> (2000) ve <em>The Silent Force</em> (2004) Avrupa'da büyük ilgi gördü; <em>The Heart of Everything</em> (2007) ve \"What Have You Done\" grubu dünyaya taşıdı.</p>",
+   "diskografi": [
+    "Mother Earth (2000)",
+    "The Silent Force (2004)",
+    "The Heart of Everything (2007)",
+    "Bleed Out (2023)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Within_Temptation"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-epica",
+   "ad": "Epica",
+   "bolge": "world",
+   "tur": "Metal",
+   "stil": "Senfonik metal",
+   "kurulus": "Hollanda · 2002",
+   "ozet": "Simone Simons'ın sesiyle senfonik, death ve progresif metali birleştiren grup.",
+   "icerik": "<p>Epica, Mark Jansen'in After Forever'dan ayrılmasının ardından 2002'de Hollanda'da kuruldu. Simone Simons'ın vokaliyle senfonik metali death metal ve progresif metal unsurlarıyla birleştiriyor.</p><p><em>The Divine Conspiracy</em> (2007), <em>Design Your Universe</em> (2009) ve <em>The Quantum Enigma</em> (2014) en beğenilen albümleri arasında.</p>",
+   "diskografi": [
+    "The Phantom Agony (2003)",
+    "The Divine Conspiracy (2007)",
+    "Design Your Universe (2009)",
+    "Aspiral (2025)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Epica_(band)"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-children-of-bodom",
+   "ad": "Children of Bodom",
+   "bolge": "world",
+   "tur": "Metal",
+   "stil": "Melodik death metal",
+   "kurulus": "Finlandiya (Espoo) · 1993",
+   "ozet": "Alexi Laiho'nun gitarıyla melodik death metalin en hızlı gruplarından.",
+   "icerik": "<p>Children of Bodom, 1993'te Espoo'da kuruldu. Alexi Laiho'nun virtüöz gitarı ve Janne Wirman'ın klavyesiyle melodik death metale neoklasik ve power metal tadı kattı.</p><p><em>Hatebreeder</em> (1999), <em>Follow the Reaper</em> (2000) ve <em>Hate Crew Deathroll</em> (2003) grubun zirve dönemi. Grup 2019'da dağıldı; Laiho 2020'de hayatını kaybetti.</p>",
+   "diskografi": [
+    "Hatebreeder (1999)",
+    "Follow the Reaper (2000)",
+    "Hate Crew Deathroll (2003)",
+    "Hexed (2019)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Children_of_Bodom"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-amorphis",
+   "ad": "Amorphis",
+   "bolge": "world",
+   "tur": "Metal",
+   "stil": "Progresif metal, melodik death metal",
+   "kurulus": "Finlandiya (Helsinki) · 1990",
+   "ozet": "Kalevala destanından beslenen Fin progresif metal grubu.",
+   "icerik": "<p>Amorphis, 1990'da Helsinki'de kuruldu. Death metalle başlayan grup zamanla progresif, folk ve melodik death metale yöneldi; sözlerinde sık sık Fin ulusal destanı Kalevala'dan yararlanıyor.</p><p><em>Tales from the Thousand Lakes</em> (1994) grubun dönüm noktası; <em>Skyforger</em> (2009) ve <em>Queen of Time</em> (2018) son dönemin öne çıkan albümleri.</p>",
+   "diskografi": [
+    "Tales from the Thousand Lakes (1994)",
+    "Elegy (1996)",
+    "Skyforger (2009)",
+    "Queen of Time (2018)",
+    "Borderland (2025)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Amorphis"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-wardruna",
+   "ad": "Wardruna",
+   "bolge": "world",
+   "tur": "Alternatif",
+   "stil": "Nordik folk",
+   "kurulus": "Norveç · 2003",
+   "ozet": "Eski Kuzey enstrümanlarıyla Norse geleneğini müziğe döken grup.",
+   "icerik": "<p>Wardruna, 2003'te Einar Selvik tarafından Norveç'te kuruldu. Norse kültürünü ve geleneklerini, geyik derisinden davullar, flütler, keçi boynuzu ve tarihî Kuzey enstrümanlarıyla müziğe döküyor.</p><p><em>Runaljod</em> üçlemesi grubu tanıttı; müzikleri <em>Vikings</em> dizisiyle geniş kitlelere ulaştı. Grup metal dinleyicisinin de çok sevdiği bir isim.</p>",
+   "diskografi": [
+    "Runaljod – Gap var Ginnunga (2009)",
+    "Runaljod – Yggdrasil (2013)",
+    "Skald (2018)",
+    "Kvitravn (2021)",
+    "Birna (2025)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Wardruna"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-heilung",
+   "ad": "Heilung",
+   "bolge": "world",
+   "tur": "Alternatif",
+   "stil": "Deneysel folk",
+   "kurulus": "Danimarka · 2014",
+   "ozet": "Demir Çağı metinlerini \"erken orta çağ Kuzey Avrupa'sının yükseltilmiş tarihi\"ne dönüştüren grup.",
+   "icerik": "<p>Heilung, 2014'te Kopenhag'da kuruldu; üyeleri Danimarka, Norveç ve Almanya'dan. Müzikleri Demir Çağı ve Viking Çağı'ndan kalma metinlere ve run yazıtlarına dayanıyor; kendilerini \"erken orta çağ Kuzey Avrupa'sının yükseltilmiş tarihi\" olarak tanımlıyorlar.</p><p>Ritüel havasındaki konserleri metal festivallerinde de büyük ilgi görüyor.</p>",
+   "diskografi": [
+    "Ofnir (2015)",
+    "Futha (2019)",
+    "Drif (2022)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Heilung"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-alcest",
+   "ad": "Alcest",
+   "bolge": "world",
+   "tur": "Metal",
+   "stil": "Blackgaze, post-black metal",
+   "kurulus": "Fransa · 2000",
+   "ozet": "Neige'in black metali shoegaze'le buluşturup blackgaze'i doğuran projesi.",
+   "icerik": "<p>Alcest, 2000'de Neige (Stéphane Paut) tarafından Fransa'da black metal projesi olarak kuruldu. Neige, black metale shoegaze'in hayalî ve aydınlık atmosferini ekleyerek \"blackgaze\" türünün doğuşunda belirleyici oldu.</p><p><em>Souvenirs d'un autre monde</em> (2007) ve <em>Écailles de lune</em> (2010) türün temel albümleri sayılıyor.</p>",
+   "diskografi": [
+    "Souvenirs d'un autre monde (2007)",
+    "Écailles de lune (2010)",
+    "Kodama (2016)",
+    "Les Chants de l'Aurore (2024)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Alcest"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-bring-me-the-horizon",
+   "ad": "Bring Me the Horizon",
+   "bolge": "world",
+   "tur": "Metal",
+   "stil": "Metalcore, alternatif rock",
+   "kurulus": "İngiltere (Sheffield) · 2004",
+   "ozet": "Deathcore'dan stadyum rock'ına uzanan Sheffield grubu.",
+   "icerik": "<p>Bring Me the Horizon, 2004'te Sheffield'da kuruldu. Deathcore ve metalcore'la başlayan grup, zamanla elektronik ve pop unsurlarını da kullanarak modern rock'ın en büyük gruplarından birine dönüştü.</p><p><em>Sempiternal</em> (2013) ve <em>That's the Spirit</em> (2015) grubun kırılma noktaları oldu; <em>Post Human: Nex Gen</em> 2024'te çıktı.</p>",
+   "diskografi": [
+    "Count Your Blessings (2006)",
+    "Sempiternal (2013)",
+    "That's the Spirit (2015)",
+    "Post Human: Nex Gen (2024)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Bring_Me_the_Horizon"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-avenged-sevenfold",
+   "ad": "Avenged Sevenfold",
+   "bolge": "world",
+   "tur": "Metal",
+   "stil": "Heavy metal, metalcore",
+   "kurulus": "ABD (Huntington Beach) · 1999",
+   "ozet": "M. Shadows ve Synyster Gates'in metalcore'dan klasik metale uzanan grubu.",
+   "icerik": "<p>Avenged Sevenfold, 1999'da Kaliforniya'da kuruldu. Metalcore'la başlayan grup, <em>City of Evil</em> (2005) ile klasik heavy metalin gitar düellolarına ve melodilerine yöneldi.</p><p>\"Bat Country\" ve \"Afterlife\" grubun en bilinen şarkıları arasında. Davulcu The Rev'in 2009'daki ölümünün ardından çıkan <em>Nightmare</em> (2010) Billboard'da bir numara oldu.</p>",
+   "diskografi": [
+    "Waking the Fallen (2003)",
+    "City of Evil (2005)",
+    "Nightmare (2010)",
+    "Life Is But a Dream... (2023)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Avenged_Sevenfold"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-trivium",
+   "ad": "Trivium",
+   "bolge": "world",
+   "tur": "Metal",
+   "stil": "Heavy metal, metalcore",
+   "kurulus": "ABD (Orlando) · 1999",
+   "ozet": "Matt Heafy'nin thrash'ten metalcore'a uzanan Orlando grubu.",
+   "icerik": "<p>Trivium, 1999'da Orlando'da kuruldu. Grubun çekirdeğinde vokalist-gitarist Matt Heafy, gitarist Corey Beaulieu ve basçı Paolo Gregoletto var; thrash ve metalcore'u melodik heavy metalle birleştiriyorlar.</p><p><em>Ascendancy</em> (2005) grubu tanıttı; <em>In Waves</em> ve <em>What the Dead Men Say</em> en beğenilen albümleri arasında.</p>",
+   "diskografi": [
+    "Ascendancy (2005)",
+    "Shogun (2008)",
+    "In Waves (2011)",
+    "In the Court of the Dragon (2021)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Trivium_(band)"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-machine-head",
+   "ad": "Machine Head",
+   "bolge": "world",
+   "tur": "Metal",
+   "stil": "Groove metal, thrash metal",
+   "kurulus": "ABD (Oakland) · 1991",
+   "ozet": "Robb Flynn'in kurduğu, Amerikan metalinin yeni dalgasının öncülerinden.",
+   "icerik": "<p>Machine Head, 1991'de Oakland'da Robb Flynn tarafından kuruldu. Agresif groove ve thrash metaliyle Amerikan heavy metalinin yeni dalgasının öncülerinden oldu; Flynn grubun tek orijinal üyesi.</p><p><em>Burn My Eyes</em> (1994) grubun çıkış albümü; <em>The Blackening</em> (2007) ise 2000'lerin en beğenilen metal albümlerinden biri.</p>",
+   "diskografi": [
+    "Burn My Eyes (1994)",
+    "The More Things Change... (1997)",
+    "The Blackening (2007)",
+    "Unatoned (2025)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Machine_Head_(band)"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-lamb-of-god",
+   "ad": "Lamb of God",
+   "bolge": "world",
+   "tur": "Metal",
+   "stil": "Groove metal",
+   "kurulus": "ABD (Richmond, Virginia) · 1994",
+   "ozet": "Randy Blythe'ın sesiyle Amerikan metalinin yeni dalgasının en büyük gruplarından.",
+   "icerik": "<p>Lamb of God, 1994'te Richmond'da Burn the Priest adıyla kuruldu. Randy Blythe'ın vokali ve Mark Morton ile Willie Adler'ın gitarlarıyla Amerikan heavy metalinin yeni dalgasının en önemli gruplarından biri oldu.</p><p><em>Ashes of the Wake</em> (2004) ve <em>Sacrament</em> (2006) grubun zirvesi; \"Redneck\" ve \"Laid to Rest\" en bilinen şarkıları.</p>",
+   "diskografi": [
+    "As the Palaces Burn (2003)",
+    "Ashes of the Wake (2004)",
+    "Sacrament (2006)",
+    "Omens (2022)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Lamb_of_God_(band)"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-porcupine-tree",
+   "ad": "Porcupine Tree",
+   "bolge": "world",
+   "tur": "Progresif",
+   "stil": "Progresif rock",
+   "kurulus": "İngiltere · 1987",
+   "ozet": "Steven Wilson'ın kurduğu, modern progresif rock'ın en etkili gruplarından.",
+   "icerik": "<p>Porcupine Tree, 1987'de Steven Wilson'ın tek kişilik projesi olarak başladı ve zamanla bir gruba dönüştü. Psikedelik rock'tan progresif metale uzanan sound'uyla modern progresif rock'ın en etkili gruplarından biri oldu.</p><p><em>In Absentia</em> (2002) ve <em>Fear of a Blank Planet</em> (2007) grubun en beğenilen albümleri. Uzun bir aradan sonra grup 2022'de <em>Closure/Continuation</em> ile döndü.</p>",
+   "diskografi": [
+    "The Sky Moves Sideways (1995)",
+    "In Absentia (2002)",
+    "Deadwing (2005)",
+    "Fear of a Blank Planet (2007)",
+    "Closure/Continuation (2022)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Porcupine_Tree"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-rush",
+   "ad": "Rush",
+   "bolge": "world",
+   "tur": "Progresif",
+   "stil": "Progresif rock, hard rock",
+   "kurulus": "Kanada (Toronto) · 1968",
+   "ozet": "Geddy Lee, Alex Lifeson ve Neil Peart'ın efsanevi Kanada üçlüsü.",
+   "icerik": "<p>Rush, 1968'de Toronto'da kuruldu. Geddy Lee, Alex Lifeson ve 1974'te katılan davulcu-söz yazarı Neil Peart'tan oluşan klasik kadro, progresif rock ile hard rock'ı birleştirdi.</p><p><em>2112</em> (1976), <em>Moving Pictures</em> (1981) ve \"Tom Sawyer\" grubun en bilinen işleri. Peart'ın 2020'deki ölümünün ardından Lee ve Lifeson 2025'te yeni bir davulcuyla turneye çıkacaklarını açıkladı.</p>",
+   "diskografi": [
+    "2112 (1976)",
+    "A Farewell to Kings (1977)",
+    "Permanent Waves (1980)",
+    "Moving Pictures (1981)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Rush_(band)"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-jethro-tull",
+   "ad": "Jethro Tull",
+   "bolge": "world",
+   "tur": "Progresif",
+   "stil": "Progresif rock, folk rock",
+   "kurulus": "İngiltere (Blackpool) · 1967",
+   "ozet": "Ian Anderson'ın flütüyle rock'a damga vuran İngiliz progresif grubu.",
+   "icerik": "<p>Jethro Tull, 1967'de Blackpool'da kuruldu. Ian Anderson'ın flütü ve vokaliyle blues'tan doğup hard rock, İngiliz folk müziği ve klasik müziği birleştiren progresif bir sound geliştirdi.</p><p><em>Aqualung</em> (1971) ve <em>Thick as a Brick</em> (1972) grubun en bilinen albümleri. Grup bugün de Anderson'la albüm yapmaya ve turneye devam ediyor.</p>",
+   "diskografi": [
+    "Stand Up (1969)",
+    "Aqualung (1971)",
+    "Thick as a Brick (1972)",
+    "Songs from the Wood (1977)",
+    "Curious Ruminant (2025)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Jethro_Tull_(band)"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-uriah-heep",
+   "ad": "Uriah Heep",
+   "bolge": "world",
+   "tur": "Rock",
+   "stil": "Hard rock, progresif rock",
+   "kurulus": "İngiltere (Londra) · 1969",
+   "ozet": "Hammond org'u ve vokal armonileriyle hard rock'ın öncülerinden.",
+   "icerik": "<p>Uriah Heep, 1969'da Londra'da kuruldu. Hammond org'u, çok sesli vokal armonileri ve ağır riff'leriyle hard rock ve heavy metalin şekillenmesine katkıda bulundu. Gitarist Mick Box, grubun elli yılı aşkın tarihindeki tek kalıcı üyesi.</p><p><em>Demons and Wizards</em> (1972) ve \"Easy Livin'\", \"Lady in Black\" grubun en bilinen işleri; Türkiye'de de çok sevilen bir grup.</p>",
+   "diskografi": [
+    "Look at Yourself (1971)",
+    "Demons and Wizards (1972)",
+    "The Magician's Birthday (1972)",
+    "Chaos & Colour (2023)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Uriah_Heep_(band)"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-thin-lizzy",
+   "ad": "Thin Lizzy",
+   "bolge": "world",
+   "tur": "Rock",
+   "stil": "Hard rock",
+   "kurulus": "İrlanda (Dublin) · 1969",
+   "ozet": "Phil Lynott'ın çift gitarlı İrlandalı hard rock efsanesi.",
+   "icerik": "<p>Thin Lizzy, 1969'da Dublin'de kuruldu. Basçı, vokalist ve söz yazarı Phil Lynott'ın liderliğindeki grup, ikiz gitar armonileriyle hard rock ve heavy metali derinden etkiledi.</p><p>\"Whiskey in the Jar\", \"The Boys Are Back in Town\" ve \"Jailbreak\" grubun en bilinen şarkıları. Grup, Lynott'ın 1986'daki ölümüyle büyük ölçüde sona erdi.</p>",
+   "diskografi": [
+    "Jailbreak (1976)",
+    "Johnny the Fox (1976)",
+    "Black Rose: A Rock Legend (1979)",
+    "Thunder and Lightning (1983)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Thin_Lizzy"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-queen",
+   "ad": "Queen",
+   "bolge": "world",
+   "tur": "Rock",
+   "stil": "Rock, hard rock",
+   "kurulus": "İngiltere (Londra) · 1970",
+   "ozet": "Freddie Mercury ve Brian May'in, rock tarihinin en büyük gruplarından biri.",
+   "icerik": "<p>Queen, 1970'te Londra'da kuruldu. Freddie Mercury, Brian May, Roger Taylor ve John Deacon'dan oluşan grup; progresif rock, hard rock ve heavy metalle başlayıp opera, pop ve stadyum rock'ına uzanan bir yelpazede tarihin en çok satan gruplarından biri oldu.</p><p>\"Bohemian Rhapsody\", \"We Will Rock You\" ve \"Don't Stop Me Now\" hâlâ dünyanın en çok dinlenen şarkıları arasında; 1985'teki Live Aid performansı rock'ın en büyük konserlerinden biri sayılıyor.</p>",
+   "diskografi": [
+    "Sheer Heart Attack (1974)",
+    "A Night at the Opera (1975)",
+    "News of the World (1977)",
+    "The Game (1980)",
+    "Innuendo (1991)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Queen_(band)"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "grup-the-doors",
+   "ad": "The Doors",
+   "bolge": "world",
+   "tur": "Rock",
+   "stil": "Psikedelik rock",
+   "kurulus": "ABD (Los Angeles) · 1965",
+   "ozet": "Jim Morrison'ın şiirsel ve karanlık sesiyle 60'ların en etkili gruplarından.",
+   "icerik": "<p>The Doors, 1965'te Los Angeles'ta kuruldu. Jim Morrison, Ray Manzarek, Robby Krieger ve John Densmore'dan oluşan grup; Morrison'ın şiirsel sözleri ve Manzarek'in klavyesiyle rock tarihinin en yenilikçi gruplarından biri oldu.</p><p>\"Light My Fire\", \"The End\", \"Break On Through\" ve \"Riders on the Storm\" grubun en bilinen şarkıları. Grup, Morrison'ın 1971'deki ölümünden kısa süre sonra dağıldı.</p>",
+   "diskografi": [
+    "The Doors (1967)",
+    "Strange Days (1967)",
+    "Morrison Hotel (1970)",
+    "L.A. Woman (1971)"
+   ],
+   "link": "",
+   "spotify": "",
+   "youtube": "",
+   "kaynaklar": [
+    {
+     "ad": "Wikipedia",
+     "url": "https://en.wikipedia.org/wiki/The_Doors"
+    }
+   ],
+   "durum": "yayin"
+  }
+ ]
+}
