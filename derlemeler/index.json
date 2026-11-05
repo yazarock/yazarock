@@ -38,7 +38,8 @@
   "gruplar-2026-10-31-anoreksi.json",
   "gruplar-2026-10-31-dorian.json",
   "gruplar-2026-11-02-zerospan.json",
-  "gruplar-2026-11-03-cataclysmic.json"
+  "gruplar-2026-11-03-cataclysmic.json",
+  "gruplar-2026-11-05-cursed.json"
  ],
  "gorsel_dosyalari": [
   "grup-gorselleri-2026-10-27.json",
@@ -48,6 +49,7 @@
   "gorseller-2026-10-31-anoreksi.json",
   "gorseller-2026-10-31-anoreksi-grup.json",
   "gorseller-2026-10-31-dorian.json",
-  "gorseller-2026-11-02-zerospan.json"
+  "gorseller-2026-11-02-zerospan.json",
+  "gorseller-2026-11-05-cursed.json"
  ]
 }
