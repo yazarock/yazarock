@@ -111,6 +111,7 @@ function yr_ig_sayfa(){
 			echo '<optgroup label="Tüm gruplar (fotoğrafı olanlar)">';foreach($tum as $g)echo '<option value="'.$g->ID.'"'.selected($gsec,$g->ID,false).'>'.esc_html($g->post_title).'</option>';echo '</optgroup>';?>
 		</select></label><?php endif;?>
 	<?php endif;?></form>
+	<?php if($grupmu&&$sekme==='yazi'){$gt=get_the_title($yid);$n=fn($t)=>preg_replace('/[^a-z0-9çğıöşü]/u','',mb_strtolower($t));foreach(yr_ig_roportajlar() as $rp){if(mb_strpos($n(get_the_title($rp)),$n($gt))!==false){echo '<p class="yr-ig-uyari">Bu grubun röportajı var. Aynı grup için iki ayrı gönderi etkiyi böler: <a href="'.esc_url($u.'&sekme=rop&rop='.$rp->ID).'">röportaj gönderisini hazırla</a>, grup kartını ayrıca paylaşma.</p>';break;}}}?>
 	<?php if($sekme==='rop'&&$veri):?><fieldset class="yr-ig-sec yr-ig-rop"><legend><strong>Gönderinin metinleri</strong> — her kutuyu istediğin gibi düzenleyebilir ya da listeden grubun bir cümlesini seçebilirsin</legend>
 		<label>1 · Kapak alt yazısı<textarea id="rp-kapak" rows="2"></textarea></label>
 		<label>2 · Büyük söz <select class="rp-sec" data-hedef="rp-s1"></select><textarea id="rp-s1" rows="2"></textarea><input type="text" id="rp-k1" placeholder="Altındaki açıklama"></label>
@@ -129,8 +130,9 @@ function yr_ig_sayfa(){
 	<div class="yr-ig-in"><div id="yr-ig-gorseller"><p>Görsel hazırlanıyor…</p></div>
 	<div class="yr-ig-yan"><h3>Açıklama</h3><textarea id="yr-ig-metin" rows="16"></textarea>
 	<p><button type="button" class="button button-primary" id="yr-ig-kopya">Açıklamayı kopyala</button></p>
-	<ol class="description"><li>Görsel(ler)i indir (birden fazlaysa sırayla, kaydırmalı gönderi olarak paylaş).</li><li>Açıklamayı kopyala, Instagram'da yapıştır.</li><li>Gruplar Instagram'daysa gönderide onları etiketle.</li><li>İstersen Meta Business Suite'ten ileri bir saate planla.</li></ol></div></div></div>
-	<style>.yr-ig-form{margin:14px 0}.yr-ig-in{display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start}#yr-ig-gorseller{display:flex;gap:16px;flex-wrap:wrap}#yr-ig-gorseller figure{margin:0}#yr-ig-gorseller canvas{width:360px;max-width:100%;height:auto;display:block;box-shadow:0 2px 12px rgba(0,0,0,.25)}#yr-ig-gorseller figcaption{margin-top:8px}.yr-ig-sec{border:1px solid #c3c4c7;background:#fff;padding:10px 14px;margin:0 0 18px;max-width:900px}.yr-ig-sec label{display:block;margin:4px 0}.yr-ig-rop label{display:block;margin:10px 0}.yr-ig-rop textarea,.yr-ig-rop input[type=text]{width:100%;margin-top:4px}.yr-ig-rop select{max-width:100%;margin:4px 0}.yr-ig-foto{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}.yr-ig-foto label.button{display:inline-block;margin:0}.yr-ig-kaydir{display:flex!important;gap:8px;align-items:center;margin:0!important}.yr-ig-yan{flex:1;min-width:280px;max-width:520px}.yr-ig-yan textarea{width:100%;font:13px/1.5 monospace}</style>
+	<h3>Paylaşırken</h3><ol class="description"><li>Görselleri sırayla indir, kaydırmalı gönderi olarak paylaş (son kare "takip et" karesi).</li><li>Açıklamayı kopyala, yapıştır.</li><li>Grubu <strong>ortak çalışan</strong> olarak davet et (Kişileri etiketle → Ortak çalışan davet et); gönderi onların takipçilerine de çıkar.</li></ol>
+		<h3>Paylaştıktan hemen sonra</h3><ol class="description"><li><strong>Hikâye görselini indir</strong>, hikâyede paylaş ve altındaki boş alana <strong>bağlantı çıkartması</strong> ekle: yazının adresi. Siteye tek tıkla gelinen yol bu.</li><li>Gruptan hikâyeni paylaşmasını iste; onlar paylaşınca sen de onlarınkini paylaş.</li><li>Grubun ve ilgili 2–3 hesabın (mekân, festival, sahne sayfaları) son gönderilerine içten bir yorum bırak.</li><li>Gönderideki yorumlara ilk saatte cevap ver; Instagram bunu ödüllendiriyor.</li></ol></div></div></div>
+	<style>.yr-ig-form{margin:14px 0}.yr-ig-in{display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start}#yr-ig-gorseller{display:flex;gap:16px;flex-wrap:wrap}#yr-ig-gorseller figure{margin:0}#yr-ig-gorseller canvas{width:360px;max-width:100%;height:auto;display:block;box-shadow:0 2px 12px rgba(0,0,0,.25)}#yr-ig-gorseller figcaption{margin-top:8px}#yr-ig-gorseller .yr-ig-hik canvas{width:220px}.yr-ig-uyari{background:#fcf9e8;border-left:4px solid #dba617;padding:8px 12px;max-width:900px;margin:0 0 14px}.yr-ig-sec{border:1px solid #c3c4c7;background:#fff;padding:10px 14px;margin:0 0 18px;max-width:900px}.yr-ig-sec label{display:block;margin:4px 0}.yr-ig-rop label{display:block;margin:10px 0}.yr-ig-rop textarea,.yr-ig-rop input[type=text]{width:100%;margin-top:4px}.yr-ig-rop select{max-width:100%;margin:4px 0}.yr-ig-foto{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}.yr-ig-foto label.button{display:inline-block;margin:0}.yr-ig-kaydir{display:flex!important;gap:8px;align-items:center;margin:0!important}.yr-ig-yan{flex:1;min-width:280px;max-width:520px}.yr-ig-yan textarea{width:100%;font:13px/1.5 monospace}</style>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Barlow:wght@400;600&display=swap">
 	<script>
 	window.YR_IG={sekme:<?php echo wp_json_encode($sekme);?>,veri:<?php echo wp_json_encode($veri);?>,logo:<?php echo wp_json_encode(yr_ig_logo());?>,site:<?php echo wp_json_encode(preg_replace('~^https?://~','',untrailingslashit(home_url())));?>};
@@ -142,7 +144,8 @@ function yr_ig_sayfa(){
 function yr_ig_js(){return <<<'JS'
 (function(){
 const D=window.YR_IG,W=1080,H=1350,RED='#c0282d',RED2='#e5393f',TXT='#ece6e6',MUTE='#a69a9b',BG='#0d0809',PAN='#170e10',LINE='#3a2024';
-const up=s=>(s||'').toLocaleUpperCase('tr-TR');
+const up=s=>(s||'').toLocaleUpperCase('tr-TR');const IG='@yazarockk',LINK='link hikâyede ve profilde 👆',TAKIP='Türkiye\'nin yeraltı sahnesini kaçırmamak için takip et: '+IG;
+const ilkCumle=t=>{const c=(t||'').split(/(?<=[.!?…])\s+/u);return c[0]||''};
 const AY=['OCA','ŞUB','MAR','NİS','MAY','HAZ','TEM','AĞU','EYL','EKİ','KAS','ARA'],AYU=['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'],GUN=['PAZAR','PAZARTESİ','SALI','ÇARŞAMBA','PERŞEMBE','CUMA','CUMARTESİ'];
 const tarih=s=>{const [y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d)};
 function img(src){return new Promise(r=>{if(!src)return r(null);const i=new Image();i.onload=()=>r(i);i.onerror=()=>r(null);i.src=src})}
@@ -177,7 +180,7 @@ async function hafta(){
 	let m='🤘 YERALTINDA BU HAFTA · '+aralik+'\n\n';
 	for(const x of e){const d=tarih(x.t);m+='▪️ '+d.getDate()+' '+AYU[d.getMonth()]+' '+GUN[d.getDay()].charAt(0)+GUN[d.getDay()].slice(1).toLocaleLowerCase('tr-TR')+(x.s?' '+x.s:'')+' · '+x.ad+(x.sehir?' ('+x.sehir+')':'')+'\n'}
 	if(!e.length)m+='(Henüz konser seçilmedi.)\n';
-	m+='\nBağımsız grupları sahnede yalnız bırakmayın! Biletler ve tüm takvim: link profilde 👆\nGrubunun konserini eklemek için bize yaz.\n\n#yazarock #yeraltı #underground #konser #canlımüzik #rock #metal'+[...new Set(e.map(x=>x.sehir).filter(Boolean))].map(s=>' #'+s.toLocaleLowerCase('tr-TR').replace(/\s+/g,'')).join('');
+	m+='\nBağımsız grupları sahnede yalnız bırakmayın! Biletler ve tüm takvim: '+LINK+'\nGrubunun konserini eklemek için bize yaz.\n'+TAKIP+'\n\n#yazarock #yeraltı #underground #konser #canlımüzik #rock #metal'+[...new Set(e.map(x=>x.sehir).filter(Boolean))].map(s=>' #'+s.toLocaleLowerCase('tr-TR').replace(/\s+/g,'')).join('');
 	return [on,m];
 }
 async function yazi(){
@@ -199,7 +202,7 @@ async function yazi(){
 	for(let k=0;k<Math.min(kalan,oz.length);k++){let l=oz[k];if(k===kalan-1&&oz.length>kalan)l=kisalt(c,l+' …',W-140);y+=44;c.fillText(l,70,y)}
 	await logo(c,W-70-230,H-96-30-45,230);
 	alt(c);
-	const m=v.baslik+'\n\n'+v.ozet+'\n\n'+(/^Grup/.test(v.kat||'')?'Grubu tanı, dinle: yazarock.com\'da (link profilde) 👆':'Yazının tamamı yazarock.com\'da: link profilde 👆')+'\n\n#yazarock #rock #metal #underground'+[].concat(Object.values(v.etiket||{})).slice(0,6).map(t=>' #'+t.toLocaleLowerCase('tr-TR').replace(/[^0-9a-zçğıöşü]/g,'')).filter((t,i,a)=>t.length>2&&a.indexOf(t)===i&&![' #rock',' #metal',' #underground',' #yazarock'].includes(t)).join('');
+	const grp=/^Grup/.test(v.kat||'');const m=v.baslik+'\n\n'+(grp?v.ozet:ilkCumle(v.ozet)+' Devamı ve fazlası yazıda.')+'\n\n'+(grp?'Grubu tanı, dinle: yazarock.com · ':'Yazının tamamı yazarock.com\'da · ')+LINK+'\n'+TAKIP+'\n\n#yazarock #rock #metal #underground'+[].concat(Object.values(v.etiket||{})).slice(0,6).map(t=>' #'+t.toLocaleLowerCase('tr-TR').replace(/[^0-9a-zçğıöşü]/g,'')).filter((t,i,a)=>t.length>2&&a.indexOf(t)===i&&![' #rock',' #metal',' #underground',' #yazarock'].includes(t)).join('');
 	return [[cv],m];
 }
 function cumleler(t){return (t||'').split(/\n+|(?<=[.!?…])\s+/u).map(x=>x.trim()).filter(x=>x.length>=8)}
@@ -243,31 +246,46 @@ async function rop(){
 	{const cv=tuval(),c=cv.getContext('2d');zemin(c);ust(c,etiket);c.fillStyle=RED;c.fillRect(72,300,96,8);
 	const t=up(deger('rp-s1')||G);let [sat,fs]=sigdir(c,t,W-144,5,150,56,'700 {f}px Oswald, Impact, sans-serif');
 	sat.forEach((l,k)=>{c.fillStyle=k===1?RED2:TXT;c.fillText(l,68,380+fs*.85+k*fs*.98)});
-	c.fillStyle=MUTE;c.font='600 24px Barlow, Arial, sans-serif';cokSatir(c,'— '+up(deger('rp-k1')),72,380+fs*.85+sat.length*fs*.98+50,W-144,32,2);altSatir(c,D.site,'2/5');on.push(cv)}
+	c.fillStyle=MUTE;c.font='600 24px Barlow, Arial, sans-serif';cokSatir(c,'— '+up(deger('rp-k1')),72,380+fs*.85+sat.length*fs*.98+50,W-144,32,2);altSatir(c,D.site,'2/6');on.push(cv)}
 	// 3-4 alıntılar
 	for(const [n,id,kid] of [[3,'rp-s2','rp-k2'],[4,'rp-s3','rp-k3']]){const cv=tuval(),c=cv.getContext('2d');zemin(c);ust(c,etiket);c.fillStyle=RED;c.fillRect(72,330,96,8);
 	c.fillStyle=RED;c.font='700 200px Oswald, Impact, sans-serif';c.fillText('“',64,560);
 	const t=deger(id);let [sat,fs]=sigdir(c,t,W-144,8,64,36,'600 {f}px Barlow, Arial, sans-serif');
-	c.fillStyle=TXT;const y=cokSatir(c,t,72,620,W-144,fs*1.2,9);c.fillStyle=MUTE;c.font='600 24px Barlow, Arial, sans-serif';cokSatir(c,'— '+up(deger(kid)),72,y+40,W-144,32,2);altSatir(c,D.site,n+'/5');on.push(cv)}
+	c.fillStyle=TXT;const y=cokSatir(c,t,72,620,W-144,fs*1.2,9);c.fillStyle=MUTE;c.font='600 24px Barlow, Arial, sans-serif';cokSatir(c,'— '+up(deger(kid)),72,y+40,W-144,32,2);altSatir(c,D.site,n+'/6');on.push(cv)}
 	// 5 kapanış
 	{const cv=tuval(),c=cv.getContext('2d');zemin(c);ust(c,etiket);c.fillStyle=TXT;c.font='700 92px Oswald, Impact, sans-serif';c.fillText('RÖPORTAJIN',72,340);c.fillText('TAMAMI',72,440);
 	c.fillStyle=RED2;const s1=D.site.toLocaleUpperCase('tr-TR');c.fillText(s1,72,540);const w=c.measureText(s1).width;c.fillStyle=TXT;c.fillText('\'DA',72+w,540);
 	c.fillStyle='#d6cdcd';c.font='400 36px Barlow, Arial, sans-serif';const y=cokSatir(c,deger('rp-son'),72,630,W-144,48,4);
 	const by=Math.max(y+40,860);c.strokeStyle=RED;c.lineWidth=3;c.strokeRect(72,by,W-144,190);c.fillStyle=TXT;c.font='700 34px Barlow, Arial, sans-serif';c.fillText('Grubun mu var?',106,by+62);
 	c.fillStyle='#d6cdcd';c.font='400 30px Barlow, Arial, sans-serif';cokSatir(c,'Garajdan Sahneye\'nin 10 sorusunu yanıtla, sıradaki röportaj seninki olsun. 🤘',106,by+112,W-212,40,2);
-	altSatir(c,'Link profilde','5/5');on.push(cv)}
+	altSatir(c,'Link hikâyede ve profilde','5/6');on.push(cv)}
 	const hs='#'+G.toLocaleLowerCase('tr-TR').replace(/[^0-9a-zçğıöşü]/g,'');
-	const m='Garajdan Sahneye\'de bu kez '+(v.sehir_den?v.sehir_den+' ':'')+G+' var 🤘\n\n'+(deger('rp-kapak')||v.ozet||'')+'\n\nRöportajın tamamı yazarock.com\'da, link profilde 👆\n\n#yazarock #garajdansahneye '+hs+(v.sehir?' #'+v.sehir.toLocaleLowerCase('tr-TR').replace(/\s+/g,''):'')+' #bağımsızmüzik #underground #rock';
+	const m='Garajdan Sahneye\'de bu kez '+(v.sehir_den?v.sehir_den+' ':'')+G+' var 🤘\n\n'+(deger('rp-kapak')||v.ozet||'')+'\n\nRöportajın tamamı yazarock.com\'da · '+LINK+'\n'+TAKIP+'\n\n#yazarock #garajdansahneye '+hs+(v.sehir?' #'+v.sehir.toLocaleLowerCase('tr-TR').replace(/\s+/g,''):'')+' #bağımsızmüzik #underground #rock';
 	return [on,m];
 }
+function takipKare(n){const cv=tuval(),c=cv.getContext('2d');zemin(c);logoKucuk(c);
+	c.fillStyle=RED;c.fillRect(72,330,96,8);c.fillStyle=TXT;c.font='700 118px Oswald, Impact, sans-serif';c.fillText('YERALTINI',68,500);c.fillText('KAÇIRMA',68,622);
+	c.fillStyle='#d6cdcd';c.font='400 38px Barlow, Arial, sans-serif';cokSatir(c,'Garajdan sahneye, yeraltından yüzeye. Türkiye\'nin bağımsız rock ve metal sahnesi her gün burada.',72,720,W-144,52,3);
+	c.fillStyle=RED;c.fillRect(72,900,W-144,170);c.fillStyle='#fff';c.font='600 30px Barlow, Arial, sans-serif';c.fillText('TAKİP ET',106,958);c.font='700 74px Oswald, Impact, sans-serif';c.fillText(IG,104,1040);
+	c.fillStyle=MUTE;c.font='400 30px Barlow, Arial, sans-serif';c.fillText('Yazının tamamı: hikâyedeki linkte ve profilde',72,1150);
+	altSatir(c,D.site,n);return cv}
+function hikaye(src){const HW=1080,HH=1920,cv=document.createElement('canvas');cv.width=HW;cv.height=HH;const c=cv.getContext('2d');
+	c.fillStyle=BG;c.fillRect(0,0,HW,HH);const g=c.createRadialGradient(HW/2,-100,40,HW/2,-100,1300);g.addColorStop(0,'#4a1218');g.addColorStop(1,'rgba(13,8,9,0)');c.fillStyle=g;c.fillRect(0,0,HW,HH);
+	const w=HW-120,h=w*src.height/src.width,y=200;c.save();c.shadowColor='rgba(0,0,0,.6)';c.shadowBlur=40;c.drawImage(src,60,y,w,h);c.restore();
+	c.fillStyle=TXT;c.font='700 34px Oswald, Impact, sans-serif';c.fillText('YAZA',60,130);const a=c.measureText('YAZA').width;c.fillStyle=RED2;c.fillText('R',60+a,130);const b=c.measureText('R').width;c.fillStyle=TXT;c.fillText('OCK',60+a+b,130);
+	c.fillStyle=TXT;c.textAlign='center';c.font='700 64px Oswald, Impact, sans-serif';c.fillText('TAMAMI İÇİN',HW/2,y+h+120);c.fillStyle=RED2;c.fillText('LİNKE DOKUN ↓',HW/2,y+h+200);c.textAlign='left';
+	return cv}
 async function calis(){
 	try{await Promise.all(['700 40px Oswald, Impact, sans-serif','500 20px Oswald, Impact, sans-serif','400 20px Barlow, Arial, sans-serif','600 20px Barlow, Arial, sans-serif'].map(f=>document.fonts.load(f)))}catch(e){}
-	const [cs,m]=D.sekme==='rop'?await rop():D.sekme==='yazi'?await yazi():await hafta();
+	const [cs,m]=D.sekme==='rop'?await rop():D.sekme==='yazi'?await yazi():await hafta();if(cs.length)cs.push(takipKare(D.sekme==='rop'?'6/6':'takip et →'));
 	const k=document.getElementById('yr-ig-gorseller');k.innerHTML='';
 	cs.forEach((cv,n)=>{const f=document.createElement('figure');f.appendChild(cv);const a=document.createElement('a');a.className='button';a.textContent='İndir'+(cs.length>1?' ('+(n+1)+')':'');a.href='#';
 		a.onclick=ev=>{ev.preventDefault();cv.toBlob(b=>{const l=document.createElement('a');l.href=URL.createObjectURL(b);l.download='yazarock-'+(D.sekme==='rop'?'roportaj':D.sekme==='yazi'?'yazi':'hafta-'+D.veri.bas)+(cs.length>1?'-'+(n+1):'')+'.png';document.body.appendChild(l);l.click();setTimeout(()=>l.remove(),500)},'image/png')};
 		const fc=document.createElement('figcaption');fc.appendChild(a);f.appendChild(fc);k.appendChild(f)});
 	if(!cs.length)k.innerHTML='<p>Yazı bulunamadı.</p>';
+	else{const hv=hikaye(cs[0]),f=document.createElement('figure');f.className='yr-ig-hik';f.appendChild(hv);const a=document.createElement('a');a.className='button button-primary';a.textContent='Hikâye görselini indir';a.href='#';
+		a.onclick=ev=>{ev.preventDefault();hv.toBlob(b=>{const l=document.createElement('a');l.href=URL.createObjectURL(b);l.download='yazarock-hikaye.png';document.body.appendChild(l);l.click();setTimeout(()=>l.remove(),500)},'image/png')};
+		const fc=document.createElement('figcaption');fc.appendChild(a);const s=document.createElement('span');s.className='description';s.textContent=' Altta boş alana bağlantı çıkartmasını koy.';fc.appendChild(s);f.appendChild(fc);k.appendChild(f)}
 	const t=document.getElementById('yr-ig-metin');t.value=m;
 	document.getElementById('yr-ig-kopya').onclick=()=>{t.select();(navigator.clipboard?navigator.clipboard.writeText(t.value):Promise.reject()).catch(()=>document.execCommand('copy'));};
 }
