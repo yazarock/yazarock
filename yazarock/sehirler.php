@@ -285,14 +285,15 @@ add_action('init',function(){
 	if(function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
 },47);
 
-/* Haftanın Keşfi yeniden: Anoreksi + Insignificance yazısı (mig v35) */
+/* Haftanın Keşfi: Kara Mesai + Garajdan Sahneye röportajı; grup başlığı "karamesai" → "Kara Mesai" (mig v36) */
 add_action('init',function(){
-	if(get_option('yr_mig_v35'))return;
-	$g=get_posts(['post_type'=>'grup','post_status'=>'publish','title'=>'Anoreksi','numberposts'=>1]);if(!$g)return;
-	$p=get_posts(['post_type'=>'post','post_status'=>'publish','meta_key'=>'_yr_derleme_id','meta_value'=>'2026-10-30-anoreksi-insignificance','numberposts'=>1]);
-	update_option('yr_mig_v35',1);
+	if(get_option('yr_mig_v36'))return;
+	$g=get_page_by_path('karamesai',OBJECT,'grup');if(!$g||$g->post_status!=='publish')return;
+	$p=get_page_by_path('garajdan-sahneye-kara-mesai',OBJECT,'post');
+	update_option('yr_mig_v36',1);
+	if($g->post_title==='karamesai')wp_update_post(['ID'=>$g->ID,'post_title'=>'Kara Mesai']);
 	foreach(get_posts(['post_type'=>'grup','post_status'=>'any','numberposts'=>-1,'fields'=>'ids','meta_key'=>'_yr_kesif']) as $i)delete_post_meta($i,'_yr_kesif');
-	update_post_meta($g[0]->ID,'_yr_kesif',time());
-	if($p)update_post_meta($g[0]->ID,'_yr_kesif_yazi',$p[0]->ID);
+	update_post_meta($g->ID,'_yr_kesif',time());
+	if($p&&$p->post_status==='publish')update_post_meta($g->ID,'_yr_kesif_yazi',$p->ID);
 	if(function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
 },50);
