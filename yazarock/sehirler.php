@@ -297,3 +297,24 @@ add_action('init',function(){
 	if($p&&$p->post_status==='publish')update_post_meta($g->ID,'_yr_kesif_yazi',$p->ID);
 	if(function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
 },50);
+
+/* Tiran röportajı: Instagram ekran görüntüsü yerine grubun kendi tanıtım fotoğrafı (Instagram, 12 Ekim 2026) — içerikteki ilk resim + öne çıkan görsel (mig v37, en fazla 3 deneme) */
+add_action('init',function(){
+	$n=(int)get_option('yr_mig_v37');if($n>=3)return;
+	$p=get_page_by_path('garajdan-sahneye-tiran',OBJECT,'post');if(!$p)return;
+	update_option('yr_mig_v37',$n+1);
+	require_once ABSPATH.'wp-admin/includes/media.php';require_once ABSPATH.'wp-admin/includes/file.php';require_once ABSPATH.'wp-admin/includes/image.php';
+	$aid=media_sideload_image('https://raw.githubusercontent.com/yazarock/yazarock/main/derlemeler/gorseller/tiran.jpg',$p->ID,'Tiran','id');
+	if(is_wp_error($aid)||!$aid)return;
+	update_post_meta($aid,'_wp_attachment_image_alt','Tiran');
+	$src=wp_get_attachment_image_src($aid,'large');$w=$src?$src[1]:1024;$h=$src?$src[2]:683;
+	$blok='<!-- wp:image {"id":'.$aid.',"sizeSlug":"large","linkDestination":"none"} -->'."\n".'<figure class="wp-block-image size-large"><img src="'.esc_url($src?$src[0]:wp_get_attachment_url($aid)).'" alt="Tiran" class="wp-image-'.$aid.'" width="'.$w.'" height="'.$h.'"/></figure>'."\n".'<!-- /wp:image -->';
+	$c=$p->post_content;
+	$c2=preg_replace('#(<!--\s*wp:image[^>]*-->\s*)?<figure[^>]*>\s*<img[^>]*wp-image-\d+[^>]*>.*?</figure>(\s*<!--\s*/wp:image\s*-->)?#s',$blok,$c,1,$say);
+	if(!$say)$c2=$blok."\n\n".$c;
+	global $wpdb;$wpdb->update($wpdb->posts,['post_content'=>$c2],['ID'=>$p->ID]);clean_post_cache($p->ID);
+	update_post_meta($p->ID,'_yr_one_icerikten',1);set_post_thumbnail($p->ID,$aid);
+	update_post_meta($p->ID,'_yr_gorsel_kredi','Tiran (grubun resmi Instagram hesabı)');update_post_meta($p->ID,'_yr_gorsel_kaynak','https://www.instagram.com/tiranofficial_/p/DeR_wBtCv5X/');
+	update_option('yr_mig_v37',3);
+	if(function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
+},51);
