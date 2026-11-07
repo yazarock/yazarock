@@ -82,26 +82,48 @@ function yr_yerli_havuz(){
 	set_transient('yr_yerli_havuz',$ids,6*HOUR_IN_SECONDS);
 	return $ids;
 }
-function yr_yerli_oneri($pid){
-	if(yr_roportaj_mi($pid))return 0;
-	$h=array_values(array_diff(yr_yerli_havuz(),yr_metindeki_gruplar(get_post_field('post_content',$pid),5)));
-	if(!$h)return 0;
-	/* Yazının türüne uyan grup varsa o (ör. thrash haberine thrash grubu) */
+/* İlk kurulumda eklenen tanınmış gruplar (seed.json, seed2.json): "Yeraltından" kutusunda gösterilmez */
+function yr_unlu_grup_adlari(){
+	static $v=null;if($v!==null)return $v;$v=[];
+	foreach(['seed.json','seed2.json'] as $f){
+		$d=json_decode((string)@file_get_contents(get_template_directory().'/'.$f),true);
+		foreach((array)($d['gruplar']??[]) as $g)if(!empty($g['ad']))$v[mb_strtolower(trim((string)$g['ad']))]=1;
+	}
+	return $v;
+}
+function yr_unlu_mu($g){return isset(yr_unlu_grup_adlari()[mb_strtolower(trim(html_entity_decode(get_the_title($g),ENT_QUOTES,'UTF-8')))]);}
+function yr_yerli_oneriler($pid,$adet=6){
+	if(yr_roportaj_mi($pid))return [];
+	$gecen=yr_metindeki_gruplar(get_post_field('post_content',$pid),5);
+	$h=array_values(array_diff(yr_yerli_havuz(),$gecen));
+	/* Havuz azsa diğer Türkiye gruplarıyla tamamla */
+	if(count($h)<$adet){
+		$ek=get_posts(['post_type'=>'grup','post_status'=>'publish','numberposts'=>60,'fields'=>'ids','orderby'=>'date','order'=>'DESC','meta_key'=>'_yr_bolge','meta_value'=>'tr','post__not_in'=>array_merge($h,$gecen,[0])]);
+		$h=array_merge($h,array_map('intval',$ek));
+	}
+	$h=array_values(array_filter(array_unique($h),function($g){return !yr_unlu_mu($g);}));
+	if(!$h)return [];
+	/* Yazının türüne uyan gruplar başa (ör. thrash haberine thrash grubu) */
 	$metin=mb_strtolower(wp_strip_all_tags(get_the_title($pid).' '.get_post_field('post_content',$pid)));
-	$uyan=[];
+	$uyan=[];$diger=[];
 	foreach($h as $g){
+		$ok=false;
 		foreach(preg_split('/[^\p{L}]+/u',mb_strtolower((string)get_post_meta($g,'_yr_stil',true)),-1,PREG_SPLIT_NO_EMPTY) as $k){
 			if(mb_strlen($k)<4||in_array($k,['metal','rock','müzik','grubu'],true))continue;
-			if(mb_strpos($metin,$k)!==false){$uyan[]=$g;break;}
+			if(mb_strpos($metin,$k)!==false){$ok=true;break;}
 		}
+		if($ok)$uyan[]=$g;else $diger[]=$g;
 	}
-	$s=$uyan?$uyan:$h;
-	return (int)$s[$pid%count($s)];/* aynı yazıda hep aynı grup (önbellekle uyumlu) */
+	/* Her yazı farklı gruptan başlasın (aynı yazıda hep aynı sıra, önbellekle uyumlu) */
+	$dondur=function($l)use($pid){$n=count($l);if($n<2)return $l;$o=$pid%$n;return array_merge(array_slice($l,$o),array_slice($l,0,$o));};
+	return array_slice(array_merge($dondur($uyan),$dondur($diger)),0,$adet);
 }
 function yr_yerli_kutu($pid){
-	$g=yr_yerli_oneri($pid);if(!$g)return;
-	echo '<div class="box yr-oneri"><h2>Yeraltından bir öneri</h2>';
-	yr_grup_kart($g,false,'Türkiye\'den bağımsız bir grup');
+	$gl=yr_yerli_oneriler($pid);if(!$gl)return;
+	echo '<div class="box yr-oneri"><h2>Yeraltından bir öneri</h2><div class="yr-donen" data-sure="3000" aria-live="off">';
+	foreach($gl as $i=>$g){echo '<div class="yr-dk'.($i?'':' on').'"'.($i?' aria-hidden="true"':'').'>';yr_grup_kart($g,false,'Türkiye\'den bağımsız bir grup');echo '</div>';}
+	echo '</div>';
+	if(count($gl)>1){echo '<div class="yr-dn" role="group" aria-label="Öneriler">';foreach($gl as $i=>$g)echo '<button type="button" class="'.($i?'':'on').'" aria-label="'.esc_attr(($i+1).'. öneri: '.get_the_title($g)).'"></button>';echo '</div>';}
 	echo '</div>';
 }
 
