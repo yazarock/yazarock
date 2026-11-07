@@ -207,7 +207,7 @@ fetch(m.getAttribute('data-harita')).then(function(r){return r.text()}).then(fun
 }).catch(function(){});
 })();
 
-/* 1.26.1: "Yeraltından bir öneri" kutusu 3 saniyede bir sonraki gruba geçer; fare üstündeyken, odaklanınca ya da hareket azaltma açıksa durur */
+/* 1.26.1: dönen kutular (Yeraltından bir öneri, Röportaj Albümleri); fare üstündeyken ya da odaklanınca durur */
 (function(){document.querySelectorAll('.yr-donen').forEach(function(d){
 var k=d.querySelectorAll('.yr-dk'),n=d.parentNode.querySelectorAll('.yr-dn button'),i=0,dur=false,ms=parseInt(d.getAttribute('data-sure'),10)||3000;
 if(k.length<2)return;
@@ -215,6 +215,6 @@ function git(j){k[i].classList.remove('on');k[i].setAttribute('aria-hidden','tru
 n.forEach(function(b,j){b.addEventListener('click',function(){git(j);});});
 var box=d.parentNode;box.addEventListener('mouseenter',function(){dur=true;});box.addEventListener('mouseleave',function(){dur=false;});
 box.addEventListener('focusin',function(){dur=true;});box.addEventListener('focusout',function(){dur=false;});
-if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+/* Hareket azaltma açıksa da döner; yalnızca geçiş efekti kapalıdır (style.css) */
 setInterval(function(){if(!dur&&!document.hidden)git(i+1);},ms);
 });})();
