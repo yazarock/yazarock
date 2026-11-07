@@ -380,7 +380,9 @@ self.addEventListener('install',function(){self.skipWaiting()});
 self.addEventListener('activate',function(e){e.waitUntil(caches.keys().then(function(k){return Promise.all(k.filter(function(x){return x!==V}).map(function(x){return caches.delete(x)}))}).then(function(){return self.clients.claim()}))});
 self.addEventListener('fetch',function(e){
  var r=e.request;if(r.method!=='GET')return;var u=new URL(r.url);if(u.origin!==location.origin)return;
- if(/wp-admin|wp-login|wp-json|preview=/.test(u.pathname+u.search))return;
+ if(/wp-admin|wp-login|wp-json|wp-cron|preview=/.test(u.pathname+u.search))return;
+ if(r.referrer&&/\/wp-admin\/|\/wp-login/.test(r.referrer))return;/* yönetim panelinin isteklerine hiç dokunma */
+ if(/\/wp-content\/plugins\//.test(u.pathname))return;/* eklenti dosyaları doğrudan ağdan */
  if(r.mode==='navigate'){e.respondWith(fetch(r).catch(function(){return new Response(OFF,{headers:{'Content-Type':'text/html; charset=utf-8'}})}));return}
  if(/\.(css|js)$/.test(u.pathname)){e.respondWith(fetch(r).then(function(x){if(x.ok){var y=x.clone();caches.open(V).then(function(c){c.put(r,y)})}return x}).catch(function(){return caches.match(r)}));return}
  if(/\.(png|jpg|jpeg|webp|svg|woff2?)$/.test(u.pathname)){e.respondWith(caches.open(V).then(function(c){return c.match(r).then(function(h){var n=fetch(r).then(function(x){if(x.ok)c.put(r,x.clone());return x}).catch(function(){return h});return h||n})}))}
