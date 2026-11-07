@@ -266,3 +266,19 @@ add_action('admin_init',function(){
 	/* Slogan yalnızca hâlâ ilk kurulumdaki eski metinse değişir; Ayarlar → Genel → Slogan'dan istediğin zaman düzenleyebilirsin */
 	if(get_option('blogdescription')==='Türkiye ve dünyadan rock ve metal müzik haberleri, konser ve festival takvimi, grup biyografileri.')update_option('blogdescription','Tanınmayan rock ve metal gruplarının sesi');
 });
+
+/* ================= v1.25.2 geçişi: menüdeki eski bağlantılar (http://, www, göreli adres dahil) kalıcı adreslere ================= */
+add_action('admin_init',function(){
+	if(get_option('yr_mig_v7')||!current_user_can('manage_options'))return;
+	update_option('yr_mig_v7',1);
+	$host=preg_quote(preg_replace('#^www\.#','',(string)wp_parse_url(home_url(),PHP_URL_HOST)),'#');
+	foreach((array)wp_get_nav_menus() as $m){
+		foreach((array)wp_get_nav_menu_items($m->term_id) as $it){
+			if($it->type!=='custom')continue;
+			$url=trim((string)get_post_meta($it->ID,'_menu_item_url',true));
+			if(!preg_match('#^(?:(?:https?:)?//(?:www\.)?'.$host.')?/?(?:index\.php)?\?(page_id|p|cat)=(\d+)$#i',$url,$x))continue;
+			$yeni=strtolower($x[1])==='cat'?get_term_link((int)$x[2],'category'):get_permalink((int)$x[2]);
+			if($yeni&&!is_wp_error($yeni))update_post_meta($it->ID,'_menu_item_url',esc_url_raw($yeni));
+		}
+	}
+});
