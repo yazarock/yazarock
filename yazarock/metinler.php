@@ -194,8 +194,8 @@ function yr_t_alanlar(){
 			'tr_tum'=>['Alt bağlantı','Tüm gruplar →'],
 		],
 		'Haftanın Albümü'=>[
-			'hafta_b'=>['Başlık','Haftanın Albümü'],
-			'hafta_pill'=>['Etiket','Haftanın Grubu'],
+			'hafta_b'=>['Başlık','Röportaj Albümleri'],
+			'hafta_pill'=>['Etiket','Röportaj yapılan grup'],
 			'hafta_btn'=>['Düğme','Grubu Keşfet'],
 		],
 		'Yan sütun: Grubun mu var?'=>[

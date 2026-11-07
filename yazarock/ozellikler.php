@@ -97,7 +97,36 @@ function yr_week_pick(){
 	set_transient('yr_week_'.$k,$r,WEEK_IN_SECONDS);return $r;
 }
 add_action('save_post_grup',function(){delete_transient('yr_week_'.yr_week_key());});
+/* Röportaj yapılan grupların albümleri (en yeni röportaj önce); her grubun en yeni albümü */
+function yr_rop_albumler(){
+	$v=get_transient('yr_rop_albumler');if(is_array($v))return $v;
+	global $wpdb;$v=[];$gor=[];
+	$rows=$wpdb->get_results("SELECT pm.meta_value AS g,p.ID AS y FROM {$wpdb->postmeta} pm INNER JOIN {$wpdb->posts} p ON p.ID=pm.post_id WHERE pm.meta_key='_yr_roportaj_grup' AND p.post_status='publish' AND p.post_type='post' ORDER BY p.post_date DESC LIMIT 60");
+	foreach((array)$rows as $r){
+		$g=(int)$r->g;if(!$g||isset($gor[$g])||get_post_status($g)!=='publish'||get_post_type($g)!=='grup')continue;$gor[$g]=1;
+		$d=yr_parse_disco(get_post_meta($g,'_yr_diskografi',true));$al=null;
+		foreach($d as $x)if(!$al||($x[1]!==''&&($al[1]===''||(int)$x[1]>=(int)$al[1])))$al=$x;
+		if($d&&$al&&$al[1]==='')$al=end($d);
+		$v[]=['id'=>$g,'album'=>$al,'rop'=>(int)$r->y];
+		if(count($v)>=8)break;
+	}
+	set_transient('yr_rop_albumler',$v,HOUR_IN_SECONDS);return $v;
+}
+add_action('save_post',function(){delete_transient('yr_rop_albumler');});
 function yr_week_box(){
+	$L=yr_rop_albumler();
+	if($L){
+		echo '<div class="box wk"><h2>'.esc_html(yr_t('hafta_b')).'</h2><div class="yr-donen" data-sure="4000" aria-live="off">';
+		foreach($L as $i=>$w){$id=$w['id'];
+			echo '<div class="yr-dk'.($i?'':' on').'"'.($i?' aria-hidden="true"':'').'><div class="wkb"><a class="wkc" href="'.esc_url(get_permalink($id)).'" tabindex="-1">'.yr_cover($id).'</a><div>'.(yr_t('hafta_pill')!==''?'<span class="pill">'.esc_html(yr_t('hafta_pill')).'</span>':'').'<h3>'.esc_html(get_the_title($id)).'</h3>';
+			if($w['album'])echo '<p class="wka">'.esc_html($w['album'][0]).($w['album'][1]?' <span>('.esc_html($w['album'][1]).')</span>':'').'</p>';
+			echo '<p>'.esc_html(wp_trim_words(get_the_excerpt($id),26)).'</p><div class="btnrow"><a class="btn" href="'.esc_url(get_permalink($w['rop'])).'">Röportajı oku</a><a class="btn alt" href="'.esc_url(get_permalink($id)).'">'.esc_html(yr_t('hafta_btn')).'</a></div></div></div></div>';
+		}
+		echo '</div>';
+		if(count($L)>1){echo '<div class="yr-dn" role="group" aria-label="Albümler">';foreach($L as $i=>$w)echo '<button type="button" class="'.($i?'':'on').'" aria-label="'.esc_attr(($i+1).'. albüm: '.get_the_title($w['id'])).'"></button>';echo '</div>';}
+		echo '</div>';return;
+	}
+	/* Henüz röportaj yoksa eski davranış: haftanın albümü */
 	$w=yr_week_pick();if(!$w)return;$id=$w['id'];
 	echo '<div class="box wk"><h2>'.esc_html(yr_t('hafta_b')).'</h2><div class="wkb"><a class="wkc" href="'.esc_url(get_permalink($id)).'">'.yr_cover($id).'</a><div>'.(yr_t('hafta_pill')!==''?'<span class="pill">'.esc_html(yr_t('hafta_pill')).'</span>':'').'<h3>'.esc_html(get_the_title($id)).'</h3>';
 	if($w['album'])echo '<p class="wka">'.esc_html($w['album'][0]).($w['album'][1]?' <span>('.esc_html($w['album'][1]).')</span>':'').'</p>';
