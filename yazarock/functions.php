@@ -1,6 +1,6 @@
 <?php
 if(!defined('ABSPATH'))exit;
-define('YR_VER','1.25.2');
+define('YR_VER','1.25.3');
 
 /* E-posta adresi yazım ve alan adı kontrolü: hatalı adreslere giden mailler geri döner ve sitenin e-posta itibarını düşürür */
 function yr_eposta_oneri($m){
@@ -78,6 +78,16 @@ add_filter('wp_nav_menu_objects',function($items,$args){
 	foreach($l as $it){if(is_user_logged_in())$it->title='Hesabım';$it->classes=array_merge((array)$it->classes,['login']);}
 	return array_merge($o,$l);
 },10,2);
+/* Menüde eski biçimli (?page_id= / ?p= / ?cat=) bağlantılar varsa ekrana basılırken kalıcı adrese çevrilir */
+add_filter('wp_nav_menu_objects',function($items){
+	$host=preg_quote(preg_replace('#^www\.#','',(string)wp_parse_url(home_url(),PHP_URL_HOST)),'#');
+	foreach($items as $it){
+		if(!preg_match('#^(?:(?:https?:)?//(?:www\.)?'.$host.')?/?(?:index\.php)?\?(page_id|p|cat)=(\d+)$#i',trim((string)$it->url),$x))continue;
+		$yeni=strtolower($x[1])==='cat'?get_term_link((int)$x[2],'category'):get_permalink((int)$x[2]);
+		if($yeni&&!is_wp_error($yeni))$it->url=$yeni;
+	}
+	return $items;
+},5);
 function yr_fallback_menu(){
 	echo '<nav aria-label="Ana menü"><a href="'.esc_url(home_url('/')).'">Ana Sayfa</a><a href="'.esc_url(yr_haber_url()).'">Haberler</a><a href="'.esc_url(get_post_type_archive_link('grup')).'">Gruplar</a><a href="'.esc_url(get_post_type_archive_link('etkinlik')).'">Etkinlikler</a></nav>';
 }
