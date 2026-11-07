@@ -367,11 +367,11 @@ add_action('wp_footer',function(){echo '<script>window.YR_SW='.wp_json_encode(ho
 add_action('template_redirect',function(){
 	$p=wp_parse_url($_SERVER['REQUEST_URI']??'',PHP_URL_PATH);$base=untrailingslashit((string)wp_parse_url(home_url('/'),PHP_URL_PATH));
 	if($p===$base.'/manifest.webmanifest'){
-		nocache_headers();header('Content-Type: application/manifest+json; charset=utf-8');
-		echo wp_json_encode(['name'=>'Yazarock','short_name'=>'Yazarock','description'=>'Rock ve metal müzik haberleri','lang'=>'tr','start_url'=>$base.'/','scope'=>$base.'/','display'=>'standalone','background_color'=>'#0d0809','theme_color'=>'#0d0809','icons'=>[['src'=>yr_icon('icon-192.png'),'sizes'=>'192x192','type'=>'image/png'],['src'=>yr_icon('icon-512.png'),'sizes'=>'512x512','type'=>'image/png'],['src'=>yr_icon('icon-maskable-512.png'),'sizes'=>'512x512','type'=>'image/png','purpose'=>'maskable']]],JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);exit;
+		status_header(200);nocache_headers();header('Content-Type: application/manifest+json; charset=utf-8');
+		echo wp_json_encode(['name'=>'Yazarock','short_name'=>'Yazarock','description'=>'Tanınmayan rock ve metal gruplarının sesi','lang'=>'tr','start_url'=>$base.'/','scope'=>$base.'/','display'=>'standalone','background_color'=>'#0d0809','theme_color'=>'#0d0809','icons'=>[['src'=>yr_icon('icon-192.png'),'sizes'=>'192x192','type'=>'image/png'],['src'=>yr_icon('icon-512.png'),'sizes'=>'512x512','type'=>'image/png'],['src'=>yr_icon('icon-maskable-512.png'),'sizes'=>'512x512','type'=>'image/png','purpose'=>'maskable']]],JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);exit;
 	}
 	if($p===$base.'/yr-sw.js'){
-		header('Content-Type: application/javascript; charset=utf-8');header('Service-Worker-Allowed: '.$base.'/');header('Cache-Control: no-cache');
+		status_header(200);header('Content-Type: application/javascript; charset=utf-8');header('Service-Worker-Allowed: '.$base.'/');header('Cache-Control: no-cache');
 		ob_start();
 		echo <<<'JS'
 const V='yr-__VER__';
