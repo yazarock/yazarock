@@ -3,7 +3,7 @@ Theme Name: Yazarock
 Theme URI: https://yazarock.com
 Author: Yazarock
 Description: Rock ve metal müzik haber teması. Gruplar, Etkinlikler, yazar giriş paneli, yazarlık başvurusu ve bülten içerir.
-Version: 1.28.0
+Version: 1.28.1
 Requires at least: 6.0
 Requires PHP: 7.4
 Text Domain: yazarock
@@ -609,3 +609,15 @@ nav a.gt:hover{background:var(--red)}
 .yr-dn button{width:10px;height:10px;padding:0;border:1px solid var(--mute);background:transparent;border-radius:50%;cursor:pointer}
 .yr-dn button.on{background:var(--red);border-color:var(--red)}
 @media(prefers-reduced-motion:reduce){.yr-donen .yr-dk{transition:none}}
+/* 1.28.1: erişilebilirlik (PageSpeed) */
+nav a.on,.login{background:#a8212a;color:#fff}
+.band em{color:#ff5a5f}
+.gk-in h2.gk-t{font-size:clamp(26px,3.2vw,38px);margin:8px 0 4px;text-transform:uppercase;font-family:Oswald,Impact,sans-serif;padding:0;border:0}
+.gk-in h2.gk-t a:hover{color:var(--red2)}
+#anket .chk{min-height:32px;align-items:center;padding:4px 0}
+#anket .chk input{width:22px;height:22px;min-width:22px;margin:0}
+.yr-dn button{width:24px;height:24px;background-clip:content-box;padding:7px;border:0;position:relative}
+.yr-dn button::before{content:"";position:absolute;inset:7px;border:1px solid var(--mute);border-radius:50%}
+.yr-dn button.on::before{background:var(--red);border-color:var(--red)}
+.yr-dn button.on{background:transparent}
+.yr-dn{gap:2px}

@@ -1,6 +1,6 @@
 <?php
 if(!defined('ABSPATH'))exit;
-define('YR_VER','1.28.0');
+define('YR_VER','1.28.1');
 
 /* E-posta adresi yazım ve alan adı kontrolü: hatalı adreslere giden mailler geri döner ve sitenin e-posta itibarını düşürür */
 function yr_eposta_oneri($m){
@@ -193,7 +193,7 @@ function yr_newsletter(){
 	if(!empty($_COOKIE['yr_ab']))return;/* abone olanlara gösterilmez */
 	echo '<section class="box nl-box" id="bulten" style="margin-top:22px"><h2>'.esc_html(yr_t('bulten_b')).'</h2><p style="margin:0;color:var(--mute)">'.esc_html(yr_t('bulten_m')).'</p>';yr_notice('abone');
 	echo '<form class="news-l" method="post" action="'.esc_url(admin_url('admin-post.php')).'"><input type="hidden" name="action" value="yr_form"><input type="hidden" name="t" value="abone">';wp_nonce_field('yr_form','yr_n');
-	echo '<input class="hp" tabindex="-1" autocomplete="off" name="website"><input type="email" name="email" placeholder="E-posta adresin" aria-label="E-posta" required>';yr_ts_widget();echo '<button class="btn" type="submit">'.esc_html(yr_t('bulten_btn')).'</button>';
+	echo '<input class="hp" tabindex="-1" autocomplete="off" name="website" aria-label="Bu alanı boş bırakın" aria-hidden="true"><input type="email" name="email" placeholder="E-posta adresin" aria-label="E-posta" required>';yr_ts_widget();echo '<button class="btn" type="submit">'.esc_html(yr_t('bulten_btn')).'</button>';
 	echo '<label class="chk"><input type="checkbox" name="onay" value="1" required> <span>Ticari elektronik ileti almayı kabul ediyorum; <a href="'.esc_url(yr_page_url('kvkk-aydinlatma-metni')).'" target="_blank">KVKK Aydınlatma Metni</a>\'ni okudum. Dilediğim zaman abonelikten çıkabilirim.</span></label></form></section>';
 }
 /* Aboneleri CSV indir */

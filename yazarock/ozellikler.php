@@ -182,7 +182,7 @@ function yr_poll_box(){
 		echo '<small style="color:var(--mute)">Toplam '.(int)$t.' oy'.(!$open?' · Anket kapandı':'').'</small>';
 	}else{
 		echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'"><input type="hidden" name="action" value="yr_oy"><input type="hidden" name="aid" value="'.(int)$id.'">';wp_nonce_field('yr_oy','yr_n');
-		echo '<input class="hp" tabindex="-1" autocomplete="off" name="website">';
+		echo '<input class="hp" tabindex="-1" autocomplete="off" name="website" aria-label="Bu alanı boş bırakın" aria-hidden="true">';
 		foreach($o as $i=>$x)echo '<label class="chk"><input type="radio" name="sec" value="'.$i.'" required> <span>'.esc_html($x).'</span></label>';
 		yr_ts_widget();echo '<div class="row"><button class="btn" type="submit">Oy Ver</button><a class="btn alt" href="'.esc_url(add_query_arg('sonuc','1').'#anket').'">Sonuçlar</a></div></form>';
 	}

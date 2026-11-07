@@ -8,7 +8,7 @@ if(!$giris):?>
 <?php elseif(yr_is_writer($u)):?><p>Zaten Yazarock yazarısın.</p><div class="btnrow"><a class="btn" href="<?php echo esc_url(admin_url('post-new.php'));?>">Yeni Yazı</a><a class="btn alt" href="<?php echo esc_url(yr_panel_url());?>">Panelim</a></div>
 <?php elseif(!in_array($_GET['yr_y']??'',['tamam','onaylandi'],true)):?>
 <form class="pform hesapf" id="ap" data-hatirla="yr_yazar_f" method="post" action="<?php echo esc_url(admin_url('admin-post.php'));?>"><input type="hidden" name="action" value="yr_yazar_basvuru"><?php wp_nonce_field('yr_yazar','yr_n');?>
-<input class="hp" tabindex="-1" autocomplete="off" name="website">
+<input class="hp" tabindex="-1" autocomplete="off" name="website" aria-label="Bu alanı boş bırakın" aria-hidden="true">
 <p class="note">Başvurun <b><?php echo esc_html($u->display_name);?></b> (<?php echo esc_html($u->user_email);?>) hesabınla yapılacak. Onaylandığında hesabın yazar hesabına dönüşür; aynı kullanıcı adı ve şifreyle giriş yaparsın.</p>
 <div class="g2"><label>Alan<select name="alan"><option>Underground &amp; Yeni Gruplar</option><option>Röportaj</option><option>Konser &amp; Festival</option><option>Albüm İncelemesi</option><option>Grup Biyografisi</option><option>Türkiye Rock Tarihi</option></select></label>
 <label>Örnek yazı bağlantısı <small>(isteğe bağlı)</small><input name="link" type="url" placeholder="https://"></label></div>

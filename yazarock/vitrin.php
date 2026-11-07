@@ -33,7 +33,7 @@ function yr_grup_kart($id,$buyuk=false,$etiket=''){
 	$img=(!has_post_thumbnail($id)&&$yz&&has_post_thumbnail($yz))?yr_cover($yz,'large'):yr_cover($id,$buyuk?'large':'medium_large');
 	echo '<div class="gkart'.($buyuk?' buyuk':'').'"><a class="gk-img" href="'.esc_url($yz?get_permalink($yz):$url).'" tabindex="-1" aria-hidden="true">'.$img.'</a><div class="gk-in">';
 	if($buyuk){if(yr_t('kesif_pill')!=='')echo '<span class="pill">'.esc_html(yr_t('kesif_pill')).'</span>';}else echo '<span class="gk-k">'.esc_html($etiket!==''?$etiket:'Röportaj yapılan grup').'</span>';
-	echo '<h3><a href="'.esc_url($url).'">'.esc_html(get_the_title($p)).'</a></h3>';
+	$hx=$buyuk?'h2':'h3';echo '<'.$hx.' class="gk-t"><a href="'.esc_url($url).'">'.esc_html(get_the_title($p)).'</a></'.$hx.'>';
 	if($alt)echo '<p class="gk-alt">'.esc_html($alt).'</p>';
 	if($yz){echo '<p class="gk-alt"><a href="'.esc_url(get_permalink($yz)).'">'.esc_html(get_the_title($yz)).'</a></p>';$ex=has_excerpt($yz)?get_the_excerpt($yz):wp_trim_words(wp_strip_all_tags(get_post_field('post_content',$yz)),40);}
 	else $ex=has_excerpt($p)?get_the_excerpt($p):wp_trim_words(wp_strip_all_tags($p->post_content),$buyuk?40:24);

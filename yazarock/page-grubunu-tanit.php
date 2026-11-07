@@ -14,7 +14,7 @@ if($B['liste']){echo '<ol class="gt-steps">';$i=0;foreach(yr_liste_maddeleri($B[
 if(($_GET['yr_g']??'')==='tamam'):?>
 <div class="gt-ok"><?php echo yr_ikon('heart');?><h2>Sahnede görüşmek üzere!</h2><p>Bu arada sitede tanıttığımız diğer gruplara göz atabilirsin.</p><div class="btnrow" style="justify-content:center"><a class="btn" href="<?php echo esc_url(get_post_type_archive_link('grup'));?>">Gruplar</a><a class="btn alt" href="<?php echo esc_url(remove_query_arg('yr_g'));?>">Başka bir grup için başvur</a></div></div>
 <?php else:?>
-<form class="fg pform gtf" id="gtform" method="post" enctype="multipart/form-data" action="<?php echo esc_url(admin_url('admin-post.php'));?>"><input type="hidden" name="action" value="yr_grup_basvuru"><?php wp_nonce_field('yr_gb','yr_n');?><input class="hp" tabindex="-1" autocomplete="off" name="website">
+<form class="fg pform gtf" id="gtform" method="post" enctype="multipart/form-data" action="<?php echo esc_url(admin_url('admin-post.php'));?>"><input type="hidden" name="action" value="yr_grup_basvuru"><?php wp_nonce_field('yr_gb','yr_n');?><input class="hp" tabindex="-1" autocomplete="off" name="website" aria-label="Bu alanı boş bırakın" aria-hidden="true">
 <fieldset><legend><span>1</span>Grup</legend>
 <div class="g2"><label>Grup adı *<input name="grup" required minlength="2" maxlength="80"></label>
 <label>Şehir *<input name="sehir" list="gt-sehir" required minlength="2" maxlength="40" placeholder="ör. İzmir"></label></div>
