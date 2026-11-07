@@ -1,6 +1,6 @@
 <?php
 if(!defined('ABSPATH'))exit;
-define('YR_VER','1.25.0');
+define('YR_VER','1.25.1');
 
 /* E-posta adresi yazım ve alan adı kontrolü: hatalı adreslere giden mailler geri döner ve sitenin e-posta itibarını düşürür */
 function yr_eposta_oneri($m){
@@ -471,3 +471,11 @@ require_once get_template_directory().'/yeraltindan.php';
 require_once get_template_directory().'/sehirler.php';
 require_once get_template_directory().'/bulten.php';
 require_once get_template_directory().'/instagram.php';
+
+/* Google Search Console doğrulama dosyası (HTML dosyası yöntemi). Doğrulandıktan sonra da kalmalı, silme. */
+add_action('template_redirect',function(){
+	$p=wp_parse_url($_SERVER['REQUEST_URI']??'',PHP_URL_PATH);$base=untrailingslashit((string)wp_parse_url(home_url('/'),PHP_URL_PATH));
+	if($p!==$base.'/googled2aca4e63ec39b18.html')return;
+	status_header(200);header('Content-Type: text/html; charset=utf-8');header('X-Robots-Tag: noindex');
+	echo 'google-site-verification: googled2aca4e63ec39b18.html';exit;
+},0);
