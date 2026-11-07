@@ -252,8 +252,8 @@ add_action('admin_init',function(){
 
 /* ================= v1.25 geçişi: menüdeki eski ?page_id= / ?cat= bağlantıları kalıcı adreslere, slogan yeni hedefe ================= */
 add_action('admin_init',function(){
-	if(get_option('yr_mig_v6')||!current_user_can('manage_options'))return;
-	update_option('yr_mig_v6',1);
+	if(get_option('yr_mig_v38')||!current_user_can('manage_options'))return;
+	update_option('yr_mig_v38',1);
 	$home=untrailingslashit(home_url());
 	foreach((array)wp_get_nav_menus() as $m){
 		foreach((array)wp_get_nav_menu_items($m->term_id) as $it){
@@ -269,8 +269,8 @@ add_action('admin_init',function(){
 
 /* ================= v1.25.2 geçişi: menüdeki eski bağlantılar (http://, www, göreli adres dahil) kalıcı adreslere ================= */
 add_action('admin_init',function(){
-	if(get_option('yr_mig_v7')||!current_user_can('manage_options'))return;
-	update_option('yr_mig_v7',1);
+	if(get_option('yr_mig_v39')||!current_user_can('manage_options'))return;
+	update_option('yr_mig_v39',1);
 	$host=preg_quote(preg_replace('#^www\.#','',(string)wp_parse_url(home_url(),PHP_URL_HOST)),'#');
 	foreach((array)wp_get_nav_menus() as $m){
 		foreach((array)wp_get_nav_menu_items($m->term_id) as $it){

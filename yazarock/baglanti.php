@@ -171,3 +171,44 @@ add_filter('wp_content_img_tag',function($img){
 	}
 	return $img;
 });
+
+/* ================= v1.28 geçişi: röportajı olup grup sayfası olmayanlar için TASLAK grup sayfaları ================= */
+/* Bilgiler röportajlardan derlendi; yayımlamadan önce kontrol et. Yayımlanınca röportaja otomatik bağlanır. */
+add_action('admin_init',function(){
+	if(get_option('yr_mig_v40')||!current_user_can('manage_options')||!function_exists('yr_derleme_grup_ekle'))return;
+	update_option('yr_mig_v40',1);
+	$L=[
+		['rop'=>'garajdan-sahneye-tiran','sehir'=>'İstanbul','kredi'=>'','g'=>['id'=>'rop-grup-tiran','ad'=>'Tiran','bolge'=>'tr','tur'=>'Metal','stil'=>'Alternatif / Modern Metal','kurulus'=>'İstanbul · 2024',
+			'ozet'=>'İstanbul\'dan, beş üniversitelinin kurduğu alternatif / modern metal grubu. İlk albümleri Össan Deneç prodüksiyonuyla çıktı.',
+			'spotify'=>'https://open.spotify.com/artist/6DIDUoxkjTGeN7fhrvk2k8','youtube'=>'https://youtube.com/@gruptiran','link'=>'https://www.instagram.com/tiranofficial_/',
+			'icerik'=>'<p>Tiran, 2024\'te İstanbul\'da beş üniversite öğrencisinin kurduğu bir alternatif / modern metal grubu. Üyeler üniversitelerinin müzik kulübünde bir araya geldi; önceleri Türkçe rock çalan bir ekipken daha sert bir yöne dönüp bugünkü adını aldılar.</p><p>İlk albümlerinde aşk, öfke, isyan, hüzün ve çaresizlik gibi temaları işliyorlar. Akustik gitar ve vokalle doğan şarkılarını breakdown\'lar, sert vokaller ve metalcore dokunuşlarıyla yeniden düzenleyip Össan Deneç\'in prodüksiyonuyla kaydettiler.</p><p>Etkilendikleri isimler Pentagram, Dorian ve Çilekeş\'ten Gojira, Deftones ve Alice in Chains\'e uzanıyor.</p>']],
+		['rop'=>'garajdan-sahneye-bora-sahinkara','sehir'=>'İzmir','kredi'=>'','g'=>['id'=>'rop-grup-bora-sahinkara','ad'=>'Bora Şahinkara','bolge'=>'tr','tur'=>'Progresif','stil'=>'Progresif Rock','kurulus'=>'İzmir · 2023',
+			'ozet'=>'İzmir\'den progresif rock bestecisi ve gitarist. Son mini albümü "Çocuk Köpek", rock\'n roll ruhlu çocuk şarkılarından oluşuyor.',
+			'spotify'=>'https://open.spotify.com/artist/1XFoIcye9MiNRmOOsVwPso','youtube'=>'https://www.youtube.com/@BoraSahinkara','link'=>'https://www.instagram.com/borasahinkara.mi/','diskografi'=>'Çocuk Köpek (2026)',
+			'icerik'=>'<p>Bora Şahinkara, İzmir\'de 2023\'ten beri üreten bir progresif rock bestecisi ve gitarist. Sabit bir grubu yok: söz, gitar, bas ve davul partilerini kendisi yazıyor, gitarları stüdyoda kendisi çalıyor, diğer partiler için gönüllü müzisyen arkadaşlarıyla çalışıyor. Bu yöntemle iki kolektif mini albüm yayımladı.</p><p>Son çalışması "Çocuk Köpek", bir çocukla bir köpeğin arkadaşlığını anlatan beş parçalık bir mini albüm. Akustik sadelikten funk ve rock\'n roll\'a uzanan parçaların kayıt, miks ve mastering\'i Gökhan Bektaş\'a ait.</p><p>Etkilendiği isimler arasında Fazıl Say, Yavuz Çetin, Opeth, King Crimson ve Black Sabbath var.</p>']],
+		['rop'=>'garajdan-sahneye-ayberk-saka','sehir'=>'Muğla','kredi'=>'Ayberk Saka Instagram','g'=>['id'=>'rop-grup-ayberk-saka','ad'=>'Ayberk Saka','bolge'=>'tr','tur'=>'Progresif','stil'=>'Art Rock','kurulus'=>'Muğla · 2000',
+			'ozet'=>'Muğla\'dan art rock bestecisi ve çok enstrümanlı müzisyen. Son albümü "Kelebeğin Vedası", 56 dakikalık bir art rock operası.',
+			'spotify'=>'https://open.spotify.com/album/1Q77zU4W8TAzrFz7rxuZS3','link'=>'https://www.instagram.com/ayberksaka_/','diskografi'=>'Kelebeğin Vedası',
+			'icerik'=>'<p>Ayberk Saka, Muğla\'da art rock çizgisinde müzik yapan bir besteci ve çok enstrümanlı müzisyen. Klasik müzik eğitiminin ardından kurduğu bu kişisel projede beste, düzenleme, gitar, bas, klavye, orkestrasyon ve prodüksiyonun tamamını kendi stüdyosunda üstleniyor.</p><p>Müziğinde klasik kompozisyonu 70\'lerin progresif rock\'ıyla, senfonik katmanlarla, caz ve soul esintileriyle ve yer yer thrash metal riffleriyle birleştiriyor. Son albümü "Kelebeğin Vedası", insanın iç dünyasıyla hesaplaşmasını anlatan 18 parçalık, 56 dakikalık kesintisiz bir art rock operası.</p><p>16 yaşından beri sahnede; otellerde, barlarda ve konserlerde çalıyor.</p>']],
+	];
+	foreach($L as $x){
+		yr_derleme_grup_ekle($x['g']);
+		$gp=get_posts(['post_type'=>'grup','post_status'=>'any','meta_key'=>'_yr_derleme_id','meta_value'=>$x['g']['id'],'numberposts'=>1]);if(!$gp)continue;$g=$gp[0];
+		$rp=get_posts(['post_type'=>'post','post_status'=>'publish','name'=>$x['rop'],'numberposts'=>1]);
+		if($rp){
+			update_post_meta($g->ID,'_yr_rop_kaynak',$rp[0]->ID);
+			$t=get_post_thumbnail_id($rp[0]->ID);if($t&&!has_post_thumbnail($g->ID))set_post_thumbnail($g->ID,$t);
+			$baglanti='<p>Yazarock röportajı: <a href="'.esc_url(get_permalink($rp[0])).'">'.esc_html(get_the_title($rp[0])).'</a></p>';
+			if(strpos($g->post_content,get_permalink($rp[0]))===false)wp_update_post(['ID'=>$g->ID,'post_content'=>wp_slash($g->post_content.$baglanti)]);
+		}
+		if($x['kredi']!=='')update_post_meta($g->ID,'_yr_gorsel_kredi',$x['kredi']);
+		if(function_exists('yr_sehir_ata'))yr_sehir_ata($g->ID);/* şehir kuruluş bilgisinden (ör. İzmir · 2023) */
+	}
+});
+/* Röportajdan doğan grup sayfası yayımlanınca röportaja "Röportaj yapılan grup" olarak bağlanır */
+add_action('transition_post_status',function($yeni,$eski,$p){
+	if($yeni!=='publish'||$eski==='publish'||$p->post_type!=='grup')return;
+	$r=(int)get_post_meta($p->ID,'_yr_rop_kaynak',true);
+	if($r&&!get_post_meta($r,'_yr_roportaj_grup',true))update_post_meta($r,'_yr_roportaj_grup',$p->ID);
+	delete_transient('yr_rop_albumler_v2');delete_transient('yr_yerli_havuz');delete_transient('yr_grup_adlari');
+},10,3);
