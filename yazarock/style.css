@@ -3,7 +3,7 @@ Theme Name: Yazarock
 Theme URI: https://yazarock.com
 Author: Yazarock
 Description: Rock ve metal müzik haber teması. Gruplar, Etkinlikler, yazar giriş paneli, yazarlık başvurusu ve bülten içerir.
-Version: 1.25.3
+Version: 1.26.0
 Requires at least: 6.0
 Requires PHP: 7.4
 Text Domain: yazarock
@@ -592,3 +592,12 @@ nav a.gt:hover{background:var(--red)}
 
 /* 1.22.0 röportaj taslak */
 .rp-kayit{border:1px dashed var(--line);padding:12px 14px;margin:0 0 16px}.rp-kaydet.btn{font-size:14px;padding:8px 14px}.rp-sonuc{display:block;margin-top:8px;font-size:14px;word-break:break-all}.rp-sonuc.iyi{color:#9fd8a5}.rp-sonuc.kotu{color:var(--red2)}.rp-sonuc a{color:var(--blue)}.rp-ig{border:1px solid var(--red2);background:var(--panel2);padding:12px 14px;margin:0 0 14px;font-size:15px}.rp-ig .btn{margin-top:10px;display:table}.gt-ok-mini{border:1px solid #2f6b3a;background:#13241a;color:#cfe9d3;padding:10px 14px;margin:0 0 12px}.button-link.rp-kaydet{background:none;border:0;padding:0;color:var(--blue);text-decoration:underline;cursor:pointer;font:inherit}
+
+/* 1.26.0: etkinlik bilgileri, yazıda geçen gruplar, yerli grup önerisi */
+.ebilgi{list-style:none;padding:0;margin:0 0 18px;display:grid;gap:6px;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+.ebilgi li{padding:8px 12px;background:var(--panel2);border:1px solid var(--line)}
+.ebilgi b{font-family:Oswald,sans-serif;font-weight:500;letter-spacing:.04em;color:var(--mute);margin-right:4px}
+.entry .notice{padding:10px 14px;border-left:4px solid var(--red);background:var(--panel2)}
+.yr-gecen span{color:var(--mute);margin-right:4px}
+.yr-oneri{margin-top:22px}
+.yr-oneri h2{margin-top:0}

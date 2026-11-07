@@ -1,6 +1,6 @@
 <?php
 if(!defined('ABSPATH'))exit;
-define('YR_VER','1.25.3');
+define('YR_VER','1.26.0');
 
 /* E-posta adresi yazım ve alan adı kontrolü: hatalı adreslere giden mailler geri döner ve sitenin e-posta itibarını düşürür */
 function yr_eposta_oneri($m){
@@ -329,7 +329,8 @@ add_action('wp_head',function(){
 		$p=get_queried_object();$d=has_excerpt($p)?get_the_excerpt($p):wp_trim_words(wp_strip_all_tags($p->post_content),30);
 		if(is_front_page())$d=yr_site_aciklama();
 		$img=yr_paylasim_gorseli($p);$u=get_permalink($p);$type=$p->post_type==='post'?'article':'website';
-		if($p->post_type==='etkinlik')$j=['@context'=>'https://schema.org','@type'=>'Event','name'=>get_the_title($p),'startDate'=>yr_meta('tarih',$p->ID).(yr_meta('saat',$p->ID)?'T'.yr_meta('saat',$p->ID):''),'eventAttendanceMode'=>'https://schema.org/OfflineEventAttendanceMode','location'=>['@type'=>'Place','name'=>yr_meta('mekan',$p->ID),'address'=>yr_meta('sehir',$p->ID)],'url'=>$u];
+		if($p->post_type==='etkinlik')$j=yr_etkinlik_ld($p,$u,wp_strip_all_tags($d),$img);
+		if($p->post_type==='grup')$j=yr_grup_ld($p,$u,wp_strip_all_tags($d),$img);
 		if($p->post_type==='post')$j=['@context'=>'https://schema.org','@type'=>'Article','headline'=>get_the_title($p),'datePublished'=>get_the_date('c',$p),'dateModified'=>get_the_modified_date('c',$p),'author'=>['@type'=>'Person','name'=>get_the_author_meta('display_name',$p->post_author)],'image'=>$img?$img:yr_varsayilan_gorsel(),'mainEntityOfPage'=>$u];
 	}
 	if(is_front_page())$j=['@context'=>'https://schema.org','@type'=>'WebSite','name'=>'Yazarock.com','url'=>home_url('/'),'potentialAction'=>['@type'=>'SearchAction','target'=>home_url('/?s={search_term_string}'),'query-input'=>'required name=search_term_string']];
@@ -481,6 +482,7 @@ require_once get_template_directory().'/yeraltindan.php';
 require_once get_template_directory().'/sehirler.php';
 require_once get_template_directory().'/bulten.php';
 require_once get_template_directory().'/instagram.php';
+require_once get_template_directory().'/baglanti.php';
 
 /* Google Search Console doğrulama dosyası (HTML dosyası yöntemi). Doğrulandıktan sonra da kalmalı, silme. */
 add_action('template_redirect',function(){

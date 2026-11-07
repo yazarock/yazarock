@@ -26,13 +26,13 @@ add_filter('manage_grup_posts_columns',function($c){$c['yr_kesif']='Keşif';retu
 add_action('manage_grup_posts_custom_column',function($c,$id){if($c==='yr_kesif'&&get_post_meta($id,'_yr_kesif',true))echo '★';},10,2);
 
 /* Grup kartı (büyük: Haftanın Keşfi, küçük: röportaj altındaki kutu) */
-function yr_grup_kart($id,$buyuk=false){
+function yr_grup_kart($id,$buyuk=false,$etiket=''){
 	$p=get_post($id);if(!$p||$p->post_type!=='grup'||$p->post_status!=='publish')return;
 	$url=get_permalink($p);$alt=yr_join(yr_meta('stil',$id),yr_meta('kurulus',$id));
 	$yz=$buyuk?(int)get_post_meta($id,'_yr_kesif_yazi',true):0;if($yz&&get_post_status($yz)!=='publish')$yz=0;/* Keşif kutusunda öne çıkan inceleme yazısı */
 	$img=(!has_post_thumbnail($id)&&$yz&&has_post_thumbnail($yz))?yr_cover($yz,'large'):yr_cover($id,$buyuk?'large':'medium_large');
 	echo '<div class="gkart'.($buyuk?' buyuk':'').'"><a class="gk-img" href="'.esc_url($yz?get_permalink($yz):$url).'" tabindex="-1" aria-hidden="true">'.$img.'</a><div class="gk-in">';
-	if($buyuk){if(yr_t('kesif_pill')!=='')echo '<span class="pill">'.esc_html(yr_t('kesif_pill')).'</span>';}else echo '<span class="gk-k">Röportaj yapılan grup</span>';
+	if($buyuk){if(yr_t('kesif_pill')!=='')echo '<span class="pill">'.esc_html(yr_t('kesif_pill')).'</span>';}else echo '<span class="gk-k">'.esc_html($etiket!==''?$etiket:'Röportaj yapılan grup').'</span>';
 	echo '<h3><a href="'.esc_url($url).'">'.esc_html(get_the_title($p)).'</a></h3>';
 	if($alt)echo '<p class="gk-alt">'.esc_html($alt).'</p>';
 	if($yz){echo '<p class="gk-alt"><a href="'.esc_url(get_permalink($yz)).'">'.esc_html(get_the_title($yz)).'</a></p>';$ex=has_excerpt($yz)?get_the_excerpt($yz):wp_trim_words(wp_strip_all_tags(get_post_field('post_content',$yz)),40);}

@@ -6,14 +6,14 @@
 <?php if(has_post_thumbnail()&&!get_post_meta($pid,'_yr_one_icerikten',true)){the_post_thumbnail('large');yr_credit();}/* öne çıkan görsel yazının içindeki resimden alındıysa üstte ikinci kez gösterme */?>
 <div class="content"><?php the_content();?></div>
 <?php yr_embeds($pid);$rg=(int)get_post_meta($pid,'_yr_roportaj_grup',true);if($rg)yr_grup_kart($rg);?>
-<?php the_tags('<p class="tags">',' ',' </p>');?>
+<?php yr_yazidaki_gruplar($pid);the_tags('<p class="tags">',' ',' </p>');?>
 <div class="post-foot" id="tepki">
 <div class="share"><a class="btn alt" href="https://wa.me/?text=<?php echo $t.'%20'.$u;?>" rel="noopener" target="_blank">WhatsApp</a><a class="btn alt" href="https://twitter.com/intent/tweet?url=<?php echo $u;?>&amp;text=<?php echo $t;?>" rel="noopener" target="_blank">X</a></div>
 <?php yr_tepki_kutu($pid);?>
 </div>
 <?php yr_yazar_kutu($aid);?>
 </article>
-<?php if(comments_open()||get_comments_number())comments_template();
+<?php yr_yerli_kutu($pid);if(comments_open()||get_comments_number())comments_template();
 $ex=[$pid];
 $ay=new WP_Query(['post_type'=>'post','author'=>$aid,'posts_per_page'=>3,'post__not_in'=>$ex,'ignore_sticky_posts'=>1,'no_found_rows'=>true]);
 if($ay->have_posts()):?><div class="box" style="margin-top:22px"><h2>Yazarın Diğer Yazıları</h2><div class="news"><?php while($ay->have_posts()){$ay->the_post();$ex[]=get_the_ID();yr_card();}?></div><p style="margin:14px 0 0"><a class="more" href="<?php echo esc_url(get_author_posts_url($aid));?>">Tüm yazıları →</a></p></div><?php endif;wp_reset_postdata();
