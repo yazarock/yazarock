@@ -249,3 +249,20 @@ add_action('admin_init',function(){
 	if($k&&strpos($k->post_content,'Beğeni ve Okunma Sayaçları')===false)wp_update_post(['ID'=>$k->ID,'post_content'=>wp_slash($k->post_content.'<h2>Beğeni ve Okunma Sayaçları</h2><p>Yazılara verdiğiniz beğen / beğenme oyları ve okunma sayıları istatistik amacıyla tutulur. Üye değilseniz, aynı yazıya tekrar tekrar oy verilmesini ve sahte okunmaları önlemek için IP adresiniz geri döndürülemez şekilde özetlenerek (hash) en fazla 7 gün saklanır; IP adresinizin kendisi kaydedilmez. Üyeyseniz verdiğiniz oylar, panelinizdeki "Beğendiklerim" bölümünü oluşturmak için hesabınızla ilişkilendirilir ve hesabınızı sildiğinizde silinir.</p><h2>Profil Bilgileri</h2><p>Panelinizden eklediğiniz profil fotoğrafı, kısa biyografi ve sosyal medya bağlantıları; yazarsanız yazar sayfanızda herkese açık olarak gösterilir. Üyeler hesaplarını panelden kendileri silebilir.</p>')]);
 	flush_rewrite_rules();
 });
+
+/* ================= v1.25 geçişi: menüdeki eski ?page_id= / ?cat= bağlantıları kalıcı adreslere, slogan yeni hedefe ================= */
+add_action('admin_init',function(){
+	if(get_option('yr_mig_v6')||!current_user_can('manage_options'))return;
+	update_option('yr_mig_v6',1);
+	$home=untrailingslashit(home_url());
+	foreach((array)wp_get_nav_menus() as $m){
+		foreach((array)wp_get_nav_menu_items($m->term_id) as $it){
+			if($it->type!=='custom')continue;
+			if(!preg_match('#^'.preg_quote($home,'#').'/?\?(page_id|p|cat)=(\d+)$#',(string)$it->url,$x))continue;
+			$yeni=$x[1]==='cat'?get_term_link((int)$x[2],'category'):get_permalink((int)$x[2]);
+			if($yeni&&!is_wp_error($yeni))update_post_meta($it->ID,'_menu_item_url',esc_url_raw($yeni));
+		}
+	}
+	/* Slogan yalnızca hâlâ ilk kurulumdaki eski metinse değişir; Ayarlar → Genel → Slogan'dan istediğin zaman düzenleyebilirsin */
+	if(get_option('blogdescription')==='Türkiye ve dünyadan rock ve metal müzik haberleri, konser ve festival takvimi, grup biyografileri.')update_option('blogdescription','Tanınmayan rock ve metal gruplarının sesi');
+});

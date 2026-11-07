@@ -1,6 +1,6 @@
 <?php
 if(!defined('ABSPATH'))exit;
-define('YR_VER','1.24.6');
+define('YR_VER','1.25.0');
 
 /* E-posta adresi yazım ve alan adı kontrolü: hatalı adreslere giden mailler geri döner ve sitenin e-posta itibarını düşürür */
 function yr_eposta_oneri($m){
@@ -295,19 +295,38 @@ function yr_title(){
 	return 'Haberler';
 }
 
+/* SEO: sitenin genel açıklaması. Ana sayfanın "Özet" alanı doluysa o kullanılır (Sayfalar → Ana Sayfa → Özet), boşsa bu varsayılan metin */
+function yr_site_aciklama(){
+	$f=(int)get_option('page_on_front');
+	if($f&&has_excerpt($f))return wp_strip_all_tags(get_the_excerpt($f));
+	return 'Türkiye\'nin underground rock ve metal grupları: röportajlar, grup tanıtımları, konser takvimi ve haftalık Yeraltından listesi.';
+}
+add_action('init',function(){add_post_type_support('page','excerpt');});
+/* Paylaşım görseli: öne çıkan görsel yoksa sırayla röportajı yapılan grubun görseli ve yazının içindeki ilk görsel denenir */
+function yr_paylasim_gorseli($p){
+	$img=get_the_post_thumbnail_url($p,'large');if($img)return $img;
+	$g=(int)get_post_meta($p->ID,'_yr_roportaj_grup',true);
+	if($g&&($x=get_the_post_thumbnail_url($g,'large')))return $x;
+	if(preg_match('/<img[^>]+src=["\']([^"\']+)["\']/i',(string)$p->post_content,$m))return $m[1];
+	return '';
+}
+function yr_varsayilan_gorsel(){return get_template_directory_uri().'/assets/paylasim.jpg';}
 /* SEO: açıklama, Open Graph ve yapılandırılmış veri */
 add_action('wp_head',function(){
-	$d=get_bloginfo('description');$u=home_url(add_query_arg([]));$img='';$type='website';$j=null;
+	$d=yr_site_aciklama();$u=home_url(add_query_arg([]));$img='';$type='website';$j=null;
+	if(is_home()&&!is_front_page()&&($pf=(int)get_option('page_for_posts'))){$u=is_paged()?get_pagenum_link(max(1,(int)get_query_var('paged'))):get_permalink($pf);echo '<link rel="canonical" href="'.esc_url($u).'">';}
 	if(is_singular()){
 		$p=get_queried_object();$d=has_excerpt($p)?get_the_excerpt($p):wp_trim_words(wp_strip_all_tags($p->post_content),30);
-		$img=get_the_post_thumbnail_url($p,'large');$u=get_permalink($p);$type=$p->post_type==='post'?'article':'website';
+		if(is_front_page())$d=yr_site_aciklama();
+		$img=yr_paylasim_gorseli($p);$u=get_permalink($p);$type=$p->post_type==='post'?'article':'website';
 		if($p->post_type==='etkinlik')$j=['@context'=>'https://schema.org','@type'=>'Event','name'=>get_the_title($p),'startDate'=>yr_meta('tarih',$p->ID).(yr_meta('saat',$p->ID)?'T'.yr_meta('saat',$p->ID):''),'eventAttendanceMode'=>'https://schema.org/OfflineEventAttendanceMode','location'=>['@type'=>'Place','name'=>yr_meta('mekan',$p->ID),'address'=>yr_meta('sehir',$p->ID)],'url'=>$u];
-		if($p->post_type==='post')$j=['@context'=>'https://schema.org','@type'=>'Article','headline'=>get_the_title($p),'datePublished'=>get_the_date('c',$p),'dateModified'=>get_the_modified_date('c',$p),'author'=>['@type'=>'Person','name'=>get_the_author_meta('display_name',$p->post_author)],'image'=>$img?$img:null,'mainEntityOfPage'=>$u];
+		if($p->post_type==='post')$j=['@context'=>'https://schema.org','@type'=>'Article','headline'=>get_the_title($p),'datePublished'=>get_the_date('c',$p),'dateModified'=>get_the_modified_date('c',$p),'author'=>['@type'=>'Person','name'=>get_the_author_meta('display_name',$p->post_author)],'image'=>$img?$img:yr_varsayilan_gorsel(),'mainEntityOfPage'=>$u];
 	}
 	if(is_front_page())$j=['@context'=>'https://schema.org','@type'=>'WebSite','name'=>'Yazarock.com','url'=>home_url('/'),'potentialAction'=>['@type'=>'SearchAction','target'=>home_url('/?s={search_term_string}'),'query-input'=>'required name=search_term_string']];
 	$d=wp_strip_all_tags($d);
-	echo '<meta name="description" content="'.esc_attr($d).'"><meta property="og:site_name" content="Yazarock.com"><meta property="og:type" content="'.esc_attr($type).'"><meta property="og:title" content="'.esc_attr(wp_get_document_title()).'"><meta property="og:description" content="'.esc_attr($d).'"><meta property="og:url" content="'.esc_url($u).'"><meta name="twitter:card" content="'.($img?'summary_large_image':'summary').'">';
+	echo '<meta name="description" content="'.esc_attr($d).'"><meta property="og:site_name" content="Yazarock.com"><meta property="og:type" content="'.esc_attr($type).'"><meta property="og:title" content="'.esc_attr(wp_get_document_title()).'"><meta property="og:description" content="'.esc_attr($d).'"><meta property="og:url" content="'.esc_url($u).'"><meta name="twitter:card" content="summary_large_image">';
 	if($img)echo '<meta property="og:image" content="'.esc_url($img).'">';
+	else echo '<meta property="og:image" content="'.esc_url(yr_varsayilan_gorsel()).'"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">';
 	if($j)echo '<script type="application/ld+json">'.wp_json_encode($j,JSON_UNESCAPED_UNICODE).'</script>';
 },5);
 
@@ -315,7 +334,7 @@ add_action('wp_head',function(){
 function yr_page($t,$s){$p=get_page_by_path($s);if($p)return $p->ID;return wp_insert_post(['post_type'=>'page','post_status'=>'publish','post_title'=>$t,'post_name'=>$s,'post_content'=>'']);}
 add_action('after_switch_theme',function(){
 	update_option('permalink_structure','/%postname%/');update_option('blogname','Yazarock.com');
-	update_option('blogdescription','Türkiye ve dünyadan rock ve metal müzik haberleri, konser ve festival takvimi, grup biyografileri.');
+	update_option('blogdescription','Tanınmayan rock ve metal gruplarının sesi');
 	$home=yr_page('Ana Sayfa','ana-sayfa');$haber=yr_page('Haberler','haberler');$yaz=yr_page('Yazar Ol','yazar-ol');$gir=yr_page('Giriş Yap','giris');
 	update_option('show_on_front','page');update_option('page_on_front',$home);update_option('page_for_posts',$haber);
 	foreach(['Kültür & Sanat','Rehber','Röportaj','Konser Raporu'] as $c)if(!term_exists($c,'category'))wp_insert_term($c,'category');
