@@ -97,33 +97,49 @@ function yr_week_pick(){
 	set_transient('yr_week_'.$k,$r,WEEK_IN_SECONDS);return $r;
 }
 add_action('save_post_grup',function(){delete_transient('yr_week_'.yr_week_key());});
-/* Röportaj yapılan grupların albümleri (en yeni röportaj önce); her grubun en yeni albümü */
+/* Röportajlar ve grupları (en yeni röportaj önce). Grup seçilmemişse röportaj başlığındaki grup adı aranır; grup sayfası yoksa röportajın kendisi gösterilir */
 function yr_rop_albumler(){
-	$v=get_transient('yr_rop_albumler');if(is_array($v))return $v;
+	$v=get_transient('yr_rop_albumler_v2');if(is_array($v))return $v;
 	global $wpdb;$v=[];$gor=[];
-	$rows=$wpdb->get_results("SELECT pm.meta_value AS g,p.ID AS y FROM {$wpdb->postmeta} pm INNER JOIN {$wpdb->posts} p ON p.ID=pm.post_id WHERE pm.meta_key='_yr_roportaj_grup' AND p.post_status='publish' AND p.post_type='post' ORDER BY p.post_date DESC LIMIT 60");
-	foreach((array)$rows as $r){
-		$g=(int)$r->g;if(!$g||isset($gor[$g])||get_post_status($g)!=='publish'||get_post_type($g)!=='grup')continue;$gor[$g]=1;
-		$d=yr_parse_disco(get_post_meta($g,'_yr_diskografi',true));$al=null;
-		foreach($d as $x)if(!$al||($x[1]!==''&&($al[1]===''||(int)$x[1]>=(int)$al[1])))$al=$x;
-		if($d&&$al&&$al[1]==='')$al=end($d);
-		$v[]=['id'=>$g,'album'=>$al,'rop'=>(int)$r->y];
+	$ids=array_map('intval',$wpdb->get_col("SELECT p.ID FROM {$wpdb->posts} p INNER JOIN {$wpdb->postmeta} pm ON pm.post_id=p.ID AND pm.meta_key='_yr_roportaj_grup' WHERE p.post_status='publish' AND p.post_type='post'"));
+	$k=function_exists('yr_roportaj_kat')?yr_roportaj_kat():0;
+	if($k)$ids=array_merge($ids,array_map('intval',get_posts(['post_type'=>'post','post_status'=>'publish','numberposts'=>40,'fields'=>'ids','cat'=>$k])));
+	$ids=array_values(array_unique($ids));
+	if(!$ids){set_transient('yr_rop_albumler_v2',[],HOUR_IN_SECONDS);return [];}
+	$ids=get_posts(['post_type'=>'post','post__in'=>$ids,'numberposts'=>40,'fields'=>'ids','orderby'=>'date','order'=>'DESC']);
+	foreach($ids as $y){
+		$baslik=html_entity_decode(get_the_title($y),ENT_QUOTES,'UTF-8');
+		$g=(int)get_post_meta($y,'_yr_roportaj_grup',true);
+		if($g&&(get_post_status($g)!=='publish'||get_post_type($g)!=='grup'))$g=0;
+		if(!$g&&function_exists('yr_metindeki_gruplar')){$m=yr_metindeki_gruplar($baslik,1);$g=$m?(int)$m[0]:0;}
+		if($g){
+			if(isset($gor['g'.$g]))continue;$gor['g'.$g]=1;
+			$d=yr_parse_disco(get_post_meta($g,'_yr_diskografi',true));$al=null;
+			foreach($d as $x)if(!$al||($x[1]!==''&&($al[1]===''||(int)$x[1]>=(int)$al[1])))$al=$x;
+			$v[]=['id'=>$g,'album'=>$al,'rop'=>(int)$y];
+		}else{
+			$ad=trim(preg_match('/:\s*(.+)$/u',$baslik,$mm)?$mm[1]:$baslik);/* "Garajdan Sahneye: Tiran" → Tiran */
+			$an='a'.mb_strtolower($ad);if(isset($gor[$an]))continue;$gor[$an]=1;
+			$v[]=['id'=>0,'ad'=>$ad,'album'=>null,'rop'=>(int)$y];
+		}
 		if(count($v)>=8)break;
 	}
-	set_transient('yr_rop_albumler',$v,HOUR_IN_SECONDS);return $v;
+	set_transient('yr_rop_albumler_v2',$v,HOUR_IN_SECONDS);return $v;
 }
-add_action('save_post',function(){delete_transient('yr_rop_albumler');});
+add_action('save_post',function(){delete_transient('yr_rop_albumler_v2');});
 function yr_week_box(){
 	$L=yr_rop_albumler();
 	if($L){
 		echo '<div class="box wk"><h2>'.esc_html(yr_t('hafta_b')).'</h2><div class="yr-donen" data-sure="4000" aria-live="off">';
-		foreach($L as $i=>$w){$id=$w['id'];
-			echo '<div class="yr-dk'.($i?'':' on').'"'.($i?' aria-hidden="true"':'').'><div class="wkb"><a class="wkc" href="'.esc_url(get_permalink($id)).'" tabindex="-1">'.yr_cover($id).'</a><div>'.(yr_t('hafta_pill')!==''?'<span class="pill">'.esc_html(yr_t('hafta_pill')).'</span>':'').'<h3>'.esc_html(get_the_title($id)).'</h3>';
+		foreach($L as $i=>$w){$id=(int)$w['id'];$r=(int)$w['rop'];
+			$ad=$id?get_the_title($id):$w['ad'];$hedef=$id?get_permalink($id):get_permalink($r);
+			$gor=$id?yr_cover($id):(function_exists('yr_post_cover')?yr_post_cover($r):yr_cover($r));
+			echo '<div class="yr-dk'.($i?'':' on').'"'.($i?' aria-hidden="true"':'').'><div class="wkb"><a class="wkc" href="'.esc_url($hedef).'" tabindex="-1">'.$gor.'</a><div>'.(yr_t('hafta_pill')!==''?'<span class="pill">'.esc_html(yr_t('hafta_pill')).'</span>':'').'<h3>'.esc_html($ad).'</h3>';
 			if($w['album'])echo '<p class="wka">'.esc_html($w['album'][0]).($w['album'][1]?' <span>('.esc_html($w['album'][1]).')</span>':'').'</p>';
-			echo '<p>'.esc_html(wp_trim_words(get_the_excerpt($id),26)).'</p><div class="btnrow"><a class="btn" href="'.esc_url(get_permalink($w['rop'])).'">Röportajı oku</a><a class="btn alt" href="'.esc_url(get_permalink($id)).'">'.esc_html(yr_t('hafta_btn')).'</a></div></div></div></div>';
+			echo '<p>'.esc_html(wp_trim_words(get_the_excerpt($id?$id:$r),26)).'</p><div class="btnrow"><a class="btn" href="'.esc_url(get_permalink($r)).'">Röportajı oku</a>'.($id?'<a class="btn alt" href="'.esc_url(get_permalink($id)).'">'.esc_html(yr_t('hafta_btn')).'</a>':'').'</div></div></div></div>';
 		}
 		echo '</div>';
-		if(count($L)>1){echo '<div class="yr-dn" role="group" aria-label="Albümler">';foreach($L as $i=>$w)echo '<button type="button" class="'.($i?'':'on').'" aria-label="'.esc_attr(($i+1).'. albüm: '.get_the_title($w['id'])).'"></button>';echo '</div>';}
+		if(count($L)>1){echo '<div class="yr-dn" role="group" aria-label="Albümler">';foreach($L as $i=>$w)echo '<button type="button" class="'.($i?'':'on').'" aria-label="'.esc_attr(($i+1).'. röportaj: '.($w['id']?get_the_title($w['id']):$w['ad'])).'"></button>';echo '</div>';}
 		echo '</div>';return;
 	}
 	/* Henüz röportaj yoksa eski davranış: haftanın albümü */
