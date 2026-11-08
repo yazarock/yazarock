@@ -318,3 +318,19 @@ add_action('init',function(){
 	update_option('yr_mig_v37',3);
 	if(function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
 },51);
+
+/* Miskinler "Misko Disko" yeni çıkış haberi: Nevzat'ın gönderdiği grup fotoğrafı öne çıkan görsel olarak (mig v41, en fazla 3 deneme) */
+add_action('init',function(){
+	$n=(int)get_option('yr_mig_v41');if($n>=3)return;
+	$p=get_page_by_path('miskinlerin-ilk-albumu-misko-disko-11-kasimda-anadolu-ezgileriyle-psikedelik-funk-rock',OBJECT,'post');if(!$p)return;
+	update_option('yr_mig_v41',$n+1);
+	if(has_post_thumbnail($p->ID)){update_option('yr_mig_v41',3);return;}/* elle eklendiyse dokunma */
+	require_once ABSPATH.'wp-admin/includes/media.php';require_once ABSPATH.'wp-admin/includes/file.php';require_once ABSPATH.'wp-admin/includes/image.php';
+	$aid=media_sideload_image('https://raw.githubusercontent.com/yazarock/yazarock/main/yazarock/assets/miskinler-aktar.jpg',$p->ID,'Miskinler','id');
+	if(is_wp_error($aid)||!$aid)return;
+	update_post_meta($aid,'_wp_attachment_image_alt','Miskinler');
+	set_post_thumbnail($p->ID,$aid);
+	update_post_meta($p->ID,'_yr_gorsel_kredi','Miskinler');
+	update_option('yr_mig_v41',3);
+	if(function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
+},52);
