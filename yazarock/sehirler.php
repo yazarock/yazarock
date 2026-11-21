@@ -350,3 +350,17 @@ add_action('init',function(){
 	update_post_meta($g->ID,'_yr_kesif_yazi',$p->ID);
 	if(function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
 },52);
+
+/* Sezar'ın Peruğu grup sayfası (röportajdan derlendi) — v42 Haftanın Keşfi geçişi bunu bekliyordu (mig v43) */
+add_action('init',function(){
+	if(get_option('yr_mig_v43')||!function_exists('yr_derleme_grup_ekle'))return;
+	update_option('yr_mig_v43',1);
+	$ok=yr_derleme_grup_ekle(['id'=>'rop-grup-sezarin-perugu','ad'=>'Sezar\'ın Peruğu','durum'=>'yayin','bolge'=>'tr','tur'=>'Rock','stil'=>'Groove Rock','kurulus'=>'Ankara · 2025',
+		'ozet'=>'Ankara\'dan iki kişilik groove rock grubu. Yeni EP\'leri "Adını Bilmediğim Bir Katta" 20 Kasım\'da çıktı.',
+		'spotify'=>'https://open.spotify.com/artist/24SpOari24jXPYX9Cjp06c','youtube'=>'https://www.youtube.com/@Sezar%C4%B1nPeru%C4%9Fu','link'=>'https://sezarinperugu.com',
+		'diskografi'=>"Hallederiz\nAdını Bilmediğim Bir Katta (2026)",
+		'icerik'=>'<p>Sezar\'ın Peruğu, Ağustos 2025\'te Ankara\'da kurulan iki kişilik bir grup. Müziklerini groove rock olarak tanımlıyorlar: gitar, bas ve davulun ritmini merkeze alıyor, gerektiğinde yaylılar, geleneksel sazlar ya da elektronik seslerle düzenlemeyi genişletiyorlar.</p><p>İlk albümleri "Hallederiz" daha karanlık ve sert bir havadaydı. 20 Kasım\'da çıkan dört şarkılık "Adını Bilmediğim Bir Katta" EP\'si ise aynı groove anlayışını daha hareketli ve alaycı bir tona taşıyor. EP için şarkıların zillerden dinlenebildiği etkileşimli bir apartman sitesi de hazırladılar.</p><p><a href="https://www.instagram.com/sezarinperugu">Instagram</a></p>']);
+	$g=get_posts(['post_type'=>'grup','post_status'=>'publish','numberposts'=>1,'meta_key'=>'_yr_derleme_id','meta_value'=>'rop-grup-sezarin-perugu']);
+	if($g&&!has_post_thumbnail($g[0]->ID)){$p=get_page_by_path('garajdan-sahneye-sezarin-perugu',OBJECT,'post');if($p&&($t=get_post_thumbnail_id($p->ID)))set_post_thumbnail($g[0]->ID,$t);}
+	delete_transient('yr_mig_v42_bekle');/* v42 hemen çalışsın */
+},51);
