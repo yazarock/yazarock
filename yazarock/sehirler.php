@@ -334,3 +334,19 @@ add_action('init',function(){
 	update_option('yr_mig_v41',3);
 	if(function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
 },52);
+
+/* Haftanın Keşfi: Sezar'ın Peruğu + Garajdan Sahneye röportajı (mig v42; grup ya da röportaj henüz yayında değilse 10 dakikada bir, en fazla 30 gün tekrar dener) */
+add_action('init',function(){
+	if(get_option('yr_mig_v42'))return;
+	if(get_transient('yr_mig_v42_bekle'))return;set_transient('yr_mig_v42_bekle',1,10*MINUTE_IN_SECONDS);
+	$bas=(int)get_option('yr_mig_v42_bas');if(!$bas){$bas=time();update_option('yr_mig_v42_bas',$bas,false);}if(time()-$bas>30*DAY_IN_SECONDS)return;
+	$g=null;foreach(get_posts(['post_type'=>'grup','post_status'=>'publish','numberposts'=>10,'s'=>'Sezar']) as $x){if(stripos(remove_accents(html_entity_decode($x->post_title,ENT_QUOTES,'UTF-8')),'sezar')!==false){$g=$x;break;}}
+	if(!$g)return;
+	$p=null;foreach(get_posts(['post_type'=>'post','post_status'=>'publish','numberposts'=>10,'s'=>'Sezar']) as $x){$t=html_entity_decode($x->post_title,ENT_QUOTES,'UTF-8');if(stripos($t,'Garajdan Sahneye')!==false||stripos($t,'röportaj')!==false){$p=$x;break;}}
+	if(!$p)return;
+	update_option('yr_mig_v42',1);
+	foreach(get_posts(['post_type'=>'grup','post_status'=>'any','numberposts'=>-1,'fields'=>'ids','meta_key'=>'_yr_kesif']) as $i)delete_post_meta($i,'_yr_kesif');
+	update_post_meta($g->ID,'_yr_kesif',time());
+	update_post_meta($g->ID,'_yr_kesif_yazi',$p->ID);
+	if(function_exists('yr_onbellek_temizle'))yr_onbellek_temizle();
+},52);
