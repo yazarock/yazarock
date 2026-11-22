@@ -1,0 +1,82 @@
+{
+  "tarih": "2026-11-22",
+  "yazilar": [
+    {
+      "id": "2026-11-22-dunyada-bir-yer-alti-curuk",
+      "baslik": "Kadıköy'den Dünyada Bir Yer, yeni şarkısı “Altı Çürük” ile düzenin çatlaklarına bakıyor",
+      "ozet": "2023'te Kadıköy'de kurulan Dünyada Bir Yer, iki EP'nin ardından yeni teklisi “Altı Çürük”ü 6 Kasım'da yayımladı.",
+      "icerik": "<p>Kadıköy merkezli rock grubu <strong>Dünyada Bir Yer</strong>, yeni şarkısı <em>Altı Çürük</em>'ü 6 Kasım'da dinleyiciyle buluşturdu. Şarkının sözü, müziği ve prodüksiyonu grubun kurucusu İ. Çağrı Aygün'e ait; gitarlarda Tolga Can Şişman var. Rotka'nın aktardığına göre parça, gündelik hayatın parlak yüzeyinin altında kalan çürümüşlüğü, dışarıdan sağlam görünen ama temelinden sorunlu bir düzeni konu alıyor.</p><p>Grup 2023'te kuruldu ve kısa sürede iki kayıt çıkardı: 2024'te dört şarkılık bir ilk çalışma, 2025'te de ikinci bir EP. <em>Altı Çürük</em> bu çizgiyi sürdürüyor; tanıtımlarda distorsiyonlu gitarlar ve psikedelik motiflerle örülmüş bir rock sound'undan söz ediliyor. Şarkıyı henüz kendi kulağımızla etraflıca değerlendirmeden kesin bir yargıya varmak istemiyoruz, ama Kadıköy'ün kalabalık sahnesinde kendi kayıtlarını kendi üreten bir grubun üçüncü yılında ürettiklerini takip etmeye değer buluyoruz.</p><p>Şarkı dijital platformlarda dinlenebiliyor. Dünyada Bir Yer'in canlı performans tarihleri açıklandığında takvimimize ekleyeceğiz.</p>",
+      "kategori": "Yeni Çıkış",
+      "etiketler": ["Dünyada Bir Yer", "Kadıköy", "Rock", "Psikedelik Rock", "Yerli Sahne"],
+      "kaynaklar": [
+        {"ad": "Rotka – Dünyada Bir Yer, Yeni Şarkısı “Altı Çürük” ile Düzenin Görünmeyen Yüzüne Bakıyor", "url": "https://rotka.org/dunyada-bir-yer-yeni-sarkisi-alti-curuk-ile-duzenin-gorunmeyen-yuzune-bakiyor/"}
+      ],
+      "durum": "yayin"
+    }
+  ],
+  "etkinlikler": [
+    {
+      "id": "2026-11-22-rut-soldout-izmir-2911",
+      "baslik": "RUT (A Tribute to Radiohead) – SoldOut Performance Hall",
+      "tarih": "2026-11-29",
+      "saat": "21:00",
+      "sehir": "İzmir",
+      "mekan": "SoldOut Performance Hall",
+      "tur": "Konser",
+      "bilet": "https://izmirmag.net/etkinlik/rut-a-tribute-to-radiohead-29-kasim-2026-soldout-performance-hall/",
+      "aciklama": "<p>2022'de Eskişehir'de kurulan RUT, Radiohead şarkılarından oluşan programıyla Karşıyaka'da sahnede.</p>",
+      "kaynaklar": [{"ad": "izmirmag", "url": "https://izmirmag.net/etkinlik/rut-a-tribute-to-radiohead-29-kasim-2026-soldout-performance-hall/"}],
+      "durum": "yayin"
+    },
+    {
+      "id": "2026-11-22-redd-hollystone-eskisehir-0412",
+      "baslik": "Redd – Holly Stone Performance Hall Eskişehir",
+      "tarih": "2026-12-04",
+      "saat": "22:00",
+      "sehir": "Eskişehir",
+      "mekan": "Holly Stone Performance Hall Eskişehir",
+      "tur": "Konser",
+      "bilet": "https://www.songkick.com/concerts/43496164-redd-at-holly-stone-performance-hall-eskisehir",
+      "aciklama": "<p>Redd turnesinin Eskişehir durağı. Kapı açılışı 22:00.</p>",
+      "kaynaklar": [{"ad": "Songkick", "url": "https://www.songkick.com/concerts/43496164-redd-at-holly-stone-performance-hall-eskisehir"}],
+      "durum": "yayin"
+    },
+    {
+      "id": "2026-11-22-pinhani-hollystone-eskisehir-1312",
+      "baslik": "Pinhani – Holly Stone Performance Hall Eskişehir",
+      "tarih": "2026-12-13",
+      "saat": "21:30",
+      "sehir": "Eskişehir",
+      "mekan": "Holly Stone Performance Hall Eskişehir",
+      "tur": "Konser",
+      "bilet": "https://www.songkick.com/concerts/43512906-pinhani-at-holly-stone-performance-hall-eskisehir",
+      "aciklama": "<p>Pinhani yeni albümü <em>Olduğu Kadar</em>'ın ardından Eskişehir'de. Kapı açılışı 21:30.</p>",
+      "kaynaklar": [{"ad": "Songkick", "url": "https://www.songkick.com/concerts/43512906-pinhani-at-holly-stone-performance-hall-eskisehir"}],
+      "durum": "yayin"
+    },
+    {
+      "id": "2026-11-22-jakuzi-blind-istanbul-1812",
+      "baslik": "Jakuzi – Blind",
+      "tarih": "2026-12-18",
+      "saat": "20:00",
+      "sehir": "İstanbul",
+      "mekan": "Blind",
+      "tur": "Konser",
+      "bilet": "https://bugece.co/tr/event/jakuzi-12-18-26--7f691782",
+      "aciklama": "<p>2015'te İstanbul'da kurulan, synth-pop ve darkwave'i post-punk etkileriyle harmanlayan Jakuzi, Asmalımescit'teki Blind'da.</p>",
+      "kaynaklar": [{"ad": "Bugece", "url": "https://bugece.co/tr/event/jakuzi-12-18-26--7f691782"}],
+      "durum": "yayin"
+    },
+    {
+      "id": "2026-11-22-yuzyuzeyken-jj-ankara-2612",
+      "baslik": "Yüzyüzeyken Konuşuruz – Jolly Joker Ankara",
+      "tarih": "2026-12-26",
+      "sehir": "Ankara",
+      "mekan": "Jolly Joker Ankara",
+      "tur": "Konser",
+      "bilet": "https://heavymetalshop.com.tr/konser/yuzyuzeyken-konusuruz-ankara-26-aralik-2026/",
+      "kaynaklar": [{"ad": "Heavy Metal Shop – Ankara konserleri", "url": "https://heavymetalshop.com.tr/konser-sehir/ankara/"}],
+      "durum": "yayin"
+    }
+  ]
+}
