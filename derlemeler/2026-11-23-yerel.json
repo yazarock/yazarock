@@ -1,0 +1,78 @@
+{
+ "tarih": "2026-11-23",
+ "yazilar": [],
+ "etkinlikler": [
+  {
+   "id": "2026-11-23-ayna-kocaeli-0912",
+   "baslik": "Ayna – Kocaeli Marmara Koleji Hasan Ali Yücel Sahnesi",
+   "tarih": "2026-12-09",
+   "saat": "20:30",
+   "sehir": "Kocaeli",
+   "mekan": "Kocaeli Marmara Koleji Hasan Ali Yücel Sahnesi",
+   "tur": "Konser",
+   "bilet": "https://biletinial.com/tr-tr/muzik/ayna-konserii",
+   "aciklama": "<p>Otuzuncu yılını turneyle kutlayan Ayna, aralık rotasında Kocaeli'de okul sahnesinde. Biletler Biletinial'de satışta.</p>",
+   "kaynaklar": [
+    {
+     "ad": "Biletinial – Ayna Konseri",
+     "url": "https://biletinial.com/tr-tr/muzik/ayna-konserii"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "2026-11-23-ayna-canakkale-1112",
+   "baslik": "Ayna – Çanakkale İÇDAŞ Kongre Merkezi",
+   "tarih": "2026-12-11",
+   "saat": "20:30",
+   "sehir": "Çanakkale",
+   "mekan": "Çanakkale İÇDAŞ Kongre Merkezi",
+   "tur": "Konser",
+   "bilet": "https://biletinial.com/tr-tr/muzik/ayna-konserii",
+   "aciklama": "<p>Otuzuncu yılını turneyle kutlayan Ayna, aralık rotasında Çanakkale'de kongre merkezi sahnesinde. Biletler Biletinial'de satışta.</p>",
+   "kaynaklar": [
+    {
+     "ad": "Biletinial – Ayna Konseri",
+     "url": "https://biletinial.com/tr-tr/muzik/ayna-konserii"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "2026-11-23-ayna-edirne-1612",
+   "baslik": "Ayna – Edirne Belediyesi AKM Konservatuvar Binası",
+   "tarih": "2026-12-16",
+   "saat": "20:30",
+   "sehir": "Edirne",
+   "mekan": "Edirne Belediyesi AKM Konservatuvar Binası",
+   "tur": "Konser",
+   "bilet": "https://biletinial.com/tr-tr/muzik/ayna-konserii",
+   "aciklama": "<p>Otuzuncu yılını turneyle kutlayan Ayna, aralık rotasında Edirne'de belediyenin kültür merkezi sahnesinde. Biletler Biletinial'de satışta.</p>",
+   "kaynaklar": [
+    {
+     "ad": "Biletinial – Ayna Konseri",
+     "url": "https://biletinial.com/tr-tr/muzik/ayna-konserii"
+    }
+   ],
+   "durum": "yayin"
+  },
+  {
+   "id": "2026-11-23-ayna-antalya-2012",
+   "baslik": "Ayna – Antalya Türkan Şoray Kültür Merkezi",
+   "tarih": "2026-12-20",
+   "saat": "20:00",
+   "sehir": "Antalya",
+   "mekan": "Antalya Türkan Şoray Kültür Merkezi",
+   "tur": "Konser",
+   "bilet": "https://biletinial.com/tr-tr/muzik/ayna-konserii",
+   "aciklama": "<p>Otuzuncu yılını turneyle kutlayan Ayna, aralık rotasında Antalya'da Türkan Şoray Kültür Merkezi'nde. Biletler Biletinial'de satışta.</p>",
+   "kaynaklar": [
+    {
+     "ad": "Biletinial – Ayna Konseri",
+     "url": "https://biletinial.com/tr-tr/muzik/ayna-konserii"
+    }
+   ],
+   "durum": "yayin"
+  }
+ ]
+}
