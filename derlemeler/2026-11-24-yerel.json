@@ -1,0 +1,237 @@
+{
+  "tarih": "2026-11-24",
+  "yazilar": [
+    {
+      "id": "2026-11-24-buca-rock-night-iskele-filibuster",
+      "baslik": "Buca'da öğrenci gruplarına sahne: İskele ve Filibuster yarın Buca Rock Night'ta",
+      "ozet": "Dokuz Eylül Üniversitesi çevresinden çıkan İskele ve Filibuster, 25 Kasım Çarşamba akşamı The Four's Pub Buca'da düzenlenen Buca Rock Night'ın ilk gecesinde çalıyor.",
+      "icerik": "<p>İzmir'in öğrenci semti Buca, yarın akşam kendi gruplarına sahne açıyor. <strong>İskele</strong> ve <strong>Filibuster</strong>, 25 Kasım Çarşamba günü saat 20.00'de The Four's Pub Buca'da yapılacak <em>Buca Rock Night I</em> etkinliğinde aynı geceyi paylaşacak. Etkinlik duyurusunda iki grup, Dokuz Eylül Üniversitesi'nin öne çıkan grupları olarak tanıtılıyor.</p><p>Gecenin adındaki \"I\" ibaresi, organizasyonun bir seriye dönüşme niyetinde olduğunu düşündürüyor; ancak devam tarihleri henüz açıklanmış değil. Biletler Bubilet üzerinden 250 TL'den başlayan fiyatlarla satışta. İki grubun kayıtlı çalışmalarına dair ayrıntılı bilgiye henüz ulaşamadığımız için müzikleri hakkında yorum yapmayı konser sonrasına bırakıyoruz.</p><p>Büyük salonlar ve tanınmış isimler İzmir takvimini doldururken, kampüs çevresinden gelen grupların bir pub sahnesinde seyirci karşısına çıkması yerel sahnenin asıl damarının hâlâ attığını gösteriyor. Yazarock olarak Buca'dan çıkacak yeni isimleri takip etmeye devam edeceğiz; gecede oradaysanız izlenimlerinizi bizimle paylaşabilirsiniz.</p>",
+      "kategori": "Konser Duyurusu",
+      "etiketler": [
+        "İskele",
+        "Filibuster",
+        "İzmir",
+        "Buca",
+        "Yerel Sahne",
+        "Rock"
+      ],
+      "kaynaklar": [
+        {
+          "ad": "izmirmag – Buca Rock Night I: İskele x Filibuster",
+          "url": "https://izmirmag.net/etkinlik/buca-rock-night-i-iskele-x-filibuster-25-kasim-2026-the-fours-pub-buca/"
+        },
+        {
+          "ad": "Bubilet – Buca Rock Night I",
+          "url": "https://www.bubilet.com.tr/izmir/etkinlik/buca-rock-night-i-iskele-x-filibuster"
+        }
+      ],
+      "durum": "yayin"
+    }
+  ],
+  "etkinlikler": [
+    {
+      "id": "2026-11-24-buca-rock-night-iskele-filibuster-2511",
+      "baslik": "İskele, Filibuster – The Four's Pub Buca",
+      "tarih": "2026-11-25",
+      "sehir": "İzmir",
+      "mekan": "The Four's Pub Buca",
+      "tur": "Konser",
+      "saat": "20:00",
+      "bilet": "https://www.bubilet.com.tr/izmir/etkinlik/buca-rock-night-i-iskele-x-filibuster",
+      "ozet": "Buca Rock Night I: Dokuz Eylül Üniversitesi çevresinden iki grup aynı gecede.",
+      "kaynaklar": [
+        {
+          "ad": "Etkinlik sayfası",
+          "url": "https://izmirmag.net/etkinlik/buca-rock-night-i-iskele-x-filibuster-25-kasim-2026-the-fours-pub-buca/"
+        }
+      ],
+      "durum": "yayin"
+    },
+    {
+      "id": "2026-11-24-tekir-hayal-kahvesi-izmir-2711",
+      "baslik": "Tekir – Hayal Kahvesi İzmir",
+      "tarih": "2026-11-27",
+      "sehir": "İzmir",
+      "mekan": "Hayal Kahvesi İzmir",
+      "tur": "Konser",
+      "saat": "21:00",
+      "bilet": "https://www.bubilet.com.tr/izmir/etkinlik/tekir",
+      "ozet": "18 yaş sınırı var.",
+      "kaynaklar": [
+        {
+          "ad": "Etkinlik sayfası",
+          "url": "https://izmirmag.net/etkinlik/tekir-27-kasim-2026-hayal-kahvesi-izmir/"
+        }
+      ],
+      "durum": "yayin"
+    },
+    {
+      "id": "2026-11-24-mavi-gri-hayal-kahvesi-izmir-0412",
+      "baslik": "Mavi Gri – Hayal Kahvesi İzmir",
+      "tarih": "2026-12-04",
+      "sehir": "İzmir",
+      "mekan": "Hayal Kahvesi İzmir",
+      "tur": "Konser",
+      "saat": "22:00",
+      "bilet": "https://izmirmag.net/etkinlik/mavi-gri-konseri-4-aralik-2026-hayal-kahvesi-izmir/",
+      "kaynaklar": [
+        {
+          "ad": "Etkinlik sayfası",
+          "url": "https://izmirmag.net/etkinlik/mavi-gri-konseri-4-aralik-2026-hayal-kahvesi-izmir/"
+        }
+      ],
+      "durum": "yayin"
+    },
+    {
+      "id": "2026-11-24-flort-blind-0512",
+      "baslik": "Flört – Blind",
+      "tarih": "2026-12-05",
+      "sehir": "İstanbul",
+      "mekan": "Blind",
+      "tur": "Konser",
+      "bilet": "https://www.songkick.com/concerts/43449153-flort-at-blind",
+      "kaynaklar": [
+        {
+          "ad": "Etkinlik sayfası",
+          "url": "https://www.songkick.com/concerts/43449153-flort-at-blind"
+        }
+      ],
+      "durum": "yayin"
+    },
+    {
+      "id": "2026-11-24-perdenin-ardindakiler-hayal-kahvesi-izmir-1212",
+      "baslik": "Perdenin Ardındakiler – Hayal Kahvesi İzmir",
+      "tarih": "2026-12-12",
+      "sehir": "İzmir",
+      "mekan": "Hayal Kahvesi İzmir",
+      "tur": "Konser",
+      "saat": "22:00",
+      "bilet": "https://izmirmag.net/etkinlik/perdenin-ardindakiler-12-aralik-2026-hayal-kahvesi-izmir/",
+      "kaynaklar": [
+        {
+          "ad": "Etkinlik sayfası",
+          "url": "https://izmirmag.net/etkinlik/perdenin-ardindakiler-12-aralik-2026-hayal-kahvesi-izmir/"
+        }
+      ],
+      "durum": "yayin"
+    },
+    {
+      "id": "2026-11-24-baba-mustache-cliff-venue-1612",
+      "baslik": "Baba Mustache – Cliff Venue",
+      "tarih": "2026-12-16",
+      "sehir": "İzmir",
+      "mekan": "Cliff Venue",
+      "tur": "Konser",
+      "saat": "21:00",
+      "bilet": "https://izmirmag.net/etkinlik/baba-mustache-16-aralik-2026-cliff-venue/",
+      "kaynaklar": [
+        {
+          "ad": "Etkinlik sayfası",
+          "url": "https://izmirmag.net/etkinlik/baba-mustache-16-aralik-2026-cliff-venue/"
+        }
+      ],
+      "durum": "yayin"
+    },
+    {
+      "id": "2026-11-24-palmiyeler-redd-kucukciftlik-2012",
+      "baslik": "Palmiyeler, Redd – KüçükÇiftlik Park",
+      "tarih": "2026-12-20",
+      "sehir": "İstanbul",
+      "mekan": "KüçükÇiftlik Park",
+      "tur": "Konser",
+      "bilet": "https://songkick.com/concerts/43489819-palmiyeler-at-kucukciftlik-park",
+      "kaynaklar": [
+        {
+          "ad": "Etkinlik sayfası",
+          "url": "https://songkick.com/concerts/43489819-palmiyeler-at-kucukciftlik-park"
+        }
+      ],
+      "durum": "yayin"
+    },
+    {
+      "id": "2026-11-24-necati-ve-saykolar-skaff-2512",
+      "baslik": "Necati ve Saykolar – Skaff PSM Alsancak",
+      "tarih": "2026-12-25",
+      "sehir": "İzmir",
+      "mekan": "Skaff PSM Alsancak",
+      "tur": "Konser",
+      "saat": "22:30",
+      "bilet": "https://izmirmag.net/etkinlik/necati-ve-saykolar-25-aralik-2026-skaff-psm-alsancak/",
+      "kaynaklar": [
+        {
+          "ad": "Etkinlik sayfası",
+          "url": "https://izmirmag.net/etkinlik/necati-ve-saykolar-25-aralik-2026-skaff-psm-alsancak/"
+        }
+      ],
+      "durum": "yayin"
+    },
+    {
+      "id": "2026-11-24-son-feci-bisiklet-factory-psm-2512",
+      "baslik": "Son Feci Bisiklet – The Factory PSM",
+      "tarih": "2026-12-25",
+      "sehir": "İzmir",
+      "mekan": "The Factory PSM",
+      "tur": "Konser",
+      "saat": "21:00",
+      "bilet": "https://izmirmag.net/etkinlik/son-feci-bisiklet-25-aralik-2026-the-factory-psm-tarihi-havagazi-fabrikasi/",
+      "kaynaklar": [
+        {
+          "ad": "Etkinlik sayfası",
+          "url": "https://izmirmag.net/etkinlik/son-feci-bisiklet-25-aralik-2026-the-factory-psm-tarihi-havagazi-fabrikasi/"
+        }
+      ],
+      "durum": "yayin"
+    },
+    {
+      "id": "2026-11-24-yuksek-sadakat-factory-psm-2612",
+      "baslik": "Yüksek Sadakat – The Factory PSM",
+      "tarih": "2026-12-26",
+      "sehir": "İzmir",
+      "mekan": "The Factory PSM",
+      "tur": "Konser",
+      "saat": "21:00",
+      "bilet": "https://izmirmag.net/etkinlik/yuksek-sadakat-konseri-26-aralik-2026-the-factory-psm-tarihi-havagazi-fabrikasi/",
+      "kaynaklar": [
+        {
+          "ad": "Etkinlik sayfası",
+          "url": "https://izmirmag.net/etkinlik/yuksek-sadakat-konseri-26-aralik-2026-the-factory-psm-tarihi-havagazi-fabrikasi/"
+        }
+      ],
+      "durum": "yayin"
+    },
+    {
+      "id": "2026-11-24-ayna-soldout-izmir-2612",
+      "baslik": "Ayna – SoldOut Performance Hall",
+      "tarih": "2026-12-26",
+      "sehir": "İzmir",
+      "mekan": "SoldOut Performance Hall",
+      "tur": "Konser",
+      "saat": "22:00",
+      "bilet": "https://izmirmag.net/etkinlik/ayna-konseri-26-aralik-2026-soldout-performance-hall/",
+      "kaynaklar": [
+        {
+          "ad": "Etkinlik sayfası",
+          "url": "https://izmirmag.net/etkinlik/ayna-konseri-26-aralik-2026-soldout-performance-hall/"
+        }
+      ],
+      "durum": "yayin"
+    },
+    {
+      "id": "2026-11-24-flort-factory-psm-0801",
+      "baslik": "Flört – The Factory PSM",
+      "tarih": "2027-01-08",
+      "sehir": "İzmir",
+      "mekan": "The Factory PSM",
+      "tur": "Konser",
+      "saat": "21:00",
+      "bilet": "https://izmirmag.net/etkinlik/flort-konseri-8-ocak-2027-the-factory-psm-tarihi-havagazi-fabrikasi/",
+      "kaynaklar": [
+        {
+          "ad": "Etkinlik sayfası",
+          "url": "https://izmirmag.net/etkinlik/flort-konseri-8-ocak-2027-the-factory-psm-tarihi-havagazi-fabrikasi/"
+        }
+      ],
+      "durum": "yayin"
+    }
+  ]
+}
