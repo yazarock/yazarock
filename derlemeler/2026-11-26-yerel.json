@@ -1,0 +1,68 @@
+{
+  "tarih": "2026-11-26",
+  "yazilar": [],
+  "etkinlikler": [
+    {
+      "id": "2026-11-26-ogun-sanlisoy-holly-stone-ankara-2711",
+      "baslik": "Ogün Sanlısoy – Holly Stone Performance Hall Ankara",
+      "tarih": "2026-11-27",
+      "sehir": "Ankara",
+      "mekan": "Holly Stone Performance Hall Ankara",
+      "tur": "Konser",
+      "bilet": "https://songkick.com/concerts/43294332-ogun-sanlisoy-at-holly-stone-performance-hall-ankara",
+      "aciklama": "<p>Ogün Sanlısoy cuma akşamı Ankara'da Holly Stone sahnesinde.</p>",
+      "kaynaklar": [{"ad": "Songkick – Holly Stone Performance Hall Ankara", "url": "https://www.songkick.com/venues/4627706-holly-stone-performance-hall-ankara"}],
+      "durum": "yayin"
+    },
+    {
+      "id": "2026-11-26-duman-jj-arena-atasehir-2811",
+      "baslik": "Duman – JJ Arena Ataşehir",
+      "tarih": "2026-11-28",
+      "sehir": "İstanbul",
+      "mekan": "JJ Arena Ataşehir",
+      "tur": "Konser",
+      "bilet": "https://songkick.com/concerts/43399542-duman-at-jj-arena-atasehir",
+      "aciklama": "<p>Duman cumartesi gecesi İstanbul'un Anadolu yakasında, JJ Arena Ataşehir'de sahne alıyor.</p>",
+      "kaynaklar": [{"ad": "Songkick – İstanbul rock konserleri", "url": "https://songkick.com/metro-areas/32463-turkey-istanbul/2026/genre/rock"}],
+      "durum": "yayin"
+    },
+    {
+      "id": "2026-11-26-ayna-dorock-xl-kadikoy-1012",
+      "baslik": "Ayna – Dorock XL Kadıköy",
+      "tarih": "2026-12-10",
+      "saat": "22:00",
+      "sehir": "İstanbul",
+      "mekan": "Dorock XL Kadıköy",
+      "tur": "Konser",
+      "bilet": "https://songkick.com/concerts/43509516-ayna-at-dorock-xl",
+      "ozet": "Kapı açılışı 22:00.",
+      "aciklama": "<p>Ayna, Anadolu turnesinin arasında Kadıköy'e uğrayıp Dorock XL'de kulüp konseri veriyor. Kapılar 22:00'de açılıyor.</p>",
+      "kaynaklar": [{"ad": "Songkick – Ayna, Dorock XL", "url": "https://songkick.com/concerts/43509516-ayna-at-dorock-xl"}],
+      "durum": "yayin"
+    },
+    {
+      "id": "2026-11-26-model-jj-arena-atasehir-1912",
+      "baslik": "Model – JJ Arena Ataşehir",
+      "tarih": "2026-12-19",
+      "sehir": "İstanbul",
+      "mekan": "JJ Arena Ataşehir",
+      "tur": "Konser",
+      "bilet": "https://songkick.com/concerts/43508011-model-at-jj-arena-atasehir",
+      "aciklama": "<p>Model, aralığın üçüncü cumartesisinde JJ Arena Ataşehir'de.</p>",
+      "kaynaklar": [{"ad": "Songkick – Model, JJ Arena Ataşehir", "url": "https://songkick.com/concerts/43508011-model-at-jj-arena-atasehir"}],
+      "durum": "yayin"
+    },
+    {
+      "id": "2026-11-26-gripin-atakoy-marina-2012",
+      "baslik": "Gripin – Ataköy Marina Açık Hava Sahnesi",
+      "tarih": "2026-12-20",
+      "sehir": "İstanbul",
+      "mekan": "Ataköy Marina Açık Hava Sahnesi",
+      "tur": "Konser",
+      "bilet": "https://songkick.com/concerts/43510209-gripin-at-atakoy-marina-acik-hava-sahnesi",
+      "aciklama": "<p>Gripin 20 Aralık'ta Ataköy Marina'daki sahnede dinleyicisiyle buluşuyor.</p>",
+      "kaynaklar": [{"ad": "Songkick – Gripin, Ataköy Marina", "url": "https://songkick.com/concerts/43510209-gripin-at-atakoy-marina-acik-hava-sahnesi"}],
+      "durum": "yayin"
+    }
+  ]
+}
