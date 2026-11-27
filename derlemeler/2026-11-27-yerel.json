@@ -1,0 +1,247 @@
+{
+  "tarih": "2026-11-27",
+  "yazilar": [
+    {
+      "id": "2026-11-27-ymktb-pickpocket-aralik",
+      "baslik": "You May Kiss The Bride 15. yılını kutluyor, Pickpocket %100 Studio'ya taşındı",
+      "ozet": "İstanbul'un iki köklü post-hardcore/metal grubu aralığın son haftasında sahnede: You May Kiss The Bride 23 Aralık'ta IF Beşiktaş'ta 15. yıl konseri veriyor, Pickpocket 25 Aralık'ta Zorlu PSM %100 Studio'da.",
+      "icerik": "<p>Aralığın son haftası İstanbul'un ağır gitar dinleyicileri için iki önemli tarih barındırıyor. 2011'de İstanbul'da kurulan post-hardcore/metalcore grubu You May Kiss The Bride, 15. yılını 23 Aralık Çarşamba akşamı IF Performance Hall Beşiktaş'ta verilecek özel bir konserle kutluyor. Konser 21.00'de başlıyor; biletler Biletix'te 550 TL'den satışta.</p><p>İki gün sonra, 25 Aralık Cuma günü sahne Pickpocket'ın. 2000'den bu yana alternatif metal ile post-hardcore arasında gidip gelen grubun konseri başlangıçta IF Beşiktaş'ta planlanmıştı; Biletix'teki mekân değişikliği notuna göre gece Zorlu PSM %100 Studio'ya taşındı. Kapı saatinden sonra sahne 21.30'da açılıyor. Daha önce IF Beşiktaş için bilet alanların bilet sayfasındaki güncel bilgiyi kontrol etmesinde fayda var.</p><p>İki grup da İstanbul'un 2000'ler ve 2010'lar boyunca büyüyen sert ve melodik çizgisinin uzun soluklu temsilcileri arasında. Aynı hafta içinde peş peşe gelen bu konserler, yılın son günlerinde kulüp sahnesinin hâlâ canlı olduğunu da hatırlatıyor. İki tarih de Yazarock konser takviminde yer alıyor.</p>",
+      "kategori": "Konser Duyurusu",
+      "etiketler": [
+        "You May Kiss The Bride",
+        "Pickpocket",
+        "Post-Hardcore",
+        "Alternatif Metal",
+        "İstanbul"
+      ],
+      "kaynaklar": [
+        {
+          "ad": "Biletix – You May Kiss The Bride 15. Yıl Özel Konseri",
+          "url": "https://www.biletix.com/etkinlik/5ADBQ/TURKIYE/tr/music-you-may-kiss-the-bride-15-yil-ozel-konseri-23-12-2026-istanbul"
+        },
+        {
+          "ad": "Biletix – Pickpocket",
+          "url": "https://www.biletix.com/etkinlik/5X036/TURKIYE/tr/music-pickpocket-25-12-2026-istanbul"
+        }
+      ],
+      "durum": "yayin"
+    }
+  ],
+  "etkinlikler": [
+    {
+      "id": "2026-11-27-pickpocket-zorlu-2512",
+      "baslik": "Pickpocket – Zorlu PSM %100 Studio",
+      "tarih": "2026-12-25",
+      "sehir": "İstanbul",
+      "mekan": "Zorlu PSM %100 Studio",
+      "tur": "Konser",
+      "bilet": "https://www.biletix.com/etkinlik/5X036/TURKIYE/tr/music-pickpocket-25-12-2026-istanbul",
+      "aciklama": "<p>2000'den beri İstanbul sahnesinde olan alternatif metal ve post-hardcore grubu Pickpocket, IF Performance Hall Beşiktaş'tan taşınan konserini %100 Studio'da veriyor.</p>",
+      "kaynaklar": [
+        {
+          "ad": "Biletix etkinlik sayfası",
+          "url": "https://www.biletix.com/etkinlik/5X036/TURKIYE/tr/music-pickpocket-25-12-2026-istanbul"
+        }
+      ],
+      "durum": "yayin",
+      "saat": "21:30"
+    },
+    {
+      "id": "2026-11-27-ymktb-if-besiktas-2312",
+      "baslik": "You May Kiss The Bride – IF Performance Hall Beşiktaş",
+      "tarih": "2026-12-23",
+      "sehir": "İstanbul",
+      "mekan": "IF Performance Hall Beşiktaş",
+      "tur": "Konser",
+      "bilet": "https://www.biletix.com/etkinlik/5ADBQ/TURKIYE/tr/music-you-may-kiss-the-bride-15-yil-ozel-konseri-23-12-2026-istanbul",
+      "aciklama": "<p>2011'de İstanbul'da kurulan post-hardcore/metalcore grubu You May Kiss The Bride, 15. yılını özel bir konserle kutluyor.</p>",
+      "kaynaklar": [
+        {
+          "ad": "Biletix etkinlik sayfası",
+          "url": "https://www.biletix.com/etkinlik/5ADBQ/TURKIYE/tr/music-you-may-kiss-the-bride-15-yil-ozel-konseri-23-12-2026-istanbul"
+        }
+      ],
+      "durum": "yayin",
+      "saat": "21:00"
+    },
+    {
+      "id": "2026-11-27-ogun-sanlisoy-if-besiktas-0212",
+      "baslik": "Ogün Sanlısoy – IF Performance Hall Beşiktaş",
+      "tarih": "2026-12-02",
+      "sehir": "İstanbul",
+      "mekan": "IF Performance Hall Beşiktaş",
+      "tur": "Konser",
+      "bilet": "https://www.biletix.com/etkinlik/5W938/TURKIYE/tr/ogun-sanlisoy-02-12-2026-istanbul",
+      "aciklama": "<p>Ogün Sanlısoy'un Türkiye turnesi İstanbul'da IF Beşiktaş'a uğruyor.</p>",
+      "kaynaklar": [
+        {
+          "ad": "Biletix etkinlik sayfası",
+          "url": "https://www.biletix.com/etkinlik/5W938/TURKIYE/tr/ogun-sanlisoy-02-12-2026-istanbul"
+        }
+      ],
+      "durum": "yayin",
+      "saat": "21:00"
+    },
+    {
+      "id": "2026-11-27-redd-jj-ankara-3112",
+      "baslik": "Redd – Jolly Joker Ankara",
+      "tarih": "2026-12-31",
+      "sehir": "Ankara",
+      "mekan": "Jolly Joker Ankara",
+      "tur": "Konser",
+      "bilet": "https://www.biletix.com/etkinlik/5VY02/TURKIYE/tr/redd-yilbasi-ozel-31-12-2026-ankara",
+      "aciklama": "<p>Redd yılbaşı gecesini Ankara'da özel bir konserle karşılıyor.</p>",
+      "kaynaklar": [
+        {
+          "ad": "Biletix etkinlik sayfası",
+          "url": "https://www.biletix.com/etkinlik/5VY02/TURKIYE/tr/redd-yilbasi-ozel-31-12-2026-ankara"
+        }
+      ],
+      "durum": "yayin",
+      "saat": "21:00"
+    },
+    {
+      "id": "2026-11-27-son-feci-bisiklet-paribu-0801",
+      "baslik": "Son Feci Bisiklet – Paribu Art Ana Sahne",
+      "tarih": "2027-01-08",
+      "sehir": "İstanbul",
+      "mekan": "Paribu Art – Ana Sahne",
+      "tur": "Konser",
+      "bilet": "https://www.biletix.com/mekan/340P7/TURKIYE/en",
+      "aciklama": "<p>Son Feci Bisiklet yeni yılın ilk konserlerinden birini Paribu Art Ana Sahne'de veriyor.</p>",
+      "kaynaklar": [
+        {
+          "ad": "Biletix Paribu Art mekân sayfası",
+          "url": "https://www.biletix.com/mekan/340P7/TURKIYE/en"
+        }
+      ],
+      "durum": "yayin",
+      "saat": "21:00"
+    },
+    {
+      "id": "2026-11-27-balcik-chainwind-congulus-thewall-1112",
+      "baslik": "Balçık, Chainwind Ritual, Congulus – The Wall Kadıköy",
+      "tarih": "2026-12-11",
+      "sehir": "İstanbul",
+      "mekan": "The Wall Saloon & Performance, Kadıköy",
+      "tur": "Konser",
+      "bilet": "https://www.biletix.com/etkinlik/5RD50/TURKIYE/en/balcik-chainwind-ritual-congulus-11-12-2026-istanbul",
+      "aciklama": "<p>Üç yeraltı grubu Balçık, Chainwind Ritual ve Congulus aynı gece Kadıköy'de sahne alıyor.</p>",
+      "kaynaklar": [
+        {
+          "ad": "Biletix etkinlik sayfası",
+          "url": "https://www.biletix.com/etkinlik/5RD50/TURKIYE/en/balcik-chainwind-ritual-congulus-11-12-2026-istanbul"
+        }
+      ],
+      "durum": "yayin",
+      "saat": "20:00"
+    },
+    {
+      "id": "2026-11-27-casablanca-drivers-pixel-ankara-2811",
+      "baslik": "Casablanca Drivers – Pixel Ankara",
+      "tarih": "2026-11-28",
+      "sehir": "Ankara",
+      "mekan": "Pixel Ankara",
+      "tur": "Konser",
+      "bilet": "https://bugece.co/en/venues/pixel-ankara",
+      "aciklama": "<p>Casablanca Drivers cumartesi gecesi Pixel Ankara'da.</p>",
+      "kaynaklar": [
+        {
+          "ad": "Bugece – Pixel Ankara",
+          "url": "https://bugece.co/en/venues/pixel-ankara"
+        }
+      ],
+      "durum": "yayin"
+    },
+    {
+      "id": "2026-11-27-od-band-if-ankara-2911",
+      "baslik": "Od Band – IF Performance Hall Ankara",
+      "tarih": "2026-11-29",
+      "sehir": "Ankara",
+      "mekan": "IF Performance Hall Tunus",
+      "tur": "Konser",
+      "bilet": "https://www.biletix.com/etkinlik/5K7D9/TURKIYE/en/od-band-29-11-2026-ankara",
+      "aciklama": "<p>Melis Karaduman'la ortak teklisi “Anksiyete”yi yeni yayımlayan Od Band, Ankara'da sahnede.</p>",
+      "kaynaklar": [
+        {
+          "ad": "Biletix etkinlik sayfası",
+          "url": "https://www.biletix.com/etkinlik/5K7D9/TURKIYE/en/od-band-29-11-2026-ankara"
+        }
+      ],
+      "durum": "yayin",
+      "saat": "21:00"
+    },
+    {
+      "id": "2026-11-27-od-band-blind-0701",
+      "baslik": "Od Band – Blind",
+      "tarih": "2027-01-07",
+      "sehir": "İstanbul",
+      "mekan": "Blind İstanbul",
+      "tur": "Konser",
+      "bilet": "https://www.biletix.com/etkinlik/6SC06/TURKIYE/en/od-band-07-01-2027-istanbul",
+      "aciklama": "<p>Od Band yeni yılın ilk haftasında Blind'da.</p>",
+      "kaynaklar": [
+        {
+          "ad": "Biletix etkinlik sayfası",
+          "url": "https://www.biletix.com/etkinlik/6SC06/TURKIYE/en/od-band-07-01-2027-istanbul"
+        }
+      ],
+      "durum": "yayin",
+      "saat": "21:00"
+    },
+    {
+      "id": "2026-11-27-kirli-ciki-if-tepe-0612",
+      "baslik": "Kirli Çıkı – IF Performance Hall Tepe Prime",
+      "tarih": "2026-12-06",
+      "sehir": "Ankara",
+      "mekan": "IF Performance Hall Tepe Prime",
+      "tur": "Konser",
+      "bilet": "https://www.biletix.com/etkinlik/5BDGX/ANKARA/en/kirli-ciki-06-12-2026-ankara",
+      "aciklama": "<p>Kirli Çıkı aralığın ilk pazar akşamı Ankara'da.</p>",
+      "kaynaklar": [
+        {
+          "ad": "Biletix etkinlik sayfası",
+          "url": "https://www.biletix.com/etkinlik/5BDGX/ANKARA/en/kirli-ciki-06-12-2026-ankara"
+        }
+      ],
+      "durum": "yayin",
+      "saat": "20:00"
+    },
+    {
+      "id": "2026-11-27-gorkem-karabudak-blind-2811",
+      "baslik": "Görkem Karabudak – Blind",
+      "tarih": "2026-11-28",
+      "sehir": "İstanbul",
+      "mekan": "Blind İstanbul",
+      "tur": "Konser",
+      "bilet": "https://www.biletix.com/etkinlik/5EP66/TURKIYE/en/gorkem-karabudak-28-11-2026-istanbul",
+      "aciklama": "<p>Görkem Karabudak cumartesi akşamı Blind'da.</p>",
+      "kaynaklar": [
+        {
+          "ad": "Biletix etkinlik sayfası",
+          "url": "https://www.biletix.com/etkinlik/5EP66/TURKIYE/en/gorkem-karabudak-28-11-2026-istanbul"
+        }
+      ],
+      "durum": "yayin",
+      "saat": "21:00"
+    },
+    {
+      "id": "2026-11-27-cagri-sinci-blind-0801",
+      "baslik": "Çağrı Sinci & Yeraltı Sakinleri – Blind",
+      "tarih": "2027-01-08",
+      "sehir": "İstanbul",
+      "mekan": "Blind İstanbul",
+      "tur": "Konser",
+      "bilet": "https://www.biletix.com/etkinlik/6HO00/TURKIYE/en/cagri-sinci-yeralti-sakinleri-08-01-2027-istanbul",
+      "aciklama": "<p>Çağrı Sinci, Yeraltı Sakinleri ile birlikte Blind sahnesinde.</p>",
+      "kaynaklar": [
+        {
+          "ad": "Biletix etkinlik sayfası",
+          "url": "https://www.biletix.com/etkinlik/6HO00/TURKIYE/en/cagri-sinci-yeralti-sakinleri-08-01-2027-istanbul"
+        }
+      ],
+      "durum": "yayin",
+      "saat": "21:45"
+    }
+  ]
+}
