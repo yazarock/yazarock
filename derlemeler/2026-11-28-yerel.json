@@ -1,0 +1,71 @@
+{
+  "tarih": "2026-11-28",
+  "yazilar": [],
+  "etkinlikler": [
+    {
+      "id": "2026-11-28-sebnem-ferah-volkswagen-arena-0212",
+      "baslik": "Şebnem Ferah – Volkswagen Arena",
+      "tarih": "2026-12-02",
+      "saat": "21:30",
+      "sehir": "İstanbul",
+      "mekan": "Volkswagen Arena",
+      "tur": "Konser",
+      "bilet": "https://konserbilet.com/etkinlikler/sebnem-ferah-volkswagen-arena-2026-12-02-biletix",
+      "ozet": "Türk rock'ının güçlü seslerinden Şebnem Ferah, aralığın ilk haftasında Maslak'ta.",
+      "aciklama": "<p>Şebnem Ferah 2 Aralık akşamı Volkswagen Arena sahnesinde. Biletler Biletix üzerinden satışta.</p>",
+      "kaynaklar": [{"ad": "Konserbilet – İstanbul Aralık 2026 takvimi", "url": "https://konserbilet.com/takvim/aralik-2026/istanbul"}],
+      "durum": "yayin"
+    },
+    {
+      "id": "2026-11-28-teoman-bostanci-showland-0312",
+      "baslik": "Teoman – Bostancı Showland",
+      "tarih": "2026-12-03",
+      "saat": "21:00",
+      "sehir": "İstanbul",
+      "mekan": "Bostancı Showland",
+      "tur": "Konser",
+      "bilet": "https://konserbilet.com/etkinlikler/teoman-bostanci-showland-2026-12-03-biletix",
+      "aciklama": "<p>Teoman 3 Aralık'ta Anadolu yakasında, Bostancı Showland'de dinleyicisiyle buluşuyor. Biletler Biletix'te.</p>",
+      "kaynaklar": [{"ad": "Konserbilet – İstanbul Aralık 2026 takvimi", "url": "https://konserbilet.com/takvim/aralik-2026/istanbul"}],
+      "durum": "yayin"
+    },
+    {
+      "id": "2026-11-28-emre-aydin-hayal-kahvesi-izmir-0512",
+      "baslik": "Emre Aydın – Hayal Kahvesi İzmir",
+      "tarih": "2026-12-05",
+      "saat": "22:00",
+      "sehir": "İzmir",
+      "mekan": "Hayal Kahvesi İzmir",
+      "tur": "Konser",
+      "bilet": "https://izmirmag.net/etkinlik/emre-aydin-konseri-5-aralik-2026-hayal-kahvesi-izmir/",
+      "aciklama": "<p>Emre Aydın 5 Aralık cumartesi gecesi Konak'taki Hayal Kahvesi İzmir'de sahne alıyor.</p>",
+      "kaynaklar": [{"ad": "İzmirmag", "url": "https://izmirmag.net/etkinlik/emre-aydin-konseri-5-aralik-2026-hayal-kahvesi-izmir/"}],
+      "durum": "yayin"
+    },
+    {
+      "id": "2026-11-28-yuzyuzeyken-konusuruz-jj-kiyi-0512",
+      "baslik": "Yüzyüzeyken Konuşuruz – Jolly Joker Kıyı İstanbul",
+      "tarih": "2026-12-05",
+      "saat": "21:00",
+      "sehir": "İstanbul",
+      "mekan": "Jolly Joker Kıyı İstanbul",
+      "tur": "Konser",
+      "bilet": "https://konserbilet.com/etkinlikler/yuzyuzeyken-konusuruz-jolly-joker-kiyi-istanbul-2026-12-05-biletix",
+      "aciklama": "<p>Yüzyüzeyken Konuşuruz, aralıktaki Ankara konserinden önce 5 Aralık'ta İstanbul'da, Jolly Joker Kıyı'da çalıyor.</p>",
+      "kaynaklar": [{"ad": "Konserbilet – İstanbul Aralık 2026 takvimi", "url": "https://konserbilet.com/takvim/aralik-2026/istanbul"}],
+      "durum": "yayin"
+    },
+    {
+      "id": "2026-11-28-emre-aydin-dorock-xl-1912",
+      "baslik": "Emre Aydın – Dorock XL Kadıköy",
+      "tarih": "2026-12-19",
+      "sehir": "İstanbul",
+      "mekan": "Dorock XL Kadıköy",
+      "tur": "Konser",
+      "bilet": "https://www.songkick.com/concerts/43512911-emre-aydin-at-dorock-xl",
+      "aciklama": "<p>Emre Aydın İzmir'in ardından 19 Aralık'ta Kadıköy'de, Dorock XL sahnesinde.</p>",
+      "kaynaklar": [{"ad": "Songkick – Dorock XL", "url": "https://www.songkick.com/venues/4622916-dorock-xl"}],
+      "durum": "yayin"
+    }
+  ]
+}
